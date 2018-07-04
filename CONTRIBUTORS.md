@@ -1,6 +1,6 @@
 The following people have been involved in developing KAPPA:
 
-- Lorenzo Kampoli
+- Lorenzo Campoli
 - George Oblapenko
 - Ilya Alekseev
 - Anastasiya Demko
