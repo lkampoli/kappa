@@ -1,0 +1,980 @@
+N2 + O2:
+  phi_zero Born-Mayer: 3.7106409245399995e-16
+  beta Born-Mayer: 25730000000
+  C (VSS (1 1)): 1.992e-18
+  omega (VSS (1 1)): 0.252
+  C (VSS (2 2)): 1.286e-18
+  omega (VSS (2 2)): 0.222
+  C (VSS tot): 1.92e-18
+  omega (VSS tot): 0.225
+  C (VSS deflection): 9.43e-21
+  omega (VSS deflection): 0.0491
+  beta Bruno: 8.11
+  epsilon0 Bruno: 1.8689389630725e-21
+  re Bruno: 3.805e-10
+  diss,N2,Arrh_A,Park: 1.16237724472253e-08
+  diss,N2,Arrh_n,Park: -1.6
+  diss,N2,Ed,Park: 1.5628962528000002e-18
+  diss,N2,Arrh_A,Scanlon: 1.5e-11
+  diss,N2,Arrh_n,Scanlon: -0.68
+  diss,N2,Ea,Scanlon: 1.567e-18
+  diss,O2,Arrh_A,Park: 3.32107784206438e-09
+  diss,O2,Arrh_n,Park: -1.5
+  diss,O2,Ed,Park: 8.24938614e-19
+  diss,O2,Arrh_A,Scanlon: 1.3e-10
+  diss,O2,Arrh_n,Scanlon: -1
+  diss,O2,Ea,Scanlon: 8.197e-19
+  Bzowski, sigma: 3.529e-10
+  Bzowski, eps/k: 108.8
+  Bzowski, rho*: 0.0918
+  Bzowski, V_0*: 179000
+  alpha_FHO: 4e-10
+  VSS, dref: 3.604e-10
+  VSS, omega: 0.703
+  VSS, alpha: 1.43
+  VSS, Tref: 273
+N2 + O:
+  phi_zero Born-Mayer: 1.378512716526e-16
+  beta Born-Mayer: 33310000000
+  C (VSS (1 1)): 1.501e-18
+  omega (VSS (1 1)): 0.254
+  C (VSS (2 2)): 1.146e-18
+  omega (VSS (2 2)): 0.239
+  C (VSS tot): 1.6709999999999998e-18
+  omega (VSS tot): 0.239
+  C (VSS deflection): 1.2309999999999998e-20
+  omega (VSS deflection): 0.0258
+  beta Bruno: 7.25
+  epsilon0 Bruno: 1.2299909489505e-21
+  re Bruno: 3.6510000000000006e-10
+  diss,N2,Arrh_A,Park: 4.98161676309657e-08
+  diss,N2,Arrh_n,Park: -1.6
+  diss,N2,Ed,Park: 1.5628962528000002e-18
+  diss,N2,Arrh_A,Scanlon: 4e-12
+  diss,N2,Arrh_n,Scanlon: -0.54
+  diss,N2,Ea,Scanlon: 1.567e-18
+  exch,Arrh_A,Scanlon: 8e-17
+  exch,Arrh_n,Scanlon: 0
+  exch,Ea,Scanlon: 5.175e-19
+  exch,Arrh_A,Park: 1.0627449094606e-12
+  exch,Arrh_n,Park: -1
+  exch,Ed,Park: 5.297555584800001e-19
+  exch,Ea,WRFP, J: 5.175031710000001e-19
+  exch,A,Warnatz: 6.9246e-18
+  exch,A,RFP: 1.4537e-17
+  exch,n,Warnatz: 0
+  exch,n,RF: 0.5
+  exch,n,Polak: 0.5
+  exch,alpha,RF: 0.51
+  exch,alpha,Polak: 0.52
+  exch,beta,Polak: 0.9
+  VSS, dref: 3.2220000000000004e-10
+  VSS, omega: 0.702
+  VSS, alpha: 1.427
+  VSS, Tref: 273
+  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+O + O2+:
+  beta Bruno: 7.35
+  epsilon0 Bruno: 1.09532830605e-20
+  re Bruno: 3.0080000000000004e-10
+  VSS, dref: 2.9900000000000005e-10
+  VSS, omega: 0.682
+  VSS, alpha: 1.366
+  VSS, Tref: 273
+NO + e-:
+  Om11: [-2.8293464, 15.622863, 952.42325, -321.62905, 0.41010211, 0.056798247, 0.87924482, 8.7622132, 0.93677536, -227.49385]
+  Om12: [-2.783554, 17.932672, 1266.3247, -623.54687, 0.561934, -4.5835203e-06, 1.0031122, 8.4650903, 0.84983082, -108.1481]
+  Om13: [16.372178, 5.3192532, 35244.399, -37.753003, 3.44901, -1.4927515, 1.1851607, 8.2549115, 0.86733305, -0.019185125]
+  Om14: [17.513152, 9.6046452, 7074.7112, -164.12975, 2.2583084, -0.54036053, 1.2525764, 8.0726285, 0.80052616, -1.024377]
+  Om15: [18.114157, 13.573935, 5700.1312, -369.98837, 1.8295712, -0.27287725, 1.2779459, 7.9214785, 0.73053658, -4.9373914]
+  Om22: [8.3572298, 4.6952991, 488.93334, 1008.4118, 0.017306059, -0.98587087, 0.85811919, 8.5897447, 0.92261791, -998.24283]
+  Om23: [0.00069188668, 14.492179, 721.27752, -208.03768, 0.59137721, 0.1584661, 1.086245, 8.3869998, 0.99033699, -158.56733]
+  Om24: [0.00029393554, 12.082965, 386.99104, -53.850473, 0.58338089, 0.25072363, 1.1311315, 8.2300353, 0.93272837, -136.1949]
+  Om33: [16.408711, 6.327113, 14455.88, -47.514382, 3.0925093, -1.2051174, 1.1362137, 8.2751838, 0.87079571, -0.043852555]
+O2 + O2+:
+  beta Bruno: 8.38
+  epsilon0 Bruno: 1.75446392385e-20
+  re Bruno: 3.162e-10
+  VSS, dref: 5.245e-10
+  VSS, omega: 0.67
+  VSS, alpha: 0.157
+  VSS, Tref: 273
+CO2 + CO2:
+  beta Bruno: 7.75
+  epsilon0 Bruno: 3.1900946247000005e-21
+  re Bruno: 4.119e-10
+  Bzowski, sigma: 3.769e-10
+  Bzowski, eps/k: 245.3
+  Bzowski, rho*: 0.072
+  Bzowski, V_0*: 2800000
+  VSS, Tref: 273
+N2 + O+:
+  beta Bruno: 7.31
+  epsilon0 Bruno: 2.4011185828200002e-20
+  re Bruno: 2.887e-10
+  VSS, dref: 3.477e-10
+  VSS, omega: 0.691
+  VSS, alpha: 1.365
+  VSS, Tref: 273
+O + N2+:
+  beta Bruno: 7.25
+  epsilon0 Bruno: 8.589110679300001e-21
+  re Bruno: 3.302e-10
+  VSS, dref: 3.823e-10
+  VSS, omega: 0.66
+  VSS, alpha: 1.286
+  VSS, Tref: 273
+O + NO:
+  phi_zero Born-Mayer: 3.43186220223e-16
+  beta Born-Mayer: 37170000000
+  C (VSS (1 1)): 1.2199999999999999e-18
+  omega (VSS (1 1)): 0.23
+  C (VSS (2 2)): 9.27e-19
+  omega (VSS (2 2)): 0.217
+  C (VSS tot): 1.354e-18
+  omega (VSS tot): 0.217
+  C (VSS deflection): 1.2219999999999999e-20
+  omega (VSS deflection): 0.0221
+  beta Bruno: 7.26
+  epsilon0 Bruno: 1.259631215403e-21
+  re Bruno: 3.641e-10
+  exch,Arrh_A,Scanlon: 2.3e-19
+  exch,Arrh_n,Scanlon: 0.5
+  exch,Ea,Scanlon: 2.719e-19
+  exch,Arrh_A,Park: 1.39485269366704e-17
+  exch,Arrh_n,Park: 0
+  exch,Ed,Park: 2.685365028e-19
+  diss,NO,Arrh_A,Park: 1.82659281313541e-13
+  diss,NO,Arrh_n,Park: 0
+  diss,NO,Ed,Park: 1.0423910520000002e-18
+  diss,NO,Arrh_A,Scanlon: 4e-10
+  diss,NO,Arrh_n,Scanlon: -1.1
+  diss,NO,Ea,Scanlon: 1.043e-18
+  VSS, dref: 3.693e-10
+  VSS, omega: 0.752
+  VSS, alpha: 1.555
+  VSS, Tref: 273
+NO + O:
+  phi_zero Born-Mayer: 3.43186220223e-16
+  beta Born-Mayer: 37170000000
+  C (VSS (1 1)): 1.2199999999999999e-18
+  omega (VSS (1 1)): 0.23
+  C (VSS (2 2)): 9.27e-19
+  omega (VSS (2 2)): 0.217
+  C (VSS tot): 1.354e-18
+  omega (VSS tot): 0.217
+  C (VSS deflection): 1.2219999999999999e-20
+  omega (VSS deflection): 0.0221
+  beta Bruno: 7.26
+  epsilon0 Bruno: 1.259631215403e-21
+  re Bruno: 3.641e-10
+  exch,Arrh_A,Scanlon: 2.3e-19
+  exch,Arrh_n,Scanlon: 0.5
+  exch,Ea,Scanlon: 2.719e-19
+  exch,Arrh_A,Park: 1.39485269366704e-17
+  exch,Arrh_n,Park: 0
+  exch,Ed,Park: 2.685365028e-19
+  diss,NO,Arrh_A,Park: 1.82659281313541e-13
+  diss,NO,Arrh_n,Park: 0
+  diss,NO,Ed,Park: 1.0423910520000002e-18
+  diss,NO,Arrh_A,Scanlon: 4e-10
+  diss,NO,Arrh_n,Scanlon: -1.1
+  diss,NO,Ea,Scanlon: 1.043e-18
+  VSS, dref: 3.693e-10
+  VSS, omega: 0.752
+  VSS, alpha: 1.555
+  VSS, Tref: 273
+  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+O2 + N+:
+  beta Bruno: 7.38
+  epsilon0 Bruno: 1.92254831292e-20
+  re Bruno: 3.048e-10
+  VSS, dref: 3.528e-10
+  VSS, omega: 0.682
+  VSS, alpha: 1.344
+  VSS, Tref: 273
+N2 + CO2:
+  beta Bruno: 7.9
+  epsilon0 Bruno: 2.3667358644e-21
+  re Bruno: 3.9860000000000005e-10
+  diss,N2,Arrh_A,Park: 1.1623773006975426e-08
+  diss,N2,Arrh_n,Park: -1.6
+  diss,N2,Ed,Park: 1.5628962528000002e-18
+  Bzowski, sigma: 3.711e-10
+  Bzowski, eps/k: 155
+  Bzowski, rho*: 0.0897
+  Bzowski, V_0*: 242000
+  VSS, Tref: 273
+NO + NO:
+  phi_zero Born-Mayer: 4.29062884107e-16
+  beta Born-Mayer: 33030000000
+  C (VSS (1 1)): 1.981e-18
+  omega (VSS (1 1)): 0.25
+  C (VSS (2 2)): 1.25e-18
+  omega (VSS (2 2)): 0.218
+  C (VSS tot): 1.876e-18
+  omega (VSS tot): 0.221
+  C (VSS deflection): 9.11e-21
+  omega (VSS deflection): 0.0521
+  beta Bruno: 8.09
+  epsilon0 Bruno: 1.8977781412425e-21
+  re Bruno: 3.813e-10
+  diss,NO,Arrh_A,Park: 1.82659281313541e-13
+  diss,NO,Arrh_n,Park: 0
+  diss,NO,Ed,Park: 1.0423910520000002e-18
+  diss,NO,Arrh_A,Scanlon: 1e-10
+  diss,NO,Arrh_n,Scanlon: -1
+  diss,NO,Ea,Scanlon: 1.043e-18
+  Bzowski, sigma: 3.474e-10
+  Bzowski, eps/k: 125
+  Bzowski, rho*: 0.0883
+  Bzowski, V_0*: 214500
+  VSS, dref: 4.2180000000000003e-10
+  VSS, omega: 0.737
+  VSS, alpha: 1.542
+  VSS, Tref: 273
+  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+O2 + N2+:
+  beta Bruno: 8.11
+  epsilon0 Bruno: 1.45174860147e-20
+  re Bruno: 3.434e-10
+  VSS, dref: 4.0339999999999997e-10
+  VSS, omega: 0.66
+  VSS, alpha: 1.284
+  VSS, Tref: 273
+O2 + N2: # add LC to run R_VT (wrong!)
+  beta Bruno: 8.11
+  epsilon0 Bruno: 1.45174860147e-20
+  re Bruno: 3.434e-10
+  VSS, dref: 4.0339999999999997e-10
+  VSS, omega: 0.66
+  VSS, alpha: 1.284
+  VSS, Tref: 273  
+  alpha_FHO: 4e-10
+H2 + H2:
+  VSS, Tref: 273
+O2 + O2:
+  phi_zero Born-Mayer: 2.379232199025e-15
+  beta Born-Mayer: 39640000000
+  C (VSS (1 1)): 1.6059999999999998e-18
+  omega (VSS (1 1)): 0.224
+  C (VSS (2 2)): 1.039e-18
+  omega (VSS (2 2)): 0.198
+  C (VSS tot): 1.5559999999999998e-18
+  omega (VSS tot): 0.201
+  C (VSS deflection): 9.49e-21
+  omega (VSS deflection): 0.0419
+  beta Bruno: 8.14
+  epsilon0 Bruno: 1.918125783618e-21
+  re Bruno: 3.78e-10
+  diss,O2,Arrh_A,Park: 3.32107784206438e-09
+  diss,O2,Arrh_n,Park: -1.5
+  diss,O2,Ed,Park: 8.24938614e-19
+  diss,O2,Arrh_A,Scanlon: 5.33e-11		# Open Source DSMC Chemistry Modelling for Hypersonic Flows, pp. 22, C1
+  diss,O2,Arrh_n,Scanlon: -1 			# Open Source DSMC Chemistry Modelling for Hypersonic Flows, pp. 22, C2
+  diss,O2,Ea,Scanlon: 8.197e-19 		# Open Source DSMC Chemistry Modelling for Hypersonic Flows, pp. 22, Ea
+  Bzowski, sigma: 3.407e-10 
+  Bzowski, eps/k: 121.1 # [K]
+  Bzowski, rho*: 0.0745
+  Bzowski, V_0*: 1322000
+  alpha_FHO: 4e-10
+  VSS, dref: 3.8960000000000003e-10
+  VSS, omega: 0.7
+  VSS, alpha: 1.463
+  VSS, Tref: 273
+N + O:
+  phi_zero Born-Mayer: 5.57877879933e-17
+  beta Born-Mayer: 34100000000
+  C (VSS (1 1)): 1.466e-18
+  omega (VSS (1 1)): 0.286
+  C (VSS (2 2)): 1.1239999999999998e-18
+  omega (VSS (2 2)): 0.269
+  C (VSS tot): 1.6359999999999998e-18
+  omega (VSS tot): 0.268
+  C (VSS deflection): 1.238e-20
+  omega (VSS deflection): 0.0296
+  beta Bruno: 6.72
+  epsilon0 Bruno: 9.595435447785e-22
+  re Bruno: 3.507e-10
+  VSS, dref: 3.811e-10
+  VSS, omega: 0.794
+  VSS, alpha: 1.545
+  VSS, Tref: 273
+O + N:
+  phi_zero Born-Mayer: 5.57877879933e-17
+  beta Born-Mayer: 34100000000
+  C (VSS (1 1)): 1.466e-18
+  omega (VSS (1 1)): 0.286
+  C (VSS (2 2)): 1.1239999999999998e-18
+  omega (VSS (2 2)): 0.269
+  C (VSS tot): 1.6359999999999998e-18
+  omega (VSS tot): 0.268
+  C (VSS deflection): 1.238e-20
+  omega (VSS deflection): 0.0296
+  beta Bruno: 6.72
+  epsilon0 Bruno: 9.595435447785e-22
+  re Bruno: 3.507e-10
+  VSS, dref: 3.811e-10
+  VSS, omega: 0.794
+  VSS, alpha: 1.545
+  VSS, Tref: 273
+N2 + e-:
+  Om11: [8.6647417, -2.8470816, 0.0024974553, 0.37435842, 0.0, 3.6373136, 0.42807542, 8.9937032, 0.64208483, 0.0]
+  Om12: [9.2427216, -3.1087179, 0.029946282, -0.12250469, 0.0, 2.4738237, 0.598748, 8.6867502, 0.61223806, 0.0]
+  Om13: [10.916068, -3.680264, 0.69820942, -2.3577425, 0.0, 1.102769, 0.80170671, 8.4501962, 0.6273881, 0.0]
+  Om14: [12.183894, -4.2550219, 3.0322926, -6.0542005, 0.0, 0.61008698, 0.89617529, 8.2816052, 0.59781149, 0.0]
+  Om15: [13.185789, -4.8168341, 6.7403385, -10.660674, 0.0, 0.40773619, 0.94738178, 8.1408417, 0.56174043, 0.0]
+  Om22: [11.05787, -2.0428465, 0.13399913, -0.62499744, 0.0, 1.6080129, 0.71921263, 8.5357712, 0.93300209, 0.0]
+  Om23: [11.09756, -2.0628663, 0.3077277, -1.1293145, 0.0, 1.2832611, 0.7979988, 8.312668, 0.94017592, 0.0]
+  Om24: [10.916044, -2.0870247, 0.35408884, -1.18637, 0.0, 1.2387612, 0.82247892, 8.102481, 0.94113201, 0.0]
+  Om33: [12.168592, -2.6164186, 1.586823, -3.587717, 0.0, 0.72392521, 0.87107617, 8.5009936, 0.69264029, 0.0]
+O + N+:
+  beta Bruno: 6.95
+  epsilon0 Bruno: 1.2252648607499999e-20
+  re Bruno: 2.886e-10
+  VSS, dref: 7.525e-10
+  VSS, omega: 1.064
+  VSS, alpha: 1.798
+  VSS, Tref: 273
+N + NO:
+  phi_zero Born-Mayer: 6.86692875759e-17
+  beta Born-Mayer: 29830000000
+  C (VSS (1 1)): 1.6309999999999998e-18
+  omega (VSS (1 1)): 0.26
+  C (VSS (2 2)): 1.246e-18
+  omega (VSS (2 2)): 0.244
+  C (VSS tot): 1.815e-18
+  omega (VSS tot): 0.244
+  C (VSS deflection): 1.2309999999999998e-20
+  omega (VSS deflection): 0.0277
+  beta Bruno: 6.94
+  epsilon0 Bruno: 1.374347057457e-21
+  re Bruno: 3.706e-10
+  exch,Arrh_A,Scanlon: 5e-16
+  exch,Arrh_n,Scanlon: -0.35
+  exch,Ea,Scanlon: 2e-20
+  diss,NO,Arrh_A,Park: 1.82659281313541e-13
+  diss,NO,Arrh_n,Park: 0
+  diss,NO,Ed,Park: 1.0423910520000002e-18
+  diss,NO,Arrh_A,Scanlon: 4e-10
+  diss,NO,Arrh_n,Scanlon: -1.1
+  diss,NO,Ea,Scanlon: 1.043e-18
+  VSS, dref: 4.028e-10
+  VSS, omega: 0.788
+  VSS, alpha: 1.641
+  VSS, Tref: 273
+NO + N:
+  phi_zero Born-Mayer: 6.86692875759e-17
+  beta Born-Mayer: 29830000000
+  C (VSS (1 1)): 1.6309999999999998e-18
+  omega (VSS (1 1)): 0.26
+  C (VSS (2 2)): 1.246e-18
+  omega (VSS (2 2)): 0.244
+  C (VSS tot): 1.815e-18
+  omega (VSS tot): 0.244
+  C (VSS deflection): 1.2309999999999998e-20
+  omega (VSS deflection): 0.0277
+  beta Bruno: 6.94
+  epsilon0 Bruno: 1.374347057457e-21
+  re Bruno: 3.706e-10
+  exch,Arrh_A,Scanlon: 5e-16
+  exch,Arrh_n,Scanlon: -0.35
+  exch,Ea,Scanlon: 2e-20
+  diss,NO,Arrh_A,Park: 1.82659281313541e-13
+  diss,NO,Arrh_n,Park: 0
+  diss,NO,Ed,Park: 1.0423910520000002e-18
+  diss,NO,Arrh_A,Scanlon: 4e-10
+  diss,NO,Arrh_n,Scanlon: -1.1
+  diss,NO,Ea,Scanlon: 1.043e-18
+  VSS, dref: 4.028e-10
+  VSS, omega: 0.788
+  VSS, alpha: 1.641
+  VSS, Tref: 273
+  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+N + NO:
+  phi_zero Born-Mayer: 6.86692875759e-17
+  beta Born-Mayer: 29830000000
+  C (VSS (1 1)): 1.6309999999999998e-18
+  omega (VSS (1 1)): 0.26
+  C (VSS (2 2)): 1.246e-18
+  omega (VSS (2 2)): 0.244
+  C (VSS tot): 1.815e-18
+  omega (VSS tot): 0.244
+  C (VSS deflection): 1.2309999999999998e-20
+  omega (VSS deflection): 0.0277
+  beta Bruno: 6.94
+  epsilon0 Bruno: 1.374347057457e-21
+  re Bruno: 3.706e-10
+  exch,Arrh_A,Scanlon: 5e-16
+  exch,Arrh_n,Scanlon: -0.35
+  exch,Ea,Scanlon: 2e-20
+  diss,NO,Arrh_A,Park: 1.82659281313541e-13
+  diss,NO,Arrh_n,Park: 0
+  diss,NO,Ed,Park: 1.0423910520000002e-18
+  diss,NO,Arrh_A,Scanlon: 4e-10
+  diss,NO,Arrh_n,Scanlon: -1.1
+  diss,NO,Ea,Scanlon: 1.043e-18
+  VSS, dref: 4.028e-10
+  VSS, omega: 0.788
+  VSS, alpha: 1.641
+  VSS, Tref: 273
+O2 + O+:
+  beta Bruno: 7.32
+  epsilon0 Bruno: 2.27991389277e-20
+  re Bruno: 2.862e-10
+  VSS, dref: 3.453e-10
+  VSS, omega: 0.695
+  VSS, alpha: 1.359
+  VSS, Tref: 273
+NO + N2+:
+  beta Bruno: 8.08
+  epsilon0 Bruno: 1.5158196597e-20
+  re Bruno: 3.448e-10
+  VSS, dref: 4.1e-10
+  VSS, omega: 0.658
+  VSS, alpha: 1.269
+  VSS, Tref: 273
+NO + N2: # add LC to run R_VT (wrong!)
+  beta Bruno: 8.08
+  epsilon0 Bruno: 1.5158196597e-20
+  re Bruno: 3.448e-10
+  VSS, dref: 4.1e-10
+  VSS, omega: 0.658
+  VSS, alpha: 1.269
+  VSS, Tref: 273
+  alpha_FHO: 4e-10
+NO + NO+:
+  beta Bruno: 8.34
+  epsilon0 Bruno: 1.7980110947099998e-20
+  re Bruno: 3.1970000000000004e-10
+  VSS, dref: 5.325000000000001e-10
+  VSS, omega: 0.653
+  VSS, alpha: 0.209
+  VSS, Tref: 273
+N2 + NO:
+  phi_zero Born-Mayer: 8.39220084747e-18
+  beta Born-Mayer: 17610000000
+  C (VSS (1 1)): 2.191e-18
+  omega (VSS (1 1)): 0.263
+  C (VSS (2 2)): 1.355e-18
+  omega (VSS (2 2)): 0.227
+  C (VSS tot): 2.038e-18
+  omega (VSS tot): 0.23
+  C (VSS deflection): 8.82e-21
+  omega (VSS deflection): 0.0588
+  beta Bruno: 8.08
+  epsilon0 Bruno: 1.8641324333775e-21
+  re Bruno: 3.8210000000000006e-10
+  diss,N2,Arrh_A,Park: 1.16237724472253e-08
+  diss,N2,Arrh_n,Park: -1.6
+  diss,N2,Ed,Park: 1.5628962528000002e-18
+  diss,N2,Arrh_A,Scanlon: 1.5e-11
+  diss,N2,Arrh_n,Scanlon: -0.68
+  diss,N2,Ea,Scanlon: 1.567e-18
+  diss,NO,Arrh_A,Park: 8.30269460516095e-15
+  diss,NO,Arrh_n,Park: 0
+  diss,NO,Ed,Park: 1.0423910520000002e-18
+  diss,NO,Arrh_A,Scanlon: 2.1e-10
+  diss,NO,Arrh_n,Scanlon: -1
+  diss,NO,Ea,Scanlon: 1.043e-18
+  Bzowski, sigma: 3.562e-10
+  Bzowski, eps/k: 110.8
+  Bzowski, rho*: 0.0984
+  Bzowski, V_0*: 95630
+  VSS, dref: 4.391e-10
+  VSS, omega: 0.756
+  VSS, alpha: 1.515
+  VSS, Tref: 273
+  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+N + NO+:
+  beta Bruno: 6.98
+  epsilon0 Bruno: 1.3458927670800001e-20
+  re Bruno: 3.095e-10
+  VSS, dref: 3.584e-10
+  VSS, omega: 0.668
+  VSS, alpha: 1.313
+  VSS, Tref: 273
+N2 + N2+:
+  beta Bruno: 8.07
+  epsilon0 Bruno: 1.5472063071300002e-20
+  re Bruno: 3.455e-10
+  VSS, dref: 4.975e-10
+  VSS, omega: 0.601
+  VSS, alpha: 0.254
+  VSS, Tref: 273
+O + NO+:
+  beta Bruno: 7.34
+  epsilon0 Bruno: 1.0754292677100001e-20
+  re Bruno: 3.029e-10
+  VSS, dref: 3.3820000000000003e-10
+  VSS, omega: 0.666
+  VSS, alpha: 1.336
+  VSS, Tref: 273
+N2 + NO+:
+  beta Bruno: 8.32
+  epsilon0 Bruno: 1.8317849858700002e-20
+  re Bruno: 3.2040000000000005e-10
+  VSS, dref: 3.752e-10
+  VSS, omega: 0.676
+  VSS, alpha: 1.343
+  VSS, Tref: 273
+O2 + e-:
+  Om11: [7.8588787, 1.8369546, 356.93172, 0.028223244, 0.0, -2.2467312, 0.50707449, 10.843859, 1.0487624, 0.0]
+  Om12: [7.6482114, 1.7644092, 665.40159, 0.0043786142, 0.0, -2.5567984, 0.63599773, 10.597054, 1.0651801, 0.0]
+  Om13: [7.4713949, 1.6999137, 1058.2978, -0.011775249, 0.0, -2.8012345, 0.74937898, 10.396702, 1.0989618, 0.0]
+  Om14: [7.3195193, 1.6438407, 1532.3704, -0.023221479, 0.0, -3.0058803, 0.84916205, 10.228012, 1.1421074, 0.0]
+  Om15: [7.1872618, 1.5993805, 2091.7705, -0.038643508, 0.0, -3.1834745, 0.94024864, 10.082742, 1.1927295, 0.0]
+  Om22: [8.6050316, 1.9234429, 24007.545, -0.61447421, 0.0, -3.9000941, 1.0229813, 10.482913, 1.1035341, 0.0]
+  Om23: [8.4198162, 1.9466632, 20484.698, -0.7512615, 0.0, -3.8356592, 1.0450625, 10.262712, 1.0484238, 0.0]
+  Om24: [8.2684322, 1.9702143, 16867.52, -0.8611491, 0.0, -3.7539962, 1.0494037, 10.079267, 0.99980198, 0.0]
+  Om33: [7.6919894, 1.811851, 1079.8292, -0.085419626, 0.0, -2.7486271, 0.94853921, 10.3775, 1.1136931, 0.0]
+NO + N+:
+  beta Bruno: 7.37
+  epsilon0 Bruno: 1.9957037147400002e-20
+  re Bruno: 3.064e-10
+  VSS, dref: 3.5950000000000005e-10
+  VSS, omega: 0.681
+  VSS, alpha: 1.329
+  VSS, Tref: 273
+N2 + O2+:
+  beta Bruno: 8.34
+  epsilon0 Bruno: 1.85809273221e-20
+  re Bruno: 3.1850000000000004e-10
+  VSS, dref: 3.434e-10
+  VSS, omega: 0.699
+  VSS, alpha: 1.378
+  VSS, Tref: 273
+O2 + NO+:
+  beta Bruno: 8.36
+  epsilon0 Bruno: 1.7289092007e-20
+  re Bruno: 3.182e-10
+  VSS, dref: 3.7140000000000003e-10
+  VSS, omega: 0.677
+  VSS, alpha: 1.343
+  VSS, Tref: 273
+N + N:
+  phi_zero Born-Mayer: 1.3778718459e-17
+  beta Born-Mayer: 26800000000
+  C (VSS (1 1)): 2.743e-18
+  omega (VSS (1 1)): 0.357
+  C (VSS (2 2)): 2.129e-18
+  omega (VSS (2 2)): 0.335
+  C (VSS tot): 3.0679999999999998e-18
+  omega (VSS tot): 0.328
+  C (VSS deflection): 1.4949999999999997e-20
+  omega (VSS deflection): 0.0435
+  beta Bruno: 6.61
+  epsilon0 Bruno: 1.030519966608e-21
+  re Bruno: 3.583e-10
+  VSS, dref: 3.6970000000000003e-10
+  VSS, omega: 0.79
+  VSS, alpha: 1.486
+  VSS, Tref: 273
+NO + O+:
+  beta Bruno: 7.31
+  epsilon0 Bruno: 2.36136857145e-20
+  re Bruno: 2.879e-10
+  VSS, dref: 3.469e-10
+  VSS, omega: 0.688
+  VSS, alpha: 1.352
+  VSS, Tref: 273
+N2 + N+:
+  beta Bruno: 7.36
+  epsilon0 Bruno: 2.0314322618400003e-20
+  re Bruno: 3.071e-10
+  VSS, dref: 7.666e-10
+  VSS, omega: 1.034
+  VSS, alpha: 1.862
+  VSS, Tref: 273
+N + e-:
+  Om11: [5.8254006, -0.61358276, 4.6947975e-10, 0.0, -1.9, 14.568706, 2.0801421, 10.51152, 2.0320525, 7.0]
+  Om12: [5.6035615, -0.54460457, 5.3579631e-10, 0.0, -1.9, 14.907928, 2.1420027, 10.057131, 2.3400382, 7.0]
+  Om13: [5.4230088, -0.49686275, 6.740311e-10, 0.0, -1.9, 15.1256, 2.1934504, 9.7252286, 2.4094586, 7.0]
+  Om14: [5.2477084, -0.45868521, 4.1056388e-10, 0.0, -1.9, 15.76629, 2.2238493, 9.5040311, 2.387541, 7.0]
+  Om15: [5.1018556, -0.43139316, 3.5987258e-10, 0.0, -1.9, 16.153823, 2.2526053, 9.2275803, 2.4952532, 7.0]
+  Om22: [5.5683614, -0.54215959, 8.7754486e-11, 0.0, -1.9, 15.775236, 2.9194982, 9.5472258, 2.1393001, 7.0]
+  Om23: [5.3873634, -0.49481075, 9.940663e-11, 0.0, -1.9, 16.07601, 3.0104698, 9.2214353, 2.1882147, 7.0]
+  Om24: [5.2118627, -0.45534815, 5.0851876e-11, 0.0, -1.9, 16.844386, 3.0592425, 8.9702707, 2.2246032, 7.0]
+  Om33: [5.4142881, -0.49733458, 5.1258839e-10, 0.0, -1.9, 15.326933, 2.8132158, 9.5154236, 2.4166467, 7.0]
+O + O2:
+  phi_zero Born-Mayer: 7.25785983945e-16
+  beta Born-Mayer: 40390000000
+  C (VSS (1 1)): 1.0369999999999998e-18
+  omega (VSS (1 1)): 0.211
+  C (VSS (2 2)): 7.85e-19
+  omega (VSS (2 2)): 0.199
+  C (VSS tot): 1.1469999999999998e-18
+  omega (VSS tot): 0.199
+  C (VSS deflection): 1.2159999999999999e-20
+  omega (VSS deflection): 0.0202
+  beta Bruno: 7.26
+  epsilon0 Bruno: 1.278216463557e-21
+  re Bruno: 3.621e-10
+  diss,O2,Arrh_A,Park: 1.66053892103219e-08
+  diss,O2,Arrh_n,Park: -1.5
+  diss,O2,Ed,Park: 8.24938614e-19
+  diss,O2,Arrh_A,Scanlon: 1.5e-10
+  diss,O2,Arrh_n,Scanlon: -1.05
+  diss,O2,Ea,Scanlon: 8.197e-19
+  alpha_FHO: 4e-10
+  diss,O2,Arrh_A,mTM: 6.1953e-12
+  diss,O2,Arrh_n,mTM: -0.55724
+  diss,O2,Ea,mTM: 8.352382659840001e-19
+  VSS, dref: 3.734e-10
+  VSS, omega: 0.76
+  VSS, alpha: 1.542
+  VSS, Tref: 273
+O2 + O:
+  phi_zero Born-Mayer: 7.25785983945e-16
+  beta Born-Mayer: 40390000000
+  C (VSS (1 1)): 1.0369999999999998e-18
+  omega (VSS (1 1)): 0.211
+  C (VSS (2 2)): 7.85e-19
+  omega (VSS (2 2)): 0.199
+  C (VSS tot): 1.1469999999999998e-18
+  omega (VSS tot): 0.199
+  C (VSS deflection): 1.2159999999999999e-20
+  omega (VSS deflection): 0.0202
+  beta Bruno: 7.26
+  epsilon0 Bruno: 1.278216463557e-21
+  re Bruno: 3.621e-10
+  diss,O2,Arrh_A,Park: 1.66053892103219e-08
+  diss,O2,Arrh_n,Park: -1.5
+  diss,O2,Ed,Park: 8.24938614e-19
+  diss,O2,Arrh_A,Scanlon: 1.5e-10
+  diss,O2,Arrh_n,Scanlon: -1.05
+  diss,O2,Ea,Scanlon: 8.197e-19
+  alpha_FHO: 4e-10
+  diss,O2,Arrh_A,mTM: 6.1953e-12
+  diss,O2,Arrh_n,mTM: -0.55724
+  diss,O2,Ea,mTM: 8.352382659840001e-19
+  VSS, dref: 3.734e-10
+  VSS, omega: 0.76
+  VSS, alpha: 1.542
+  VSS, Tref: 273
+N + N+:
+  beta Bruno: 6.76
+  epsilon0 Bruno: 1.51535502837e-20
+  re Bruno: 2.956e-10
+  VSS, dref: 6.462e-10
+  VSS, omega: 0.741
+  VSS, alpha: 0.158
+  VSS, Tref: 273
+O2 + CO:
+  beta Bruno: 8.07
+  epsilon0 Bruno: 1.9253361009e-21
+  re Bruno: 3.836e-10
+  diss,O2,Arrh_A,Park: 3.32107784206438e-09
+  diss,O2,Arrh_n,Park: -1.5
+  diss,O2,Ed,Park: 8.24938614e-19
+  diss,CO,Arrh_A,Park: 3.819239702291926e-10
+  diss,CO,Arrh_n,Park: -1
+  diss,CO,Ed,Park: 1.7810390160000003e-18
+  Bzowski, sigma: 3.529e-10
+  Bzowski, eps/k: 108.7
+  Bzowski, rho*: 0.0918
+  Bzowski, V_0*: 179200
+  VSS, Tref: 273
+N + O2+:
+  beta Bruno: 6.99
+  epsilon0 Bruno: 1.36835528862e-20
+  re Bruno: 3.074e-10
+  VSS, dref: 3.155e-10
+  VSS, omega: 0.682
+  VSS, alpha: 1.339
+  VSS, Tref: 273
+O + e-:
+  Om11: [8.4272724, 1.5114426, 185.15287, 0.51923435, 0.0, -2.4753262, 0.4555132, 11.183108, 1.3284135, 0.0]
+  Om12: [8.8104856, 1.4638292, 462845.37, 0.34721927, 0.0, -5.8325613, 0.72600394, 11.019551, 1.4157571, 0.0]
+  Om13: [8.7209499, 1.6025253, 173478.57, 0.25782606, 0.0, -5.3356533, 0.70492042, 10.823475, 1.3369725, 0.0]
+  Om14: [8.5791555, 1.6974863, 93716.661, 0.16125373, 0.0, -5.0345906, 0.72049861, 10.657225, 1.316694, 0.0]
+  Om15: [8.4079354, 1.7417063, 66900.888, 7.6528761e-02, 0.0, -4.8849034, 0.76169177, 10.514777, 1.3291704, 0.0]
+  Om22: [8.5895173, 1.154362, 11397656.0, 0.51127498, 0.0, -7.078187, 1.430151, 10.160031, 1.2547808, 0.0]
+  Om23: [8.4019947, 1.1520014, 11681715.0, 0.45650827, 0.0, -7.1333167, 1.4773336, 9.9422415, 1.2229175, 0.0]
+  Om24: [8.2004011, 1.1443707, 9604312.3, 0.42229855, 0.0, -7.1138747, 1.5482109, 9.7503828, 1.2182253, 0.0]
+  Om33: [7.9654594, 1.1821958, 49627.266, 0.56671305, 0.0, -4.9155056, 1.3172987, 9.8246972, 1.3776101, 0.0]
+N + N2+:
+  beta Bruno: 6.94
+  epsilon0 Bruno: 1.1009199037800001e-20
+  re Bruno: 3.358e-10
+  VSS, dref: 3.9870000000000003e-10
+  VSS, omega: 0.657
+  VSS, alpha: 1.256
+  VSS, Tref: 273
+O2 + CO2:
+  beta Bruno: 7.93
+  epsilon0 Bruno: 2.3922104787e-21
+  re Bruno: 3.965e-10
+  diss,O2,Arrh_A,Park: 3.32107784206438e-09
+  diss,O2,Arrh_n,Park: -1.5
+  diss,O2,Ed,Park: 8.24938614e-19
+  Bzowski, sigma: 3.596e-10
+  Bzowski, eps/k: 168.8
+  Bzowski, rho*: 0.073
+  Bzowski, V_0*: 2011000
+  VSS, Tref: 273
+N + O+:
+  beta Bruno: 6.74
+  epsilon0 Bruno: 1.82454314583e-20
+  re Bruno: 2.764e-10
+  VSS, dref: 7.092e-10
+  VSS, omega: 0.995
+  VSS, alpha: 1.585
+  VSS, Tref: 273
+NO + O2+:
+  beta Bruno: 8.36
+  epsilon0 Bruno: 1.8240785145e-20
+  re Bruno: 3.1780000000000003e-10
+  VSS, dref: 3.417e-10
+  VSS, omega: 0.695
+  VSS, alpha: 1.365
+  VSS, Tref: 273
+NO + O2:
+  beta Bruno: 8.36
+  epsilon0 Bruno: 1.8240785145e-20
+  re Bruno: 3.1780000000000003e-10
+  VSS, dref: 3.417e-10
+  VSS, omega: 0.695
+  VSS, alpha: 1.365
+  VSS, Tref: 273
+  alpha_FHO: 4e-10
+N2 + N2:
+  phi_zero Born-Mayer: 6.660247980705e-17
+  beta Born-Mayer: 25730000000
+  C (VSS (1 1)): 2.414e-18
+  omega (VSS (1 1)): 0.274
+  C (VSS (2 2)): 1.425e-18
+  omega (VSS (2 2)): 0.231
+  C (VSS tot): 2.161e-18
+  omega (VSS tot): 0.235
+  C (VSS deflection): 8.199999999999998e-21
+  omega (VSS deflection): 0.0702
+  beta Bruno: 8.07
+  epsilon0 Bruno: 1.8333706433295e-21
+  re Bruno: 3.829e-10
+  diss,N2,Arrh_A,Park: 6.144e-09 #1.16237724472253e-08
+  diss,N2,Arrh_n,Park: -1.6
+  diss,N2,Ed,Park: 1.5628962528000002e-18
+  diss,N2,Arrh_A,Scanlon: 4.1e-12 # [m^3/s] #6.144e-09		# Open Source DSMC Chemistry Modelling for Hypersonic Flows, pp. 22, C1
+  diss,N2,Arrh_n,Scanlon: -0.62 #-1.6			# Open Source DSMC Chemistry Modelling for Hypersonic Flows, pp. 22, C2
+  diss,N2,Ea,Scanlon: 1.567e-18				# Open Source DSMC Chemistry Modelling for Hypersonic Flows, pp. 22, Ea
+  Bzowski, sigma: 3.6520000000000004e-10
+  Bzowski, eps/k: 98.4
+  Bzowski, rho*: 0.108
+  Bzowski, V_0*: 53080
+  alpha_FHO: 4e-10
+  VSS, dref: 4.04e-10
+  VSS, omega: 0.686
+  VSS, alpha: 1.424
+  VSS, Tref: 273
+H + H:
+  VSS, Tref: 273
+Ar + Ar:
+  C (VSS (1 1)): 1.129e-18
+  omega (VSS (1 1)): 0.2
+  C (VSS (2 2)): 8.529999999999999e-19
+  omega (VSS (2 2)): 0.19
+  C (VSS tot): 1.2479999999999998e-18
+  omega (VSS tot): 0.19
+  C (VSS deflection): 1.213e-20
+  omega (VSS deflection): 0.0167
+  beta Bruno: 8.12
+  epsilon0 Bruno: 1.8590054683695e-21
+  re Bruno: 3.794e-10
+  VSS, dref: 4.0110000000000004e-10
+  VSS, omega: 0.722
+  VSS, alpha: 1.47
+  VSS, Tref: 273
+O2 + NO:
+  phi_zero Born-Mayer: 1.0210671248745e-15
+  beta Born-Mayer: 36440000000
+  C (VSS (1 1)): 1.791e-18
+  omega (VSS (1 1)): 0.238
+  C (VSS (2 2)): 1.1569999999999999e-18
+  omega (VSS (2 2)): 0.21
+  C (VSS tot): 1.7309999999999999e-18
+  omega (VSS tot): 0.213
+  C (VSS deflection): 9.54e-21
+  omega (VSS deflection): 0.0455
+  beta Bruno: 8.12
+  epsilon0 Bruno: 1.9057890240675e-21
+  re Bruno: 3.797e-10
+  diss,O2,Arrh_A,Park: 3.32107784206438e-09
+  diss,O2,Arrh_n,Park: -1.5
+  diss,O2,Ed,Park: 8.24938614e-19
+  diss,O2,Arrh_A,Scanlon: 1.1e-10
+  diss,O2,Arrh_n,Scanlon: -1
+  diss,O2,Ea,Scanlon: 8.197e-19
+  diss,NO,Arrh_A,Park: 8.30269460516095e-15
+  diss,NO,Arrh_n,Park: 0
+  diss,NO,Ed,Park: 1.0423910520000002e-18
+  diss,NO,Arrh_A,Scanlon: 2e-10
+  diss,NO,Arrh_n,Scanlon: -1
+  diss,NO,Ea,Scanlon: 1.043e-18
+  Bzowski, sigma: 3.4410000000000003e-10
+  Bzowski, eps/k: 122.9
+  Bzowski, rho*: 0.0815
+  Bzowski, V_0*: 487700
+  VSS, dref: 4.054e-10
+  VSS, omega: 0.718
+  VSS, alpha: 1.501
+  VSS, Tref: 273
+  alpha_FHO: 4e-10
+O + O+:
+  beta Bruno: 6.93
+  epsilon0 Bruno: 1.49718634119e-20
+  re Bruno: 2.689e-10
+  VSS, dref: 5.625e-10
+  VSS, omega: 0.725
+  VSS, alpha: 0.164
+  VSS, Tref: 273
+O + O:
+  phi_zero Born-Mayer: 2.25906895665e-16
+  beta Born-Mayer: 41400000000
+  C (VSS (1 1)): 9.62e-19
+  omega (VSS (1 1)): 0.239
+  C (VSS (2 2)): 7.33e-19
+  omega (VSS (2 2)): 0.225
+  C (VSS tot): 1.069e-18
+  omega (VSS tot): 0.225
+  C (VSS deflection): 1.227e-20
+  omega (VSS deflection): 0.0239
+  beta Bruno: 6.9
+  epsilon0 Bruno: 9.233343544095e-22
+  re Bruno: 3.423e-10
+  VSS, dref: 3.6920000000000003e-10
+  VSS, omega: 0.803
+  VSS, alpha: 1.582
+  VSS, Tref: 273
+H2 + H:
+  VSS, Tref: 273
+N + O2:
+  phi_zero Born-Mayer: 1.4510913149205e-16
+  beta Born-Mayer: 33200000000
+  C (VSS (1 1)): 1.259e-18
+  omega (VSS (1 1)): 0.234
+  C (VSS (2 2)): 9.579999999999998e-19
+  omega (VSS (2 2)): 0.221
+  C (VSS tot): 1.399e-18
+  omega (VSS tot): 0.221
+  C (VSS deflection): 1.225e-20
+  omega (VSS deflection): 0.0221
+  beta Bruno: 6.94
+  epsilon0 Bruno: 1.3831590285645e-21
+  re Bruno: 3.687e-10
+  diss,O2,Arrh_A,Park: 3.32107784206438e-09
+  diss,O2,Arrh_n,Park: -1.5
+  diss,O2,Ed,Park: 8.24938614e-19
+  diss,O2,Arrh_A,Scanlon: 1.1e-10
+  diss,O2,Arrh_n,Scanlon: -1
+  diss,O2,Ea,Scanlon: 8.197e-19
+  exch,Arrh_A,Scanlon: 4e-15
+  exch,Arrh_n,Scanlon: -0.39
+  exch,Ea,Scanlon: 2e-20
+  exch,Ea,WRFP, J: 5.287184100000001e-20
+  exch,A,Warnatz: 1.9097e-21
+  exch,A,RFP: 1.6715e-17
+  exch,n,Warnatz: 1
+  exch,n,RF: 0.5
+  exch,n,Polak: 0.5
+  exch,alpha,RF: 0.24
+  exch,alpha,Polak: 0.12
+  exch,beta,Polak: 0.46
+  VSS, dref: 3.7210000000000004e-10
+  VSS, omega: 0.757
+  VSS, alpha: 1.567
+  VSS, Tref: 273
+O2 + N:
+  phi_zero Born-Mayer: 1.4510913149205e-16
+  beta Born-Mayer: 33200000000
+  C (VSS (1 1)): 1.259e-18
+  omega (VSS (1 1)): 0.234
+  C (VSS (2 2)): 9.579999999999998e-19
+  omega (VSS (2 2)): 0.221
+  C (VSS tot): 1.399e-18
+  omega (VSS tot): 0.221
+  C (VSS deflection): 1.225e-20
+  omega (VSS deflection): 0.0221
+  beta Bruno: 6.94
+  epsilon0 Bruno: 1.3831590285645e-21
+  re Bruno: 3.687e-10
+  diss,O2,Arrh_A,Park: 3.32107784206438e-09
+  diss,O2,Arrh_n,Park: -1.5
+  diss,O2,Ed,Park: 8.24938614e-19
+  diss,O2,Arrh_A,Scanlon: 1.1e-10
+  diss,O2,Arrh_n,Scanlon: -1
+  diss,O2,Ea,Scanlon: 8.197e-19
+  exch,Arrh_A,Scanlon: 4e-15
+  exch,Arrh_n,Scanlon: -0.39
+  exch,Ea,Scanlon: 2e-20
+  exch,Ea,WRFP, J: 5.287184100000001e-20
+  exch,A,Warnatz: 1.9097e-21
+  exch,A,RFP: 1.6715e-17
+  exch,n,Warnatz: 1
+  exch,n,RF: 0.5
+  exch,n,Polak: 0.5
+  exch,alpha,RF: 0.24
+  exch,alpha,Polak: 0.12
+  exch,beta,Polak: 0.46
+  VSS, dref: 3.7210000000000004e-10
+  VSS, omega: 0.757
+  VSS, alpha: 1.567
+  VSS, Tref: 273
+  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+CO + CO:
+  beta Bruno: 8
+  epsilon0 Bruno: 1.9649098728e-21
+  re Bruno: 3.8889999999999997e-10
+  diss,CO,Arrh_A,Park: 3.819239702291926e-10
+  diss,CO,Arrh_n,Park: -1
+  diss,CO,Ed,Park: 1.7810390160000003e-18
+  Bzowski, sigma: 3.6520000000000004e-10
+  Bzowski, eps/k: 98.4
+  Bzowski, rho*: 0.108
+  Bzowski, V_0*: 53080
+  VSS, Tref: 273
+N2 + CO:
+  beta Bruno: 8.04
+  epsilon0 Bruno: 1.8955356087e-21
+  re Bruno: 3.86e-10
+  diss,N2,Arrh_A,Park: 1.1623773006975426e-08
+  diss,N2,Arrh_n,Park: -1.6
+  diss,N2,Ed,Park: 1.5628962528000002e-18
+  diss,CO,Arrh_A,Park: 3.819239702291926e-10
+  diss,CO,Arrh_n,Park: -1
+  diss,CO,Ed,Park: 1.7810390160000003e-18
+  Bzowski, sigma: 3.6520000000000004e-10
+  Bzowski, eps/k: 98.4
+  Bzowski, rho*: 0.108
+  Bzowski, V_0*: 53110
+  VSS, Tref: 273
+N2 + N:
+  phi_zero Born-Mayer: 2.962424468685e-17
+  beta Born-Mayer: 26140000000
+  C (VSS (1 1)): 2.1539999999999995e-18
+  omega (VSS (1 1)): 0.295
+  C (VSS (2 2)): 1.654e-18
+  omega (VSS (2 2)): 0.276
+  C (VSS tot): 2.403e-18
+  omega (VSS tot): 0.275
+  C (VSS deflection): 1.239e-20
+  omega (VSS deflection): 0.0334
+  beta Bruno: 6.94
+  epsilon0 Bruno: 1.3496735383559999e-21
+  re Bruno: 3.7150000000000006e-10
+  diss,N2,Arrh_A,Park: 2.657e-08 #4.98161676309657e-08
+  diss,N2,Arrh_n,Park: -1.6
+  diss,N2,Ed,Park: 1.5628962528000002e-18
+  diss,N2,Arrh_A,Scanlon: 2.657e-08 #1e-11
+  diss,N2,Arrh_n,Scanlon: -1.6 #-0.68
+  diss,N2,Ea,Scanlon: 1.567e-18
+  diss,N2,Arrh_A,mTM: 1e-11
+  diss,N2,Arrh_n,mTM: -0.68
+  diss,N2,Ea,mTM: 1.5670382040000001e-18
+  VSS, dref: 4.088e-10
+  VSS, omega: 0.762
+  VSS, alpha: 1.585
+  VSS, Tref: 273
+  alpha_FHO: 4e+10
+  E_FHO: 2.76129704e-21
+  SVT_FHO: 0.3183

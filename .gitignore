@@ -1,0 +1,8 @@
+/build/*
+/kappa_tmp/*
+/kappa_deps/*
+/tests/*.o
+/tests/*.txt
+/examples/*.o
+/install/*
+/trash/*
