@@ -14,9 +14,7 @@
 
 EXAMPLES  = \
 	dumpspectrumTest	\
-	particleProperties	\
-	particleTest		\
-	particle_loading		
+	particleTest		
 	
 
 all : $(EXAMPLES)
@@ -24,18 +22,12 @@ all : $(EXAMPLES)
 dumpspectrumTest : dumpspectrumTest.o
 	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
 
-particleProperties : particleProperties.o
-	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
-
 particleTest : particleTest.o
-	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
-
-particle_loading : particle_loading.o
 	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
 
 %.o : %.cpp
 	$(CXX) -c $(CXX_FLAGS)  $<
 
 clean :
-	$(RM) *.o $(EXAMPLES) *.csv *.out gmon.out
+	$(RM) *.o $(EXAMPLES) *.csv *.out gmon.out *.txt
 

@@ -1,10 +1,9 @@
 /* 
- * \brief Dump vibrational spectrum
  * \file dumpspectrumTest.cpp
+ * \brief Dump vibrational spectrum
  */
 
 #include <iostream>
-#include "kappa.hpp"
 #include <fstream>
 
 #ifdef WINDOWS
@@ -14,6 +13,8 @@
 #include <unistd.h>
 #define GetCurrentDir getcwd
 #endif
+
+#include "kappa.hpp"
 
 std::string GetCurrentWorkingDir( void ) {
   char buff[FILENAME_MAX];
@@ -37,15 +38,17 @@ int main(int argc, char** argv) {
   std::string output_dir = GetCurrentWorkingDir();
   std::cout << "Current directory is: " << output_dir << std::endl;
 
+  // create molecules
   Molecule N2("N2", false, false, particle_source);
   Molecule NO("NO", true, true, particle_source);
   Molecule O2("O2", true, true, particle_source);
 
+  // select approximation level
   kappa::Approximation appr = kappa::Approximation{};
 
-  int i;
+  int i; // vibrational levels
 
-  ofstream f;
+  ofstream f; // output file
 
   f.open(output_dir + "/N2_spectrum.csv");
   for (i=0; i<N2.num_vibr_levels[0]; i++) {

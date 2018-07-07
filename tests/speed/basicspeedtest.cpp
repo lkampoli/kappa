@@ -40,11 +40,8 @@ int main(int argc, char** argv) {
 
   double n = 1.25 / (2 * 23.2651287e-27); //particle number density of N2
 
-  //  Molecule N2("N2"); FIXME
-  //  kappa::Molecule N2("N2", "true", "true", particle_source);
   Molecule N2("N2", "true", "true", particle_source);
 
-  //  Interaction int_m1_m2(N2, N2); FIXME
   Interaction int_m1_m2(N2, N2, interaction_source);
 
   double res1=0., res2=0;
@@ -74,8 +71,6 @@ int main(int argc, char** argv) {
   cout << duration << "ns total, average : " << duration / 20000 << "ns." << std::endl;
   // t = clock()-t;
     
-  // cout << "New optimised Res: " << res2 << "clicks: " << t << ", time: " << float(t) / CLOCKS_PER_SEC << " seconds" << std::endl;
-  // cout << "Z=" <<  ApproximationTest.Z_coll(2500, n, int_m1_m2) << ", Z_opt=" <<  ApproximationTest.Z_coll2(2500, n, int_m1_m2) << std::endl;
   cout << "Z=" <<  ApproximationTest.Z_coll(2500, n, int_m1_m2) << ", Z_opt=" <<  ApproximationTest.Z_coll(2500, n, int_m1_m2) << std::endl;
 
   return 0;

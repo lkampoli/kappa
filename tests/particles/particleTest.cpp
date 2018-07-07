@@ -1,8 +1,5 @@
 /* 
  * \file particleTest.cpp
- * \author aspera
- *
- * Created on 4 марта 2016 г., 12:36
  */
 
 #include <cstdlib>
@@ -31,7 +28,6 @@ using namespace kappa;
 int main(int argc, char** argv) {
 
   cout << "Start Test for Particle classes" << endl;
-
   std::string m_source = std::getenv("KAPPA_DATA_DIRECTORY");
   std::cout << "KAPPA_DATA_DIRECTORY is: " << m_source << '\n';
   std::string particle_source    = m_source + "particles.yaml";
@@ -69,17 +65,17 @@ int main(int argc, char** argv) {
   Atom Oplus_atom("O+", particle_source);
   Atom Ominus_atom("O-", particle_source);
     
-  // Molecule C2("C2","anfalse",false, particle_source);
-  Molecule C2("C2",true,false, particle_source);
-  Molecule CO("CO",true,false, particle_source);
-  Molecule N2("N2",true,false, particle_source);
-  Molecule N2plus("N2+", true,false, particle_source);
-  Molecule NO("NO", true,false, particle_source);
-  Molecule O2("O2", true,false, particle_source);
-  Molecule O2plus("O2+", true,false, particle_source);
+  // Molecule C2("C2", "anfalse", false, particle_source);
+  Molecule C2("C2", true, false, particle_source);
+  Molecule CO("CO", true, false, particle_source);
+  Molecule N2("N2", true, false, particle_source);
+  Molecule N2plus("N2+", true, false, particle_source);
+  Molecule NO("NO", true, false, particle_source);
+  Molecule O2("O2", true, false, particle_source);
+  Molecule O2plus("O2+", true, false, particle_source);
 
   std::cout << "Number of electron levels in CO: " << CO.num_electron_levels << endl;  // should be 28
-  //std::cout << "Vibrational spectrum of CO: " << CO.vibr_spectrum << endl;  // should be "anfalse"
+  // std::cout << "Vibrational spectrum of CO: " << CO.vibr_spectrum << endl;  // should be "anfalse"
   std::cout << "Vibrational spectrum of CO: " << CO.anharmonic_spectrum << endl;  // should be true
   std::cout << "Rigid rotator model used for CO molecule: " << CO.rigid_rotator << endl; // should be false (0)
   std::cout << "N2 number of vibrational levels in ground state: " << N2.num_vibr_levels[0] << endl;  // should be 48
@@ -91,18 +87,18 @@ int main(int argc, char** argv) {
   // }
 
   try {
-    Molecule CObad2("CO",true,false,"articles.yaml");  // test that trying to read a non-existent database file throws the correct error
+    Molecule CObad2("CO", true, false, "articles.yaml");  // test that trying to read a non-existent database file throws the correct error
   } catch (const UnopenedFileException& e) {
     std::cout << e.what() << endl;
   }
 
-  Molecule C2_h("C2","false",false, particle_source);
-  Molecule CO_h("CO","false",false, particle_source);
-  Molecule N2_h("N2","false", false, particle_source);
-  Molecule N2plus_h("N2+","false", false, particle_source);
-  Molecule NO_h("NO","false", false, particle_source);
-  Molecule O2_h("O2","false", false, particle_source);
-  Molecule O2plus_h("O2+","false", false, particle_source);
+  Molecule C2_h("C2", "false", false, particle_source);
+  Molecule CO_h("CO", "false", false, particle_source);
+  Molecule N2_h("N2", "false", false, particle_source);
+  Molecule N2plus_h("N2+", "false", false, particle_source);
+  Molecule NO_h("NO", "false", false, particle_source);
+  Molecule O2_h("O2", "false", false, particle_source);
+  Molecule O2plus_h("O2+", "false", false, particle_source);
 
   std::cout << "N2 number of vibrational levels in ground state: " << N2_h.num_vibr_levels[0] << endl;  // should be 33
   

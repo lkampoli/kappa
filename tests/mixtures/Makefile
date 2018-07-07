@@ -13,7 +13,6 @@
 		-L $(KAPPA_DIR)/kappa_deps/x86_64/lib -lyaml-cpp -larmadillo	
 
 EXAMPLES  = \
-	caching-sts 						\
 	heatcond-sts						\
 	heatcond-sts-nonrigid					\
 	ionized_mixture_creation				\
@@ -31,7 +30,6 @@ EXAMPLES  = \
 	mixture-sts-basic_mixtureName 				\
 	mixture_loading						\
 	mixture_loading_opt					\
-	transport_coefficients					\
 	transport_coefficients_air5				\
 	mixture-sts-basic_boltzman				\
 	TestDiffusion						\
@@ -43,9 +41,6 @@ EXAMPLES  = \
 	mixture-sts-multi-component-diffusion_air5_REAL
 
 all : $(EXAMPLES)
-
-caching-sts : caching-sts.o
-	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
 
 heatcond-sts : heatcond-sts.o
 	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
@@ -96,9 +91,6 @@ mixture_loading : mixture_loading.o
 	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
 
 mixture_loading_opt : mixture_loading_opt.o
-	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
-
-transport_coefficients : transport_coefficients.o
 	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
 
 transport_coefficients_air5 : transport_coefficients_air5.o
