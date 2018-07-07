@@ -1,10 +1,10 @@
 /*
-   \brief test for rotational specific heat at constant volume for STS approach
    \file cvrot_sts.cpp
+   \brief test for rotational specific heat at constant volume for STS approach
 */
 
 #include <fstream>
-#include <iomanip> // std::setw
+#include <iomanip> 
 #include <cstdlib>
 #include <iostream>
 
@@ -49,7 +49,6 @@ int main(){
   double n_mol = 0.;
   double pressure = 0.;
 
-
   Molecule MoleculeN2("N2", false, true, particle_source);
   Atom AtomN("N", particle_source);
 
@@ -59,8 +58,10 @@ int main(){
   molecules.push_back(MoleculeN2);
   atoms.push_back(AtomN);
   
+  // create mixture
   kappa::Mixture mixture(molecules, atoms, interaction_source, particle_source);
 
+  // select approximation level
   Approximation approx{};
 
   std::cout << std::setw(20) << "T [K]";
@@ -77,14 +78,15 @@ int main(){
   //   std::cout << " at_ndens " << atom_ndens.at(at) << std::endl;
   // }
 
+  // compute boltzmann distribution
   mol_ndens.push_back(mixture.Boltzmann_distribution(T, (1.-x_atom) * tot_ndens, MoleculeN2));
   while (T <= 3000.0) {
 
     // mixture number density
     tot_ndens = p / (kappa::K_CONST_K * T);
  
-    // mol_ndens.push_back(mixture.Boltzmann_distribution(T, (1.-x_atom) * tot_ndens, MoleculeN2));
     mol_ndens[0] = mixture.Boltzmann_distribution(T, (1.-x_atom) * tot_ndens, MoleculeN2);
+
     // for (auto i=mol_ndens.begin(); i!=mol_ndens.end(); ++i) {
     //   std::cout << " mol_ndens " << (*i) << std::endl;
     // }

@@ -1,5 +1,6 @@
 /*
    \file cvibr_sts.cpp
+   \brief compute specific vibrational heat at constant volume in the STS approach.
 */   
 
 #include <fstream>
@@ -38,14 +39,19 @@ int main(){
   std::string output_dir = GetCurrentWorkingDir();
   std::cout << "Current directory is: " << output_dir << std::endl;
 
+   
   double T;
+  // create molecules and atoms
   Molecule MoleculeN2("N2", false, true, particle_source);
   Atom AtomN("N", particle_source);
 
+  // select approximation level (STS)
   Approximation approx{};
 
+  // select temperature
   T = 300.;
       
+  // compute specific vibrational heat at constant volume
   std::cout << std::setw(20) << "T [K]";
   std::cout << std::setw(25) << "Vibr. heat capacity, cv_vib";
   std::cout << std::endl;

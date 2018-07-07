@@ -1,5 +1,6 @@
 /*
    \file cvibr_multit.cpp
+   \brief compute specific vibrational heat at constant volume in the multi-temperature approximation.
 */
 
 #include <fstream>
@@ -49,9 +50,6 @@ int main(){
   // Create an instance of ApproximationMultiT model
   ApproximationMultiT approx{};
 
-  // ... just to check the corret name 
-  cout << "Molecule1_H" << Molecule1_H.name << endl;
-      
   // Initialize temperatures
   T1 = 2000.0; T = 100.0;
       

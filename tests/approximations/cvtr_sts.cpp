@@ -1,6 +1,6 @@
 /*
-   \brief test for translational specific heat at constant volume for STS approach
    \file cvtr_sts.cpp
+   \brief test for translational specific heat at constant volume for STS approach
 */
 
 #include <fstream>
@@ -82,7 +82,6 @@ int main(){
     // mixture number density
     tot_ndens = p / (kappa::K_CONST_K * T);
  
-    //mol_ndens.push_back(mixture.Boltzmann_distribution(T, (1.-x_atom) * tot_ndens, MoleculeN2));
     mol_ndens[0] = mixture.Boltzmann_distribution(T, (1.-x_atom) * tot_ndens, MoleculeN2);
 
     // for (auto i=mol_ndens.begin(); i!=mol_ndens.end(); ++i) {
@@ -100,8 +99,6 @@ int main(){
     n = mixture.compute_n(mol_ndens, atom_ndens); 
     n_at = mixture.compute_n(atom_ndens); 
     n_mol = mixture.compute_n(mol_ndens); 
-    // std::cout << " n " << n << " tot_ndens " << tot_ndens << std::endl;
-    // std::cout << " nat " << n_at << " nmol " << n_mol << " tot_ndens " << tot_ndens << std::endl;
 
     // cross-check, eq. 1.23
     cv_tr = 1.5 * kappa::K_CONST_K * tot_ndens / rho;
