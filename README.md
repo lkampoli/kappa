@@ -17,6 +17,9 @@ The main features of _KAPPA_ code are the following:
     - interaction.yaml.
 * Example testcases are located in /tests.
 
+## Installation
+Detailed information about installation can be found at https://github.com/lkampoli/kappa/wiki/HOWTO.
+
 ## Copyrights
 
 KAPPA is an open source project, it is distributed under the [LGPL v3](https://www.gnu.org/licenses/lgpl-3.0.en.html). Anyone interested in using, developing or contributing to KAPPA is welcome. Take a look at the [contributing guidelines](CONTRIBUTING.md) to start to contribute to the project.
