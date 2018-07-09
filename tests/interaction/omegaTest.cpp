@@ -1,5 +1,6 @@
 /*
   \file omegaTest.cpp
+  \brief Computing omega integrals with different models.
 */
 
 #include <iostream>
@@ -61,7 +62,6 @@ int main(int argc, char** argv) {
 
   int l = 2;
   int r = 2;
-  // std::vector<double> T_vals = {200., 300., 400., 500., 600., 700., 800., 900., 1000., 1200.};
   std::vector<double> T_vals = {500., 1000., 2000., 5000., 10000., 15000., 20000., 25000., 30000., 40000.};
 
   // for (int i = 0; i < 159; i++) { // assume a max num. of vibr. levels a priori
@@ -81,14 +81,11 @@ int main(int argc, char** argv) {
       Interaction int_m1_m2(molecules[i], molecules[k], interaction_source);
 
       out_m1_m2.open(molecules[i].name + "_" + molecules[k].name + "_" + to_string(l) + "_" + to_string(r) + ".txt");
-      // out_m1_m2 << "T;collision diameter;";
       out_m1_m2 << std::setw(20) << "Temperature [K]"; 
       out_m1_m2 << std::setw(20) << "Collision diameter"; 
-      // out_m1_m2 << std::endl;
 
       for (auto model : omega_integral_models) {
         curr_model = omega_model_names[model];
-        // out_m1_m2 << curr_model << "(" << to_string(l) + "," + to_string(r) + ")" << ";";
         out_m1_m2 << std::setw(15) << curr_model << "(" << to_string(l) + "," + to_string(r) + ")" << std::setw(20);
       }
       out_m1_m2 << endl;
@@ -98,7 +95,6 @@ int main(int argc, char** argv) {
         for (auto model : omega_integral_models) {
 
           try {
-           // out_m1_m2 << ApproximationTest.omega_integral(T, int_m1_m2, l, r, model, true) << ";";
            out_m1_m2 << std::setw(20) << ApproximationTest.omega_integral(T, int_m1_m2, l, r, model, true) << std::setw(20);
           } catch (const ModelParameterException &e) {
             std::cout << e.what() << endl;
@@ -119,13 +115,10 @@ int main(int argc, char** argv) {
 
       std::cout << molecules[i].name + ", " + atoms[k].name << endl;
       out_m1_m2.open(molecules[i].name + "_" + atoms[k].name + "_" + to_string(l) + "_" + to_string(r) + ".txt");
-      // out_m1_m2 << "T;collision diameter;";
       out_m1_m2 << std::setw(20) << "Temperature [K]";
       out_m1_m2 << std::setw(20) << "Collision diameter";
-      // out_m1_m2 << std::endl;
 
       for (auto model : omega_integral_models) {
- 
         curr_model = omega_model_names[model];
         out_m1_m2 << std::setw(15) << curr_model << "(" << to_string(l) + "," + to_string(r) + ")" << std::setw(20);
       }
@@ -154,7 +147,6 @@ int main(int argc, char** argv) {
        Interaction int_a1_a2(atoms[i], atoms[k], interaction_source);
        std::cout << atoms[i].name + ", " + atoms[k].name << endl;
        out_m1_m2.open(atoms[i].name + "_" + atoms[k].name + "_" + to_string(l) + "_" + to_string(r) + ".txt");
-       // out_m1_m2 << "T;collision diameter;";
        out_m1_m2 << std::setw(20) << "Temperature [K]";
        out_m1_m2 << std::setw(20) << "Collision diameter";
        for (auto model : omega_integral_models) {

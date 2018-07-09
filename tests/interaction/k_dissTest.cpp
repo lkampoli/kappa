@@ -1,5 +1,6 @@
 /*
    \file k_dissTest.cpp
+   \brief Computing dissociation rate coefficients k_diss according to several models.
 */
 
 #include <iostream>
@@ -103,116 +104,48 @@ void calculate(Molecule m, Atom a, Approximation appr) {
   // std::vector<std::string> TM_model_names = {"Treanor-Marrone, U=inf, Scanlon", "Treanor-Marrone, U=D/6K, Scanlon", "Treanor-Marrone, U=3T, Scanlon"};
   // std::vector<kappa::models_k_diss> TM_model_vals = {model_k_diss_tm_infty_arrh_scanlon, model_k_diss_tm_D6k_arrh_scanlon,  model_k_diss_tm_3T_arrh_scanlon};
 
-  std::vector<std::string> TM_model_names = {"Treanor-Marrone, U=inf, Park", "Treanor-Marrone, U=D/6K, Park", "Treanor-Marrone, U=3T, Park"};
-  std::vector<kappa::models_k_diss> TM_model_vals = {models_k_diss::model_k_diss_tm_infty_arrh_park, models_k_diss::model_k_diss_tm_D6k_arrh_park, 
-                                                     models_k_diss::model_k_diss_tm_3T_arrh_park};
+  // std::vector<std::string> TM_model_names = {"Treanor-Marrone, U=inf, Park", "Treanor-Marrone, U=D/6K, Park", "Treanor-Marrone, U=3T, Park"};
+  // std::vector<kappa::models_k_diss> TM_model_vals = {models_k_diss::model_k_diss_tm_infty_arrh_park, models_k_diss::model_k_diss_tm_D6k_arrh_park, models_k_diss::model_k_diss_tm_3T_arrh_park};
 
   double res, tmp;
   outf.open( output_dir + "/DISS-REC/" + m.name + "_" + a.name + ".txt");
 
-//  outf << "T;Z(U=inf);Z(U=D/6K);Z(U=3T);;";
-    outf << std::setw(20) << "T [K]";
-    outf << std::setw(20) << "Vibr. l.";
-    //outf << std::setw(20) << "TM_model_vals";
-    //outf << std::setw(20) << "a";
-    //outf << std::setw(20) << "b";
-    outf << std::setw(20) << "k_diss";
-    outf << std::endl;
+  outf << std::setw(20) << "T [K]";
+  outf << std::setw(20) << "Vibr. l.";
+  outf << std::setw(20) << "k_diss";
+  outf << std::endl;
 
-    int counter;
+  int counter;
 
-//  for (auto i : i_vals) {
-//    counter = 0;
-//    for (auto diss_model: ALL_model_vals) {
-//      outf << std::setw(20) << TM_model_names[counter];
-//      outf << std::setw(20) << i;
-//      // outf << std::setw(20) << m.vibr_energy[0][i] / K_CONST_EV;
-//      outf << non_TM_model_names[counter] << ",i=" << i << "(" << m.vibr_energy[0][i] / K_CONST_EV << " eV);"; 
-//      outf << std::endl;
-//      counter++;
-//    }
-//  }
-
-//  for (auto i : i_vals) {
-//    counter = 0;
-//    for (auto diss_model: TM_model_vals) {
-//      outf << TM_model_names[counter] << ",i=" << i << "(" << m.vibr_energy[0][i] / K_CONST_EV << " eV);"; 
-//      outf << std::setw(20) << TM_model_names[counter];
-//      outf << std::setw(20) << i;
-//      outf << std::setw(20) << m.vibr_energy[0][i] / K_CONST_EV;
-//      outf << std::endl;
-//      counter++;
-//    }
-//    outf << ";";
-//  }
-//
-//  for (auto i : i_vals) {
-//    counter = 0;
-//    for (auto diss_model: non_TM_model_vals) {
-//      outf << std::setw(15) << non_TM_model_names[counter] << ",i=" << i << "(" << m.vibr_energy[0][i] / K_CONST_EV << " eV);"; 
-//      counter++;
-//    }
-//  }
-//  outf << endl;
-
-//  for (auto T : T_vals) {
-//    // outf << T << ";";
-//    // outf << m.num_vibr_levels[0] << ";" << appr.Z_vibr_eq(-m.diss_energy[0] / (6 * K_CONST_K), m) << ";" << appr.Z_vibr_eq(-3 * T, m) << ";;";
-//    for (auto i : i_vals) {
-//      for (auto diss_model: TM_model_vals) {
-//        outf << std::setw(15) << T << std::setw(20);
-//        outf << std::setw(15) << i << std::setw(20);
-//        // outf << std::setw(15) << appr.Z_vibr_eq(-m.diss_energy[0] / (6 * K_CONST_K), m) << std::setw(20); 
-//        // outf << std::setw(15) << appr.Z_vibr_eq(-3 * T, m) << std::setw(20);
-//        outf << std::setw(15) << appr.k_diss(T, m, inter, i, diss_model) << std::setw(20);
-//        outf << std::endl;
-//        counter++;
-//      }
-//    }
-//
-//    for (auto i : i_vals) {
-//      for (auto diss_model: non_TM_model_vals) {
-//        outf << std::setw(15) << T << std::setw(20);
-//        outf << std::setw(15) << i << std::setw(20);
-//        // outf << std::setw(15) << appr.Z_vibr_eq(-m.diss_energy[0] / (6 * K_CONST_K), m) << std::setw(20); 
-//        // outf << std::setw(15) << appr.Z_vibr_eq(-3 * T, m) << std::setw(20);
-//        outf << std::setw(15) << appr.k_diss(T, m, inter, i, diss_model) << std::setw(20);
-//        outf << std::endl;
-//        // outf << appr.k_diss(T, m, inter, i, diss_model) << ";"; 
-//        counter++;
-//      }
-//    }
-//  }
-
-    for (auto T : T_vals) {
-      for (auto i : i_vals) {
-        for (auto diss_model: ALL_model_vals) {
-          outf << std::setw(15) << T << std::setw(20);
-          outf << std::setw(15) << i << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_rs_thresh_cmass_vibr) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_rs_thresh_vibr) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_rs_thresh_cmass_vibr) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_rs_thresh_cmass) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_rs_thresh) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_vss_thresh_cmass_vibr) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_vss_thresh_vibr) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_vss_thresh_cmass) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_vss_thresh) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_arrh_scanlon) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_arrh_park) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_D6k_arrh_scanlon) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_3T_arrh_scanlon) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_infty_arrh_scanlon) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_D6k_arrh_park) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_3T_arrh_park) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_infty_arrh_park) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_phys4entry) << std::setw(20);
-          outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_ilt) << std::setw(20);
-          outf << std::endl;
-          counter++;
-        }
+  for (auto T : T_vals) {
+    for (auto i : i_vals) {
+      for (auto diss_model: ALL_model_vals) {
+        outf << std::setw(15) << T << std::setw(20);
+        outf << std::setw(15) << i << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_rs_thresh_cmass_vibr) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_rs_thresh_vibr) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_rs_thresh_cmass_vibr) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_rs_thresh_cmass) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_rs_thresh) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_vss_thresh_cmass_vibr) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_vss_thresh_vibr) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_vss_thresh_cmass) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_vss_thresh) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_arrh_scanlon) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_arrh_park) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_D6k_arrh_scanlon) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_3T_arrh_scanlon) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_infty_arrh_scanlon) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_D6k_arrh_park) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_3T_arrh_park) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_tm_infty_arrh_park) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_phys4entry) << std::setw(20);
+        outf << std::setw(15) << appr.k_diss(T, m, inter, i, models_k_diss::model_k_diss_ilt) << std::setw(20);
+        outf << std::endl;
+        counter++;
       }
     }
+  }
 }
 
 int main(int argc, char** argv) {
@@ -228,17 +161,13 @@ int main(int argc, char** argv) {
 
   std::cout << "Loading particles data" << std::endl;
 
-  // Molecule N2("N2", false, "harmonic", particle_source);
   Molecule N2("N2", false, true, particle_source);
-  // Molecule O2("O2", false, "harmonic", particle_source);
 
   Atom N("N", particle_source);
-  // Atom O("O", particle_source);
 
   Approximation ApproximationTest{};
 
   calculate(N2, N, ApproximationTest);
-  // calculate(O2, O, ApproximationTest);
 
    return 0;
 }

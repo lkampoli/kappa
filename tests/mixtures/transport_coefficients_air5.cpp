@@ -1,6 +1,6 @@
 /*
    \file transport_coefficients_air5.cpp
-   \brief Computation and comparison of all (available) transport coefficients
+   \brief Computation of transport coefficients for air5 mixture in STS approach.
 */
 
 #include <iostream>

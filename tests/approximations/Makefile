@@ -14,8 +14,6 @@
 
 EXAMPLES  = \
 	cvibr_multit 		\
-	ZintTest		\
-	ZrotTest		\
 	cvibr_sts		\
 	cvtr_sts		\
 	cvrot_sts
@@ -23,12 +21,6 @@ EXAMPLES  = \
 all : $(EXAMPLES)
 
 cvibr_multit : cvibr_multit.o
-	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
-
-ZintTest : ZintTest.o
-	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
-
-ZrotTest : ZrotTest.o
 	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
 
 cvibr_sts : cvibr_sts.o

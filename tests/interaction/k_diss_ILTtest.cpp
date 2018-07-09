@@ -1,5 +1,6 @@
 /*
-   \file 
+   \file k_diss_ILTtest.cpp
+   \brief Computing dissociation rate coefficient k_diss according to Inverse Laplace Transform (ILT)
 */
 
 #include <iostream>
@@ -135,7 +136,6 @@ int main(int argc, char** argv) {
   std::cout << "Current directory is: " << output_dir << std::endl;
 
   Molecule N2("N2", true, "harmonic", particle_source);
-  // Molecule N2("N2", false, true, particle_source);
   Molecule O2("O2", true, "harmonic", particle_source);
   Atom N("N", particle_source);
   Atom O("O", particle_source);

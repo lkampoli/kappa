@@ -1,5 +1,6 @@
 /*
    \fileionized_mixture_creation.cpp
+   \brief Computing interaction also with ions.
 */
 
 #include <iostream>

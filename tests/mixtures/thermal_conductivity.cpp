@@ -1,13 +1,11 @@
 /*
    \file thermal_conductivity.cpp
-   \brief Computation of thermal conductivity 
+   \brief Computation of thermal conductivity.
 */
 
 #include <iostream>
 #include <fstream>
 #include <iomanip> 
-
-#include <omp.h> // openmp
 
 #ifdef WINDOWS
 #include <direct.h>
@@ -16,6 +14,8 @@
 #include <unistd.h>
 #define GetCurrentDir getcwd
 #endif
+
+#include <omp.h> 
 
 #include "kappa.hpp"
 

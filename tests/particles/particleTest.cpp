@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 
   try {
     Particle Ar_badfilename("Ar","articles.yaml");  
-    // test that trying to read a non-existent database file throws the correct error
+    // trying to read a non-existent database file throws the correct error
   } catch (const UnopenedFileException& e) {
     std::cout << e.what() << endl;
   }
@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
   try {
     // Particle Bad("B");  // Bug !
     Particle Bad("B", particle_source);  
-    // test that trying to load particles that are not in the database throw the correct error
+    // trying to load particles that are not in the database throws the correct error
   } catch (const DataNotFoundException& e) {
     std::cout << e.what() << endl;
   }
@@ -81,13 +81,13 @@ int main(int argc, char** argv) {
   std::cout << "N2 number of vibrational levels in ground state: " << N2.num_vibr_levels[0] << endl;  // should be 48
 
   // try {
-  //   Molecule CObad1("CO","nhrmonic",false,"particles.yaml");  // test that giving an incorrect value of the spectrum parameter throws the correct error
+  //   Molecule CObad1("CO","nhrmonic",false,"particles.yaml");  // giving an incorrect value of the spectrum parameter throws the correct error
   // } catch (const ModelParameterException& e) {
   //   std::cout << e.what() << endl;
   // }
 
   try {
-    Molecule CObad2("CO", true, false, "articles.yaml");  // test that trying to read a non-existent database file throws the correct error
+    Molecule CObad2("CO", true, false, "articles.yaml");  // trying to read a non-existent database file throws the correct error
   } catch (const UnopenedFileException& e) {
     std::cout << e.what() << endl;
   }

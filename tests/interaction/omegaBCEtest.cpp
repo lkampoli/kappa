@@ -1,5 +1,6 @@
 /*
   \file omegaBCEtest.cpp
+  \brief Computing omega integrals according to several models.
 */
 
 #include <iostream>
@@ -60,7 +61,6 @@ int main(int argc, char** argv) {
   omega_model_names.insert(std::pair<models_omega, std::string>(models_omega::model_omega_esa, "ESA"));
 
   double A, B, C, E, o11, o22;
-  // std::vector<double> T_vals = {200., 300., 400., 500., 600., 700., 800., 900., 1000.};
   std::vector<double> T_vals = {500., 1000., 2000., 5000., 10000., 15000., 20000., 25000., 30000., 40000.};
   std::vector<double> res_vals;
   std::string curr_model;
@@ -165,7 +165,7 @@ int main(int argc, char** argv) {
     }
   }
 
-  // just to load only one omega model
+  // just load only one omega model
   auto model = models_omega::model_omega_vss;
   Interaction int_m1_a1(molecules[0], atoms[0], interaction_source);
   std::cout << "LC-test: " << ApproximationTest.omega_integral(1000, int_m1_a1, 1, 1, model, false) << std::endl;   

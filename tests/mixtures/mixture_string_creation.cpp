@@ -1,6 +1,6 @@
 /*
    \file mixture_string_creation.cpp
-   \brief mixture creation by passing a string
+   \brief Mixture creation by passing a string.
 */
 
 #include <iostream>
