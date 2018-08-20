@@ -9,6 +9,8 @@
 #include <cstdlib>
 #include <cmath>        
 #include <stdlib.h>
+#include <chrono>
+#include <ctime>
 
 #include "kappa.hpp"
  
@@ -36,7 +38,19 @@ int main(int argc, char** argv) {
    kappa::Interaction inter_m_a(mol, at, interaction_source);
 
    // N2(1) + N -> N2(0) + N
-   std::cout << appr.probability_VT(20000., mol, inter_m_a, 1, -1, 0) << std::endl;
+//    std::clock_t c_start = std::clock();
+//    auto t_start = std::chrono::high_resolution_clock::now();
+//  
+    std::cout << "probability_VT = " << appr.probability_VT(20000., mol, inter_m_a, 1, -1, 0) << std::endl;
+//
+//    std::clock_t c_end = std::clock();
+//    auto t_end = std::chrono::high_resolution_clock::now();
+//
+//    std::cout << std::fixed << std::setprecision(2) << "CPU time used: "
+//              << 1000.0 * (c_end-c_start) / CLOCKS_PER_SEC << " ms\n"
+//              << "Wall clock time passed: "
+//              << std::chrono::duration<double, std::milli>(t_end-t_start).count()
+//              << " ms\n";
 
    double res_kf = 0;
    double res_kb = 0;

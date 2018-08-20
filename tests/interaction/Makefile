@@ -20,7 +20,8 @@ EXAMPLES  = \
 	k_diss_ILTtest			\
 	k_dissTest			\
         vss_and_neutral_e		\
-	test_FHO
+	test_FHO			\
+	cs_dissTest
 
 all : $(EXAMPLES)
 
@@ -46,6 +47,9 @@ vss_and_neutral_e : vss_and_neutral_e.o
 	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
 
 test_FHO : test_FHO.o
+	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
+
+cs_dissTest : cs_dissTest.o
 	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
 
 %.o : %.cpp

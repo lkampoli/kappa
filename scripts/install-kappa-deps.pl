@@ -105,7 +105,7 @@ my %packages = (  #  version   default install priority      function
 #    "blas"       => [ "3.7.1",  'on' ,  'off', $priority++,  \&install_blas ],
 #    "clapack"    => [ "",       'off',  'off', $priority++,  \&install_clapack ],
 #    "lapack"     => [ "3.0.3",  'off',  'off', $priority++,  \&install_lapack ],
-#    "lapack"     => [ "3.7.1",  'on' ,  'off', $priority++,  \&install_lapack ],
+    "lapack"     => [ "3.7.1",  'on' ,  'off', $priority++,  \&install_lapack ],
 #    "log4cpp"    => [ "0.3.4b", 'off',  'off', $priority++,  sub { install_gnu("log4cpp") } ],
 #    "zlib"       => [ "1.2.3",  'off',  'off', $priority++,  sub { install_gnu("zlib") } ],
 #    "cppunit"    => [ "1.10.2", 'off',  'off', $priority++,  sub { install_gnu("cppunit") } ],
@@ -264,12 +264,12 @@ ZZZ
   run_command("mkdir -p $kappa/kappa_tmp");
   run_command("mkdir -p $kappa/kappa_deps");
 
-  #run_command_or_die("wget -O $opt_tmp_dir/blas-3.7.1.tar.gz http://www.netlib.org/blas/blas-3.7.1.tgz");
-  #run_command_or_die("wget -O $opt_tmp_dir/lapack-3.7.1.tar.gz http://www.netlib.org/lapack/lapack-3.7.1.tgz");
+  run_command_or_die("wget -O $opt_tmp_dir/blas-3.7.1.tar.gz http://www.netlib.org/blas/blas-3.7.1.tgz");
+  run_command_or_die("wget -O $opt_tmp_dir/lapack-3.7.1.tar.gz http://www.netlib.org/lapack/lapack-3.7.1.tgz");
   run_command_or_die("wget -O $opt_tmp_dir/yaml-cpp.zip https://github.com/jbeder/yaml-cpp/archive/master.zip");
   run_command_or_die("wget -O $opt_tmp_dir/OpenBLAS-0.2.20.tar.gz github.com/xianyi/OpenBLAS/archive/v0.2.20.tar.gz");
   run_command_or_die("wget -O $opt_tmp_dir/armadillo-8.100.1.tar.xz https://sourceforge.net/projects/arma/files/armadillo-8.100.1.tar.xz");
-  #run_command_or_die("wget -O $opt_tmp_dir/cmake-3.9.2.tar.gz  https://cmake.org/files/v3.9/cmake-3.9.2.tar.gz");
+  run_command_or_die("wget -O $opt_tmp_dir/cmake-3.9.2.tar.gz  https://cmake.org/files/v3.9/cmake-3.9.2.tar.gz");
 
 }
 
