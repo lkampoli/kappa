@@ -51,5 +51,7 @@ A list of contributors to the project can found in [CONTRIBUTORS.md](CONTRIBUTOR
     - particle.hpp, atom.hpp and molecule.hpp are the header files for the Particle, Atom and Molecule classes
     - particle.cpp, atom.cpp and molecule.cpp are the implementation files for the Particle, Atom and Molecule classes
     
+## Reference 
+https://www.researchgate.net/publication/328706345_KAPPA_Kinetic_approach_to_physical_processes_in_atmospheres_library_in_C
 
 
