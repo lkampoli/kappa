@@ -3030,7 +3030,10 @@ using namespace std;
 
     for (i=0; i<num_molecules; i++) { // molecules      	
       for (k=0; k<molecules[i].num_vibr_levels[0]; k++) { // vibr. levels
-        if (i==b || k==n) {
+	// BugFix by Anna Becina:
+        // this seems to fix the asymmetricity of transport coeffs. matrix
+        //if (i==b || k==n) {
+	if (i==b && k==n) {
           diffusion_RHS.at(offset) += 1;
         } 
         diffusion_RHS.at(offset) -= this_n_vl_mol[i][k] * molecules[i].mass / this_total_dens;

@@ -1,6 +1,5 @@
 The following people have been involved in developing KAPPA:
 
-- Lorenzo Campoli
 - George Oblapenko
 - Ilya Alekseev
 - Anastasiya Demko
@@ -12,3 +11,6 @@ The following people have been involved in developing KAPPA:
 - Mariia Nabokova
 - Ksenia Papina
 - Aleksei Savelev
+- Bechina Anna
+- Maxim Melnik
+- Lorenzo Campoli
