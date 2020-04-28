@@ -1512,7 +1512,9 @@ using namespace std;
                                                                                / (K_CONST_PI * eta_cd * (molecules[i].mass + molecules[j].mass)); // 1100
                       
               bulk_viscosity_LHS.at(p1 + 1, p2) = - 4 * T * n_ij * molecules[j].mass * molecules[j].mass * c_rot_arr[o2] / ((molecules[i].mass + molecules[j].mass) * K_CONST_PI * eta_cd * rm * rot_rel_times.at(j,i)); // 0110
+
               bulk_viscosity_LHS.at(p1    , p2 + 1) = - 4 * T * n_ij * molecules[i].mass * molecules[i].mass * c_rot_arr[o1] / ((molecules[i].mass + molecules[j].mass) * K_CONST_PI * eta_cd * rm * rot_rel_times.at(i,j)); // 1001
+
               bulk_viscosity_LHS.at(p1 + 1, p2 + 1) = 0; // 0011
 
               // symmetrization
@@ -2046,7 +2048,7 @@ using namespace std;
         C_cd = (1./3.) *      omega_12.at(i, j) / omega_11.at(i, j);
         D_cd = (3./16) *      kT/(n * coll_mass * omega_11.at(i, j)); // eq. 5.61
         rm   = ( 32  ) *  n * omega_22.at(i, j) / (5 * K_CONST_PI);	
-        
+ 
         // loop over vibrational levels of each molecule i
         for (k=0; k<molecules[i].num_vibr_levels[0]; k++) {		
  
@@ -2241,10 +2243,13 @@ using namespace std;
           thermal_conductivity_LHS.at(p1 + 1, n_vibr_levels_total*3 + 2*j + 1) = -1.5 * kT * n_ij * coll_mass / (n * D_cd * (molecules[i].mass + atoms[j].mass))
                                                                                   * (13.75 - 3 * B_cd - 4 * A_cd - (20./3.) * A_cd / (K_CONST_K * K_CONST_PI)
                                                                                   * (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, num_molecules + j)))); // 1100, 13.75 = 55/4
-
+        /*
           thermal_conductivity_LHS.at(p1 + 2, n_vibr_levels_total*3 + 2*j + 1) = -6 * T / (n * D_cd * K_CONST_PI) * A_cd * n_ij * molecules[i].mass * molecules[i].mass
                                                                                   * c_rot_arr(o1) / (rm * rot_rel_times.at(i, num_molecules + j) * (molecules[i].mass + molecules[j].mass)); // 0110
-
+         */
+          // BugFix by Qizhen Hong
+          thermal_conductivity_LHS.at(p1 + 2, n_vibr_levels_total*3 + 2*j + 1) = -6 * T / (n * D_cd * K_CONST_PI) * A_cd * n_ij * molecules[i].mass * molecules[i].mass
+                                                                                  * c_rot_arr(o1) / (rm * rot_rel_times.at(i, num_molecules + j) * (molecules[i].mass + atoms[j].mass)); // 0110
           // symmetrization
           thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * j, p1    ) = thermal_conductivity_LHS.at(p1    , n_vibr_levels_total * 3 + 2 * j);
           thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * j, p1 + 1) = thermal_conductivity_LHS.at(p1 + 1, n_vibr_levels_total * 3 + 2 * j);
@@ -2316,15 +2321,23 @@ using namespace std;
         for (k=0; k<molecules[j].num_vibr_levels[0]; k++) {
 
           n_ij = this_n_atom[i] * this_n_vl_mol[j][k];
-          o1 =  vl_offset[i] + k;
+          // BugFix by Qizhen Hong
+          //o1 =  vl_offset[i] + k;
+          o1 =  vl_offset[j] + k;
 
           thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i    , n_vibr_levels_total * 3 + 2 * i) +=  1.5 * kT * n_ij / (D_cd * n); // 0000
           thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i + 1, n_vibr_levels_total * 3 + 2 * i) -= 	0.75 * kT * n_ij * molecules[j].mass * (6 * C_cd - 5) / ((atoms[i].mass + molecules[j].mass) * n * D_cd); // 1000
           thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i    , n_vibr_levels_total * 3 + 2 * i + 1) -=  0.75 * kT * n_ij * molecules[j].mass * (6 * C_cd - 5) / ((atoms[i].mass + molecules[j].mass) * n * D_cd); // 0100
-
+/*
           thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i + 1, n_vibr_levels_total * 3 + 2 * i + 1) += 
 		1.5 * kT * coll_mass * n_ij * (7.5 * atoms[i].mass / molecules[j].mass + 6.25 * molecules[j].mass / atoms[i].mass - 3 * molecules[j].mass * B_cd / atoms[i].mass 
  		+ 4 * A_cd + (20./3) * A_cd * (molecules[j].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(num_molecules + j, i))) / (K_CONST_PI * K_CONST_K)) / 
+               												(n * D_cd * (atoms[i].mass + molecules[j].mass)); // 1100
+*/
+          // BugFix by Qizhen Hong
+          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i + 1, n_vibr_levels_total * 3 + 2 * i + 1) += 
+		1.5 * kT * coll_mass * n_ij * (7.5 * atoms[i].mass / molecules[j].mass + 6.25 * molecules[j].mass / atoms[i].mass - 3 * molecules[j].mass * B_cd / atoms[i].mass 
+ 		+ 4 * A_cd + (20./3) * A_cd * (molecules[j].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(j,num_molecules + i))) / (K_CONST_PI * K_CONST_K)) / 
                												(n * D_cd * (atoms[i].mass + molecules[j].mass)); // 1100
         }
       }
@@ -2789,7 +2802,9 @@ using namespace std;
     } else { // non-rigid rotator model
       for (i=0; i<num_molecules; i++) {
         for (k=0; k<molecules[i].num_vibr_levels[0]; k++) {
-          th_diff[j] = thermal_conductivity_coeffs[3 * i];
+          //th_diff[j] = thermal_conductivity_coeffs[3 * i];
+          // BugFix by Qizhen Hong
+          th_diff[j] = thermal_conductivity_coeffs[3 * j];
           j++;
         }
       }
@@ -2816,14 +2831,23 @@ using namespace std;
       for (i2=i1+1; i2<num_molecules; i2++) {
 
         // eq. 5.75 and eq. 5.62
-        tmp = 3.2 * (this_n_molecules[i1] / n) * (this_n_molecules[i2] / n) * (molecules[i1].mass * molecules[i2].mass) * omega_22.at(i1, i2) / (kT * (molecules[i1].mass + molecules[i2].mass) * (molecules[i1].mass + molecules[i2].mass)); 
+        tmp = 3.2 * (this_n_molecules[i1] / n) * (this_n_molecules[i2] / n) * 
+		           (molecules[i1].mass * molecules[i2].mass) * omega_22.at(i1, i2) / 
+                     (kT * (molecules[i1].mass + molecules[i2].mass) * (molecules[i1].mass + molecules[i2].mass));
+
         tmp *= 1 - 10 * omega_11.at(i1, i2) / (3. * omega_22.at(i1, i2));
 
         shear_viscosity_LHS.at(i1, i2) = tmp;
         shear_viscosity_LHS.at(i2, i1) = tmp;               
       }
     }
-
+/*
+    std::cout << " mass = " << molecules[0].mass  << std::endl;
+    std::cout << "omega22 = " << omega_22 << std::endl;
+    std::cout << "T = " << T << std::endl;
+    std::cout << "shear_viscosity_LHS" << std::endl;
+    std::cout << shear_viscosity_LHS << std::endl;
+*/
     // molecule + molecule collisions for identical species
     for (i1=0; i1<num_molecules; i1++) { 
 
@@ -2832,9 +2856,10 @@ using namespace std;
       for (i2=0; i2<num_molecules; i2++) {
         if (i2 != i1) {
 
-          tmp += (3.2 * (this_n_molecules[i1] / n) * (this_n_molecules[i2] / n) * omega_22.at(i1, i2) / kT) * (10. * omega_11.at(i1, i2) * molecules[i2].mass * molecules[i1].mass / 
-                   ((molecules[i2].mass + molecules[i1].mass) * (molecules[i2].mass + molecules[i1].mass) * 3. * omega_22.at(i1, i2)) +
-                     molecules[i2].mass * molecules[i2].mass / ((molecules[i2].mass + molecules[i1].mass) * (molecules[i2].mass + molecules[i1].mass)));
+          tmp += (3.2 * (this_n_molecules[i1] / n) * (this_n_molecules[i2] / n) * omega_22.at(i1, i2) / kT) * 
+		 (10. * omega_11.at(i1, i2) * molecules[i2].mass * molecules[i1].mass / 
+                 ((molecules[i2].mass + molecules[i1].mass) * (molecules[i2].mass + molecules[i1].mass) * 3. * omega_22.at(i1, i2)) +
+                 molecules[i2].mass * molecules[i2].mass / ((molecules[i2].mass + molecules[i1].mass) * (molecules[i2].mass + molecules[i1].mass)));
         }        
       }
 
@@ -2906,6 +2931,9 @@ using namespace std;
       shear_viscosity_LHS.at(num_molecules + i1, num_molecules + i1) = tmp;
     }
 
+    //std::cout << "shear_viscosity_LHS" << std::endl;
+    //std::cout << shear_viscosity_LHS << std::endl;
+
     return shear_viscosity_LHS;
   }
 
@@ -2926,7 +2954,16 @@ using namespace std;
     }
 
     shear_viscosity_RHS *= 2 / (K_CONST_K * T * this_total_n);
-
+/*    
+    std::cout << "this_n_molecules[i]/n = " << this_n_molecules[0]/this_total_n << std::endl;
+    std::cout << "this_n_atom[i]/n = " << this_n_atom[0]/this_total_n << std::endl;
+    std::cout << "K_CONST_K = " << K_CONST_K << std::endl;
+    std::cout << "T = " << T << std::endl;
+    std::cout << "2kT = " << 2 / (K_CONST_K * T) << std::endl;
+    std::cout << "shear_viscosity_RHS" << std::endl;
+    std::cout << shear_viscosity_RHS << std::endl;
+    std::cout << shear_viscosity_RHS[0] + shear_viscosity_RHS[1] << std::endl;
+*/
     return shear_viscosity_RHS;
   }
 
@@ -3030,7 +3067,7 @@ using namespace std;
 
     for (i=0; i<num_molecules; i++) { // molecules      	
       for (k=0; k<molecules[i].num_vibr_levels[0]; k++) { // vibr. levels
-	// BugFix by Anna Becina:
+	      // BugFix by Anna Becina:
         // this seems to fix the asymmetricity of transport coeffs. matrix
         //if (i==b || k==n) {
 	if (i==b && k==n) {

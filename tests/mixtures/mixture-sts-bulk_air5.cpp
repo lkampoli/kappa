@@ -69,7 +69,7 @@ int main(int argc, char** argv) {
     mixfile.close();
   } else {
     std::cout << "Unable to open mixture file: "
-              << m_libPath+"mixtures/"+_mixtureName+".mix" << "\n";
+              << m_source+"mixtures/"+_mixtureName+".mix" << "\n";
               abort();
   }
   std::cout << "Number of species: " << _NS << "\n";
@@ -164,7 +164,7 @@ int main(int argc, char** argv) {
   double d0 = Re + be + (9./2.)*beta*l_alpha*l_alpha*exp( 2.*sqrt(beta*l_alpha)*(vibr_l - 1.) );  
 
   // set a range for temperature
-  std::vector<double> T_vals;
+  //std::vector<double> T_vals;
 
   double p = 101325.;
 

@@ -1014,6 +1014,10 @@ kappa::Approximation::Approximation() {}
   double kappa::Approximation::omega_integral_RS(double T, int l, int r, double diameter, double coll_mass) {
 
     // pp. 145
+    //std::cout << T << " " << l << " " << r << " " << diameter << " "  << coll_mass << std::endl;
+    //std::cout << sqrt(T * K_CONST_K / (2 * K_CONST_PI * coll_mass)) * 0.5 * kappa::factorial_table[r + 1] 
+    //             * (1.0 - 0.5 * (1.0 + pow(-1.0, l)) / (l + 1)) * K_CONST_PI * (diameter * diameter) << std::endl;
+
     return sqrt(T * K_CONST_K / (2 * K_CONST_PI * coll_mass)) * 0.5 * kappa::factorial_table[r + 1] 
                   * (1.0 - 0.5 * (1.0 + pow(-1.0, l)) / (l + 1)) * K_CONST_PI * (diameter * diameter);
   }

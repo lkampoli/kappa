@@ -43,44 +43,45 @@ int main(int argc, char** argv) {
 
   std::cout << "Loading particles data" << std::endl;
 
-  kappa::Molecule mol("NO", false, true, particle_source);
-  // kappa::Molecule mol("N2", false, true, particle_source);
-  // kappa::Atom at("N", particle_source);
+  //kappa::Molecule mol("NO", false, true, particle_source);
+  kappa::Molecule mol("N2", true, false, particle_source);
+  kappa::Atom at("N", particle_source);
   // kappa::Molecule mol("O2", false, true, particle_source);
   // kappa::Atom at("O", particle_source);
-  kappa::Atom N("N", particle_source);
-  atoms.push_back(N);
-  kappa::Atom O("O", particle_source);
-  atoms.push_back(O);
+  //kappa::Atom N("N", particle_source);
+  //atoms.push_back(N);
+  //kappa::Atom O("O", particle_source);
+  //atoms.push_back(O);
   molecules.push_back(mol);
-  // atoms.push_back(at);
+  atoms.push_back(at);
 
   kappa::Mixture mixture(molecules, atoms, interaction_source, particle_source);
   std::cout << "Mixture created" << std::endl;
 
-  // std::vector<double> T_vals = { 500., 1000., 5000., 10000., 20000., 40000. };
-  std::vector<double> T_vals;
+  //std::vector<double> T_vals = { 500., 1000., 5000., 10000., 20000., 40000. };
+  std::vector<double> T_vals = { 500. };
+  //std::vector<double> T_vals;
   // double x_atom = 0.0;
-  double x_N2 = 1.0;
-  double x_NO = 1.0;
-  double x_N = 0.0;
+  double x_N2 = 0.9;
+  double x_NO = 0.0;
+  double x_N = 0.1;
   double x_O = 0.0;
   double pressure = 101325.;
-  double n_tot = pressure / (K_CONST_K * 500);
+  //double n_tot = pressure / (K_CONST_K * 500);
 
   // for (int i=0; i<80; i++) { //500-40000K
   //   T_vals.push_back(500 + i * 500);
   // }
 
-  for (int i=0; i<50; i++) { 
-    T_vals.push_back(100 + i * 50);
-  }
+  //for (int i=0; i<50; i++) { 
+  //  T_vals.push_back(100 + i * 50);
+  //}
 
   std::vector<arma::vec> mol_ndens;
-  mol_ndens.push_back(mixture.Boltzmann_distribution(T_vals[0], x_NO * 101325.0 / (K_CONST_K * T_vals[0]), mol)); // NO
+  mol_ndens.push_back(mixture.Boltzmann_distribution(T_vals[0], x_N2 * 101325.0 / (K_CONST_K * T_vals[0]), mol)); // N2
 
   std::ofstream outf;
-  outf.open(output_dir + "/TRANSPORT_COEFFICIENTS/shear_viscosity/" + mol.name + "_xat_" + std::to_string(x_NO) + ".txt");
+  outf.open(output_dir + "/TRANSPORT_COEFFICIENTS/shear_viscosity/" + mol.name + "_xat_" + std::to_string(x_N2) + ".txt");
   outf << std::setw(20) << "Temperature [K]";
   outf << std::setw(20) << "Eta";
   outf << std::endl;
@@ -91,16 +92,27 @@ int main(int argc, char** argv) {
 
   double tot_ndens;
 
+//  std::vector<models_omega> omega_integral_models = {models_omega::model_omega_rs, models_omega::model_omega_vss,
+//                                                     models_omega::model_omega_bornmayer, models_omega::model_omega_lennardjones,
+//                                                     models_omega::model_omega_esa};
+
   for (auto T : T_vals) {
     tot_ndens =  101325.0 / (K_CONST_K * T);
-    mol_ndens[0] = mixture.Boltzmann_distribution(T, x_NO * 101325.0 / (K_CONST_K * T), mol);
+    mol_ndens[0] = mixture.Boltzmann_distribution(T, x_N2 * 101325.0 / (K_CONST_K * T), mol);
+    atom_ndens[0] = x_N * 101325.0 / (K_CONST_K * T);
 
     // mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens);
-    mixture.compute_transport_coefficients(T, mol_ndens);
+    mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs);
+    //mixture.compute_transport_coefficients(T, mol_ndens);
 
     outf << std::setw(20) << T;
     outf << std::setw(20) << mixture.get_shear_viscosity();
     outf << std::endl;
+  }
+
+  for (auto moles : molecules) {
+    std::cout << std::setw(20) << mol_ndens[0];
+    std::cout << std::endl;
   }
 
   outf.close();

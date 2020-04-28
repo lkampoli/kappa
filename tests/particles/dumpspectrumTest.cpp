@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
   std::cout << "Current directory is: " << output_dir << std::endl;
 
   // create molecules
-  Molecule N2("N2", false, false, particle_source);
+  Molecule N2("N2", true, false, particle_source);
   Molecule NO("NO", true, true, particle_source);
   Molecule O2("O2", true, true, particle_source);
 
@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
   f.open(output_dir + "/N2_spectrum.csv");
   for (i=0; i<N2.num_vibr_levels[0]; i++) {
     f << N2.vibr_energy[0][i] / K_CONST_EV;
-    std::cout << i << " " << N2.vibr_energy[0][i] << " " << appr.avg_rot_energy(300, N2, N2.vibr_energy[0][i], 0) << std::endl;
+    std::cout << i << " " << N2.vibr_energy[0][i] - N2.vibr_energy[0][0] << " " << appr.avg_rot_energy(300, N2, N2.vibr_energy[0][i], 0) << std::endl;
     f << ",";
   }
   f.close();
