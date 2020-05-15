@@ -1,0 +1,2 @@
+     Temperature [K]  Collision diameter      Collision mass             RS(2,2)            VSS(2,2)     Born-Mayer(2,2)             LJ(2,2)            ESA(2,2)
+                 500         3.35093e-10         1.55058e-26         1.87802e-16         1.77901e-16         1.73755e-16         1.67711e-16         1.63769e-16

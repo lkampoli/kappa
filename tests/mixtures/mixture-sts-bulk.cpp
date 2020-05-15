@@ -1,6 +1,6 @@
 /*! 
-    \file: mixture-sts-shear.cpp 
-    \brief Test for shear viscosity in binary mixtures.
+    \file: mixture-sts-bulk.cpp 
+    \brief Test for bulk viscosity in binary mixtures.
  */
 
 #include <iostream>
@@ -29,7 +29,7 @@ std::string GetCurrentWorkingDir( void ) {
 
 int main(int argc, char** argv) {
 
-  std::cout << "Start test: computation of shear viscosity" << std::endl;
+  std::cout << "Start test: computation of bulk viscosity" << std::endl;
 
   std::string m_source = std::getenv("KAPPA_DATA_DIRECTORY");
   std::cout << "KAPPA_DATA_DIRECTORY is: " << m_source << '\n';
@@ -43,15 +43,15 @@ int main(int argc, char** argv) {
 
   std::cout << "Loading particles data" << std::endl;
 
-  //kappa::Molecule mol("NO", false, true, particle_source);
   kappa::Molecule mol("N2", true, false, particle_source);
   kappa::Atom at("N", particle_source);
+  // kappa::Molecule mol("NO", false, true, particle_source);
   // kappa::Molecule mol("O2", false, true, particle_source);
   // kappa::Atom at("O", particle_source);
-  //kappa::Atom N("N", particle_source);
-  //atoms.push_back(N);
-  //kappa::Atom O("O", particle_source);
-  //atoms.push_back(O);
+  // kappa::Atom N("N", particle_source);
+  // atoms.push_back(N);
+  // kappa::Atom O("O", particle_source);
+  // atoms.push_back(O);
   molecules.push_back(mol);
   atoms.push_back(at);
 
@@ -81,14 +81,14 @@ int main(int argc, char** argv) {
   mol_ndens.push_back(mixture.Boltzmann_distribution(T_vals[0], x_N2 * 101325.0 / (K_CONST_K * T_vals[0]), mol)); // N2
 
   std::ofstream outf;
-  outf.open(output_dir + "/TRANSPORT_COEFFICIENTS/shear_viscosity/" + mol.name + "_xat_" + std::to_string(x_N2) + ".txt");
+  outf.open(output_dir + "/TRANSPORT_COEFFICIENTS/bulk_viscosity/" + mol.name + "_xat_" + std::to_string(x_N2) + ".txt");
   outf << std::setw(20) << "Temperature [K]";
   outf << std::setw(20) << "Eta";
   outf << std::endl;
 
   arma::vec atom_ndens(2);
   atom_ndens[0] = 0.;
-  atom_ndens[1] = 0.;
+  //atom_ndens[1] = 0.;
 
   double tot_ndens;
 
@@ -106,14 +106,16 @@ int main(int argc, char** argv) {
     //mixture.compute_transport_coefficients(T, mol_ndens);
 
     outf << std::setw(20) << T;
-    outf << std::setw(20) << mixture.get_shear_viscosity();
+    outf << std::setw(20) << mixture.get_bulk_viscosity();
     outf << std::endl;
   }
 
-  for (auto moles : molecules) {
-    std::cout << std::setw(20) << mol_ndens[0];
-    std::cout << std::endl;
-  }
+  std::cout << std::setw(20) << T_vals[0] << std::endl;
+  std::cout << std::setw(20) << mixture.get_bulk_viscosity() << std::endl;
+//  for (auto moles : molecules) {
+//    std::cout << std::setw(20) << mol_ndens[0];
+//    std::cout << std::endl;
+//  }
 
   outf.close();
   return 0;

@@ -1485,7 +1485,9 @@ using namespace std;
 
     // molecule + molecule collisions for molecules of different species or at different vibrational levels
     for (i=0; i<num_molecules; i++) { 				
+      std::cout << " I = " << i << std::endl;
       for (j=i; j<num_molecules; j++) { 		
+        std::cout << " J = " << j << std::endl;
 
         coll_mass = interactions[inter_index(i, j)].collision_mass;
 
@@ -1506,14 +1508,23 @@ using namespace std;
 
             if ((j!=i) || (l>k)) {
 
+               //std::cout << "  === INFO === " << std::endl;
+               //std::cout << c_rot_arr[o1] << " " << c_rot_arr[o2] << " " << rm << " " << rot_rel_times.at(i, j) << " " << rot_rel_times.at(j,i) << std::endl;
+               //std::cout << A_cd << " " << eta_cd << std::endl;
+
                bulk_viscosity_LHS.at(p1    , p2) = - 5 * kT * n_ij * coll_mass / (A_cd * eta_cd * (molecules[i].mass + molecules[j].mass)) 
                                                    + 4 *  T * n_ij * coll_mass * (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j))
                                                                                +  molecules[j].mass * c_rot_arr[o2] / (rm * rot_rel_times.at(j, i)))
                                                                                / (K_CONST_PI * eta_cd * (molecules[i].mass + molecules[j].mass)); // 1100
                       
-              bulk_viscosity_LHS.at(p1 + 1, p2) = - 4 * T * n_ij * molecules[j].mass * molecules[j].mass * c_rot_arr[o2] / ((molecules[i].mass + molecules[j].mass) * K_CONST_PI * eta_cd * rm * rot_rel_times.at(j,i)); // 0110
+               std::cout << "bulk_viscosity_LHS.at(p1    , p2)" << std::endl;
+               std::cout << bulk_viscosity_LHS.at(p1    , p2) / (n * n) << std::endl;
 
-              bulk_viscosity_LHS.at(p1    , p2 + 1) = - 4 * T * n_ij * molecules[i].mass * molecules[i].mass * c_rot_arr[o1] / ((molecules[i].mass + molecules[j].mass) * K_CONST_PI * eta_cd * rm * rot_rel_times.at(i,j)); // 1001
+              bulk_viscosity_LHS.at(p1 + 1, p2) = - 4 * T * n_ij * molecules[j].mass * molecules[j].mass * c_rot_arr[o2] / 
+                                                  ((molecules[i].mass + molecules[j].mass) * K_CONST_PI * eta_cd * rm * rot_rel_times.at(j,i)); // 0110
+
+              bulk_viscosity_LHS.at(p1    , p2 + 1) = - 4 * T * n_ij * molecules[i].mass * molecules[i].mass * c_rot_arr[o1] / 
+                                                      ((molecules[i].mass + molecules[j].mass) * K_CONST_PI * eta_cd * rm * rot_rel_times.at(i,j)); // 1001
 
               bulk_viscosity_LHS.at(p1 + 1, p2 + 1) = 0; // 0011
 
@@ -1726,6 +1737,8 @@ using namespace std;
 
     // std::cout << "NONRIGID, AFTER: " << arma::det(bulk_viscosity_LHS * 1e15) << std::endl;
 
+    std::cout << "T = " << T << std::endl;
+    std::cout << "bulk_viscosity_LHS" << bulk_viscosity_LHS << std::endl;
     return bulk_viscosity_LHS;
   }
 
@@ -1736,8 +1749,15 @@ using namespace std;
 
     int i, j=0, k;
 
+    std::cout << "this_ctr" << this_ctr << std::endl;
+    std::cout << "this_crot" << this_crot << std::endl;
+    std::cout << "this_total_n" << this_total_n << std::endl;
+    std::cout << "c_rot_arr" << c_rot_arr << std::endl;
+
     for (i=0; i<num_molecules; i++) {
       for (k=0; k<molecules[i].num_vibr_levels[0]; k++) {
+
+        std::cout << molecules[i].mass << std::endl;
 
         // TODO: vectorize!
         bulk_viscosity_RHS[2 * j] = -this_n_vl_mol[i][k] * this_crot / this_total_n; 				  // even
@@ -1747,12 +1767,19 @@ using namespace std;
     }
 
     for (i=0; i<num_atoms; i++) {
-      bulk_viscosity_rigid_rot_RHS[num_molecules * 2 + i] = -this_n_atom[i] * this_crot / this_total_n;
+
+      std::cout << atoms[i].mass << std::endl;
+
+      //bulk_viscosity_rigid_rot_RHS[num_molecules * 2 + i] = -this_n_atom[i] * this_crot / this_total_n;
+      bulk_viscosity_RHS[num_molecules * 2 + i] = -this_n_atom[i] * this_crot / this_total_n;
     }
 
     bulk_viscosity_RHS[0] = 0; // normalization condition as to make the system linearly independent
     bulk_viscosity_RHS /= (this_ctr + this_crot);
 
+    std::cout << "T = " << T << std::endl;
+    std::cout << "bulk_viscosity_RHS" << bulk_viscosity_RHS << std::endl;
+    std::cout << "size bulk_viscosity_RHS" << bulk_viscosity_RHS.size() << std::endl;
     return bulk_viscosity_RHS;
   }
 
@@ -2025,6 +2052,8 @@ using namespace std;
       }
     }
 
+    std::cout << "T = " << T << std::endl;
+    std::cout << "bulk_viscosity = " << -res * K_CONST_K * T / this_total_n << std::endl;
     return -res * K_CONST_K * T / this_total_n;
   }
 
@@ -2387,6 +2416,8 @@ using namespace std;
       thermal_conductivity_LHS.at(0, n_vibr_levels_total * 3 + 2 * i + 1) = 0;
     }
 
+    std::cout << "T = " << T << std::endl;
+    std::cout << "thermal_conductivity_LHS" << thermal_conductivity_LHS << std::endl;
     return thermal_conductivity_LHS;
 
   }
@@ -2416,6 +2447,8 @@ using namespace std;
 
     thermal_conductivity_RHS *= T / this_total_n;
 
+    std::cout << "T = " << T << std::endl;
+    std::cout << "thermal_conductivity_RHS" << thermal_conductivity_RHS << std::endl;
     return thermal_conductivity_RHS;
   }
 
@@ -2931,9 +2964,8 @@ using namespace std;
       shear_viscosity_LHS.at(num_molecules + i1, num_molecules + i1) = tmp;
     }
 
-    //std::cout << "shear_viscosity_LHS" << std::endl;
-    //std::cout << shear_viscosity_LHS << std::endl;
-
+    std::cout << "T = " << T << std::endl;
+    std::cout << "shear_viscosity_LHS" << shear_viscosity_LHS << std::endl;
     return shear_viscosity_LHS;
   }
 
@@ -2964,6 +2996,8 @@ using namespace std;
     std::cout << shear_viscosity_RHS << std::endl;
     std::cout << shear_viscosity_RHS[0] + shear_viscosity_RHS[1] << std::endl;
 */
+    std::cout << "T = " << T << std::endl;
+    std::cout << "shear_viscosity_RHS" << shear_viscosity_RHS << std::endl;
     return shear_viscosity_RHS;
   }
 

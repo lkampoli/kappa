@@ -105,7 +105,7 @@ my %packages = (  #  version   default install priority      function
 #    "blas"       => [ "3.7.1",  'on' ,  'off', $priority++,  \&install_blas ],
 #    "clapack"    => [ "",       'off',  'off', $priority++,  \&install_clapack ],
 #    "lapack"     => [ "3.0.3",  'off',  'off', $priority++,  \&install_lapack ],
-    "lapack"     => [ "3.7.1",  'off' ,  'off', $priority++,  \&install_lapack ],
+  #    "lapack"     => [ "3.7.1",  'on' ,  'off', $priority++,  \&install_lapack ],
 #    "log4cpp"    => [ "0.3.4b", 'off',  'off', $priority++,  sub { install_gnu("log4cpp") } ],
 #    "zlib"       => [ "1.2.3",  'off',  'off', $priority++,  sub { install_gnu("zlib") } ],
 #    "cppunit"    => [ "1.10.2", 'off',  'off', $priority++,  sub { install_gnu("cppunit") } ],
@@ -140,9 +140,10 @@ my %packages = (  #  version   default install priority      function
 #    "cgnslib"    => [ "2.5-4",  'off',  'off', $priority++,  \&install_cgnslib ],
 #    "cgnstools"  => [ "2-5-4",  'off',  'off', $priority++,  \&install_cgnstools ],
 #    "google-perftools" => [ "0.93",'off','off', $priority++, \&install_google_perftools ],
-     "yaml-cpp"   => [ ""          ,      'off' ,  'off', $priority++,  \&install_yamlcpp ],
-     "OpenBLAS"   => [ "0.2.20"    ,      'off' ,  'off', $priority++,  \&install_openblas ],
-     "armadillo"  => [ "8.100.1"   ,      'on' ,  'off', $priority++,  \&install_armadillo ],
+    #     "yaml-cpp"   => [ ""          ,      'off' ,  'off', $priority++,  \&install_yamlcpp ],
+#    "OpenBLAS"   => [ "0.2.20"    ,      'on' ,  'off', $priority++,  \&install_openblas ],
+    # "OpenBLAS"   => [ ""    ,      'on' ,  'off', $priority++,  \&install_openblas ],
+    # "armadillo"  => [ "8.100.1"   ,      'on' ,  'off', $priority++,  \&install_armadillo ],
 );
 
 #=================================on======================================
@@ -261,15 +262,13 @@ ZZZ
 
    
   # download from respective repositories
-  run_command("mkdir -p $kappa/kappa_tmp");
-  run_command("mkdir -p $kappa/kappa_deps");
+  #run_command("mkdir -p $kappa/kappa_tmp");
+  #run_command("mkdir -p $kappa/kappa_deps");
 
-  #  run_command_or_die("wget -O $opt_tmp_dir/blas-3.7.1.tar.gz http://www.netlib.org/blas/blas-3.7.1.tgz");
   #run_command_or_die("wget -O $opt_tmp_dir/lapack-3.7.1.tar.gz http://www.netlib.org/lapack/lapack-3.7.1.tgz");
   #run_command_or_die("wget -O $opt_tmp_dir/yaml-cpp.zip https://github.com/jbeder/yaml-cpp/archive/master.zip");
-  #run_command_or_die("wget -O $opt_tmp_dir/OpenBLAS-0.2.20.tar.gz github.com/xianyi/OpenBLAS/archive/v0.2.20.tar.gz");
+  #run_command_or_die("git clone https://github.com/xianyi/OpenBLAS.git $opt_tmp_dir/OpenBLAS");
   #run_command_or_die("wget -O $opt_tmp_dir/armadillo-8.100.1.tar.xz https://sourceforge.net/projects/arma/files/armadillo-8.100.1.tar.xz");
-  #run_command_or_die("wget -O $opt_tmp_dir/cmake-3.9.2.tar.gz  https://cmake.org/files/v3.9/cmake-3.9.2.tar.gz");
 
 }
 
@@ -736,14 +735,16 @@ sub install_openblas() {
     safe_chdir($opt_tmp_dir);
 
     unless ($opt_fetchonly) {
-    rmtree "$opt_tmp_dir/$lib-$version";
-    run_command_or_die("tar -xvf $lib-$version.tar.gz");
+#   rmtree "$opt_tmp_dir/$lib-$version";
+#   run_command_or_die("tar -xvf $lib-$version.tar.gz");
 #   untar_src($lib,$version);
-    safe_chdir("$opt_tmp_dir/$lib-$version");
+#   safe_chdir("$opt_tmp_dir/$lib-$version");
+    safe_chdir("$opt_tmp_dir/$lib");
 
     run_command_or_die("make $opt_makeopts");
 #   run_command_or_die("make install PREFIX=$opt_install_dir");
-    run_command_or_die("make install PREFIX=$opt_install_dir USE_OPENMP=1");
+#   run_command_or_die("make install PREFIX=$opt_install_dir USE_OPENMP=1");
+    run_command_or_die("make install PREFIX=$opt_install_dir");
  }
 }
 #==========================================================================

@@ -61,12 +61,12 @@ int main(int argc, char** argv) {
   arma::vec atom_ndens(1);
   std::vector<arma::vec> mol_ndens;
 
-  double t=1000.;
+  double t=500.;
   double tmax=25500.;
   double p=101325.0;
 
   int i;
-  int x_atom_perc = 95.;
+  int x_atom_perc = 1.;
   double x_atom = x_atom_perc / 100.;
   double th_c; // thermal conductivity
 

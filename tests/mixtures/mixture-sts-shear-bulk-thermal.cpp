@@ -118,11 +118,11 @@ int main(int argc, char** argv) {
     mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens);
     mixture_RR.compute_transport_coefficients(T, mol_ndens, atom_ndens);
   
-    // std::cout << std::setw(25) << T;
-    // std::cout << std::setw(25) << mixture.get_shear_viscosity();
-    // std::cout << std::setw(25) << mixture.get_bulk_viscosity();
-    // std::cout << std::setw(25) << mixture.get_thermal_conductivity();
-    // std::cout << std::endl;
+     std::cout << std::setw(25) << T;
+     std::cout << std::setw(25) << mixture.get_shear_viscosity();
+     std::cout << std::setw(25) << mixture.get_bulk_viscosity();
+     std::cout << std::setw(25) << mixture.get_thermal_conductivity();
+     std::cout << std::endl;
 
      outf << std::setw(20) << T;
      outf << std::setw(20) << mixture.get_shear_viscosity();

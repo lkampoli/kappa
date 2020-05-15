@@ -987,6 +987,9 @@ kappa::Approximation::Approximation() {}
   double kappa::Approximation::p_rot_collision_number_parker(double T, double xi_inf, double epsilon) {
 
     double kTe = T * K_CONST_K / epsilon; // epsilon/k=97.5 for N2, 107.4 for O2, k=1.3807e-23
+    std::cout << "kTe << " " << xi_inf << epsilon" << std::endl;
+    std::cout << kTe << " " << xi_inf << " " << epsilon << std::endl;
+    std::cout << xi_inf /  ( 1 + pow(K_CONST_PI, 1.5) * pow(kTe, -0.5) / 2 + (K_CONST_PI * K_CONST_PI / 4 + 2) / kTe + pow(K_CONST_PI, 1.5) * pow(kTe, -1.5)) << std::endl;
     return xi_inf /  ( 1 + pow(K_CONST_PI, 1.5) * pow(kTe, -0.5) / 2 + (K_CONST_PI * K_CONST_PI / 4 + 2) / kTe + pow(K_CONST_PI, 1.5) * pow(kTe, -1.5));
   }
 
@@ -2300,6 +2303,9 @@ kappa::Approximation::Approximation() {}
      }
      #endif
 
+     std::cout << "p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon)" << std::endl;
+     std::cout << p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon) << std::endl;
+     std::cout << omega_integral(T, interaction, 2, 2, model, true) << " " << n << std::endl;
      return p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon) * K_CONST_PI * 0.15625 / 
 	                                 (n * omega_integral(T, interaction, 2, 2, model, true));
   }
