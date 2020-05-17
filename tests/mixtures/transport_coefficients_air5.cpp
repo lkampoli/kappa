@@ -53,9 +53,9 @@ int main(int argc, char** argv) {
 
   std::cout << "Finished loading particles data" << std::endl;
 
-  std::cout << "Molecule's name " << mol.name << std::endl;
-  std::cout << "Atom's name " << at.name << std::endl;
-  std::cout << "Molecule vibrational levels " << mol.num_vibr_levels[0] << std::endl;
+  //std::cout << "Molecule's name " << mol.name << std::endl;
+  //std::cout << "Atom's name " << at.name << std::endl;
+  //std::cout << "Molecule vibrational levels " << mol.num_vibr_levels[0] << std::endl;
 
   // air5 mixture
   kappa::Mixture mixture(mol, at, interaction_source, particle_source);

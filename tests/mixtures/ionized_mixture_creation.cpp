@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
+#include <cstdlib>
 
 #ifdef WINDOWS
 #include <direct.h>
@@ -16,6 +17,7 @@
 #define GetCurrentDir getcwd
 #endif
 
+using namespace std;
 #include "kappa.hpp"
 
 std::string GetCurrentWorkingDir( void ) {

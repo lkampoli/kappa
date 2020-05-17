@@ -1,2 +1,0 @@
-     Temperature [K]                 Eta
-                 500         2.67163e-05

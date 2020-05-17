@@ -23,5 +23,4 @@ basicTest : basicTest.o
 	$(CXX) -c $(CXX_FLAGS)  $<
 
 clean :
-	$(RM) *.o $(EXAMPLES) gmon.out
-
+	$(RM) *.o $(EXAMPLES) gmon.out *.log

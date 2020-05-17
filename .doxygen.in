@@ -776,11 +776,11 @@ INPUT                  = ../src/mixtures \
                          ../tests/basic/ \
                          ../tests/interaction/ \
                          ../tests/mixtures/ \
-                         ../tests/particles/ \
-                         ./manual/mainpage.h \
-                         ./manual/install.h \
-                         ./manual/mathematical_model.h \
-                         ./manual/citelist.h 
+                         ../tests/particles/
+                         #./manual/mainpage.h \
+                         #./manual/install.h \
+                         #./manual/mathematical_model.h \
+                         #./manual/citelist.h 
  
 
 # This tag can be used to specify the character encoding of the source files

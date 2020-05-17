@@ -53,5 +53,3 @@ A list of contributors to the project can found in [CONTRIBUTORS.md](CONTRIBUTOR
     
 ## Reference 
 https://www.researchgate.net/publication/328706345_KAPPA_Kinetic_approach_to_physical_processes_in_atmospheres_library_in_C
-
-
