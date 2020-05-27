@@ -24,6 +24,7 @@ std::string GetCurrentWorkingDir( void ) {
   return current_working_dir;
 }
 
+using namespace kappa;
 
 int main(int argc, char** argv) {
    
@@ -38,8 +39,9 @@ int main(int argc, char** argv) {
   std::cout << "Loading particles data" << std::endl;
 
   // N2 molecule (rigid and non rigid rotator model)
-  kappa::Molecule mol("N2", true, true,         particle_source);
-  kappa::Molecule mol_nonrig("N2", true, false, particle_source);
+  //kappa::Molecule mol("N2", true, true,         particle_source);
+  //kappa::Molecule mol_nonrig("N2", true, false, particle_source);
+  kappa::Molecule mol("N2", true, false, particle_source);
  
   // N atom
   kappa::Atom at("N", particle_source);
@@ -52,14 +54,15 @@ int main(int argc, char** argv) {
 
   // N2/N binary mixture creation
   kappa::Mixture mixture(mol, at,               interaction_source, particle_source);
-  kappa::Mixture mixture_nonrig(mol_nonrig, at, interaction_source, particle_source);
+  //kappa::Mixture mixture_nonrig(mol_nonrig, at, interaction_source, particle_source);
 
   // some check print
   std::cout << "particles: " << mixture.get_n_particles() << std::endl;
   std::cout << "names: " << mixture.get_names() << std::endl;
 
   // set a range for temperature
-  std::vector<double> T_vals = {2500.0, 5000.0, 20000.0, 50000.0};
+  //std::vector<double> T_vals = {2500.0, 5000.0, 20000.0, 50000.0};
+  std::vector<double> T_vals = {500.0};
 
   // vibrational levels
   int i;
@@ -74,21 +77,23 @@ int main(int argc, char** argv) {
   double beta = 2.6986E+10; // N2
   double d0 = Re + be + (9./2.)*beta*l_alpha*l_alpha*exp( 2*sqrt(beta*l_alpha)*(vibr_l - 1) );
 
-  for (i=0; i<159; i++) { // assume a max num. of vibr. levels a priori
-    T_vals.push_back(500 + i * 500);
-  }
+//  for (i=0; i<159; i++) { // assume a max num. of vibr. levels a priori
+//    T_vals.push_back(500 + i * 500);
+//  }
 
   // set an arbitrary atom mass fraction
-  int x_atom_perc = 95.0;
+  double x_atom_perc = 10.0;
   double x_atom = x_atom_perc / 100.;
 
   // arma vector for atom number density
   arma::vec atom_ndens(1);
 
   // vector of arma vector for molecular number density
+  double x_mol_perc = 90.0;
   std::vector<arma::vec> mol_ndens;
 
   // assume an initial boltzmann ditribution 
+  //mol_ndens.push_back(mixture.Boltzmann_distribution(T_vals[0], (1.-x_atom) * 101325.0 / (kappa::K_CONST_K * T_vals[0]), mol));
   mol_ndens.push_back(mixture.Boltzmann_distribution(T_vals[0], 101325.0 / (kappa::K_CONST_K * T_vals[0]), mol));
 
   // output files
@@ -120,14 +125,18 @@ int main(int argc, char** argv) {
     std::cout << std::setw(20) << T << std::endl;
 
     // computation of transport coefficients
-    mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens);
-    mixture_nonrig.compute_transport_coefficients(T, mol_ndens, atom_ndens);
+    //mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens);
+    //mixture_nonrig.compute_transport_coefficients(T, mol_ndens, atom_ndens);
+    mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs);
+    //mixture_nonrig.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs);
+    mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs);
 
     double D0 = (3./(8.* tot_ndens * d0 * d0) ) * sqrt( (kappa::K_CONST_K * T)/(kappa::K_CONST_PI*mol.mass) );
 
-    // retrieve thermal-diffusion coefficients (Rigid Rotator)
+    // retrieve thermal-diffusion coefficients
     thd = mixture.get_thermodiffusion();
 
+    std::cout << mixture.get_thermodiffusion() << std::endl;
 
     for (i=0; i<thd.n_elem; i++) {
       outf << std::setw(20) << T; 
@@ -136,7 +145,8 @@ int main(int argc, char** argv) {
     }
 
     // retrieve thermal-diffusion coefficients (Non-Rigid Rotator)
-    thd = mixture_nonrig.get_thermodiffusion();
+    //thd = mixture_nonrig.get_thermodiffusion();
+    thd = mixture.get_thermodiffusion();
     for (i=0; i<thd.n_elem; i++) {
       outf2 << std::setw(20) << T; 
       outf2 << std::setw(25) << std::setprecision(18) << thd[i]/D0; 

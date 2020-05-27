@@ -44,6 +44,7 @@ int main(int argc, char** argv) {
   std::cout << "Loading particles data" << std::endl;
 
   kappa::Molecule mol("N2", true, false, particle_source);
+  // kappa::Molecule mol("N2", true, true, particle_source);
   kappa::Atom at("N", particle_source);
   // kappa::Molecule mol("NO", false, true, particle_source);
   // kappa::Molecule mol("O2", false, true, particle_source);
@@ -101,8 +102,13 @@ int main(int argc, char** argv) {
     mol_ndens[0] = mixture.Boltzmann_distribution(T, x_N2 * 101325.0 / (K_CONST_K * T), mol);
     atom_ndens[0] = x_N * 101325.0 / (K_CONST_K * T);
 
-    // mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens);
-    mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs);
+    //mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs);
+    //mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens);
+
+    // Attention: looks like the perturbation is non-zero is not defined!
+    // Better to pass it explicitely
+    mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs, 0.0);
+
     //mixture.compute_transport_coefficients(T, mol_ndens);
 
     outf << std::setw(20) << T;
@@ -112,10 +118,55 @@ int main(int argc, char** argv) {
 
   std::cout << std::setw(20) << T_vals[0] << std::endl;
   std::cout << std::setw(20) << mixture.get_bulk_viscosity() << std::endl;
-//  for (auto moles : molecules) {
-//    std::cout << std::setw(20) << mol_ndens[0];
-//    std::cout << std::endl;
-//  }
+  for (auto moles : molecules) {
+    std::cout << std::setw(20) << mol_ndens[0];
+    std::cout << std::endl;
+  }
+
+
+  std::cout << "MOLECULAR NUMBER DENSITIES"  << std::endl;
+  std::cout << mol_ndens[0]  << std::endl;
+  std::cout << "ATOMIC NUMBER DENSITIES"  << std::endl;
+  std::cout << atom_ndens[0]  << std::endl;
+  std::cout << "MOLECULAR MOLAR FRACTIONS"  << std::endl;
+  std::cout << mol_ndens[0] / 101325.0 * (K_CONST_K * T_vals[0]) << std::endl;
+  std::cout << "ATOMIC MOLAR FRACTIONS"  << std::endl;
+  std::cout << atom_ndens[0] / 101325.0 * (K_CONST_K * T_vals[0])  << std::endl; 
+  std::cout << "MOLECULAR MASS FRACTIONS"  << std::endl;
+  std::cout << mol_ndens[0] / 101325.0 * (K_CONST_K * T_vals[0])  << std::endl;
+  std::cout << "ATOMIC MASS FRACTIONS"  << std::endl;
+  std::cout << atom_ndens[0] / 101325.0 * (K_CONST_K * T_vals[0])  << std::endl; 
+
+  double density = mixture.compute_density(mol_ndens, atom_ndens, 0);
+  std::cout << "density" << density << std::endl;
+
+  // molar to mass conversion
+  double rho = 0.0;
+  for (int i=0; i<48; i++) {
+    rho += mol_ndens[0].at(i) * mol.mass;
+  }
+  rho += atom_ndens[0] * at.mass;
+  std::cout << "rho" << rho << std::endl;
+
+  arma::vec MassFractions = arma::zeros(49);
+  for (int i=0; i<48; i++) {
+    MassFractions(i) = mol_ndens[0].at(i) * mol.mass / rho;
+  }
+  MassFractions(48) = atom_ndens[0] * at.mass / rho;
+  std::cout << MassFractions << std::endl;
+
+//  arma::vec x_molar_fractions = arma::zeros(49);
+//  arma::vec x_mass_fractions = arma::zeros(49);
+//
+//  x_molar_fractions =  mol_ndens[0] / 101325.0 * (K_CONST_K * T_vals[0]);
+//  x_mass_fractions = mixture.convert_molar_frac_to_mass(x_molar_fractions);
+//  std::cout << std::setw(20) << x_mass_fractions << "\n";
+//
+//  std::vector<double> mass_fractions;
+//  for ( int i = 0; i < x_mass_fractions.n_rows; ++i) {
+//     mass_fractions.push_back(x_mass_fractions(i));
+//     std::cout << std::setw(20) << mass_fractions[i] << "\n";
+//  };
 
   outf.close();
   return 0;

@@ -26,6 +26,8 @@ std::string GetCurrentWorkingDir( void ) {
   return current_working_dir;
 }
 
+using namespace kappa;
+
 int main(int argc, char** argv) {
    
   std::cout << "Start computation of transport coefficients" << std::endl;
@@ -62,11 +64,12 @@ int main(int argc, char** argv) {
   std::vector<arma::vec> mol_ndens;
 
   double t=500.;
-  double tmax=25500.;
+  double tmax=1000.;
+  //double tmax=25500.;
   double p=101325.0;
 
   int i;
-  int x_atom_perc = 1.;
+  int x_atom_perc = 10.;
   double x_atom = x_atom_perc / 100.;
   double th_c; // thermal conductivity
 
@@ -83,10 +86,17 @@ int main(int argc, char** argv) {
     mol_ndens[0] = mixture.Boltzmann_distribution(t, (1 - x_atom) * tot_ndens, mol);
 
     // computation of transport coefficients
-    mixture.compute_transport_coefficients(t, mol_ndens, atom_ndens);
+    //mixture.compute_transport_coefficients(t, mol_ndens, atom_ndens);
+    mixture.compute_transport_coefficients(t, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs);
 
     // retrieve thermal conductivity coefficients
     th_c = mixture.get_thermal_conductivity();
+
+    std::cout << std::setw(20) << " Thermal conductivity = " << th_c; 
+
+
+    std::cout << " ThermoDiffusion " << std::endl;
+    std::cout << mixture.get_thermodiffusion() << std::endl;
 
     outf << std::setw(20) << t; 
     outf << std::setw(20) << th_c; 
