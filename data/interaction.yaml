@@ -28,7 +28,7 @@ N2 + O2:
   Bzowski, eps/k: 108.8
   Bzowski, rho*: 0.0918
   Bzowski, V_0*: 179000
-  alpha_FHO: 4e-10
+  alpha_FHO: 4e+10 # BUG (found by Maria): it should be 4e+10 everywhere!
   VSS, dref: 3.604e-10
   VSS, omega: 0.703
   VSS, alpha: 1.43
@@ -72,7 +72,7 @@ N2 + O:
   VSS, omega: 0.702
   VSS, alpha: 1.427
   VSS, Tref: 273
-  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+  alpha_FHO: 4e+10 # add LC to run R_VT (wrong!)
 O + O2+:
   beta Bruno: 7.35
   epsilon0 Bruno: 1.09532830605e-20
@@ -184,7 +184,7 @@ NO + O:
   VSS, omega: 0.752
   VSS, alpha: 1.555
   VSS, Tref: 273
-  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+  alpha_FHO: 4e+10 # add LC to run R_VT (wrong!)
 O2 + N+:
   beta Bruno: 7.38
   epsilon0 Bruno: 1.92254831292e-20
@@ -233,7 +233,7 @@ NO + NO:
   VSS, omega: 0.737
   VSS, alpha: 1.542
   VSS, Tref: 273
-  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+  alpha_FHO: 4e+10 # add LC to run R_VT (wrong!)
 O2 + N2+:
   beta Bruno: 8.11
   epsilon0 Bruno: 1.45174860147e-20
@@ -250,7 +250,7 @@ O2 + N2: # add LC to run R_VT (wrong!)
   VSS, omega: 0.66
   VSS, alpha: 1.284
   VSS, Tref: 273  
-  alpha_FHO: 4e-10
+  alpha_FHO: 4e+10
 H2 + H2:
   VSS, Tref: 273
 O2 + O2:
@@ -277,7 +277,7 @@ O2 + O2:
   Bzowski, eps/k: 121.1 # [K]
   Bzowski, rho*: 0.0745
   Bzowski, V_0*: 1322000
-  alpha_FHO: 4e-10
+  alpha_FHO: 4e+10
   VSS, dref: 3.8960000000000003e-10
   VSS, omega: 0.7
   VSS, alpha: 1.463
@@ -390,7 +390,7 @@ NO + N:
   VSS, omega: 0.788
   VSS, alpha: 1.641
   VSS, Tref: 273
-  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+  alpha_FHO: 4e+10 # add LC to run R_VT (wrong!)
 N + NO:
   phi_zero Born-Mayer: 6.86692875759e-17
   beta Born-Mayer: 29830000000
@@ -442,7 +442,7 @@ NO + N2: # add LC to run R_VT (wrong!)
   VSS, omega: 0.658
   VSS, alpha: 1.269
   VSS, Tref: 273
-  alpha_FHO: 4e-10
+  alpha_FHO: 4e+10
 NO + NO+:
   beta Bruno: 8.34
   epsilon0 Bruno: 1.7980110947099998e-20
@@ -485,7 +485,7 @@ N2 + NO:
   VSS, omega: 0.756
   VSS, alpha: 1.515
   VSS, Tref: 273
-  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+  alpha_FHO: 4e+10 # add LC to run R_VT (wrong!)
 N + NO+:
   beta Bruno: 6.98
   epsilon0 Bruno: 1.3458927670800001e-20
@@ -616,7 +616,7 @@ O + O2:
   diss,O2,Arrh_A,Scanlon: 1.5e-10
   diss,O2,Arrh_n,Scanlon: -1.05
   diss,O2,Ea,Scanlon: 8.197e-19
-  alpha_FHO: 4e-10
+  alpha_FHO: 4e+10
   diss,O2,Arrh_A,mTM: 6.1953e-12
   diss,O2,Arrh_n,mTM: -0.55724
   diss,O2,Ea,mTM: 8.352382659840001e-19
@@ -644,7 +644,7 @@ O2 + O:
   diss,O2,Arrh_A,Scanlon: 1.5e-10
   diss,O2,Arrh_n,Scanlon: -1.05
   diss,O2,Ea,Scanlon: 8.197e-19
-  alpha_FHO: 4e-10
+  alpha_FHO: 4e+10
   diss,O2,Arrh_A,mTM: 6.1953e-12
   diss,O2,Arrh_n,mTM: -0.55724
   diss,O2,Ea,mTM: 8.352382659840001e-19
@@ -737,7 +737,7 @@ NO + O2:
   VSS, omega: 0.695
   VSS, alpha: 1.365
   VSS, Tref: 273
-  alpha_FHO: 4e-10
+  alpha_FHO: 4e+10
 N2 + N2:
   phi_zero Born-Mayer: 6.660247980705e-17
   beta Born-Mayer: 25730000000
@@ -762,7 +762,7 @@ N2 + N2:
   Bzowski, eps/k: 98.4
   Bzowski, rho*: 0.108
   Bzowski, V_0*: 53080
-  alpha_FHO: 4e-10
+  alpha_FHO: 4e+10
   VSS, dref: 4.04e-10
   VSS, omega: 0.686
   VSS, alpha: 1.424
@@ -819,7 +819,7 @@ O2 + NO:
   VSS, omega: 0.718
   VSS, alpha: 1.501
   VSS, Tref: 273
-  alpha_FHO: 4e-10
+  alpha_FHO: 4e+10
 O + O+:
   beta Bruno: 6.93
   epsilon0 Bruno: 1.49718634119e-20
@@ -920,7 +920,7 @@ O2 + N:
   VSS, omega: 0.757
   VSS, alpha: 1.567
   VSS, Tref: 273
-  alpha_FHO: 4e-10 # add LC to run R_VT (wrong!)
+  alpha_FHO: 4e+10 # add LC to run R_VT (wrong!)
 CO + CO:
   beta Bruno: 8
   epsilon0 Bruno: 1.9649098728e-21
