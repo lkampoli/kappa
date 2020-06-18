@@ -3,11 +3,6 @@ KAPPA_DATA_DIRECTORY is: /home/lk/CFD/KAPPA/data/
 Current directory is: /home/lk/CFD/KAPPA/tests/mixtures
 Loading particles data
 Mixture created
-468.637 281.182  296.804 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -22,11 +17,6 @@ bulk_viscosity_LHS_RR
 T = 500
 bulk_viscosity = 1.83239e-05
 500     1.83239e-05
-468.637 281.182  296.804 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -41,11 +31,6 @@ bulk_viscosity_LHS_RR
 T = 600
 bulk_viscosity = 2.23458e-05
 600     2.23458e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -60,11 +45,6 @@ bulk_viscosity_LHS_RR
 T = 700
 bulk_viscosity = 2.62627e-05
 700     2.62627e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -79,11 +59,6 @@ bulk_viscosity_LHS_RR
 T = 800
 bulk_viscosity = 3.00715e-05
 800     3.00715e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -98,11 +73,6 @@ bulk_viscosity_LHS_RR
 T = 900
 bulk_viscosity = 3.37744e-05
 900     3.37744e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -117,11 +87,6 @@ bulk_viscosity_LHS_RR
 T = 1000
 bulk_viscosity = 3.7376e-05
 1000     3.7376e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -136,11 +101,6 @@ bulk_viscosity_LHS_RR
 T = 1100
 bulk_viscosity = 4.08815e-05
 1100     4.08815e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -155,11 +115,6 @@ bulk_viscosity_LHS_RR
 T = 1200
 bulk_viscosity = 4.42965e-05
 1200     4.42965e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -174,11 +129,6 @@ bulk_viscosity_LHS_RR
 T = 1300
 bulk_viscosity = 4.76266e-05
 1300     4.76266e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -193,11 +143,6 @@ bulk_viscosity_LHS_RR
 T = 1400
 bulk_viscosity = 5.08769e-05
 1400     5.08769e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -212,11 +157,6 @@ bulk_viscosity_LHS_RR
 T = 1500
 bulk_viscosity = 5.40522e-05
 1500     5.40522e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -231,11 +171,6 @@ bulk_viscosity_LHS_RR
 T = 1600
 bulk_viscosity = 5.7157e-05
 1600     5.7157e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -250,11 +185,6 @@ bulk_viscosity_LHS_RR
 T = 1700
 bulk_viscosity = 6.01954e-05
 1700     6.01954e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -269,11 +199,6 @@ bulk_viscosity_LHS_RR
 T = 1800
 bulk_viscosity = 6.31713e-05
 1800     6.31713e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -288,11 +213,6 @@ bulk_viscosity_LHS_RR
 T = 1900
 bulk_viscosity = 6.60882e-05
 1900     6.60882e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -307,11 +227,6 @@ bulk_viscosity_LHS_RR
 T = 2000
 bulk_viscosity = 6.89491e-05
 2000     6.89491e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -326,11 +241,6 @@ bulk_viscosity_LHS_RR
 T = 2100
 bulk_viscosity = 7.17572e-05
 2100     7.17572e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -345,11 +255,6 @@ bulk_viscosity_LHS_RR
 T = 2200
 bulk_viscosity = 7.4515e-05
 2200     7.4515e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -364,11 +269,6 @@ bulk_viscosity_LHS_RR
 T = 2300
 bulk_viscosity = 7.72252e-05
 2300     7.72252e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -383,11 +283,6 @@ bulk_viscosity_LHS_RR
 T = 2400
 bulk_viscosity = 7.989e-05
 2400     7.989e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -402,11 +297,6 @@ bulk_viscosity_LHS_RR
 T = 2500
 bulk_viscosity = 8.25116e-05
 2500     8.25116e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -421,11 +311,6 @@ bulk_viscosity_LHS_RR
 T = 2600
 bulk_viscosity = 8.50919e-05
 2600     8.50919e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -440,11 +325,6 @@ bulk_viscosity_LHS_RR
 T = 2700
 bulk_viscosity = 8.76328e-05
 2700     8.76328e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -459,11 +339,6 @@ bulk_viscosity_LHS_RR
 T = 2800
 bulk_viscosity = 9.0136e-05
 2800     9.0136e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -478,11 +353,6 @@ bulk_viscosity_LHS_RR
 T = 2900
 bulk_viscosity = 9.26031e-05
 2900     9.26031e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -497,11 +367,6 @@ bulk_viscosity_LHS_RR
 T = 3000
 bulk_viscosity = 9.50356e-05
 3000     9.50356e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -516,11 +381,6 @@ bulk_viscosity_LHS_RR
 T = 3100
 bulk_viscosity = 9.74349e-05
 3100     9.74349e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -535,11 +395,6 @@ bulk_viscosity_LHS_RR
 T = 3200
 bulk_viscosity = 9.98022e-05
 3200     9.98022e-05
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -554,11 +409,6 @@ bulk_viscosity_LHS_RR
 T = 3300
 bulk_viscosity = 0.000102139
 3300     0.000102139
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -573,11 +423,6 @@ bulk_viscosity_LHS_RR
 T = 3400
 bulk_viscosity = 0.000104446
 3400     0.000104446
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -592,11 +437,6 @@ bulk_viscosity_LHS_RR
 T = 3500
 bulk_viscosity = 0.000106725
 3500     0.000106725
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -611,11 +451,6 @@ bulk_viscosity_LHS_RR
 T = 3600
 bulk_viscosity = 0.000108976
 3600     0.000108976
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -630,11 +465,6 @@ bulk_viscosity_LHS_RR
 T = 3700
 bulk_viscosity = 0.000111201
 3700     0.000111201
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -649,11 +479,6 @@ bulk_viscosity_LHS_RR
 T = 3800
 bulk_viscosity = 0.0001134
 3800     0.0001134
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -668,11 +493,6 @@ bulk_viscosity_LHS_RR
 T = 3900
 bulk_viscosity = 0.000115574
 3900     0.000115574
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -687,11 +507,6 @@ bulk_viscosity_LHS_RR
 T = 4000
 bulk_viscosity = 0.000117725
 4000     0.000117725
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -706,11 +521,6 @@ bulk_viscosity_LHS_RR
 T = 4100
 bulk_viscosity = 0.000119852
 4100     0.000119852
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -725,11 +535,6 @@ bulk_viscosity_LHS_RR
 T = 4200
 bulk_viscosity = 0.000121957
 4200     0.000121957
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -744,11 +549,6 @@ bulk_viscosity_LHS_RR
 T = 4300
 bulk_viscosity = 0.00012404
 4300     0.00012404
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -763,11 +563,6 @@ bulk_viscosity_LHS_RR
 T = 4400
 bulk_viscosity = 0.000126102
 4400     0.000126102
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -782,11 +577,6 @@ bulk_viscosity_LHS_RR
 T = 4500
 bulk_viscosity = 0.000128143
 4500     0.000128143
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -801,11 +591,6 @@ bulk_viscosity_LHS_RR
 T = 4600
 bulk_viscosity = 0.000130165
 4600     0.000130165
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -820,11 +605,6 @@ bulk_viscosity_LHS_RR
 T = 4700
 bulk_viscosity = 0.000132168
 4700     0.000132168
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -839,11 +619,6 @@ bulk_viscosity_LHS_RR
 T = 4800
 bulk_viscosity = 0.000134151
 4800     0.000134151
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -858,11 +633,6 @@ bulk_viscosity_LHS_RR
 T = 4900
 bulk_viscosity = 0.000136117
 4900     0.000136117
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -877,11 +647,6 @@ bulk_viscosity_LHS_RR
 T = 5000
 bulk_viscosity = 0.000138064
 5000     0.000138064
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -896,11 +661,6 @@ bulk_viscosity_LHS_RR
 T = 5100
 bulk_viscosity = 0.000139995
 5100     0.000139995
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -915,11 +675,6 @@ bulk_viscosity_LHS_RR
 T = 5200
 bulk_viscosity = 0.000141908
 5200     0.000141908
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -934,11 +689,6 @@ bulk_viscosity_LHS_RR
 T = 5300
 bulk_viscosity = 0.000143805
 5300     0.000143805
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -953,11 +703,6 @@ bulk_viscosity_LHS_RR
 T = 5400
 bulk_viscosity = 0.000145686
 5400     0.000145686
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -972,11 +717,6 @@ bulk_viscosity_LHS_RR
 T = 5500
 bulk_viscosity = 0.000147552
 5500     0.000147552
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -991,11 +731,6 @@ bulk_viscosity_LHS_RR
 T = 5600
 bulk_viscosity = 0.000149402
 5600     0.000149402
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1010,11 +745,6 @@ bulk_viscosity_LHS_RR
 T = 5700
 bulk_viscosity = 0.000151237
 5700     0.000151237
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1029,11 +759,6 @@ bulk_viscosity_LHS_RR
 T = 5800
 bulk_viscosity = 0.000153058
 5800     0.000153058
-468.637 281.182  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1048,11 +773,6 @@ bulk_viscosity_LHS_RR
 T = 5900
 bulk_viscosity = 0.000154865
 5900     0.000154865
-468.637 281.181  296.803 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1067,11 +787,6 @@ bulk_viscosity_LHS_RR
 T = 6000
 bulk_viscosity = 0.000156658
 6000     0.000156658
-468.637 281.181  296.802 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1086,11 +801,6 @@ bulk_viscosity_LHS_RR
 T = 6100
 bulk_viscosity = 0.000158437
 6100     0.000158437
-468.637 281.181  296.802 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1105,11 +815,6 @@ bulk_viscosity_LHS_RR
 T = 6200
 bulk_viscosity = 0.000160203
 6200     0.000160203
-468.637 281.181  296.802 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1124,11 +829,6 @@ bulk_viscosity_LHS_RR
 T = 6300
 bulk_viscosity = 0.000161957
 6300     0.000161957
-468.637 281.18  296.801 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1143,11 +843,6 @@ bulk_viscosity_LHS_RR
 T = 6400
 bulk_viscosity = 0.000163697
 6400     0.000163697
-468.637 281.18  296.801 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1162,11 +857,6 @@ bulk_viscosity_LHS_RR
 T = 6500
 bulk_viscosity = 0.000165425
 6500     0.000165425
-468.637 281.179  296.8 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1181,11 +871,6 @@ bulk_viscosity_LHS_RR
 T = 6600
 bulk_viscosity = 0.000167141
 6600     0.000167141
-468.637 281.178  296.799 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1200,11 +885,6 @@ bulk_viscosity_LHS_RR
 T = 6700
 bulk_viscosity = 0.000168845
 6700     0.000168845
-468.637 281.177  296.798 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1219,11 +899,6 @@ bulk_viscosity_LHS_RR
 T = 6800
 bulk_viscosity = 0.000170537
 6800     0.000170537
-468.637 281.176  296.797 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1238,11 +913,6 @@ bulk_viscosity_LHS_RR
 T = 6900
 bulk_viscosity = 0.000172218
 6900     0.000172218
-468.637 281.175  296.796 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1257,11 +927,6 @@ bulk_viscosity_LHS_RR
 T = 7000
 bulk_viscosity = 0.000173888
 7000     0.000173888
-468.637 281.173  296.794 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1276,11 +941,6 @@ bulk_viscosity_LHS_RR
 T = 7100
 bulk_viscosity = 0.000175547
 7100     0.000175547
-468.637 281.171  296.792 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1295,11 +955,6 @@ bulk_viscosity_LHS_RR
 T = 7200
 bulk_viscosity = 0.000177195
 7200     0.000177195
-468.637 281.169  296.789 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1314,11 +969,6 @@ bulk_viscosity_LHS_RR
 T = 7300
 bulk_viscosity = 0.000178832
 7300     0.000178832
-468.637 281.166  296.787 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1333,11 +983,6 @@ bulk_viscosity_LHS_RR
 T = 7400
 bulk_viscosity = 0.000180459
 7400     0.000180459
-468.637 281.163  296.783 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1352,11 +997,6 @@ bulk_viscosity_LHS_RR
 T = 7500
 bulk_viscosity = 0.000182076
 7500     0.000182076
-468.637 281.16  296.78 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1371,11 +1011,6 @@ bulk_viscosity_LHS_RR
 T = 7600
 bulk_viscosity = 0.000183682
 7600     0.000183682
-468.637 281.156  296.775 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1390,11 +1025,6 @@ bulk_viscosity_LHS_RR
 T = 7700
 bulk_viscosity = 0.000185279
 7700     0.000185279
-468.637 281.151  296.771 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1409,11 +1039,6 @@ bulk_viscosity_LHS_RR
 T = 7800
 bulk_viscosity = 0.000186866
 7800     0.000186866
-468.637 281.146  296.765 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1428,11 +1053,6 @@ bulk_viscosity_LHS_RR
 T = 7900
 bulk_viscosity = 0.000188444
 7900     0.000188444
-468.637 281.14  296.759 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1447,11 +1067,6 @@ bulk_viscosity_LHS_RR
 T = 8000
 bulk_viscosity = 0.000190012
 8000     0.000190012
-468.637 281.133  296.751 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1466,11 +1081,6 @@ bulk_viscosity_LHS_RR
 T = 8100
 bulk_viscosity = 0.000191571
 8100     0.000191571
-468.637 281.125  296.743 0 
-        0
-   0.3750
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1485,11 +1095,6 @@ bulk_viscosity_LHS_RR
 T = 8200
 bulk_viscosity = 0.00019312
 8200     0.00019312
-468.637 281.117  296.734 0 
-        0
-   0.3749
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1504,11 +1109,6 @@ bulk_viscosity_LHS_RR
 T = 8300
 bulk_viscosity = 0.000194661
 8300     0.000194661
-468.637 281.107  296.724 0 
-        0
-   0.3749
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1523,11 +1123,6 @@ bulk_viscosity_LHS_RR
 T = 8400
 bulk_viscosity = 0.000196193
 8400     0.000196193
-468.637 281.096  296.712 0 
-        0
-   0.3749
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1542,11 +1137,6 @@ bulk_viscosity_LHS_RR
 T = 8500
 bulk_viscosity = 0.000197716
 8500     0.000197716
-468.637 281.084  296.7 0 
-        0
-   0.3749
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1561,11 +1151,6 @@ bulk_viscosity_LHS_RR
 T = 8600
 bulk_viscosity = 0.000199231
 8600     0.000199231
-468.637 281.071  296.686 0 
-        0
-   0.3749
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1580,11 +1165,6 @@ bulk_viscosity_LHS_RR
 T = 8700
 bulk_viscosity = 0.000200737
 8700     0.000200737
-468.637 281.056  296.67 0 
-        0
-   0.3749
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1599,11 +1179,6 @@ bulk_viscosity_LHS_RR
 T = 8800
 bulk_viscosity = 0.000202234
 8800     0.000202234
-468.637 281.04  296.653 0 
-        0
-   0.3749
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1618,11 +1193,6 @@ bulk_viscosity_LHS_RR
 T = 8900
 bulk_viscosity = 0.000203724
 8900     0.000203724
-468.637 281.022  296.634 0 
-        0
-   0.3749
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1637,11 +1207,6 @@ bulk_viscosity_LHS_RR
 T = 9000
 bulk_viscosity = 0.000205205
 9000     0.000205205
-468.637 281.002  296.613 0 
-        0
-   0.3748
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1656,11 +1221,6 @@ bulk_viscosity_LHS_RR
 T = 9100
 bulk_viscosity = 0.000206678
 9100     0.000206678
-468.637 280.981  296.591 0 
-        0
-   0.3748
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1675,11 +1235,6 @@ bulk_viscosity_LHS_RR
 T = 9200
 bulk_viscosity = 0.000208143
 9200     0.000208143
-468.637 280.957  296.566 0 
-        0
-   0.3748
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1694,11 +1249,6 @@ bulk_viscosity_LHS_RR
 T = 9300
 bulk_viscosity = 0.0002096
 9300     0.0002096
-468.637 280.932  296.539 0 
-        0
-   0.3748
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1713,11 +1263,6 @@ bulk_viscosity_LHS_RR
 T = 9400
 bulk_viscosity = 0.000211049
 9400     0.000211049
-468.637 280.904  296.51 0 
-        0
-   0.3748
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1732,11 +1277,6 @@ bulk_viscosity_LHS_RR
 T = 9500
 bulk_viscosity = 0.00021249
 9500     0.00021249
-468.637 280.874  296.478 0 
-        0
-   0.3747
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1751,11 +1291,6 @@ bulk_viscosity_LHS_RR
 T = 9600
 bulk_viscosity = 0.000213924
 9600     0.000213924
-468.637 280.841  296.443 0 
-        0
-   0.3747
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1770,11 +1305,6 @@ bulk_viscosity_LHS_RR
 T = 9700
 bulk_viscosity = 0.00021535
 9700     0.00021535
-468.637 280.806  296.406 0 
-        0
-   0.3747
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1789,11 +1319,6 @@ bulk_viscosity_LHS_RR
 T = 9800
 bulk_viscosity = 0.000216769
 9800     0.000216769
-468.637 280.768  296.366 0 
-        0
-   0.3747
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1808,11 +1333,6 @@ bulk_viscosity_LHS_RR
 T = 9900
 bulk_viscosity = 0.00021818
 9900     0.00021818
-468.637 280.727  296.323 0 
-        0
-   0.3746
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1827,11 +1347,6 @@ bulk_viscosity_LHS_RR
 T = 10000
 bulk_viscosity = 0.000219583
 10000     0.000219583
-468.637 280.684  296.277 0 
-        0
-   0.3746
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1846,11 +1361,6 @@ bulk_viscosity_LHS_RR
 T = 10100
 bulk_viscosity = 0.00022098
 10100     0.00022098
-468.637 280.637  296.228 0 
-        0
-   0.3745
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1865,11 +1375,6 @@ bulk_viscosity_LHS_RR
 T = 10200
 bulk_viscosity = 0.000222369
 10200     0.000222369
-468.637 280.587  296.175 0 
-        0
-   0.3745
-  -0.0375
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1884,11 +1389,6 @@ bulk_viscosity_LHS_RR
 T = 10300
 bulk_viscosity = 0.00022375
 10300     0.00022375
-468.637 280.534  296.119 0 
-        0
-   0.3745
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1903,11 +1403,6 @@ bulk_viscosity_LHS_RR
 T = 10400
 bulk_viscosity = 0.000225125
 10400     0.000225125
-468.637 280.477  296.059 0 
-        0
-   0.3744
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1922,11 +1417,6 @@ bulk_viscosity_LHS_RR
 T = 10500
 bulk_viscosity = 0.000226492
 10500     0.000226492
-468.637 280.416  295.995 0 
-        0
-   0.3744
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1941,11 +1431,6 @@ bulk_viscosity_LHS_RR
 T = 10600
 bulk_viscosity = 0.000227852
 10600     0.000227852
-468.637 280.352  295.927 0 
-        0
-   0.3743
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1960,11 +1445,6 @@ bulk_viscosity_LHS_RR
 T = 10700
 bulk_viscosity = 0.000229205
 10700     0.000229205
-468.637 280.284  295.855 0 
-        0
-   0.3743
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1979,11 +1459,6 @@ bulk_viscosity_LHS_RR
 T = 10800
 bulk_viscosity = 0.000230551
 10800     0.000230551
-468.637 280.211  295.779 0 
-        0
-   0.3742
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -1998,11 +1473,6 @@ bulk_viscosity_LHS_RR
 T = 10900
 bulk_viscosity = 0.00023189
 10900     0.00023189
-468.637 280.135  295.698 0 
-        0
-   0.3741
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2017,11 +1487,6 @@ bulk_viscosity_LHS_RR
 T = 11000
 bulk_viscosity = 0.000233222
 11000     0.000233222
-468.637 280.054  295.613 0 
-        0
-   0.3741
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2036,11 +1501,6 @@ bulk_viscosity_LHS_RR
 T = 11100
 bulk_viscosity = 0.000234547
 11100     0.000234547
-468.637 279.969  295.523 0 
-        0
-   0.3740
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2055,11 +1515,6 @@ bulk_viscosity_LHS_RR
 T = 11200
 bulk_viscosity = 0.000235865
 11200     0.000235865
-468.637 279.88  295.428 0 
-        0
-   0.3739
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2074,11 +1529,6 @@ bulk_viscosity_LHS_RR
 T = 11300
 bulk_viscosity = 0.000237176
 11300     0.000237176
-468.637 279.785  295.329 0 
-        0
-   0.3738
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2093,11 +1543,6 @@ bulk_viscosity_LHS_RR
 T = 11400
 bulk_viscosity = 0.000238481
 11400     0.000238481
-468.637 279.686  295.224 0 
-        0
-   0.3738
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2112,11 +1557,6 @@ bulk_viscosity_LHS_RR
 T = 11500
 bulk_viscosity = 0.000239778
 11500     0.000239778
-468.637 279.582  295.115 0 
-        0
-   0.3737
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2131,11 +1571,6 @@ bulk_viscosity_LHS_RR
 T = 11600
 bulk_viscosity = 0.000241069
 11600     0.000241069
-468.637 279.473  294.999 0 
-        0
-   0.3736
-  -0.0374
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2150,11 +1585,6 @@ bulk_viscosity_LHS_RR
 T = 11700
 bulk_viscosity = 0.000242353
 11700     0.000242353
-468.637 279.359  294.879 0 
-        0
-   0.3735
-  -0.0373
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2169,11 +1599,6 @@ bulk_viscosity_LHS_RR
 T = 11800
 bulk_viscosity = 0.00024363
 11800     0.00024363
-468.637 279.24  294.753 0 
-        0
-   0.3734
-  -0.0373
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2188,11 +1613,6 @@ bulk_viscosity_LHS_RR
 T = 11900
 bulk_viscosity = 0.0002449
 11900     0.0002449
-468.637 279.115  294.621 0 
-        0
-   0.3733
-  -0.0373
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2207,11 +1627,6 @@ bulk_viscosity_LHS_RR
 T = 12000
 bulk_viscosity = 0.000246163
 12000     0.000246163
-468.637 278.985  294.484 0 
-        0
-   0.3732
-  -0.0373
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2226,11 +1641,6 @@ bulk_viscosity_LHS_RR
 T = 12100
 bulk_viscosity = 0.00024742
 12100     0.00024742
-468.637 278.849  294.341 0 
-        0
-   0.3730
-  -0.0373
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2245,11 +1655,6 @@ bulk_viscosity_LHS_RR
 T = 12200
 bulk_viscosity = 0.00024867
 12200     0.00024867
-468.637 278.708  294.192 0 
-        0
-   0.3729
-  -0.0373
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2264,11 +1669,6 @@ bulk_viscosity_LHS_RR
 T = 12300
 bulk_viscosity = 0.000249913
 12300     0.000249913
-468.637 278.561  294.037 0 
-        0
-   0.3728
-  -0.0373
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2283,11 +1683,6 @@ bulk_viscosity_LHS_RR
 T = 12400
 bulk_viscosity = 0.00025115
 12400     0.00025115
-468.637 278.408  293.875 0 
-        0
-   0.3727
-  -0.0373
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2302,11 +1697,6 @@ bulk_viscosity_LHS_RR
 T = 12500
 bulk_viscosity = 0.00025238
 12500     0.00025238
-468.637 278.249  293.708 0 
-        0
-   0.3725
-  -0.0373
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2321,11 +1711,6 @@ bulk_viscosity_LHS_RR
 T = 12600
 bulk_viscosity = 0.000253603
 12600     0.000253603
-468.637 278.085  293.534 0 
-        0
-   0.3724
-  -0.0372
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2340,11 +1725,6 @@ bulk_viscosity_LHS_RR
 T = 12700
 bulk_viscosity = 0.000254819
 12700     0.000254819
-468.637 277.914  293.354 0 
-        0
-   0.3723
-  -0.0372
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2359,11 +1739,6 @@ bulk_viscosity_LHS_RR
 T = 12800
 bulk_viscosity = 0.000256029
 12800     0.000256029
-468.637 277.737  293.167 0 
-        0
-   0.3721
-  -0.0372
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2378,11 +1753,6 @@ bulk_viscosity_LHS_RR
 T = 12900
 bulk_viscosity = 0.000257232
 12900     0.000257232
-468.637 277.554  292.973 0 
-        0
-   0.3720
-  -0.0372
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2397,11 +1767,6 @@ bulk_viscosity_LHS_RR
 T = 13000
 bulk_viscosity = 0.000258429
 13000     0.000258429
-468.637 277.364  292.774 0 
-        0
-   0.3718
-  -0.0372
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2416,11 +1781,6 @@ bulk_viscosity_LHS_RR
 T = 13100
 bulk_viscosity = 0.000259619
 13100     0.000259619
-468.637 277.169  292.567 0 
-        0
-   0.3716
-  -0.0372
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2435,11 +1795,6 @@ bulk_viscosity_LHS_RR
 T = 13200
 bulk_viscosity = 0.000260802
 13200     0.000260802
-468.637 276.967  292.354 0 
-        0
-   0.3715
-  -0.0371
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2454,11 +1809,6 @@ bulk_viscosity_LHS_RR
 T = 13300
 bulk_viscosity = 0.000261978
 13300     0.000261978
-468.637 276.758  292.133 0 
-        0
-   0.3713
-  -0.0371
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2473,11 +1823,6 @@ bulk_viscosity_LHS_RR
 T = 13400
 bulk_viscosity = 0.000263148
 13400     0.000263148
-468.637 276.543  291.906 0 
-        0
-   0.3711
-  -0.0371
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2492,11 +1837,6 @@ bulk_viscosity_LHS_RR
 T = 13500
 bulk_viscosity = 0.000264312
 13500     0.000264312
-468.637 276.321  291.672 0 
-        0
-   0.3709
-  -0.0371
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2511,11 +1851,6 @@ bulk_viscosity_LHS_RR
 T = 13600
 bulk_viscosity = 0.000265468
 13600     0.000265468
-468.637 276.093  291.432 0 
-        0
-   0.3707
-  -0.0371
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2530,11 +1865,6 @@ bulk_viscosity_LHS_RR
 T = 13700
 bulk_viscosity = 0.000266618
 13700     0.000266618
-468.637 275.858  291.184 0 
-        0
-   0.3705
-  -0.0371
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2549,11 +1879,6 @@ bulk_viscosity_LHS_RR
 T = 13800
 bulk_viscosity = 0.000267762
 13800     0.000267762
-468.637 275.617  290.929 0 
-        0
-   0.3703
-  -0.0370
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2568,11 +1893,6 @@ bulk_viscosity_LHS_RR
 T = 13900
 bulk_viscosity = 0.000268899
 13900     0.000268899
-468.637 275.369  290.667 0 
-        0
-   0.3701
-  -0.0370
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2587,11 +1907,6 @@ bulk_viscosity_LHS_RR
 T = 14000
 bulk_viscosity = 0.000270029
 14000     0.000270029
-468.637 275.114  290.398 0 
-        0
-   0.3699
-  -0.0370
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2606,11 +1921,6 @@ bulk_viscosity_LHS_RR
 T = 14100
 bulk_viscosity = 0.000271152
 14100     0.000271152
-468.637 274.852  290.122 0 
-        0
-   0.3697
-  -0.0370
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2625,11 +1935,6 @@ bulk_viscosity_LHS_RR
 T = 14200
 bulk_viscosity = 0.000272269
 14200     0.000272269
-468.637 274.584  289.839 0 
-        0
-   0.3695
-  -0.0369
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2644,11 +1949,6 @@ bulk_viscosity_LHS_RR
 T = 14300
 bulk_viscosity = 0.00027338
 14300     0.00027338
-468.637 274.309  289.548 0 
-        0
-   0.3692
-  -0.0369
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2663,11 +1963,6 @@ bulk_viscosity_LHS_RR
 T = 14400
 bulk_viscosity = 0.000274483
 14400     0.000274483
-468.637 274.027  289.251 0 
-        0
-   0.3690
-  -0.0369
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2682,11 +1977,6 @@ bulk_viscosity_LHS_RR
 T = 14500
 bulk_viscosity = 0.00027558
 14500     0.00027558
-468.637 273.738  288.946 0 
-        0
-   0.3687
-  -0.0369
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2701,11 +1991,6 @@ bulk_viscosity_LHS_RR
 T = 14600
 bulk_viscosity = 0.000276671
 14600     0.000276671
-468.637 273.443  288.634 0 
-        0
-   0.3685
-  -0.0368
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2720,11 +2005,6 @@ bulk_viscosity_LHS_RR
 T = 14700
 bulk_viscosity = 0.000277755
 14700     0.000277755
-468.637 273.141  288.315 0 
-        0
-   0.3682
-  -0.0368
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2739,11 +2019,6 @@ bulk_viscosity_LHS_RR
 T = 14800
 bulk_viscosity = 0.000278832
 14800     0.000278832
-468.637 272.832  287.989 0 
-        0
-   0.3680
-  -0.0368
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2758,11 +2033,6 @@ bulk_viscosity_LHS_RR
 T = 14900
 bulk_viscosity = 0.000279902
 14900     0.000279902
-468.637 272.516  287.656 0 
-        0
-   0.3677
-  -0.0368
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2777,11 +2047,6 @@ bulk_viscosity_LHS_RR
 T = 15000
 bulk_viscosity = 0.000280966
 15000     0.000280966
-468.637 272.194  287.316 0 
-        0
-   0.3674
-  -0.0367
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2796,11 +2061,6 @@ bulk_viscosity_LHS_RR
 T = 15100
 bulk_viscosity = 0.000282024
 15100     0.000282024
-468.637 271.865  286.968 0 
-        0
-   0.3671
-  -0.0367
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2815,11 +2075,6 @@ bulk_viscosity_LHS_RR
 T = 15200
 bulk_viscosity = 0.000283074
 15200     0.000283074
-468.637 271.529  286.614 0 
-        0
-   0.3668
-  -0.0367
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2834,11 +2089,6 @@ bulk_viscosity_LHS_RR
 T = 15300
 bulk_viscosity = 0.000284119
 15300     0.000284119
-468.637 271.186  286.252 0 
-        0
-   0.3666
-  -0.0367
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2853,11 +2103,6 @@ bulk_viscosity_LHS_RR
 T = 15400
 bulk_viscosity = 0.000285156
 15400     0.000285156
-468.637 270.837  285.883 0 
-        0
-   0.3663
-  -0.0366
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2872,11 +2117,6 @@ bulk_viscosity_LHS_RR
 T = 15500
 bulk_viscosity = 0.000286187
 15500     0.000286187
-468.637 270.481  285.508 0 
-        0
-   0.3660
-  -0.0366
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2891,11 +2131,6 @@ bulk_viscosity_LHS_RR
 T = 15600
 bulk_viscosity = 0.000287211
 15600     0.000287211
-468.637 270.119  285.125 0 
-        0
-   0.3656
-  -0.0366
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2910,11 +2145,6 @@ bulk_viscosity_LHS_RR
 T = 15700
 bulk_viscosity = 0.000288229
 15700     0.000288229
-468.637 269.75  284.736 0 
-        0
-   0.3653
-  -0.0365
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2929,11 +2159,6 @@ bulk_viscosity_LHS_RR
 T = 15800
 bulk_viscosity = 0.00028924
 15800     0.00028924
-468.637 269.374  284.339 0 
-        0
-   0.3650
-  -0.0365
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2948,11 +2173,6 @@ bulk_viscosity_LHS_RR
 T = 15900
 bulk_viscosity = 0.000290244
 15900     0.000290244
-468.637 268.992  283.936 0 
-        0
-   0.3647
-  -0.0365
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2967,11 +2187,6 @@ bulk_viscosity_LHS_RR
 T = 16000
 bulk_viscosity = 0.000291242
 16000     0.000291242
-468.637 268.603  283.526 0 
-        0
-   0.3643
-  -0.0364
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -2986,11 +2201,6 @@ bulk_viscosity_LHS_RR
 T = 16100
 bulk_viscosity = 0.000292233
 16100     0.000292233
-468.637 268.208  283.109 0 
-        0
-   0.3640
-  -0.0364
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3005,11 +2215,6 @@ bulk_viscosity_LHS_RR
 T = 16200
 bulk_viscosity = 0.000293217
 16200     0.000293217
-468.637 267.807  282.685 0 
-        0
-   0.3636
-  -0.0364
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3024,11 +2229,6 @@ bulk_viscosity_LHS_RR
 T = 16300
 bulk_viscosity = 0.000294195
 16300     0.000294195
-468.637 267.4  282.255 0 
-        0
-   0.3633
-  -0.0363
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3043,11 +2243,6 @@ bulk_viscosity_LHS_RR
 T = 16400
 bulk_viscosity = 0.000295167
 16400     0.000295167
-468.637 266.986  281.818 0 
-        0
-   0.3629
-  -0.0363
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3062,11 +2257,6 @@ bulk_viscosity_LHS_RR
 T = 16500
 bulk_viscosity = 0.000296131
 16500     0.000296131
-468.637 266.566  281.375 0 
-        0
-   0.3626
-  -0.0363
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3081,11 +2271,6 @@ bulk_viscosity_LHS_RR
 T = 16600
 bulk_viscosity = 0.000297089
 16600     0.000297089
-468.637 266.14  280.925 0 
-        0
-   0.3622
-  -0.0362
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3100,11 +2285,6 @@ bulk_viscosity_LHS_RR
 T = 16700
 bulk_viscosity = 0.000298041
 16700     0.000298041
-468.637 265.707  280.469 0 
-        0
-   0.3618
-  -0.0362
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3119,11 +2299,6 @@ bulk_viscosity_LHS_RR
 T = 16800
 bulk_viscosity = 0.000298985
 16800     0.000298985
-468.637 265.269  280.006 0 
-        0
-   0.3614
-  -0.0361
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3138,11 +2313,6 @@ bulk_viscosity_LHS_RR
 T = 16900
 bulk_viscosity = 0.000299923
 16900     0.000299923
-468.637 264.825  279.537 0 
-        0
-   0.3611
-  -0.0361
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3157,11 +2327,6 @@ bulk_viscosity_LHS_RR
 T = 17000
 bulk_viscosity = 0.000300855
 17000     0.000300855
-468.637 264.375  279.062 0 
-        0
-   0.3607
-  -0.0361
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3176,11 +2341,6 @@ bulk_viscosity_LHS_RR
 T = 17100
 bulk_viscosity = 0.00030178
 17100     0.00030178
-468.637 263.919  278.581 0 
-        0
-   0.3603
-  -0.0360
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3195,11 +2355,6 @@ bulk_viscosity_LHS_RR
 T = 17200
 bulk_viscosity = 0.000302698
 17200     0.000302698
-468.637 263.457  278.093 0 
-        0
-   0.3599
-  -0.0360
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3214,11 +2369,6 @@ bulk_viscosity_LHS_RR
 T = 17300
 bulk_viscosity = 0.00030361
 17300     0.00030361
-468.637 262.989  277.6 0 
-        0
-   0.3595
-  -0.0359
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3233,11 +2383,6 @@ bulk_viscosity_LHS_RR
 T = 17400
 bulk_viscosity = 0.000304515
 17400     0.000304515
-468.637 262.516  277.101 0 
-        0
-   0.3590
-  -0.0359
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3252,11 +2397,6 @@ bulk_viscosity_LHS_RR
 T = 17500
 bulk_viscosity = 0.000305413
 17500     0.000305413
-468.637 262.038  276.595 0 
-        0
-   0.3586
-  -0.0359
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3271,11 +2411,6 @@ bulk_viscosity_LHS_RR
 T = 17600
 bulk_viscosity = 0.000306305
 17600     0.000306305
-468.637 261.554  276.084 0 
-        0
-   0.3582
-  -0.0358
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3290,11 +2425,6 @@ bulk_viscosity_LHS_RR
 T = 17700
 bulk_viscosity = 0.00030719
 17700     0.00030719
-468.637 261.064  275.568 0 
-        0
-   0.3578
-  -0.0358
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3309,11 +2439,6 @@ bulk_viscosity_LHS_RR
 T = 17800
 bulk_viscosity = 0.000308069
 17800     0.000308069
-468.637 260.569  275.045 0 
-        0
-   0.3573
-  -0.0357
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3328,11 +2453,6 @@ bulk_viscosity_LHS_RR
 T = 17900
 bulk_viscosity = 0.000308941
 17900     0.000308941
-468.637 260.069  274.517 0 
-        0
-   0.3569
-  -0.0357
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3347,11 +2467,6 @@ bulk_viscosity_LHS_RR
 T = 18000
 bulk_viscosity = 0.000309806
 18000     0.000309806
-468.637 259.564  273.984 0 
-        0
-   0.3564
-  -0.0356
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3366,11 +2481,6 @@ bulk_viscosity_LHS_RR
 T = 18100
 bulk_viscosity = 0.000310665
 18100     0.000310665
-468.637 259.053  273.445 0 
-        0
-   0.3560
-  -0.0356
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3385,11 +2495,6 @@ bulk_viscosity_LHS_RR
 T = 18200
 bulk_viscosity = 0.000311517
 18200     0.000311517
-468.637 258.538  272.901 0 
-        0
-   0.3555
-  -0.0356
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3404,11 +2509,6 @@ bulk_viscosity_LHS_RR
 T = 18300
 bulk_viscosity = 0.000312362
 18300     0.000312362
-468.637 258.018  272.352 0 
-        0
-   0.3551
-  -0.0355
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3423,11 +2523,6 @@ bulk_viscosity_LHS_RR
 T = 18400
 bulk_viscosity = 0.000313201
 18400     0.000313201
-468.637 257.492  271.797 0 
-        0
-   0.3546
-  -0.0355
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3442,11 +2537,6 @@ bulk_viscosity_LHS_RR
 T = 18500
 bulk_viscosity = 0.000314034
 18500     0.000314034
-468.637 256.962  271.238 0 
-        0
-   0.3541
-  -0.0354
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3461,11 +2551,6 @@ bulk_viscosity_LHS_RR
 T = 18600
 bulk_viscosity = 0.000314859
 18600     0.000314859
-468.637 256.428  270.674 0 
-        0
-   0.3537
-  -0.0354
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3480,11 +2565,6 @@ bulk_viscosity_LHS_RR
 T = 18700
 bulk_viscosity = 0.000315678
 18700     0.000315678
-468.637 255.888  270.104 0 
-        0
-   0.3532
-  -0.0353
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3499,11 +2579,6 @@ bulk_viscosity_LHS_RR
 T = 18800
 bulk_viscosity = 0.000316491
 18800     0.000316491
-468.637 255.344  269.53 0 
-        0
-   0.3527
-  -0.0353
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3518,11 +2593,6 @@ bulk_viscosity_LHS_RR
 T = 18900
 bulk_viscosity = 0.000317297
 18900     0.000317297
-468.637 254.796  268.951 0 
-        0
-   0.3522
-  -0.0352
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3537,11 +2607,6 @@ bulk_viscosity_LHS_RR
 T = 19000
 bulk_viscosity = 0.000318096
 19000     0.000318096
-468.637 254.243  268.368 0 
-        0
-   0.3517
-  -0.0352
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3556,11 +2621,6 @@ bulk_viscosity_LHS_RR
 T = 19100
 bulk_viscosity = 0.000318889
 19100     0.000318889
-468.637 253.687  267.78 0 
-        0
-   0.3512
-  -0.0351
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3575,11 +2635,6 @@ bulk_viscosity_LHS_RR
 T = 19200
 bulk_viscosity = 0.000319675
 19200     0.000319675
-468.637 253.125  267.188 0 
-        0
-   0.3507
-  -0.0351
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3594,11 +2649,6 @@ bulk_viscosity_LHS_RR
 T = 19300
 bulk_viscosity = 0.000320455
 19300     0.000320455
-468.637 252.56  266.591 0 
-        0
-   0.3502
-  -0.0350
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3613,11 +2663,6 @@ bulk_viscosity_LHS_RR
 T = 19400
 bulk_viscosity = 0.000321228
 19400     0.000321228
-468.637 251.991  265.99 0 
-        0
-   0.3497
-  -0.0350
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3632,11 +2677,6 @@ bulk_viscosity_LHS_RR
 T = 19500
 bulk_viscosity = 0.000321995
 19500     0.000321995
-468.637 251.418  265.385 0 
-        0
-   0.3492
-  -0.0349
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3651,11 +2691,6 @@ bulk_viscosity_LHS_RR
 T = 19600
 bulk_viscosity = 0.000322755
 19600     0.000322755
-468.637 250.841  264.776 0 
-        0
-   0.3486
-  -0.0349
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3670,11 +2705,6 @@ bulk_viscosity_LHS_RR
 T = 19700
 bulk_viscosity = 0.000323508
 19700     0.000323508
-468.637 250.26  264.163 0 
-        0
-   0.3481
-  -0.0348
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0
@@ -3689,11 +2719,6 @@ bulk_viscosity_LHS_RR
 T = 19800
 bulk_viscosity = 0.000324255
 19800     0.000324255
-468.637 249.675  263.546 0 
-        0
-   0.3476
-  -0.0348
-
 compute_bulk_viscosity_coeffs_RR
 bulk_viscosity_RHS_RR
         0

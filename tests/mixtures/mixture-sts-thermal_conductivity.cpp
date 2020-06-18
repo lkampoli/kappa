@@ -26,6 +26,8 @@ std::string GetCurrentWorkingDir( void ) {
   return current_working_dir;
 }
 
+using namespace kappa;
+
 int main(int argc, char** argv) {
   
   std::cout << "Start computation of transport coefficients" << std::endl;
@@ -41,10 +43,12 @@ int main(int argc, char** argv) {
 
   // N2 molecule
   // kappa::Molecule mol("N2", true, true, particle_source); // rigid rotator
-  kappa::Molecule mol("N2", true, false, particle_source); // anharmonic, non-rigid rotator
+  //kappa::Molecule mol("N2", true, false, particle_source); // anharmonic, non-rigid rotator
+  kappa::Molecule mol("O2", true, false, particle_source); // anharmonic, non-rigid rotator
  
   // N atom
-  kappa::Atom at("N", particle_source);
+  //kappa::Atom at("N", particle_source);
+  kappa::Atom at("O", particle_source);
 
   std::cout << "Finished loading particles data" << std::endl;
 
@@ -61,12 +65,12 @@ int main(int argc, char** argv) {
   arma::vec atom_ndens(1);
   std::vector<arma::vec> mol_ndens;
 
-  double t=1000.;
-  double tmax=40500.; // K
+  double t=500.;
+  double tmax=1000.; // K
   double p=101325.0; // Pa
 
   int i;
-  int x_atom_perc = 20.;
+  int x_atom_perc = 10.;
   double x_atom = x_atom_perc / 100.;
   double th_c; //thermal conductivity
 
@@ -87,10 +91,11 @@ int main(int argc, char** argv) {
     mol_ndens.push_back(mixture.Boltzmann_distribution(t, p / (kappa::K_CONST_K * t), mol));
     mol_ndens[0] = mixture.Boltzmann_distribution(t, (1 - x_atom) * tot_ndens, mol);
 
-    // std::cout << std::setw(20) << t << std::endl;c
+    // std::cout << std::setw(20) << t << std::endl;
 
     // computation of transport coefficients
-    mixture.compute_transport_coefficients(t, mol_ndens, atom_ndens);
+    mixture.compute_transport_coefficients(t, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs, 0.);
+    //mixture.compute_transport_coefficients(t, mol_ndens, atom_ndens);
 
     // retrieve thermal conductivity coefficients
     th_c = mixture.get_thermal_conductivity();

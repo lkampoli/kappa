@@ -24,6 +24,8 @@ std::string GetCurrentWorkingDir( void ) {
   return current_working_dir;
 }
 
+using namespace kappa;
+
 int main(int argc, char** argv) {
    
   std::cout << "Start computation of transport coefficients" << std::endl;
@@ -75,20 +77,22 @@ int main(int argc, char** argv) {
   double d0 = Re + be + (9./2.)*beta*l_alpha*l_alpha*exp( 2*sqrt(beta*l_alpha)*(vibr_l - 1) );
    
   // set a range for temperature
-  std::vector<double> T_vals;
-  std::vector<double> X_vals;
+  //std::vector<double> T_vals;
+  //std::vector<double> X_vals;
   double tot_ndens;
+
+  std::vector<double> T_vals = { 500. };
 
   // vibrational levels
   int i;
 
-  for (i=0; i<80; i++) { //500-40000K
-    T_vals.push_back(500 + i * 500);
-  }
+  //for (i=0; i<80; i++) { //500-40000K
+  //  T_vals.push_back(500 + i * 500);
+  //}
 
-  for (i=0; i<=20; i++) { //0.-1.
-    X_vals.push_back(i/20.);
-  }
+  //for (i=0; i<=20; i++) { //0.-1.
+  //  X_vals.push_back(i/20.);
+  //}
 
   // arma vector for atom number density
   arma::vec atom_ndens(2);
@@ -120,7 +124,8 @@ int main(int argc, char** argv) {
   arma::vec th_d; // thermal diffusion
   arma::mat diff; // diffusion coeffs.
 
-  double x_N2 = 1.0, x_O2 = 0.0, x_NO = 0.0, x_N = 0.0, x_O = 0.0;
+  //double x_N2 = 1.0, x_O2 = 0.0, x_NO = 0.0, x_N = 0.0, x_O = 0.0;
+  double x_N2 = 0.90, x_O2 = 0.0, x_NO = 0.0, x_N = 0.1, x_O = 0.0;
 
    for (auto T : T_vals) {
 
@@ -134,7 +139,9 @@ int main(int argc, char** argv) {
      atom_ndens[1] = x_O * tot_ndens;
 
      // computation of transport coefficients
-     mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens);
+     //mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens);
+     mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs, 0.);
+
 
      // retrieve thermal conductivity coefficients
      th_c = mixture.get_thermal_conductivity();

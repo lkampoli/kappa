@@ -93,8 +93,8 @@ int main(int argc, char** argv) {
   std::vector<arma::vec> mol_ndens;
 
   // assume an initial boltzmann ditribution 
-  //mol_ndens.push_back(mixture.Boltzmann_distribution(T_vals[0], (1.-x_atom) * 101325.0 / (kappa::K_CONST_K * T_vals[0]), mol));
-  mol_ndens.push_back(mixture.Boltzmann_distribution(T_vals[0], 101325.0 / (kappa::K_CONST_K * T_vals[0]), mol));
+  mol_ndens.push_back(mixture.Boltzmann_distribution(T_vals[0], (1.-x_atom) * 101325.0 / (kappa::K_CONST_K * T_vals[0]), mol));
+  //mol_ndens.push_back(mixture.Boltzmann_distribution(T_vals[0], 101325.0 / (kappa::K_CONST_K * T_vals[0]), mol));
 
   // output files
   std::ofstream outf, outf2;
@@ -127,15 +127,15 @@ int main(int argc, char** argv) {
     // computation of transport coefficients
     //mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens);
     //mixture_nonrig.compute_transport_coefficients(T, mol_ndens, atom_ndens);
-    mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs);
     //mixture_nonrig.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs);
-    mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs);
+    mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs, 0.);
 
     double D0 = (3./(8.* tot_ndens * d0 * d0) ) * sqrt( (kappa::K_CONST_K * T)/(kappa::K_CONST_PI*mol.mass) );
 
     // retrieve thermal-diffusion coefficients
     thd = mixture.get_thermodiffusion();
 
+    std::cout << " The thermo-diffusion coeffs that I need " << std::endl;
     std::cout << mixture.get_thermodiffusion() << std::endl;
 
     for (i=0; i<thd.n_elem; i++) {

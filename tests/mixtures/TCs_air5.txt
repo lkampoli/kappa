@@ -1,0 +1,3 @@
+     Temperature [K] Thermal conduction.    Shear viscosity.     Bulk viscosity.
+                 500           0.0360918         2.74702e-05         1.93423e-05
+                               0.0390181

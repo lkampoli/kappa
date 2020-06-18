@@ -987,9 +987,9 @@ kappa::Approximation::Approximation() {}
   double kappa::Approximation::p_rot_collision_number_parker(double T, double xi_inf, double epsilon) {
 
     double kTe = T * K_CONST_K / epsilon; // epsilon/k=97.5 for N2, 107.4 for O2, k=1.3807e-23
-    std::cout << "kTe << " " << xi_inf << epsilon" << std::endl;
-    std::cout << kTe << " " << xi_inf << " " << epsilon << std::endl;
-    std::cout << xi_inf /  ( 1 + pow(K_CONST_PI, 1.5) * pow(kTe, -0.5) / 2 + (K_CONST_PI * K_CONST_PI / 4 + 2) / kTe + pow(K_CONST_PI, 1.5) * pow(kTe, -1.5)) << std::endl;
+    //std::cout << "kTe << " " << xi_inf << epsilon" << std::endl;
+    //std::cout << kTe << " " << xi_inf << " " << epsilon << std::endl;
+    //std::cout << xi_inf /  ( 1 + pow(K_CONST_PI, 1.5) * pow(kTe, -0.5) / 2 + (K_CONST_PI * K_CONST_PI / 4 + 2) / kTe + pow(K_CONST_PI, 1.5) * pow(kTe, -1.5)) << std::endl;
     return xi_inf /  ( 1 + pow(K_CONST_PI, 1.5) * pow(kTe, -0.5) / 2 + (K_CONST_PI * K_CONST_PI / 4 + 2) / kTe + pow(K_CONST_PI, 1.5) * pow(kTe, -1.5));
   }
 
@@ -1212,25 +1212,26 @@ kappa::Approximation::Approximation() {}
     }
   }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Initialization of the ci coefficients for m = 6 (neutral-neutral), Table 2 in Laricchiuta2007.
   double kappa::Approximation::omega_integral_ESA_nn(double T, int l, int r, double beta, double epsilon_zero, double r_e) {
 
     double x = log(K_CONST_K * T / epsilon_zero);
     if (l == 1 && r == 1) {
       double a[7] = { 	(7.884756e-1) - (2.438494e-2) * beta, 
-			-2.952759e-1 - (1.744149e-3) * beta, 
-			(5.020892e-1) + (4.316985e-2) * beta, 
-			(-9.042460e-1) - (4.017103e-2) * beta,
-			(-3.373058) + (2.458538e-1) * beta - 
-			(4.850047e-3) * beta * beta, 
-			(4.161981) + (2.202737e-1) * beta - (1.718010e-2) * beta * beta, 
-			(2.462523) + (3.231308e-1) * beta - (2.281072e-2) * beta * beta };
+			                   -2.952759e-1 - (1.744149e-3) * beta, 
+			                  (5.020892e-1) + (4.316985e-2) * beta, 
+			                  (-9.042460e-1) - (4.017103e-2) * beta,
+			                  (-3.373058)    + (2.458538e-1) * beta - (4.850047e-3) * beta * beta, 
+			                  (4.161981) + (2.202737e-1) * beta - (1.718010e-2) * beta * beta, 
+			                  (2.462523) + (3.231308e-1) * beta - (2.281072e-2) * beta * beta };
 
       // Optimization: vectorized product and store coefficients seperately?
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 1 && r == 2) {
       double a[7] = { (7.123565e-1) + (-2.688875e-2) * beta, 
                       (-2.9105e-1) + (-2.065175e-3) * beta, 
@@ -1244,6 +1245,7 @@ kappa::Approximation::Approximation() {}
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 1 && r == 3) {
       double a[7] = { (6.606022e-1) + (-2.831448e-2) * beta, 
  		      (-2.8709e-1) + (-2.232827e-3) * beta, 
@@ -1256,6 +1258,7 @@ kappa::Approximation::Approximation() {}
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 1 && r == 4) {
       double a[7] = { (6.268016e-1) + (-2.945078e-2) * beta, 
                       (-2.830834e-1) + (-2.361273e-3) * beta, 
@@ -1268,6 +1271,7 @@ kappa::Approximation::Approximation() {}
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 1 && r == 5) {
       double a[7] = { (5.956859e-1) + (-2.915893e-2) * beta, 
                       (-2.804989e-1) + (-2.298968e-3) * beta, 
@@ -1279,6 +1283,7 @@ kappa::Approximation::Approximation() {}
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 2 && r == 2) {
       double a[7] = { (7.898524e-1) - (2.114115e-2) * beta, 
                       (-2.998325e-1) - (1.243977e-3) * beta, 
@@ -1290,6 +1295,7 @@ kappa::Approximation::Approximation() {}
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 2 && r == 3) {
       double a[7] = { (7.269006e-1) - (2.233866e-2) * beta, 
                       (-2.972304e-1) - (1.392888e-3) * beta, 
@@ -1300,6 +1306,7 @@ kappa::Approximation::Approximation() {}
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 2 && r == 4) {
       double a[7] = { (6.829159e-1) - (2.233866e-2) * beta, 
                       (-2.943232e-1) - (1.514322e-3) * beta, 
@@ -1311,6 +1318,7 @@ kappa::Approximation::Approximation() {}
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 3 && r == 3) {
       double a[7] = { (7.468781e-1) - (2.518134e-2) * beta, 
                       (-2.947438e-1) - (1.811571e-3) * beta,
@@ -1322,6 +1330,7 @@ kappa::Approximation::Approximation() {}
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 4 && r == 4) {
       double a[7] = { (7.365470e-1) - (2.242357e-2) * beta, 
                       (-2.968650e-1) - (1.396696e-3) * beta, 
@@ -1333,6 +1342,7 @@ kappa::Approximation::Approximation() {}
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else {
       return -1;
     }
@@ -1340,6 +1350,7 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Initialization of the ci coefficients for m = 4 (charged-neutral), Table 1 in Laricchiuta2007.
   double kappa::Approximation::omega_integral_ESA_cn(double T, int l, int r, double beta, double epsilon_zero, double r_e) {
 
     // double m = 4; // parameter for neutral-ion interactions ESA STR 256 Table 2 [dimensionless]
@@ -1356,6 +1367,7 @@ kappa::Approximation::Approximation() {}
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 1 && r == 2) {
       double a[7] = { (8.361751e-1) - (3.201292e-2) * beta, 
 		      -(4.707355e-1) - (1.783284e-3) * beta, 
@@ -1367,8 +1379,10 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 1 && r == 3) {
       double a[7] = { (7.440562e-1) - (3.453851e-2) * beta,
                      -(4.656306e-1) - (2.097901e-3) * beta, 
@@ -1380,8 +1394,10 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 1 && r == 4) {
       double a[7] = { (6.684360e-1) - (3.515695e-2) * beta,
                      -(4.622014e-1) - (2.135808e-3) * beta, 
@@ -1393,8 +1409,10 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 1 && r == 5) {
       double a[7] = { (6.299083e-1) - (3.720000e-2) * beta,
 		     -(4.560921e-1) - (2.395779e-3) * beta,
@@ -1406,8 +1424,10 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) /
+      // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 2 && r == 2) {
       double a[7] = { (9.124518e-1) + (-2.398461e-2) * beta,
     	              (-4.697184e-1) + (-7.809681e-4) * beta,
@@ -1419,8 +1439,10 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 2 && r == 3) {
       double a[7] = { (8.073459e-1) + (-2.581232e-2) * beta,
   		      (-4.663682e-1) + (-1.030271e-3) * beta,
@@ -1432,8 +1454,10 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 2 && r == 4) {
       double a[7] = { (7.324117e-1) + (-2.727580e-2) * beta,
 		      (-4.625614e-1) + (-1.224292e-3) * beta,
@@ -1445,8 +1469,10 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 3 && r == 3) {
       double a[7] = { (8.402943e-1) + (-2.851694e-2) * beta,
 		      (-4.727437e-1) + (-1.328784e-3) * beta,
@@ -1458,8 +1484,10 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else if (l == 4 && r == 4) {
       double a[7] = { (8.088842e-1) + (-2.592379e-2) * beta,
 		      (-4.659483e-1) + (-1.041599e-3) * beta,
@@ -1471,8 +1499,10 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
+
     } else {
       return -1;
     }
@@ -2303,9 +2333,9 @@ kappa::Approximation::Approximation() {}
      }
      #endif
 
-     std::cout << "p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon)" << std::endl;
-     std::cout << p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon) << std::endl;
-     std::cout << omega_integral(T, interaction, 2, 2, model, true) << " " << n << std::endl;
+     //std::cout << "p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon)" << std::endl;
+     //std::cout << p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon) << std::endl;
+     //std::cout << omega_integral(T, interaction, 2, 2, model, true) << " " << n << std::endl;
      return p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon) * K_CONST_PI * 0.15625 / 
 	                                 (n * omega_integral(T, interaction, 2, 2, model, true));
   }
@@ -2646,9 +2676,13 @@ kappa::Approximation::Approximation() {}
               throw kappa::ModelParameterException(error_string.c_str());
             }
           } else if ((l == 1 && r == 1) || (l == 1 && r == 2) || (l == 1 && r == 3) || (l == 1 && r == 4) || (l == 1 && r == 5) || (l == 2 && r == 2) || (l == 2 && r == 3) || (l == 2 && r == 4) || (l == 3 && r == 3) || (l == 4 && r == 4)) {
-  	    if (dimensional == true) {
-  	      return omega_integral_ESA_nn(T, l, r, interaction["beta Bruno"], interaction["epsilon0 Bruno"], interaction["re Bruno"]) * omega_integral_RS(T, l, r, interaction.collision_diameter, interaction.collision_mass);
-  	    } else {
+  	    if (dimensional == true) 
+        {
+  	      return omega_integral_ESA_nn(T, l, r, interaction["beta Bruno"], interaction["epsilon0 Bruno"], interaction["re Bruno"]) * 
+                 omega_integral_RS(T, l, r, interaction.collision_diameter, interaction.collision_mass);
+  	    } 
+        else 
+        {
   	      return omega_integral_ESA_nn(T, l, r, interaction["beta Bruno"], interaction["epsilon0 Bruno"], interaction["re Bruno"]);
   	    }
   	  } else {
@@ -3648,7 +3682,7 @@ kappa::Approximation::Approximation() {}
     return integral_diss(T, degree, molecule, interaction, i, 0, model);
   }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Computation of the dissociation rate for a selected "particle" interaction and dissociation model
   double kappa::Approximation::k_diss(	double T, 

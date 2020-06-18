@@ -17,6 +17,8 @@
 
 #include "kappa.hpp"
 
+using namespace kappa;
+
 std::string GetCurrentWorkingDir( void ) {
   char buff[FILENAME_MAX];
   GetCurrentDir( buff, FILENAME_MAX );
@@ -57,7 +59,7 @@ int main(int argc, char** argv) {
   std::cout << "names: " << mixture.get_names() << std::endl;
 
   // set a range for temperature
-  std::vector<double> T_vals = {10000.0};
+  std::vector<double> T_vals = {500.0};
   // std::vector<double> T_vals = {2500.0, 5000.0, 20000.0, 50000.0};
   // std::vector<double> T_vals = {15000.0};
   // std::vector<double> T_vals = {30000.0};
@@ -74,7 +76,7 @@ int main(int argc, char** argv) {
   // }
 
   // set an arbitrary atom mass fraction (0.20)
-  int x_atom_perc = 0.;
+  int x_atom_perc = 10.;
   double x_atom = x_atom_perc / 100.;
 
   // arma vector for atom number density
@@ -106,9 +108,15 @@ int main(int argc, char** argv) {
 
   std::cout << std::setw(20) << "Temperature [K]" << std::endl;
 
-  mixture.compute_transport_coefficients(T_vals[0], mol_ndens, atom_ndens);
+  mixture.compute_transport_coefficients(T_vals[0], mol_ndens, atom_ndens, 0, models_omega::model_omega_rs, 0.0);
+  //mixture.compute_transport_coefficients(T_vals[0], mol_ndens, atom_ndens);
   mixture.get_diffusion();
     
+  std::cout << "mixture.get_diffusion()" << std::endl;
+  std::cout << std::setw(20) << mixture.get_diffusion() << std::endl;
+  outf << std::setw(20) << T_vals[0] << std::endl;
+  outf << std::setw(20) << mixture.get_diffusion() << std::endl;
+
  // simplified binary diffusion coefficients (for checking)
  // mixture.binary_diffusion(T_vals[0]);
  // mixture.binary_diffusion(T);

@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
 
     // computation of transport coefficients
     //mixture.compute_transport_coefficients(t, mol_ndens, atom_ndens);
-    mixture.compute_transport_coefficients(t, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs);
+    mixture.compute_transport_coefficients(t, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs, 0);
 
     // retrieve thermal conductivity coefficients
     th_c = mixture.get_thermal_conductivity();
@@ -102,6 +102,11 @@ int main(int argc, char** argv) {
     outf << std::setw(20) << th_c; 
     outf << std::endl;
  
+    mixture.get_diffusion();
+
+    std::cout << "mixture.get_diffusion()" << std::endl;
+    std::cout << std::setw(20) << mixture.get_diffusion() << std::endl;
+
     t += 500; 
   }
 
