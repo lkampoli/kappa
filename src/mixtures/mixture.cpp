@@ -56,7 +56,7 @@ using namespace std;
                           const std::string &particles_filename)
 
     : kappa::Approximation()
-{
+  {
 
       molecules = i_molecules;
       num_molecules = molecules.size();
@@ -76,11 +76,13 @@ using namespace std;
       add_interactions(interactions_filename);
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  kappa::Mixture::Mixture(const std::vector<kappa::Atom> &i_atoms, const std::string &interactions_filename, const std::string &particles_filename)
+  kappa::Mixture::Mixture(const std::vector<kappa::Atom> &i_atoms, const std::string &interactions_filename,
+                          const std::string &particles_filename)
 
-    : kappa::Approximation() {
+    : kappa::Approximation()
+  {
 
       atoms = i_atoms;
       num_molecules = 0;
@@ -97,9 +99,10 @@ using namespace std;
       add_interactions(interactions_filename);
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  kappa::Mixture::Mixture(const kappa::Molecule &molecule, const kappa::Atom &atom, const std::string &interactions_filename, const std::string &particles_filename)
+  kappa::Mixture::Mixture(const kappa::Molecule &molecule, const kappa::Atom &atom, const std::string &interactions_filename,
+                          const std::string &particles_filename)
 
     : kappa::Approximation() {
 
@@ -127,9 +130,10 @@ using namespace std;
       add_interactions(interactions_filename);
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  kappa::Mixture::Mixture(const kappa::Molecule &molecule, const std::string &interactions_filename, const std::string &particles_filename)
+  kappa::Mixture::Mixture(const kappa::Molecule &molecule, const std::string &interactions_filename,
+                          const std::string &particles_filename)
 
     : kappa::Approximation() {
 
@@ -151,7 +155,7 @@ using namespace std;
       add_interactions(interactions_filename);
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   kappa::Mixture::Mixture(const kappa::Atom &atom, const std::string &interactions_filename, const std::string &particles_filename)
 
@@ -172,9 +176,10 @@ using namespace std;
       add_interactions(interactions_filename);
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  kappa::Mixture::Mixture(const std::string particle_names, const std::string &interactions_filename, const std::string &particles_filename, bool anharmonic, bool rigid_rotators)
+  kappa::Mixture::Mixture(const std::string particle_names, const std::string &interactions_filename,
+                          const std::string &particles_filename, bool anharmonic, bool rigid_rotators)
 
     : kappa::Approximation() {
 
@@ -183,7 +188,7 @@ using namespace std;
 
       for (auto name : split_names) {
         std::cout << " Particles' name: " << name << std::endl;
-        if (name != "e-") { // if there is an electron, there should be charged particles and the electron data will be loaded anyway
+        if (name != "e-") { // if there is an e-, there should be charged particles and the e- data will be loaded anyway
           try {
             kappa::Molecule mol(name, anharmonic, rigid_rotators, particles_filename);
             molecules.push_back(mol);
@@ -214,7 +219,7 @@ using namespace std;
       add_interactions(interactions_filename);
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // initialization of the matrix for transport coefficients
   void kappa::Mixture::init_matrices(const std::string &particles_filename) {
@@ -312,7 +317,7 @@ using namespace std;
     this_n_electrons = 0.0;
   }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Defines interactions between molecules, atoms and ions
   void kappa::Mixture::add_interactions(const std::string &filename) {
@@ -577,7 +582,8 @@ using namespace std;
         rot_rel_times.at(i, j) = rot_relaxation_time_parker(T, n, molecules[i], interactions[inter_index(i, j)], model);
       }
       for (j = 0; j < num_atoms; j++) {
-        rot_rel_times.at(i, num_molecules + j) = rot_relaxation_time_parker(T, n, molecules[i], interactions[inter_index(i, num_molecules + j)], model);
+        rot_rel_times.at(i, num_molecules + j) = rot_relaxation_time_parker(T, n, molecules[i],
+                                                                            interactions[inter_index(i, num_molecules + j)], model);
       }
     }
   }
@@ -590,20 +596,24 @@ using namespace std;
     std::string error_string;
     if (n_vl_molecule.size() != num_molecules) {
       error_string = "Incorrect size of array of vibrational level populations of molecules, wrong number of molecules: ";
-      error_string += "passed array is of size " + std::to_string(n_vl_molecule.size()) + ", should be of size " + std::to_string(num_molecules);
+      error_string += "passed array is of size " + std::to_string(n_vl_molecule.size()) +
+                      ", should be of size " + std::to_string(num_molecules);
       throw kappa::IncorrectValueException(error_string.c_str());
     }
 
     for (int i = 0; i < num_molecules; i++) {
       if (molecules[i].num_vibr_levels[0] != n_vl_molecule[i].n_elem) {
         error_string = "Incorrect size of array of vibrational level populations of molecule " + molecules[i].name + ": ";
-        error_string += "passed array is of size " + std::to_string(n_vl_molecule[i].n_elem) + ", should be of size " + std::to_string(molecules[i].num_vibr_levels[0]);
+        error_string += "passed array is of size " + std::to_string(n_vl_molecule[i].n_elem) +
+                        ", should be of size " + std::to_string(molecules[i].num_vibr_levels[0]);
         throw kappa::IncorrectValueException(error_string.c_str());
       }
       for (int k = 0; k < molecules[i].num_vibr_levels[0]; k++) {
         if (n_vl_molecule[i][k] < 0) {
-          error_string = "Array of vibrational level populations of molecule " + molecules[i].name + " contains at least one negative value: ";
-          error_string += "n_vl_molecule[" + std::to_string(i) + "][" + std::to_string(k) + "]=" + std::to_string(n_vl_molecule[i][k]);
+          error_string = "Array of vibrational level populations of molecule " + molecules[i].name +
+                         " contains at least one negative value: ";
+          error_string += "n_vl_molecule[" + std::to_string(i) + "][" + std::to_string(k) + "]=" +
+                                             std::to_string(n_vl_molecule[i][k]);
           throw kappa::IncorrectValueException(error_string.c_str());
         }
       }
@@ -618,7 +628,8 @@ using namespace std;
     std::string error_string;
     if (n_molecule.n_elem != num_molecules) {
       error_string = "Incorrect size of array of number densities of molecules, wrong number of molecules: ";
-      error_string += "passed array is of size " + std::to_string(n_molecule.n_elem) + ", should be of size " + std::to_string(num_molecules);
+      error_string += "passed array is of size " + std::to_string(n_molecule.n_elem) + ", should be of size " +
+                                                   std::to_string(num_molecules);
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     for (int i = 0; i < num_molecules; i++) {
@@ -638,7 +649,8 @@ using namespace std;
     std::string error_string;
     if (n_atom.n_elem != num_atoms) {
       error_string = "Incorrect size of array of number densities of atoms, wrong number of atoms: ";
-      error_string += "passed array is of size " + std::to_string(n_atom.n_elem) + ", should be of size " + std::to_string(num_atoms);
+      error_string += "passed array is of size " + std::to_string(n_atom.n_elem) + ", should be of size " +
+                                                   std::to_string(num_atoms);
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     for (int i=0; i < num_atoms; i++) {
@@ -830,15 +842,19 @@ using namespace std;
     int i;
 
     for (i=0; i<num_molecules; i++) {
-      omega_11.at(i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(i, num_molecules+num_atoms)], 1, 1, debye_length, model, true);
+      omega_11.at(i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(i, num_molecules+num_atoms)], 1, 1,
+                                                               debye_length, model, true);
       omega_11.at(num_molecules+num_atoms, i) = omega_11.at(i, num_molecules+num_atoms);
     }
 
     for (i=0; i<num_atoms; i++) {
-      omega_11.at(num_molecules+i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules + i, num_molecules+num_atoms)], 1, 1, debye_length, model, true);
+      omega_11.at(num_molecules+i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules + i,
+                                                              num_molecules+num_atoms)], 1, 1, debye_length, model, true);
       omega_11.at(num_molecules+num_atoms, num_molecules+i) = omega_11.at(num_molecules+i, num_molecules+num_atoms);
     }
-    omega_11.at(num_molecules+num_atoms, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules+num_atoms, num_molecules+num_atoms)], 1, 1, debye_length, model, true);
+    omega_11.at(num_molecules+num_atoms, num_molecules+num_atoms) = omega_integral(T,
+                                                                    interactions[inter_index(num_molecules+num_atoms,
+                                                                    num_molecules+num_atoms)], 1, 1, debye_length, model, true);
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -848,15 +864,19 @@ using namespace std;
     int i;
 
     for (i=0; i<num_molecules; i++) {
-      omega_12.at(i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(i, num_molecules+num_atoms)], 1, 2, debye_length, model, true);
+      omega_12.at(i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(i, num_molecules+num_atoms)], 1, 2,
+                                                               debye_length, model, true);
       omega_12.at(num_molecules+num_atoms, i) = omega_12.at(i, num_molecules+num_atoms);
     }
 
     for (i=0; i<num_atoms; i++) {
-      omega_12.at(num_molecules+i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules + i, num_molecules+num_atoms)], 1, 2, debye_length, model, true);
+      omega_12.at(num_molecules+i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules + i,
+                                                              num_molecules+num_atoms)], 1, 2, debye_length, model, true);
       omega_12.at(num_molecules+num_atoms, num_molecules+i) = omega_12.at(num_molecules+i, num_molecules+num_atoms);
     }
-    omega_12.at(num_molecules+num_atoms, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules + num_atoms, num_molecules+num_atoms)], 1, 2, debye_length, model, true);
+    omega_12.at(num_molecules+num_atoms, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules +
+                                                                    num_atoms, num_molecules+num_atoms)], 1, 2, debye_length,
+                                                                    model, true);
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -866,15 +886,19 @@ using namespace std;
     int i;
 
     for (i=0; i<num_molecules; i++) {
-      omega_13.at(i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(i, num_molecules+num_atoms)], 1, 3, debye_length, model, true);
+      omega_13.at(i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(i, num_molecules+num_atoms)], 1, 3,
+                                                              debye_length, model, true);
       omega_13.at(num_molecules+num_atoms, i) = omega_13.at(i, num_molecules+num_atoms);
     }
 
     for (i=0; i<num_atoms; i++) {
-      omega_13.at(num_molecules+i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules + i, num_molecules+num_atoms)], 1, 3, debye_length, model, true);
+      omega_13.at(num_molecules+i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules + i,
+                                                              num_molecules+num_atoms)], 1, 3, debye_length, model, true);
       omega_13.at(num_molecules+num_atoms, num_molecules+i) = omega_13.at(num_molecules+i, num_molecules+num_atoms);
     }
-    omega_13.at(num_molecules+num_atoms, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules + num_atoms, num_molecules+num_atoms)], 1, 3, debye_length, model, true);
+    omega_13.at(num_molecules+num_atoms, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules +
+                                                                    num_atoms, num_molecules+num_atoms)], 1, 3, debye_length,
+                                                                    model, true);
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -883,15 +907,19 @@ using namespace std;
 
     int i;
     for (i=0; i<num_molecules; i++) {
-      omega_22.at(i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(i, num_molecules+num_atoms)], 2, 2, debye_length, model, true);
+      omega_22.at(i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(i, num_molecules+num_atoms)], 2, 2,
+                                                               debye_length, model, true);
       omega_22.at(num_molecules+num_atoms, i) = omega_22.at(i, num_molecules+num_atoms);
     }
 
     for (i=0; i<num_atoms; i++) {
-      omega_22.at(num_molecules+i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules + i, num_molecules+num_atoms)], 2, 2, debye_length, model, true);
+      omega_22.at(num_molecules+i, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules + i,
+                                                              num_molecules+num_atoms)], 2, 2, debye_length, model, true);
       omega_22.at(num_molecules+num_atoms, num_molecules+i) = omega_22.at(num_molecules+i, num_molecules+num_atoms);
     }
-    omega_22.at(num_molecules+num_atoms, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules + num_atoms, num_molecules+num_atoms)], 2, 2, debye_length, model, true);
+    omega_22.at(num_molecules+num_atoms, num_molecules+num_atoms) = omega_integral(T, interactions[inter_index(num_molecules +
+                                                                    num_atoms, num_molecules+num_atoms)], 2, 2, debye_length,
+                                                                    model, true);
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -962,12 +990,15 @@ using namespace std;
     }
     #endif
 
-    return sqrt(K_CONST_E0 * K_CONST_K * T / (arma::dot(n_molecule, molecule_charges_sq) + arma::dot(n_atom, atom_charges_sq) + n_electrons * K_CONST_ELEMENTARY_CHARGE * K_CONST_ELEMENTARY_CHARGE));
+    return sqrt(K_CONST_E0 * K_CONST_K * T / (arma::dot(n_molecule, molecule_charges_sq) + arma::dot(n_atom, atom_charges_sq) +
+           n_electrons * K_CONST_ELEMENTARY_CHARGE * K_CONST_ELEMENTARY_CHARGE));
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Mixture::debye_length(double T, const std::vector<arma::vec> &n_vl_molecule, const arma::vec &n_atom, double n_electrons) {
+  double kappa::Mixture::debye_length(double T, const std::vector<arma::vec> &n_vl_molecule, const arma::vec &n_atom,
+                                      double n_electrons)
+  {
     return debye_length(T, compute_n_molecule(n_vl_molecule), n_atom, n_electrons);
   }
 
@@ -989,7 +1020,8 @@ using namespace std;
     #endif
 
     arma::vec n_mol = compute_n_molecule(n_vl_molecule);
-    return sqrt(K_CONST_E0 * K_CONST_K * T / (arma::dot(n_mol, molecule_charges_sq) + n_electrons * K_CONST_ELEMENTARY_CHARGE * K_CONST_ELEMENTARY_CHARGE));
+    return sqrt(K_CONST_E0 * K_CONST_K * T / (arma::dot(n_mol, molecule_charges_sq) + n_electrons * K_CONST_ELEMENTARY_CHARGE *
+                                                                                                    K_CONST_ELEMENTARY_CHARGE));
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1108,7 +1140,9 @@ using namespace std;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // *** Warning: pay attention to the order in which species are stored when coupling with CFD solvers!
-  arma::vec kappa::Mixture::compute_density_array(const std::vector<arma::vec> &n_vl_molecule, const arma::vec &n_atom, double n_electrons) {
+  arma::vec kappa::Mixture::compute_density_array(const std::vector<arma::vec> &n_vl_molecule, const arma::vec &n_atom,
+                                                  double n_electrons)
+  {
 
     #ifdef KAPPA_STRICT_CHECKS
     check_n_vl_molecule(n_vl_molecule);
@@ -1260,7 +1294,9 @@ using namespace std;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Mixture::compute_pressure(double T, const std::vector<arma::vec> &n_vl_molecule, const arma::vec &n_atom, double n_electrons) {
+  double kappa::Mixture::compute_pressure(double T, const std::vector<arma::vec> &n_vl_molecule, const arma::vec &n_atom,
+                                          double n_electrons)
+  {
 
     #ifdef KAPPA_STRICT_CHECKS
     check_n_vl_molecule(n_vl_molecule);
@@ -1344,7 +1380,8 @@ using namespace std;
     }
     #endif
 
-    return 1.5 * K_CONST_K * (arma::sum(n_molecule) + arma::sum(n_atom) + n_electrons) / compute_density(n_molecule, n_atom, n_electrons);
+    return 1.5 * K_CONST_K * (arma::sum(n_molecule) + arma::sum(n_atom) + n_electrons) /
+           compute_density(n_molecule, n_atom, n_electrons);
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1365,7 +1402,8 @@ using namespace std;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // compute rotational constant volume specific heat
-  double kappa::Mixture::c_rot(	double T, const std::vector<arma::vec> &n_vl_molecule, const arma::vec &n_atom, double n_electrons) {
+  double kappa::Mixture::c_rot(	double T, const std::vector<arma::vec> &n_vl_molecule, const arma::vec &n_atom, double n_electrons)
+  {
 
     #ifdef KAPPA_STRICT_CHECKS
     std::string error_string;
@@ -1490,14 +1528,12 @@ using namespace std;
 
     // molecule + molecule collisions for molecules of different species or at different vibrational levels
     for (i=0; i<num_molecules; i++) {
-      // std::cout << " I = " << i << std::endl;
       for (j=i; j<num_molecules; j++) {
-      // std::cout << " J = " << j << std::endl;
 
         coll_mass = interactions[inter_index(i, j)].collision_mass;
 
         A_cd   = 0.50  *      omega_22.at(i, j) / omega_11.at(i, j);	// eq. 5.62
-        eta_cd = 0.625 * kT / omega_22.at(i, j); 			// 0.625 = 5/8
+        eta_cd = 0.625 * kT / omega_22.at(i, j); // 0.625 = 5/8
         rm     = 32    * n  * omega_22.at(i, j) / (5 * K_CONST_PI);
 
         for (k=0; k<molecules[i].num_vibr_levels[0]; k++) {
@@ -1513,32 +1549,35 @@ using namespace std;
 
             if ((j!=i) || (l>k)) {
 
-               bulk_viscosity_LHS.at(p1    , p2) = - 5 * kT * n_ij * coll_mass / (A_cd * eta_cd * (molecules[i].mass + molecules[j].mass))
-                                                   + 4 *  T * n_ij * coll_mass * (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j))
-                                                                               +  molecules[j].mass * c_rot_arr[o2] / (rm * rot_rel_times.at(j, i)))
-                                                                               / (K_CONST_PI * eta_cd * (molecules[i].mass + molecules[j].mass)); // 1100
-              //std::cout << "bulk_viscosity_LHS.at("<<p1<<","<<p2<<") = " << bulk_viscosity_LHS.at(p1, p2) / (n * n) << std::endl;
+               bulk_viscosity_LHS.at(p1, p2) = -5*kT * n_ij * coll_mass / (A_cd * eta_cd * (molecules[i].mass + molecules[j].mass))
+                                               +4*T  * n_ij * coll_mass *
+                                               (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j))
+                                              + molecules[j].mass * c_rot_arr[o2] / (rm * rot_rel_times.at(j, i)))
+                                              / (K_CONST_PI * eta_cd * (molecules[i].mass + molecules[j].mass)); // 1100
+              //std::cout << "bulk_viscosity_LHS.at("<<p1<<","<<p2<<") = " << bulk_viscosity_LHS.at(p1,p2)/(n*n) << std::endl;
 
               bulk_viscosity_LHS.at(p1 + 1, p2) = - 4 * T * n_ij * molecules[j].mass * molecules[j].mass * c_rot_arr[o2] /
-                                                  ((molecules[i].mass + molecules[j].mass) * K_CONST_PI * eta_cd * rm * rot_rel_times.at(j,i)); // 0110
-              //std::cout << "bulk_viscosity_LHS.at("<<p1+1<<","<<p2<<") = " << bulk_viscosity_LHS.at(p1+1, p2) / (n * n) << std::endl;
+                                                    ((molecules[i].mass + molecules[j].mass) * K_CONST_PI * eta_cd * rm *
+                                                     rot_rel_times.at(j,i)); // 0110
+              //std::cout << "bulk_viscosity_LHS.at("<<p1+1<<","<<p2<<") = " << bulk_viscosity_LHS.at(p1+1,p2)/(n*n) << std::endl;
 
               bulk_viscosity_LHS.at(p1    , p2 + 1) = - 4 * T * n_ij * molecules[i].mass * molecules[i].mass * c_rot_arr[o1] /
-                                                      ((molecules[i].mass + molecules[j].mass) * K_CONST_PI * eta_cd * rm * rot_rel_times.at(i,j)); // 1001
-              //std::cout << "bulk_viscosity_LHS.at("<<p1<<","<<p2+1<<") = " << bulk_viscosity_LHS.at(p1, p2+1) / (n * n) << std::endl;
+                                                      ((molecules[i].mass + molecules[j].mass) * K_CONST_PI * eta_cd * rm *
+                                                       rot_rel_times.at(i,j)); // 1001
+              //std::cout << "bulk_viscosity_LHS.at("<<p1<<","<<p2+1<<") = " << bulk_viscosity_LHS.at(p1, p2+1)/(n*n) << std::endl;
 
               bulk_viscosity_LHS.at(p1 + 1, p2 + 1) = 0; // 0011
-              //std::cout << "bulk_viscosity_LHS.at("<<p1+1<<","<<p2+1<<") = " << bulk_viscosity_LHS.at(p1+1, p2+1) / (n * n) << std::endl;
+              //std::cout << "bulk_viscosity_LHS.at("<<p1+1<<","<<p2+1<<") = " << bulk_viscosity_LHS.at(p1+1,p2+1)/(n*n) << std::endl;
 
               // symmetrization
               bulk_viscosity_LHS.at(p2    , p1    ) = bulk_viscosity_LHS.at(p1    , p2    );
               bulk_viscosity_LHS.at(p2    , p1 + 1) = bulk_viscosity_LHS.at(p1 + 1, p2    );
               bulk_viscosity_LHS.at(p2 + 1, p1    ) = bulk_viscosity_LHS.at(p1    , p2 + 1);
               bulk_viscosity_LHS.at(p2 + 1, p1 + 1) = bulk_viscosity_LHS.at(p1 + 1, p2 + 1);
-              //std::cout << "bulk_viscosity_LHS.at("<<p2<<","<<p1<<") = " << bulk_viscosity_LHS.at(p2, p1) / (n * n) << std::endl;
-              //std::cout << "bulk_viscosity_LHS.at("<<p2<<","<<p1+1<<") = " << bulk_viscosity_LHS.at(p2, p1+1) / (n * n) << std::endl;
-              //std::cout << "bulk_viscosity_LHS.at("<<p2+1<<","<<p1<<") = " << bulk_viscosity_LHS.at(p2+1, p1) / (n * n) << std::endl;
-              //std::cout << "bulk_viscosity_LHS.at("<<p2+1<<","<<p1+1<<") = " << bulk_viscosity_LHS.at(p2+1, p1+1) / (n * n) << std::endl;
+              //std::cout << "bulk_viscosity_LHS.at("<<p2<<","<<p1<<") = " << bulk_viscosity_LHS.at(p2,p1)/(n*n) << std::endl;
+              //std::cout << "bulk_viscosity_LHS.at("<<p2<<","<<p1+1<<") = " << bulk_viscosity_LHS.at(p2,p1+1)/(n*n) << std::endl;
+              //std::cout << "bulk_viscosity_LHS.at("<<p2+1<<","<<p1<<") = " << bulk_viscosity_LHS.at(p2+1,p1)/(n*n) << std::endl;
+              //std::cout << "bulk_viscosity_LHS.at("<<p2+1<<","<<p1+1<<") = " << bulk_viscosity_LHS.at(p2+1,p1+1)/(n*n) << std::endl;
 
             }
           }
@@ -1598,21 +1637,31 @@ using namespace std;
                o2 = vl_offset[j] + l;
 
                // eq. 5.78
-               bulk_viscosity_LHS.at(p1    , p1    ) += 5 * kT * n_ij * coll_mass / ((molecules[i].mass + molecules[j].mass) * A_cd * eta_cd) +  4 * T  * n_ij * molecules[j].mass * molecules[j].mass * (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j)) +  molecules[j].mass * c_rot_arr[o2] / (rm * rot_rel_times.at(j, i))) / (K_CONST_PI * eta_cd * (molecules[i].mass + molecules[j].mass) * (molecules[i].mass + molecules[j].mass)); // 1100
+               bulk_viscosity_LHS.at(p1, p1) += 5 * kT * n_ij * coll_mass / ((molecules[i].mass + molecules[j].mass) *
+                                                A_cd * eta_cd) +  4 * T  * n_ij * molecules[j].mass * molecules[j].mass *
+                                                (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j)) +
+                                                 molecules[j].mass * c_rot_arr[o2] / (rm * rot_rel_times.at(j, i))) /
+                                                (K_CONST_PI * eta_cd * (molecules[i].mass + molecules[j].mass) *
+                                                                       (molecules[i].mass + molecules[j].mass)); // 1100
 
                //std::cout << "bulk_viscosity_LHS.at("<<p1<<","<<p1<<") = " << bulk_viscosity_LHS.at(p1, p1) / (n * n) << std::endl;
 
                // eq. 5.80
-               bulk_viscosity_LHS.at(p1 + 1, p1    ) -= 4 * T * n_ij * molecules[j].mass * molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j) * K_CONST_PI * eta_cd * (molecules[i].mass + molecules[j].mass)); // 0110
+               bulk_viscosity_LHS.at(p1 + 1, p1) -= 4 * T * n_ij * molecules[j].mass * molecules[i].mass * c_rot_arr[o1] /
+                                                    (rm * rot_rel_times.at(i, j) * K_CONST_PI * eta_cd *
+                                                    (molecules[i].mass + molecules[j].mass)); // 0110
 
                //std::cout << "bulk_viscosity_LHS.at("<<p1+1<<","<<p1<<") = " << bulk_viscosity_LHS.at(p1+1, p1) / (n * n) << std::endl;
 
-               bulk_viscosity_LHS.at(p1    , p1 + 1) -= 4 * T * n_ij * molecules[j].mass * molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j) * K_CONST_PI * eta_cd * (molecules[i].mass + molecules[j].mass)); // 1001
+               bulk_viscosity_LHS.at(p1, p1 + 1) -= 4 * T * n_ij * molecules[j].mass * molecules[i].mass * c_rot_arr[o1] /
+                                                    (rm * rot_rel_times.at(i, j) * K_CONST_PI * eta_cd *
+                                                    (molecules[i].mass + molecules[j].mass)); // 1001
 
                //std::cout << "bulk_viscosity_LHS.at("<<p1<<","<<p1+1<<") = " << bulk_viscosity_LHS.at(p1, p1+1) / (n * n) << std::endl;
 
                // eq. 5.82
-               bulk_viscosity_LHS.at(p1 + 1, p1 + 1) += 4 * T * n_ij * molecules[i].mass * c_rot_arr[o1] / (K_CONST_PI * eta_cd * rm * rot_rel_times.at(i, j)); // 0011
+               bulk_viscosity_LHS.at(p1 + 1, p1 + 1) += 4 * T * n_ij * molecules[i].mass * c_rot_arr[o1] /
+                                                        (K_CONST_PI * eta_cd * rm * rot_rel_times.at(i, j)); // 0011
 
                //std::cout << "bulk_viscosity_LHS.at("<<p1+1<<","<<p1+1<<") = " << bulk_viscosity_LHS.at(p1+1, p1+1) / (n * n) << std::endl;
              }
@@ -1635,17 +1684,22 @@ using namespace std;
 
            n_ij = this_n_vl_mol[i][k] * this_n_atom[j];
 
-           bulk_viscosity_LHS.at(p1    , p1    ) += 5 * kT * n_ij * coll_mass / ((molecules[i].mass + atoms[j].mass) * A_cd * eta_cd)
-                                                              +  4 * T * n_ij * atoms[j].mass * atoms[j].mass
-                                                              * molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, num_molecules + j))
-                                                              / (K_CONST_PI * eta_cd * (molecules[i].mass+atoms[j].mass) * (molecules[i].mass+atoms[j].mass)); // 1100
+           bulk_viscosity_LHS.at(p1, p1) += 5 * kT * n_ij * coll_mass / ((molecules[i].mass + atoms[j].mass) * A_cd * eta_cd)
+                                            +  4 * T * n_ij * atoms[j].mass * atoms[j].mass
+                                            * molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, num_molecules + j))
+                                            / (K_CONST_PI * eta_cd * (molecules[i].mass+atoms[j].mass) *
+                                                                     (molecules[i].mass+atoms[j].mass)); // 1100
 
+           bulk_viscosity_LHS.at(p1 + 1, p1) -= 4 * T * n_ij * atoms[j].mass * molecules[i].mass * c_rot_arr[o1] /
+                                                (rm * rot_rel_times.at(i, num_molecules + j) * K_CONST_PI * eta_cd *
+                                                (molecules[i].mass + atoms[j].mass)); // 0110
 
-           bulk_viscosity_LHS.at(p1 + 1, p1    ) -= 4 * T * n_ij * atoms[j].mass * molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, num_molecules + j) * K_CONST_PI * eta_cd * (molecules[i].mass + atoms[j].mass)); // 0110
+           bulk_viscosity_LHS.at(p1, p1 + 1) -= 4 * T * n_ij * atoms[j].mass * molecules[i].mass * c_rot_arr[o1] /
+                                                (rm * rot_rel_times.at(i, num_molecules + j) * K_CONST_PI * eta_cd *
+                                                (molecules[i].mass + atoms[j].mass)); // 1001
 
-           bulk_viscosity_LHS.at(p1    , p1 + 1) -= 4 * T * n_ij * atoms[j].mass * molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, num_molecules + j) * K_CONST_PI * eta_cd * (molecules[i].mass + atoms[j].mass)); // 1001
-
-           bulk_viscosity_LHS.at(p1 + 1, p1 + 1) += 4 * T * n_ij * molecules[i].mass * c_rot_arr[o1] / (K_CONST_PI * eta_cd * rm * rot_rel_times.at(i, num_molecules + j)); // 0011
+           bulk_viscosity_LHS.at(p1 + 1, p1 + 1) += 4 * T * n_ij * molecules[i].mass * c_rot_arr[o1] /
+                                                    (K_CONST_PI * eta_cd * rm * rot_rel_times.at(i, num_molecules + j)); // 0011
         }
       }
     }
@@ -1667,7 +1721,7 @@ using namespace std;
           p1 = 2 * (vl_offset[i] + k);
           o1 =  vl_offset[i] + k;
 
-          bulk_viscosity_LHS.at(p1    , n_vibr_levels_total * 2 + j) = - 5 * kT * n_ij * coll_mass / (A_cd * eta_cd * (molecules[i].mass + atoms[j].mass))
+          bulk_viscosity_LHS.at(p1, n_vibr_levels_total * 2 + j) = - 5 * kT * n_ij * coll_mass / (A_cd * eta_cd * (molecules[i].mass + atoms[j].mass))
                                                                        + 4 *  T * n_ij * coll_mass * (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, num_molecules + j)))
                                                                         / (K_CONST_PI * eta_cd * (molecules[i].mass + atoms[j].mass)); // 1100
           //std::cout << "bulk_viscosity_LHS.at("<<p1<<","<<n_vibr_levels_total * 2 + j<<") = " << bulk_viscosity_LHS.at(p1, n_vibr_levels_total * 2 + j) / (n * n) << std::endl;
@@ -1871,6 +1925,8 @@ using namespace std;
     double A_cd, eta_cd, coll_mass, n_ij, rm, kT=K_CONST_K * T, tmp; // xi_rot = rm * tau_rot
     int i, j;
 
+    //std::cout << rot_rel_times.at(0,0) << " " << rot_rel_times.at(0,1) << " " << rot_rel_times.at(1,0) << " " << rot_rel_times.at(1,1) << std::endl;
+
     // molecule + molecule collisions for different molecular species
     for (i=0; i<num_molecules - 1; i++) {
       for (j=i+1; j<num_molecules; j++) {
@@ -1919,11 +1975,11 @@ using namespace std;
 
       tmp = 4 * T * n_ij * molecules[i].mass * c_rot_rigid_rot_arr[i] / (K_CONST_PI * eta_cd * rm * rot_rel_times.at(i,i));
 
-      bulk_viscosity_rigid_rot_LHS.at(2 * i, 2 * i) = tmp; 		// 1100
-      bulk_viscosity_rigid_rot_LHS.at(2 * i + 1, 2 * i) = -tmp; 	// 1001
+      bulk_viscosity_rigid_rot_LHS.at(2 * i, 2 * i) = tmp;         // 1100
+      bulk_viscosity_rigid_rot_LHS.at(2 * i + 1, 2 * i) = -tmp;    // 1001
 
-      bulk_viscosity_rigid_rot_LHS.at(2 * i, 2 * i + 1) = -tmp; 	// 0110
-      bulk_viscosity_rigid_rot_LHS.at(2 * i + 1, 2 * i + 1) = tmp; 	// 0011
+      bulk_viscosity_rigid_rot_LHS.at(2 * i, 2 * i + 1) = -tmp;    // 0110
+      bulk_viscosity_rigid_rot_LHS.at(2 * i + 1, 2 * i + 1) = tmp; // 0011
 
       for (j=0; j<num_molecules; j++) {
         if (j != i) {
@@ -1942,6 +1998,9 @@ using namespace std;
                                                          c_rot_rigid_rot_arr[j] / (rm * rot_rel_times.at(j, i)))
                                                          / (K_CONST_PI * eta_cd * (molecules[i].mass + molecules[j].mass) *
                                                          (molecules[i].mass + molecules[j].mass)); // 1100
+
+           // std::cout << "LOLLOTEST" << std::endl;
+           std::cout << bulk_viscosity_rigid_rot_LHS.at(2*i,2*i) << std::endl;
 
            bulk_viscosity_rigid_rot_LHS.at(2*i+1,2*i) -= 4*T * n_ij * molecules[j].mass * molecules[i].mass *
                                                          c_rot_rigid_rot_arr[i] / (rm * rot_rel_times.at(i, j) *
@@ -1965,16 +2024,33 @@ using namespace std;
         eta_cd = 0.625 * kT / omega_22.at(i, num_molecules + j);
         rm = 32 * n * omega_22.at(i, num_molecules + j) / (5 * K_CONST_PI);
 
-        bulk_viscosity_rigid_rot_LHS.at(2 * i, 2 * i) += 5 * kT * n_ij * coll_mass / ((molecules[i].mass + atoms[j].mass) * A_cd * eta_cd) +  4 * T * n_ij * atoms[j].mass * atoms[j].mass
-                                                               * molecules[i].mass * c_rot_rigid_rot_arr[i] / (rm * rot_rel_times.at(i, num_molecules + j))
-                                                               / (K_CONST_PI * eta_cd * (molecules[i].mass + atoms[j].mass) * (molecules[i].mass + atoms[j].mass)); // 1100
+        bulk_viscosity_rigid_rot_LHS.at(2*i, 2*i) += 5 * kT * n_ij * coll_mass /
+                                                     ((molecules[i].mass + atoms[j].mass) * A_cd * eta_cd) +
+                                                     4 * T * n_ij * atoms[j].mass * atoms[j].mass
+                                                     * molecules[i].mass * c_rot_rigid_rot_arr[i] /
+                                                     (rm * rot_rel_times.at(i, num_molecules + j))
+                                                     / (K_CONST_PI * eta_cd *
+                                                     (molecules[i].mass + atoms[j].mass) * (molecules[i].mass + atoms[j].mass)); // 1100
 
-        bulk_viscosity_rigid_rot_LHS.at(2 * i + 1, 2 * i) -= 4 * T * n_ij * atoms[j].mass * molecules[i].mass * c_rot_rigid_rot_arr[i]
-                                                                   / (rm * rot_rel_times.at(i, num_molecules + j) * K_CONST_PI * eta_cd * (molecules[i].mass + atoms[j].mass)); // 1001
+        std::cout << "LOLLOTEST1" << std::endl;
+        std::cout << bulk_viscosity_rigid_rot_LHS.at(2*i,2*i)/(n*n) << std::endl;
 
-        bulk_viscosity_rigid_rot_LHS.at(2 * i, 2 * i + 1) -= 4 * T * n_ij * atoms[j].mass * molecules[i].mass * c_rot_rigid_rot_arr[i]
-                                                                   / (rm * rot_rel_times.at(i, num_molecules + j) * K_CONST_PI * eta_cd * (molecules[i].mass + atoms[j].mass)); // 0110
-        bulk_viscosity_rigid_rot_LHS.at(2 * i + 1, 2 * i + 1) += 4 * T * n_ij * molecules[i].mass * c_rot_rigid_rot_arr[i] / (K_CONST_PI * eta_cd * rm * rot_rel_times.at(i, num_molecules + j)); // 0011
+        bulk_viscosity_rigid_rot_LHS.at(2*i+1, 2*i) -= 4 * T * n_ij * atoms[j].mass * molecules[i].mass * c_rot_rigid_rot_arr[i]
+                                                       / (rm * rot_rel_times.at(i, num_molecules + j) * K_CONST_PI * eta_cd *
+                                                       (molecules[i].mass + atoms[j].mass)); // 1001
+
+        std::cout << "LOLLOTEST2" << std::endl;
+        std::cout << bulk_viscosity_rigid_rot_LHS.at(2 * i + 1, 2 * i)/(n*n) << std::endl;
+        bulk_viscosity_rigid_rot_LHS.at(2*i, 2*i+1) -= 4 * T * n_ij * atoms[j].mass * molecules[i].mass * c_rot_rigid_rot_arr[i]
+                                                       / (rm * rot_rel_times.at(i, num_molecules + j) * K_CONST_PI * eta_cd *
+                                                         (molecules[i].mass + atoms[j].mass)); // 0110
+        std::cout << "LOLLOTEST3" << std::endl;
+        std::cout << bulk_viscosity_rigid_rot_LHS.at(2 * i, 2 * i + 1)/(n*n) << std::endl;
+
+        bulk_viscosity_rigid_rot_LHS.at(2*i+1, 2*i+1) += 4 * T * n_ij * molecules[i].mass * c_rot_rigid_rot_arr[i] /
+                                                         (K_CONST_PI * eta_cd * rm * rot_rel_times.at(i, num_molecules + j)); // 0011
+        std::cout << "LOLLOTEST4" << std::endl;
+        std::cout << bulk_viscosity_rigid_rot_LHS.at(2 * i + 1, 2 * i + 1)/(n*n) << std::endl;
       }
     }
 
@@ -1988,15 +2064,25 @@ using namespace std;
         eta_cd = 0.625 * kT / omega_22.at(i, num_molecules + j);
         rm = 32 * n * omega_22.at(i, num_molecules + j) / (5 * K_CONST_PI);
 
-        bulk_viscosity_rigid_rot_LHS.at(2 * i, num_molecules * 2 + j) = -5 * kT * n_ij * coll_mass / (A_cd * eta_cd * (molecules[i].mass + atoms[j].mass))
-                                                                          + 4 * T * n_ij * coll_mass * (molecules[i].mass * c_rot_rigid_rot_arr[i] / (rm * rot_rel_times.at(i, num_molecules + j)))
-                                                                              / (K_CONST_PI * eta_cd * (molecules[i].mass + atoms[j].mass));  // 1100
-        bulk_viscosity_rigid_rot_LHS.at(2 * i + 1, num_molecules * 2 + j) = -4 * T * n_ij * molecules[i].mass * molecules[i].mass * c_rot_rigid_rot_arr[i]
-                                                                                 / ((molecules[i].mass + atoms[j].mass) * K_CONST_PI * eta_cd * rm * rot_rel_times.at(i, num_molecules + j)); // 0110
+        bulk_viscosity_rigid_rot_LHS.at(2*i, num_molecules*2+j) = -5 * kT * n_ij * coll_mass /
+                                                                  (A_cd * eta_cd * (molecules[i].mass + atoms[j].mass))
+                                                                  + 4 * T * n_ij * coll_mass * (molecules[i].mass *
+                                                                  c_rot_rigid_rot_arr[i] /
+                                                                  (rm * rot_rel_times.at(i, num_molecules + j)))
+                                                                  / (K_CONST_PI * eta_cd *
+                                                                  (molecules[i].mass + atoms[j].mass));  // 1100
+        std::cout << "LOLLOTEST1ato" << std::endl;
+        std::cout << bulk_viscosity_rigid_rot_LHS.at(2 * i, num_molecules * 2 + j)/(n*n) << std::endl;
+        bulk_viscosity_rigid_rot_LHS.at(2*i+1, num_molecules*2+j) = -4 * T * n_ij * molecules[i].mass * molecules[i].mass *
+                                                                     c_rot_rigid_rot_arr[i] / ((molecules[i].mass + atoms[j].mass)
+                                                                     * K_CONST_PI * eta_cd * rm *
+                                                                     rot_rel_times.at(i, num_molecules + j)); // 0110
+        std::cout << "LOLLOTEST2ato" << std::endl;
+        std::cout << bulk_viscosity_rigid_rot_LHS.at(2 * i + 1, num_molecules * 2 + j)/(n*n) << std::endl;
 
         // symmetrization
-        bulk_viscosity_rigid_rot_LHS.at(num_molecules * 2 + j, 2 * i) = bulk_viscosity_rigid_rot_LHS.at(2 * i, num_molecules * 2 + j);
-        bulk_viscosity_rigid_rot_LHS.at(num_molecules * 2 + j, 2 * i + 1) = bulk_viscosity_rigid_rot_LHS.at(2 * i + 1, num_molecules * 2 + j);
+        bulk_viscosity_rigid_rot_LHS.at(num_molecules*2+j, 2*i)   = bulk_viscosity_rigid_rot_LHS.at(2*i,   num_molecules*2+j);
+        bulk_viscosity_rigid_rot_LHS.at(num_molecules*2+j, 2*i+1) = bulk_viscosity_rigid_rot_LHS.at(2*i+1, num_molecules*2+j);
       }
     }
 
@@ -2008,10 +2094,12 @@ using namespace std;
         A_cd = 0.5 * omega_22.at(num_molecules + i, num_molecules + j) / omega_11.at(num_molecules + i, num_molecules + j);
         eta_cd = 0.625 * kT / omega_22.at(num_molecules + i, num_molecules + j); // 0.625 = 5/8
 
-        bulk_viscosity_rigid_rot_LHS.at(num_molecules * 2 + i, num_molecules * 2 + j) = -5 * kT * n_ij * coll_mass / (A_cd * eta_cd * (atoms[i].mass + atoms[j].mass)) ; // 1100
+        bulk_viscosity_rigid_rot_LHS.at(num_molecules*2+i, num_molecules*2+j) = -5 * kT * n_ij * coll_mass /
+                                                                                (A_cd * eta_cd * (atoms[i].mass + atoms[j].mass)); // 1100
 
         // symmetrization
-        bulk_viscosity_rigid_rot_LHS.at(num_molecules * 2 + j, num_molecules * 2 + i) = bulk_viscosity_rigid_rot_LHS.at(num_molecules * 2 + i, num_molecules * 2 + j);
+        bulk_viscosity_rigid_rot_LHS.at(num_molecules*2+j, num_molecules*2+i) = bulk_viscosity_rigid_rot_LHS.at(num_molecules*2+i,
+                                                                                num_molecules * 2 + j);
       }
     }
 
@@ -2027,9 +2115,14 @@ using namespace std;
         rm = 32 * n * omega_22.at(num_molecules + i, j) / (5 * K_CONST_PI);
         eta_cd = 0.625 * kT / omega_22.at(num_molecules + i, j); // 0.625 = 5/8
 
-        bulk_viscosity_rigid_rot_LHS.at(num_molecules * 2 + i, num_molecules * 2 + i) += 5 * kT * n_ij * coll_mass / ((atoms[i].mass + molecules[j].mass) * A_cd * eta_cd) +  4 * T * n_ij * molecules[j].mass * molecules[j].mass
-                                                                                           * molecules[j].mass * c_rot_rigid_rot_arr[j] / (rm * rot_rel_times.at(j, num_molecules + i))
-                                                                                           / (K_CONST_PI * eta_cd * (atoms[i].mass + molecules[j].mass) * (atoms[i].mass + molecules[j].mass)); // 1100;
+        bulk_viscosity_rigid_rot_LHS.at(num_molecules*2+i, num_molecules*2+i) += 5 * kT * n_ij * coll_mass /
+                                                                                 ((atoms[i].mass + molecules[j].mass)*A_cd*eta_cd)
+                                                                                 +4*T*n_ij * molecules[j].mass * molecules[j].mass
+                                                                                 * molecules[j].mass * c_rot_rigid_rot_arr[j] /
+                                                                                 (rm * rot_rel_times.at(j, num_molecules + i))
+                                                                                 / (K_CONST_PI * eta_cd *
+                                                                                 (atoms[i].mass + molecules[j].mass) *
+                                                                                 (atoms[i].mass + molecules[j].mass)); //1100
       }
 
       for (j=0; j<num_atoms; j++) {
@@ -2040,7 +2133,8 @@ using namespace std;
           A_cd = 0.5 * omega_22.at(num_molecules + i, num_molecules + j) / omega_11.at(num_molecules + i, num_molecules + j);
           eta_cd = 0.625 * kT / omega_22.at(num_molecules + i, num_molecules + j); // 0.625 = 5/8
 
-          bulk_viscosity_rigid_rot_LHS.at(num_molecules * 2 + i, num_molecules * 2 + i) += 5 * kT * n_ij * coll_mass / ((atoms[i].mass + atoms[j].mass) * A_cd * eta_cd); // 1100;
+          bulk_viscosity_rigid_rot_LHS.at(num_molecules*2+i, num_molecules*2+i) += 5 * kT * n_ij * coll_mass /
+                                                                                   ((atoms[i].mass + atoms[j].mass)*A_cd*eta_cd); //1100;
         }
       }
     }
@@ -2079,7 +2173,7 @@ using namespace std;
     bulk_viscosity_rigid_rot_RHS[0] = 0; // normalization condition
     bulk_viscosity_rigid_rot_RHS /= (this_ctr + this_crot);
 
-    //std::cout << this_ctr << " " << this_crot << " " <<  " " << c_rot_rigid_rot_arr[0] << std::endl;
+    std::cout << this_ctr << " " << this_crot << " " <<  " " << c_rot_rigid_rot_arr[0] << std::endl;
     //std::cout << bulk_viscosity_rigid_rot_RHS << std::endl;
     return bulk_viscosity_rigid_rot_RHS;
   }

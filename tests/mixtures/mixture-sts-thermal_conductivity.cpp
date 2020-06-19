@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <iomanip> 
+#include <iomanip>
 
 #ifdef WINDOWS
 #include <direct.h>
@@ -15,7 +15,7 @@
 #define GetCurrentDir getcwd
 #endif
 
-#include <omp.h> 
+#include <omp.h>
 
 #include "kappa.hpp"
 
@@ -29,9 +29,9 @@ std::string GetCurrentWorkingDir( void ) {
 using namespace kappa;
 
 int main(int argc, char** argv) {
-  
+
   std::cout << "Start computation of transport coefficients" << std::endl;
-  
+
   std::string m_source = std::getenv("KAPPA_DATA_DIRECTORY");
   std::cout << "KAPPA_DATA_DIRECTORY is: " << m_source << '\n';
   std::string particle_source    = m_source + "particles.yaml";
@@ -42,13 +42,13 @@ int main(int argc, char** argv) {
   std::cout << "Loading particles data" << std::endl;
 
   // N2 molecule
-  // kappa::Molecule mol("N2", true, true, particle_source); // rigid rotator
+   kappa::Molecule mol("N2", true, true, particle_source); // rigid rotator
   //kappa::Molecule mol("N2", true, false, particle_source); // anharmonic, non-rigid rotator
-  kappa::Molecule mol("O2", true, false, particle_source); // anharmonic, non-rigid rotator
- 
+  // kappa::Molecule mol("O2", true, false, particle_source); // anharmonic, non-rigid rotator
+
   // N atom
-  //kappa::Atom at("N", particle_source);
-  kappa::Atom at("O", particle_source);
+  kappa::Atom at("N", particle_source);
+  //kappa::Atom at("O", particle_source);
 
   std::cout << "Finished loading particles data" << std::endl;
 
@@ -75,14 +75,14 @@ int main(int argc, char** argv) {
   double th_c; //thermal conductivity
 
   std::ofstream outf;
-  
+
   outf.open(output_dir + "/TRANSPORT_COEFFICIENTS/thermal_conductivity/" + mol.name + "_" + at.name + "_xat" + std::to_string(x_atom_perc) + ".txt");
 
-  // outf << std::setw(20) << "X"; 
-  // outf << std::setw(20) << "Temperature [K]"; 
-  // outf << std::setw(20) << "Thermal conductivity"; 
+  // outf << std::setw(20) << "X";
+  // outf << std::setw(20) << "Temperature [K]";
+  // outf << std::setw(20) << "Thermal conductivity";
   // outf << std::endl;
-     
+
   while (t<tmax) {
 
     double tot_ndens =  p / (kappa::K_CONST_K * t);
@@ -101,11 +101,11 @@ int main(int argc, char** argv) {
     th_c = mixture.get_thermal_conductivity();
 
     // std::cout << std::setw(20) << th_c << std::endl;
-    outf << std::setw(20) << t; 
-    outf << std::setw(20) << th_c; 
+    outf << std::setw(20) << t;
+    outf << std::setw(20) << th_c;
     outf << std::endl;
- 
-    t += 500; 
+
+    t += 500;
   }
 
   outf.close();

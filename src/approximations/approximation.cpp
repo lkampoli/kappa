@@ -1,5 +1,5 @@
 /*!
-    \file approximation.cpp 
+    \file approximation.cpp
  */
 
 #include "approximation.hpp"
@@ -14,7 +14,7 @@ kappa::Approximation::Approximation() {}
     int i=0;
     while (electron_energy[i+1] <= ionization_potential - Delta_E) {
       i++;
-    } 
+    }
     return i;
   }
 
@@ -46,13 +46,13 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::Z_diss(	double T, 
-					double U, 
-					const arma::vec &electron_energy, 
-					const arma::Col<unsigned long> &statistical_weight, 
+  double kappa::Approximation::Z_diss(	double T,
+					double U,
+					const arma::vec &electron_energy,
+					const arma::Col<unsigned long> &statistical_weight,
 					int n_electron_levels,
-                                    	const std::vector<arma::vec> &vibr_energy, 
-					int i, 
+                                    	const std::vector<arma::vec> &vibr_energy,
+					int i,
 					int e) {
     double res = 0.;
     for (int j=0; j<n_electron_levels; j++) {
@@ -63,13 +63,13 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::Z_diss(	double T, 
-					const arma::vec &electron_energy, 
-					const arma::Col<unsigned long> &statistical_weight, 
+  double kappa::Approximation::Z_diss(	double T,
+					const arma::vec &electron_energy,
+					const arma::Col<unsigned long> &statistical_weight,
 					int n_electron_levels,
-                                    	const std::vector<arma::vec> &vibr_energy, 
-					const std::vector<int> &num_vibr_levels, 
-					int i, 
+                                    	const std::vector<arma::vec> &vibr_energy,
+					const std::vector<int> &num_vibr_levels,
+					int i,
 					int e) {
     double res = 0.;
     for (int j=0; j<n_electron_levels; j++) {
@@ -92,16 +92,16 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::C_aliat(	double T, 
-					const arma::vec &electron_energy, 
-					const arma::Col<unsigned long> &statistical_weight, 
-                                        int n_electron_levels, 
-					const std::vector<arma::vec> &vibr_energy, 
+  double kappa::Approximation::C_aliat(	double T,
+					const arma::vec &electron_energy,
+					const arma::Col<unsigned long> &statistical_weight,
+                                        int n_electron_levels,
+					const std::vector<arma::vec> &vibr_energy,
 					const std::vector<int> &num_vibr_levels,
-                                       	double vibr_energy_product, 
-					double activation_energy, 
-					int i, 
-					int e, 
+                                       	double vibr_energy_product,
+					double activation_energy,
+					int i,
+					int e,
 					double U) { // U != infty
     double tmp=0, res=0;
     double kT = K_CONST_K * T, kU = K_CONST_K * U;
@@ -132,15 +132,15 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::C_aliat(	double T, 
-					const arma::vec &electron_energy, 
-					const arma::Col<unsigned long> &statistical_weight, 
+  double kappa::Approximation::C_aliat(	double T,
+					const arma::vec &electron_energy,
+					const arma::Col<unsigned long> &statistical_weight,
 					int n_electron_levels,
-                                     	const std::vector<arma::vec> &vibr_energy, 	
+                                     	const std::vector<arma::vec> &vibr_energy,
 					const std::vector<int> &num_vibr_levels,
-                                     	double vibr_energy_product, 
-					double activation_energy, 
-					int i, 
+                                     	double vibr_energy_product,
+					double activation_energy,
+					int i,
 					int e) { // U = infty
     double tmp=0, res=0;
     double kT = K_CONST_K * T;
@@ -175,14 +175,14 @@ kappa::Approximation::Approximation() {}
   int kappa::Approximation::max_i(double T, const kappa::Molecule &molecule) {
 
     if (molecule.anharmonic_spectrum == false) {
-      return molecule.num_vibr_levels[0]; 
+      return molecule.num_vibr_levels[0];
     } else {
       int i_star = p_max_i(T, molecule.vibr_energy[0][1] - molecule.vibr_energy[0][0], K_CONST_C * molecule.vibr_frequency[0], molecule.vibr_we_xe[0] / molecule.vibr_frequency[0]);
       if (i_star < 1) {
         std::string error_string = "No Treanor distribution possible for such values of T, T1";
-        throw kappa::ModelParameterException(error_string.c_str());      
+        throw kappa::ModelParameterException(error_string.c_str());
       } else if (i_star >= molecule.num_vibr_levels[0] - 1) {
-        return molecule.num_vibr_levels[0] - 1;  
+        return molecule.num_vibr_levels[0] - 1;
       } else {
         return p_max_i(T, molecule.vibr_energy[0][1] - molecule.vibr_energy[0][0], K_CONST_C * molecule.vibr_frequency[0], molecule.vibr_we_xe[0] / molecule.vibr_frequency[0]);
       }
@@ -190,20 +190,20 @@ kappa::Approximation::Approximation() {}
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
- 
+
   // averaged rotational energy
   double kappa::Approximation::p_avg_rot_energy(double T, const arma::vec &rot_energy, int num_rot_levels, int rot_symmetry) {
 
-    return arma::dot((2 * arma::linspace<arma::vec>(0, num_rot_levels - 1, num_rot_levels) + 1) % rot_energy, arma::exp(-rot_energy / (K_CONST_K * T))) 
+    return arma::dot((2 * arma::linspace<arma::vec>(0, num_rot_levels - 1, num_rot_levels) + 1) % rot_energy, arma::exp(-rot_energy / (K_CONST_K * T)))
           / (rot_symmetry * p_Z_rot(T, rot_energy, num_rot_levels, rot_symmetry));
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // squared averaged rotational energy 
+  // squared averaged rotational energy
   double kappa::Approximation::p_avg_rot_energy_sq(double T, const arma::vec &rot_energy, int num_rot_levels, int rot_symmetry) {
 
-    return arma::dot((2 * arma::linspace<arma::vec>(0, num_rot_levels - 1, num_rot_levels) + 1) % rot_energy % rot_energy, arma::exp(-rot_energy / (K_CONST_K * T))) 
+    return arma::dot((2 * arma::linspace<arma::vec>(0, num_rot_levels - 1, num_rot_levels) + 1) % rot_energy % rot_energy, arma::exp(-rot_energy / (K_CONST_K * T)))
            / (rot_symmetry * p_Z_rot(T, rot_energy, num_rot_levels, rot_symmetry));
   }
 
@@ -222,10 +222,10 @@ kappa::Approximation::Approximation() {}
     // eq. 15, On the applicability of simplified state-to-state models of transport coefficients
     return (p_avg_rot_energy_sq(T, rot_energy, num_rot_levels, rot_symmetry) - are * are) / (K_CONST_K * T * T * mass);
 
-    // eq. 1.24 -- Hyp. rigid rotator model and kT >> h*h/(8π*π*Ic) 
+    // eq. 1.24 -- Hyp. rigid rotator model and kT >> h*h/(8π*π*Ic)
     //return K_CONST_K * mass;
 
-  }  
+  }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -257,15 +257,15 @@ kappa::Approximation::Approximation() {}
   // Vibrational energy transfer rates using a Forced Harmonic Oscillator (FHO) model.
   // Journal of Thermodynamics and Heat Transfer, Vol. 12, No. 1, January-March 1998.
   // I. V. Adamovich, S. Macheret, J. W. Rich, C. E. Treanor.
-  double kappa::Approximation::probability_VV_FHO(	double rel_vel, 
- 							double coll_mass, 
+  double kappa::Approximation::probability_VV_FHO(	double rel_vel,
+ 							double coll_mass,
 	                                        	double Delta_E_vibr,
-			                        	int i, 
-							int k, 
+			                        	int i,
+							int k,
 							int delta_i,
-			                        	double omega1, 
-							double omega2, 
-							double omega, 
+			                        	double omega1,
+							double omega2,
+							double omega,
 							double alpha_FHO) {
 
     double avg_vel = vel_avg_vv(rel_vel, coll_mass, Delta_E_vibr);
@@ -294,7 +294,7 @@ kappa::Approximation::Approximation() {}
     }
 
     // eq. 17
-    return pow(rhoxi, abs_delta) * ns12 * exp(-2.0 * rhoxi * pow(ns12, 1.0 / abs_delta) / (abs_delta + 1.0)) / 
+    return pow(rhoxi, abs_delta) * ns12 * exp(-2.0 * rhoxi * pow(ns12, 1.0 / abs_delta) / (abs_delta + 1.0)) /
                                           (kappa::factorial_table[abs_delta] * kappa::factorial_table[abs_delta]);
   }
 
@@ -303,20 +303,20 @@ kappa::Approximation::Approximation() {}
   // Vibrational energy transfer rates using a Forced Harmonic Oscillator (FHO) model.
   // Journal of Thermodynamics and Heat Transfer, Vol. 12, No. 1, January-March 1998.
   // I. V. Adamovich, S. Macheret, J. W. Rich, C. E. Treanor.
-  double kappa::Approximation::probability_VT_FHO(	double rel_vel, 
-                                              		double coll_mass, 
-							double osc_mass, 
+  double kappa::Approximation::probability_VT_FHO(	double rel_vel,
+                                              		double coll_mass,
+							double osc_mass,
 							double Delta_E_vibr,
-		                                	int i,	 
+		                                	int i,
 							int delta_i,
 		                                	double omega,
 							double ram,
 							double alpha_FHO,
-							double E_FHO, 
+							double E_FHO,
 							double svt_FHO) {
 
     double avg_vel = vel_avg_vt(rel_vel, coll_mass, Delta_E_vibr);
-   
+
     if (avg_vel <= 0.0) {
       return 0.0;
     }
@@ -378,7 +378,7 @@ kappa::Approximation::Approximation() {}
 
     double te = 1000 * vibr_energy / K_CONST_EV;
     return 0.58142 - 0.0039784 * te + 1.3127e-5 * te * te - 9.877e-9 * te * te * te + 3.8664e-12 * te * te * te * te - 8.4268e-16 * te * te * te * te * te
-           + 1.0326e-19 * te * te * te * te * te * te - 6.649e-24 * te * te * te * te * te * te * te + 1.7506e-28 * te * te * te * te * te * te * te * te; 
+           + 1.0326e-19 * te * te * te * te * te * te - 6.649e-24 * te * te * te * te * te * te * te + 1.7506e-28 * te * te * te * te * te * te * te * te;
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -386,12 +386,12 @@ kappa::Approximation::Approximation() {}
   double kappa::Approximation::convert_vibr_ladder_O2(double vibr_energy) {
 
     double te = vibr_energy / K_CONST_EV;
-    return 0.4711499685975582 + 2.23383944 * te + 2.17784653 * te * te + 0.61279172 * te * te * te - 1.38809821 * te * te * te * te + 0.66364689 * 
-           te * te * te * te * te - 0.13147542 * te * te * te * te * te * te + 0.00950554 * te * te * te * te * te * te * te; 
+    return 0.4711499685975582 + 2.23383944 * te + 2.17784653 * te * te + 0.61279172 * te * te * te - 1.38809821 * te * te * te * te + 0.66364689 *
+           te * te * te * te * te - 0.13147542 * te * te * te * te * te * te + 0.00950554 * te * te * te * te * te * te * te;
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
- 
+
   double kappa::Approximation::p_probability_diss(double rel_vel, double coll_mass, double diss_energy, double vibr_energy, bool center_of_mass) {
 
     double energy = vibr_energy + rel_vel * rel_vel * coll_mass / 2;
@@ -425,17 +425,17 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::crosssection_VT_FHO_RS(	double rel_vel, 
-							double coll_mass, 
-							double diameter, 
+  double kappa::Approximation::crosssection_VT_FHO_RS(	double rel_vel,
+							double coll_mass,
+							double diameter,
 							double osc_mass,
-                                                    	double Delta_E_vibr, 
-							int i, 
+                                                    	double Delta_E_vibr,
+							int i,
 							int delta_i,
  							double omega,
-                                                    	double ram, 
+                                                    	double ram,
 							double alpha_FHO,
-							double E_FHO, 
+							double E_FHO,
 							double svt_FHO) {
     if (delta_i < 0) {
       return probability_VT_FHO(rel_vel, coll_mass, osc_mass, Delta_E_vibr, i, delta_i, omega, ram, alpha_FHO, E_FHO, svt_FHO) * crosssection_elastic_RS(diameter);
@@ -446,21 +446,21 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::crosssection_VT_FHO_VSS(	double rel_vel, 
-							double coll_mass, 	
-							double vss_c_cs, 
-							double vss_omega, 
+  double kappa::Approximation::crosssection_VT_FHO_VSS(	double rel_vel,
+							double coll_mass,
+							double vss_c_cs,
+							double vss_omega,
 							double osc_mass,
-                                                      	double Delta_E_vibr, 
-							int i, 
+                                                      	double Delta_E_vibr,
+							int i,
 							int delta_i,
-                                                      	double omega, 
-							double ram, 
-							double alpha_FHO, 
-							double E_FHO, 
+                                                      	double omega,
+							double ram,
+							double alpha_FHO,
+							double E_FHO,
 							double svt_FHO) {
     if (delta_i < 0) {
-      return probability_VT_FHO(rel_vel, coll_mass, osc_mass, Delta_E_vibr, i, delta_i, omega, ram, alpha_FHO, E_FHO, svt_FHO) 
+      return probability_VT_FHO(rel_vel, coll_mass, osc_mass, Delta_E_vibr, i, delta_i, omega, ram, alpha_FHO, E_FHO, svt_FHO)
              * crosssection_elastic_VSS(rel_vel, vss_c_cs, vss_omega);
     } else {
       return 0.; // TODO rewrite
@@ -499,7 +499,7 @@ kappa::Approximation::Approximation() {}
       return 0;
     }
 
-    return sqrt(K_CONST_PI * coll_mass / (8 * K_CONST_K)) * 7.16e-2 * (5.24e-19 * i * i * i - 7.41e-17 * i * i + 6.42e-15 * i + 7.3e-14) 
+    return sqrt(K_CONST_PI * coll_mass / (8 * K_CONST_K)) * 7.16e-2 * (5.24e-19 * i * i * i - 7.41e-17 * i * i + 6.42e-15 * i + 7.3e-14)
            * pow(t - (c1 - vibr_energy) / K_CONST_K, 0.25) / (0.91 * t);
   }
 
@@ -522,7 +522,7 @@ kappa::Approximation::Approximation() {}
     } else {
       c2 = 7.83e-7 * i * i * i * i - 1.31e-4 * i * i * i + 8.24e-3 * i * i - 0.23 * i + 2.4049;
     }
-  
+
     return sqrt(K_CONST_PI * coll_mass / (8 * K_CONST_K)) * 1.53e-10 * c2 * pow(t - c1, 0.4) / (0.89 * t);
   }
 
@@ -533,23 +533,23 @@ kappa::Approximation::Approximation() {}
 
    // collision frequency, eq. 82a
    return 4 * K_CONST_PI * n * diameter * diameter * sqrt(K_CONST_K * T / (2 * K_CONST_PI * coll_mass));
-  } 
+  }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Transport properties of a reacting gas mixture with strong vibrational and chemical nonequilibrium, Kustova and Nagnibeda, 1998.
-  double kappa::Approximation::integral_VT_FHO_RS(	double T, 
-							int degree, 
-							double coll_mass, 
-							double diameter, 
+  double kappa::Approximation::integral_VT_FHO_RS(	double T,
+							int degree,
+							double coll_mass,
+							double diameter,
 							double osc_mass,
-							double Delta_E_vibr, 
-							int i, 
-							int delta_i, 
+							double Delta_E_vibr,
+							int i,
+							int delta_i,
  							double omega,
-							double ram, 
+							double ram,
 							double alpha_FHO,
-							double E_FHO, 
+							double E_FHO,
 							double svt_FHO) {
 
     double conversion = sqrt(2 * K_CONST_K * T / coll_mass);
@@ -563,44 +563,44 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::integral_VT_FHO_VSS(	double T, 
-							int degree, 
-							double coll_mass, 
-							double vss_c_cs, 
-							double vss_omega, 
+  double kappa::Approximation::integral_VT_FHO_VSS(	double T,
+							int degree,
+							double coll_mass,
+							double vss_c_cs,
+							double vss_omega,
 							double osc_mass,
-							double Delta_E_vibr, 
-							int i, 
+							double Delta_E_vibr,
+							int i,
 							int delta_i,
-							double omega, 
-							double ram, 						
+							double omega,
+							double ram,
 							double alpha_FHO,
 							double E_FHO,
 							double svt_FHO) {
 
     double conversion = sqrt(2 * K_CONST_K * T / coll_mass);
- 
+
     auto integrand = [T, degree, coll_mass, vss_c_cs, vss_omega, osc_mass, Delta_E_vibr, i, delta_i, omega, ram, alpha_FHO, E_FHO, svt_FHO, conversion]
     (double g) {return pow(g, 2 * degree + 3) *
     crosssection_VT_FHO_VSS(conversion * g, coll_mass, vss_c_cs, vss_omega, osc_mass, Delta_E_vibr, i, delta_i, omega, ram, alpha_FHO, E_FHO, svt_FHO) * exp(-g * g);};
-  
+
     return sqrt(K_CONST_K * T / (2 * K_CONST_PI * coll_mass)) * integrate_semi_inf(integrand, 0);
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::integral_diss_RS(double T, 
-						int degree, 
-						double coll_mass, 
-						double diameter, 
-						double diss_energy, 
-						double vibr_energy, 
+  double kappa::Approximation::integral_diss_RS(double T,
+						int degree,
+						double coll_mass,
+						double diameter,
+						double diss_energy,
+						double vibr_energy,
 						bool center_of_mass) {
 
     double conversion = sqrt(2 * K_CONST_K * T / coll_mass);
 
-    auto integrand = [T, degree, coll_mass, diameter, diss_energy, vibr_energy, center_of_mass, conversion](double g) 
-                      {return pow(g, 2 * degree + 3) * 
+    auto integrand = [T, degree, coll_mass, diameter, diss_energy, vibr_energy, center_of_mass, conversion](double g)
+                      {return pow(g, 2 * degree + 3) *
                       crosssection_diss_RS(conversion * g, coll_mass, diameter, diss_energy, vibr_energy, center_of_mass) * exp(-g * g); };
 
     return sqrt(K_CONST_K * T / (2 * K_CONST_PI * coll_mass)) * integrate_semi_inf(integrand, min_vel_diss(coll_mass, diss_energy, vibr_energy) / conversion);
@@ -608,13 +608,13 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::integral_diss_VSS(	double T, 
-							int degree, 
-							double coll_mass, 	
-							double vss_c_cs, 
-							double vss_omega, 
-							double diss_energy, 
-							double vibr_energy, 
+  double kappa::Approximation::integral_diss_VSS(	double T,
+							int degree,
+							double coll_mass,
+							double vss_c_cs,
+							double vss_omega,
+							double diss_energy,
+							double vibr_energy,
 							bool center_of_mass) {
 
     double conversion = sqrt(2 * K_CONST_K * T / coll_mass);
@@ -663,8 +663,8 @@ kappa::Approximation::Approximation() {}
     // eq. 85
     double Z0 = alpha * r_e * alpha * r_e * exp( -(3 * alpha * r_e * r_e) / (8 * r) ); // steric factor
     // eq. 83
-    return 1.294 * pow(r / diameter, 2) / (Z0 * alpha * alpha * K_CONST_HBAR * (1 + 1.1 * epsilon / kT)) * 
-           4 * K_CONST_PI * K_CONST_PI * coll_mass * omega * sqrt(4 * K_CONST_PI * chi / 3) * 
+    return 1.294 * pow(r / diameter, 2) / (Z0 * alpha * alpha * K_CONST_HBAR * (1 + 1.1 * epsilon / kT)) *
+           4 * K_CONST_PI * K_CONST_PI * coll_mass * omega * sqrt(4 * K_CONST_PI * chi / 3) *
            exp(-3*chi + (K_CONST_HBAR * omega / (2 * kT)) + epsilon/kT); // TODO second 2 or 4?
   }
 
@@ -679,7 +679,7 @@ kappa::Approximation::Approximation() {}
     double lambda = 0.5; // for diatomic homonuclear molecules
     double omega = 2 * K_CONST_PI * K_CONST_C * omega_e; //angular frequency of the oscillator
     // eq. 84
-    return pow(lambda, 4) * 4 * K_CONST_K * T / osc_mass * alpha * alpha / omega / omega; 
+    return pow(lambda, 4) * 4 * K_CONST_K * T / osc_mass * alpha * alpha / omega / omega;
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -700,20 +700,20 @@ kappa::Approximation::Approximation() {}
 
     // eq. 81
     return p_Z_coll(T, 1., coll_mass, diameter) * (i+1)*(k+1) * P_SSH_VV_01(T, coll_mass, omega_e, epsilon, diameter, r_e);
-  } 
+  }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // The influence of vibrational state-resolvent transport coefficients on the wave propagation in diatomic gases.
   // Compute rate coefficients of the VT transition using Schwartz-Slavsky-Herzfeld (SSH) theory for the anharmonic oscillator model
-  double kappa::Approximation::k_VT_SSH(double T, 
+  double kappa::Approximation::k_VT_SSH(double T,
  					int i, 			// vibrational level
 					double coll_mass, 	// collisional mass
 					double diameter, 	// diameter is the distance at which the (LJ) potential is zero
-					double omega_e,         
+					double omega_e,
 					double epsilon, 	// depth of the potential well
 					double r_e, 		// internuclear distance of molecules
-					double Delta_E_vibr, 	
+					double Delta_E_vibr,
 					double vibr_energy_1) {
 
     double alpha = 17.5 / diameter;
@@ -721,30 +721,30 @@ kappa::Approximation::Approximation() {}
     double gammai = gamma0 * (vibr_energy_1 - 2 * i * Delta_E_vibr);
     gamma0 *= vibr_energy_1;
     double delta_VT = Delta_E_vibr / vibr_energy_1;
-  
+
     if (gammai >= 20) {
       delta_VT *= 4 * pow(gamma0, 2./3.);
     } else {
       delta_VT *= (4./3) * gamma0;
     }
-  
+
     return k_VT_SSH(T, i, coll_mass, diameter, omega_e, epsilon, r_e) * exp(i * delta_VT) * exp(-i * Delta_E_vibr / (K_CONST_K * T));
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::k_VT_FHO_RS(	double T, 
-						double coll_mass, 
-						double diameter, 
+  double kappa::Approximation::k_VT_FHO_RS(	double T,
+						double coll_mass,
+						double diameter,
 						double osc_mass,
-                                         	double Delta_E_vibr, 
-						int i, 
-						int delta_i, 
+                                         	double Delta_E_vibr,
+						int i,
+						int delta_i,
 						double omega,
-						double ram, 
+						double ram,
 						double alpha_FHO,
 						double E_FHO,
-						double svt_FHO) { 
+						double svt_FHO) {
 
     // Transport properties of a reacting gas mixture with strong vibrational and chemical nonequilibrium. Kustova and Nagnibeda, 1998. Eq. 65.
     return 8 * integral_VT_FHO_RS(T, 0, coll_mass, diameter, osc_mass, Delta_E_vibr, i, delta_i, omega, ram, alpha_FHO, E_FHO, svt_FHO);
@@ -752,18 +752,18 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::k_VT_FHO_VSS(	double T, 
-						double coll_mass, 
-						double vss_c_cs, 
-						double vss_omega, 
+  double kappa::Approximation::k_VT_FHO_VSS(	double T,
+						double coll_mass,
+						double vss_c_cs,
+						double vss_omega,
 						double osc_mass,
-                                         	double Delta_E_vibr, 
-						int i, 
+                                         	double Delta_E_vibr,
+						int i,
 						int delta_i,
-                                          	double omega,  
+                                          	double omega,
 						double ram,
 						double alpha_FHO,
-						double E_FHO, 
+						double E_FHO,
 						double svt_FHO) {
 
     return 8 * integral_VT_FHO_VSS(T, 0, coll_mass, vss_c_cs, vss_omega, osc_mass, Delta_E_vibr, i, delta_i, omega, ram, alpha_FHO, E_FHO, svt_FHO);
@@ -776,13 +776,13 @@ kappa::Approximation::Approximation() {}
 
     double tmp = exp(-6.8 * abs(i - 1 - k) / sqrt(T));
     return 2.5e-20 * i * (k + 1) * pow(T / 300., 1.5) * tmp * (1.5 - 0.5 * tmp);
-  
+
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // VT rate coefficients in N2-N2
-  double kappa::Approximation::k_VT_Billing_N2N2(double T, int i) { 
+  double kappa::Approximation::k_VT_Billing_N2N2(double T, int i) {
 
     // eq. 6.9 FIXME why 1e-6?
     return 1e-6 * i * exp(-3.24093 - 140.69597 * pow(T, -0.2)) * exp((0.26679 - 6.99237e-5 * T + 4.70073e-9 * T * T) * (i-1));
@@ -791,7 +791,7 @@ kappa::Approximation::Approximation() {}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // VT rate coefficients in N2-N
-  double kappa::Approximation::k_VT_Billing_N2N(double T, int i, int delta_i) { 
+  double kappa::Approximation::k_VT_Billing_N2N(double T, int i, int delta_i) {
 
     // eq. 6.10 FIXME why 1e-6?
     return 1e-6 * exp(-25.708 - 5633.1543 / T + (0.1554 - 111.3426 / T) * delta_i + (0.0054 - 2.189 / T) * delta_i * delta_i
@@ -867,7 +867,7 @@ kappa::Approximation::Approximation() {}
     int i,j;
 
     delta_i = -delta_i;
-    
+
     if (delta_i==1) {
       for (i=0;i<=2;i++)
         for (j=0;j<=4;j++)
@@ -898,7 +898,7 @@ kappa::Approximation::Approximation() {}
                      + p4e_o2o_vt_Cijk4[i][j][3] * delta_i * delta_i;
      } else {
        return -1.;
-     }   
+     }
 
      for (i=0;i<=2;i++) {
        Ai[i] = Bij[i][0] + Bij[i][1] * log(k) + (Bij[i][2] + Bij[i][3] * k + Bij[i][4] * k * k) / (1E+21 + exp(k));
@@ -920,7 +920,7 @@ kappa::Approximation::Approximation() {}
   double kappa::Approximation::k_exch_WRFP(double T, double vibr_energy, double activation_energy, double alpha_exch, double beta_exch, double A_exch, double n_exch) {
 
     if (activation_energy > alpha_exch * vibr_energy) {
-      return A_exch * pow(T, n_exch) * exp(-(activation_energy - alpha_exch * vibr_energy) / (K_CONST_K * T * beta_exch)); 
+      return A_exch * pow(T, n_exch) * exp(-(activation_energy - alpha_exch * vibr_energy) / (K_CONST_K * T * beta_exch));
     } else {
       return A_exch * pow(T, n_exch);
     }
@@ -1000,7 +1000,7 @@ kappa::Approximation::Approximation() {}
     // 9.8692326671601e-6 is the conversion factor from pascals to atmospheres
     double md = coll_mass * K_CONST_NA * 1000; // reduced molar mass, g/mol , N_Av avogadro number
     return pow(10.0, ((5e-4 * pow(md, 0.5)
-           * pow(char_vibr_temp, 1.333333333) 
+           * pow(char_vibr_temp, 1.333333333)
            * (pow(T, -0.3333333) - 0.015 * pow(md, 0.25))) - 8)) / (n * K_CONST_K * T * 9.8692326671601e-6);
   }
 
@@ -1011,17 +1011,17 @@ kappa::Approximation::Approximation() {}
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
   // Analytical expressions for the integrals Ωcd (l,r) can be obtained only for the rigid sphere model
   // Returns the \Omega^{(l,r)}-integral for a rigid sphere potential for any l > 0 and r > 0
   double kappa::Approximation::omega_integral_RS(double T, int l, int r, double diameter, double coll_mass) {
 
     // pp. 145
     //std::cout << T << " " << l << " " << r << " " << diameter << " "  << coll_mass << std::endl;
-    //std::cout << sqrt(T * K_CONST_K / (2 * K_CONST_PI * coll_mass)) * 0.5 * kappa::factorial_table[r + 1] 
+    //std::cout << sqrt(T * K_CONST_K / (2 * K_CONST_PI * coll_mass)) * 0.5 * kappa::factorial_table[r + 1]
     //             * (1.0 - 0.5 * (1.0 + pow(-1.0, l)) / (l + 1)) * K_CONST_PI * (diameter * diameter) << std::endl;
 
-    return sqrt(T * K_CONST_K / (2 * K_CONST_PI * coll_mass)) * 0.5 * kappa::factorial_table[r + 1] 
+    return sqrt(T * K_CONST_K / (2 * K_CONST_PI * coll_mass)) * 0.5 * kappa::factorial_table[r + 1]
                   * (1.0 - 0.5 * (1.0 + pow(-1.0, l)) / (l + 1)) * K_CONST_PI * (diameter * diameter);
   }
 
@@ -1029,7 +1029,7 @@ kappa::Approximation::Approximation() {}
 
   // Returns the \Omega^{(l,r)}-integral for the VSS potential
   double kappa::Approximation::omega_integral_VSS(double T, int l, int r, double coll_mass, double vss_c_cs, double vss_omega, double vss_alpha) {
-    
+
     double mult = 1;
     switch (l) {
       case 1:
@@ -1042,18 +1042,18 @@ kappa::Approximation::Approximation() {}
         mult = (3 * vss_alpha * vss_alpha + vss_alpha + 2) / ((3 + vss_alpha) * (2 + vss_alpha) * (1 + vss_alpha));
         break;
       case 4:
-        mult = (4 * vss_alpha * vss_alpha * vss_alpha + 12 * vss_alpha * vss_alpha + 32 * vss_alpha) 
+        mult = (4 * vss_alpha * vss_alpha * vss_alpha + 12 * vss_alpha * vss_alpha + 32 * vss_alpha)
                             / ((4 + vss_alpha) * (3 + vss_alpha) * (2 + vss_alpha) * (1 + vss_alpha));
         break;
       case 5:
-        mult = (5 * vss_alpha * vss_alpha * vss_alpha * vss_alpha + 30 * vss_alpha * vss_alpha * vss_alpha + 115 * vss_alpha * vss_alpha + 90 * vss_alpha + 120) / 
+        mult = (5 * vss_alpha * vss_alpha * vss_alpha * vss_alpha + 30 * vss_alpha * vss_alpha * vss_alpha + 115 * vss_alpha * vss_alpha + 90 * vss_alpha + 120) /
               ((5 + vss_alpha) * (4 + vss_alpha) * (3 + vss_alpha) * (2 + vss_alpha) * (1 + vss_alpha));
         break;
       default:
         return -1;
-        break; 
+        break;
     }
-  
+
     return mult * sqrt(T * K_CONST_K / (2 * K_CONST_PI * coll_mass)) * tgamma(2.5 + r - vss_omega) * vss_c_cs * pow(2 * T * K_CONST_K / coll_mass, 0.5 - vss_omega);
   }
 
@@ -1061,24 +1061,24 @@ kappa::Approximation::Approximation() {}
 
   // Returns the \Omega^{(l,r)}-integral for the Lennard-Jones potential
   double kappa::Approximation::omega_integral_LennardJones(double T, int l, int r, double epsilon) {
-	
+
     if (r==1 && l==1) {
       double log_KT_eps = log(K_CONST_K * T / epsilon) + 1.4;
       // Kustova-Nagnibeda eqn. 5.99 and tab. 5.5
-      return 1. / ( - 0.16845 						- 
-   	   	      0.02258 / (log_KT_eps * log_KT_eps) 		+ 
-                      0.19779 / log_KT_eps 				+ 
-     		      0.64373 * log_KT_eps 				- 
+      return 1. / ( - 0.16845 						-
+   	   	      0.02258 / (log_KT_eps * log_KT_eps) 		+
+                      0.19779 / log_KT_eps 				+
+     		      0.64373 * log_KT_eps 				-
 		      0.09267 * log_KT_eps * log_KT_eps 		+
 		      0.00711 * log_KT_eps * log_KT_eps * log_KT_eps )	;
     } else if (r==2 && l==2) {
       double log_KT_eps = log(K_CONST_K * T / epsilon) + 1.5;
-      return 1. / ( - 0.40811 						- 
-		       0.05086 / (log_KT_eps * log_KT_eps) 		+ 
-                       0.34010 / log_KT_eps 				+ 
-                       0.70375 * log_KT_eps 				- 
-                       0.10699 * log_KT_eps * log_KT_eps 		+ 
-                       0.00763 * log_KT_eps * log_KT_eps * log_KT_eps )	;	
+      return 1. / ( - 0.40811 						-
+		       0.05086 / (log_KT_eps * log_KT_eps) 		+
+                       0.34010 / log_KT_eps 				+
+                       0.70375 * log_KT_eps 				-
+                       0.10699 * log_KT_eps * log_KT_eps 		+
+                       0.00763 * log_KT_eps * log_KT_eps * log_KT_eps )	;
     } else {
       return -1.;
     }
@@ -1090,30 +1090,30 @@ kappa::Approximation::Approximation() {}
   double kappa::Approximation::omega_integral_Born_Mayer(double T, int l, int r, double beta, double phi_zero, double diameter, double epsilon) {
 
     if ((r==1 && l==1) || (r==2 && l==2)) {
-      double Born_Mayer_A[6] = { 0 }; 
+      double Born_Mayer_A[6] = { 0 };
       double log_v_star = log(phi_zero / (10 * epsilon));
       double KT_eps = K_CONST_K * T / epsilon;
-        
+
       for (int i=0; i<6; i++) {
-	  
+
         // coefficients for Born-Mayer potential, Kustova-Nagnibeda (5.100)
-        Born_Mayer_A[i] = Born_Mayer_coeff_array[i][0] + pow(log_v_star  / (beta * diameter), -2) * 
-                         (Born_Mayer_coeff_array[i][1] + 
-                          Born_Mayer_coeff_array[i][2] / log_v_star +	
+        Born_Mayer_A[i] = Born_Mayer_coeff_array[i][0] + pow(log_v_star  / (beta * diameter), -2) *
+                         (Born_Mayer_coeff_array[i][1] +
+                          Born_Mayer_coeff_array[i][2] / log_v_star +
                           Born_Mayer_coeff_array[i][3] / (log_v_star * log_v_star) );
 
       }
 
-      if (r==1 && l==1) { 
-	return pow(log(phi_zero / (K_CONST_K * T)) / (beta * diameter), 2) 	* 
-               ( 0.89 + Born_Mayer_A[0] / (KT_eps * KT_eps) 			+ 
-                        Born_Mayer_A[1] / pow(KT_eps, 4) 			+ 
+      if (r==1 && l==1) {
+	return pow(log(phi_zero / (K_CONST_K * T)) / (beta * diameter), 2) 	*
+               ( 0.89 + Born_Mayer_A[0] / (KT_eps * KT_eps) 			+
+                        Born_Mayer_A[1] / pow(KT_eps, 4) 			+
                         Born_Mayer_A[2] / pow(KT_eps, 6) )			;
-      } else { // r == 2 and l == 2 
+      } else { // r == 2 and l == 2
         KT_eps = log(KT_eps);
-	return pow(log(phi_zero / (K_CONST_K * T)) / (beta * diameter), 2) 	* 
-                       ( 1.04 + Born_Mayer_A[3] / (KT_eps * KT_eps) 		+ 
-    				Born_Mayer_A[4] / (KT_eps * KT_eps * KT_eps) 	+ 
+	return pow(log(phi_zero / (K_CONST_K * T)) / (beta * diameter), 2) 	*
+                       ( 1.04 + Born_Mayer_A[3] / (KT_eps * KT_eps) 		+
+    				Born_Mayer_A[4] / (KT_eps * KT_eps * KT_eps) 	+
  				Born_Mayer_A[5] / pow(KT_eps, 4));
       }
     } else {
@@ -1134,7 +1134,7 @@ kappa::Approximation::Approximation() {}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   double kappa::Approximation::omega_integral_ESA_H2H2(double T, int l, int r, double diameter) {
- 
+
     if (l == 1 && r == 1) {
       return kappa::Approximation::omega_integral_ESA_hydrogen(T, diameter, 24.00841090, -1.61027553, 3.88885724, -8.89043396, 0.44260972, 8.88408687, -1.05402226);
     } else if (l == 1 && r == 2) {
@@ -1161,7 +1161,7 @@ kappa::Approximation::Approximation() {}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   double kappa::Approximation::omega_integral_ESA_H2H(double T, int l, int r, double diameter) {
- 
+
     if (l == 1 && r == 1) {
       return kappa::Approximation::omega_integral_ESA_hydrogen(T, diameter, 12.49063970, -1.14704753, 8.76515503, -3.52921496, 0.32874932, 12.77040465, -3.04802967);
     } else if (l == 1 && r == 2) {
@@ -1188,7 +1188,7 @@ kappa::Approximation::Approximation() {}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   double kappa::Approximation::omega_integral_ESA_HH(double T, int l, int r, double diameter) {
- 
+
     if (l == 1 && r == 1) {
       return kappa::Approximation::omega_integral_ESA_hydrogen(T, diameter, 15.09506044, -1.25710008, 9.57839369, -3.80371463, 0.98646613, 9.25705877, -0.93611707);
     } else if (l == 1 && r == 2) {
@@ -1219,12 +1219,12 @@ kappa::Approximation::Approximation() {}
 
     double x = log(K_CONST_K * T / epsilon_zero);
     if (l == 1 && r == 1) {
-      double a[7] = { 	(7.884756e-1) - (2.438494e-2) * beta, 
-			                   -2.952759e-1 - (1.744149e-3) * beta, 
-			                  (5.020892e-1) + (4.316985e-2) * beta, 
+      double a[7] = { 	(7.884756e-1) - (2.438494e-2) * beta,
+			                   -2.952759e-1 - (1.744149e-3) * beta,
+			                  (5.020892e-1) + (4.316985e-2) * beta,
 			                  (-9.042460e-1) - (4.017103e-2) * beta,
-			                  (-3.373058)    + (2.458538e-1) * beta - (4.850047e-3) * beta * beta, 
-			                  (4.161981) + (2.202737e-1) * beta - (1.718010e-2) * beta * beta, 
+			                  (-3.373058)    + (2.458538e-1) * beta - (4.850047e-3) * beta * beta,
+			                  (4.161981) + (2.202737e-1) * beta - (1.718010e-2) * beta * beta,
 			                  (2.462523) + (3.231308e-1) * beta - (2.281072e-2) * beta * beta };
 
       // Optimization: vectorized product and store coefficients seperately?
@@ -1233,13 +1233,13 @@ kappa::Approximation::Approximation() {}
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 1 && r == 2) {
-      double a[7] = { (7.123565e-1) + (-2.688875e-2) * beta, 
-                      (-2.9105e-1) + (-2.065175e-3) * beta, 
-                      (4.187065e-2) + (4.060236e-2) * beta, 
+      double a[7] = { (7.123565e-1) + (-2.688875e-2) * beta,
+                      (-2.9105e-1) + (-2.065175e-3) * beta,
+                      (4.187065e-2) + (4.060236e-2) * beta,
                       (-9.287685e-1) + (-2.342270e-2) * beta,
-		      (-3.598542) + (2.54512e-1) * beta + 
-                      (-4.685966e-3) * beta * beta, 
-                      (3.934824) + (2.699944e-1) * beta + (-2.009886e-2) * beta * beta, 
+		      (-3.598542) + (2.54512e-1) * beta +
+                      (-4.685966e-3) * beta * beta,
+                      (3.934824) + (2.699944e-1) * beta + (-2.009886e-2) * beta * beta,
                        2.578084 + (3.449024e-1) * beta + (-2.2927e-2) * beta * beta };
 
       double exp_1 = exp((x - a[2]) / a[3]);
@@ -1247,12 +1247,12 @@ kappa::Approximation::Approximation() {}
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 1 && r == 3) {
-      double a[7] = { (6.606022e-1) + (-2.831448e-2) * beta, 
- 		      (-2.8709e-1) + (-2.232827e-3) * beta, 
-                      (-2.51969e-1) + (3.778211e-2) * beta, 
+      double a[7] = { (6.606022e-1) + (-2.831448e-2) * beta,
+ 		      (-2.8709e-1) + (-2.232827e-3) * beta,
+                      (-2.51969e-1) + (3.778211e-2) * beta,
                       (-9.173046e-1) + (-1.864476e-2) * beta,
 		      (-3.776812) + (2.552528e-1) * beta + (-4.23722e-3) * beta * beta,
-                      (3.768103) + (3.155025e-1) * beta + (-2.218849e-2) * beta * beta, 
+                      (3.768103) + (3.155025e-1) * beta + (-2.218849e-2) * beta * beta,
                        2.695440 + (3.597998e-1) * beta + (-2.267102e-2) * beta * beta };
 
       double exp_1 = exp((x - a[2]) / a[3]);
@@ -1260,12 +1260,12 @@ kappa::Approximation::Approximation() {}
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 1 && r == 4) {
-      double a[7] = { (6.268016e-1) + (-2.945078e-2) * beta, 
-                      (-2.830834e-1) + (-2.361273e-3) * beta, 
-                      (-4.559927e-1) + (3.705640e-2) * beta, 
+      double a[7] = { (6.268016e-1) + (-2.945078e-2) * beta,
+                      (-2.830834e-1) + (-2.361273e-3) * beta,
+                      (-4.559927e-1) + (3.705640e-2) * beta,
                       (-9.334638e-1) + (-1.797329e-2) * beta,
-		      (-3.947019) + (2.446843e-1) * beta + (-3.176374e-3) * beta * beta, 
-                      (3.629926) + (3.761272e-1) * beta + (-2.451016e-2) * beta * beta, 
+		      (-3.947019) + (2.446843e-1) * beta + (-3.176374e-3) * beta * beta,
+                      (3.629926) + (3.761272e-1) * beta + (-2.451016e-2) * beta * beta,
                        2.824905 + (3.781709e-1) * beta + (-2.251978e-2) * beta * beta };
 
       double exp_1 = exp((x - a[2]) / a[3]);
@@ -1273,71 +1273,71 @@ kappa::Approximation::Approximation() {}
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 1 && r == 5) {
-      double a[7] = { (5.956859e-1) + (-2.915893e-2) * beta, 
-                      (-2.804989e-1) + (-2.298968e-3) * beta, 
-                      (-5.965551e-1) + (3.724395e-2) * beta, 
+      double a[7] = { (5.956859e-1) + (-2.915893e-2) * beta,
+                      (-2.804989e-1) + (-2.298968e-3) * beta,
+                      (-5.965551e-1) + (3.724395e-2) * beta,
                       (-8.946001e-1) + (-2.550731e-2) * beta,
-		      (-4.076798) + (1.983892e-1) * beta + (-5.014065e-3) * beta * beta, 
-                      (3.458362) + (4.770695e-1) * beta + (-2.678054e-2) * beta * beta, 
+		      (-4.076798) + (1.983892e-1) * beta + (-5.014065e-3) * beta * beta,
+                      (3.458362) + (4.770695e-1) * beta + (-2.678054e-2) * beta * beta,
                        2.982260 + (4.014572e-1) * beta + (-2.142580e-2) * beta * beta };
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 2 && r == 2) {
-      double a[7] = { (7.898524e-1) - (2.114115e-2) * beta, 
-                      (-2.998325e-1) - (1.243977e-3) * beta, 
-                      (7.077103e-1) + (3.583907e-2) * beta, 
+      double a[7] = { (7.898524e-1) - (2.114115e-2) * beta,
+                      (-2.998325e-1) - (1.243977e-3) * beta,
+                      (7.077103e-1) + (3.583907e-2) * beta,
                       (-8.946857e-1) - (2.473947e-2) * beta,
-		      (-2.958969) + (2.303358e-1) * beta - (5.226562e-3) * beta * beta, 
-                      (4.348412) + (1.920321e-1) * beta - (1.496557e-2) * beta * beta, 
+		      (-2.958969) + (2.303358e-1) * beta - (5.226562e-3) * beta * beta,
+                      (4.348412) + (1.920321e-1) * beta - (1.496557e-2) * beta * beta,
                       (2.205440) + (2.567027e-1) * beta - (1.861359e-2) * beta * beta };
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 2 && r == 3) {
-      double a[7] = { (7.269006e-1) - (2.233866e-2) * beta, 
-                      (-2.972304e-1) - (1.392888e-3) * beta, 
+      double a[7] = { (7.269006e-1) - (2.233866e-2) * beta,
+                      (-2.972304e-1) - (1.392888e-3) * beta,
                       (3.904230e-1) + (3.231655e-2) * beta, (-9.442201e-1) - (1.494805e-2) * beta,
-		      (-3.137828) + (2.347767e-1) * beta - (4.963979e-3) * beta * beta, 
-                      (4.190370) + (2.346004e-1) * beta - (1.718963e-2) * beta * beta, 
+		      (-3.137828) + (2.347767e-1) * beta - (4.963979e-3) * beta * beta,
+                      (4.190370) + (2.346004e-1) * beta - (1.718963e-2) * beta * beta,
                       (2.319751) + (2.700236e-1) * beta - (1.854217e-2) * beta * beta };
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 2 && r == 4) {
-      double a[7] = { (6.829159e-1) - (2.233866e-2) * beta, 
-                      (-2.943232e-1) - (1.514322e-3) * beta, 
-                      (1.414623e-1) + (3.075351e-2) * beta, 
+      double a[7] = { (6.829159e-1) - (2.233866e-2) * beta,
+                      (-2.943232e-1) - (1.514322e-3) * beta,
+                      (1.414623e-1) + (3.075351e-2) * beta,
                       (-9.720228e-1) - (1.038869e-2) * beta,
-	  	      (-3.284219) + (2.243767e-1) * beta - (3.913041e-3) * beta * beta, 
-                      (4.011692) + (3.005083e-1) * beta - (2.012373e-2) * beta * beta, 
+	  	      (-3.284219) + (2.243767e-1) * beta - (3.913041e-3) * beta * beta,
+                      (4.011692) + (3.005083e-1) * beta - (2.012373e-2) * beta * beta,
                       (2.401249) + (2.943600e-1) * beta - (1.884503e-2) * beta * beta };
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 3 && r == 3) {
-      double a[7] = { (7.468781e-1) - (2.518134e-2) * beta, 
+      double a[7] = { (7.468781e-1) - (2.518134e-2) * beta,
                       (-2.947438e-1) - (1.811571e-3) * beta,
-                      (2.234096e-1) + (3.681114e-2) * beta, 
+                      (2.234096e-1) + (3.681114e-2) * beta,
                       (-9.974591e-1) - (2.670805e-2) * beta,
-		      (-3.381787) + (2.372932e-1) * beta - (4.239629e-3) * beta * beta, 
-                      (4.094540) + (2.756466e-1) * beta - (2.009227e-2) * beta * beta, 
+		      (-3.381787) + (2.372932e-1) * beta - (4.239629e-3) * beta * beta,
+                      (4.094540) + (2.756466e-1) * beta - (2.009227e-2) * beta * beta,
                       (2.476087) + (3.300898e-1) * beta - (2.223317e-2) * beta * beta };
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 4 && r == 4) {
-      double a[7] = { (7.365470e-1) - (2.242357e-2) * beta, 
-                      (-2.968650e-1) - (1.396696e-3) * beta, 
-                      (3.747555e-1) + (2.847063e-2) * beta, 
+      double a[7] = { (7.365470e-1) - (2.242357e-2) * beta,
+                      (-2.968650e-1) - (1.396696e-3) * beta,
+                      (3.747555e-1) + (2.847063e-2) * beta,
                       (-9.944036e-1) - (1.378926e-2) * beta,
 		      (-3.136655) + (2.176409e-1) * beta - (3.899247e-3) * beta * beta,
-                      (4.145871) + (2.855836e-1) * beta - (1.939452e-2) * beta * beta, 
+                      (4.145871) + (2.855836e-1) * beta - (1.939452e-2) * beta * beta,
                       (2.315532) + (2.842981e-1) * beta - (1.874462e-2) * beta * beta };
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
@@ -1356,12 +1356,12 @@ kappa::Approximation::Approximation() {}
     // double m = 4; // parameter for neutral-ion interactions ESA STR 256 Table 2 [dimensionless]
     double x = log(K_CONST_K * T / epsilon_zero);
     if (l == 1 && r == 1) {
-      double a[7] = { 	(9.851755e-1) - (2.870704e-2) * beta, 
-			-(4.737800e-1) - (1.370344e-3) * beta, 
-			(7.080799e-1) + (4.575312e-3) * beta, 
+      double a[7] = { 	(9.851755e-1) - (2.870704e-2) * beta,
+			-(4.737800e-1) - (1.370344e-3) * beta,
+			(7.080799e-1) + (4.575312e-3) * beta,
 			(-1.239439) - (3.683605e-2) * beta,
-			(-4.638467) + (4.418904e-1) * beta - (1.220292e-2) * beta * beta, 
-			(3.841835) + (3.277658e-1) * beta - (2.660275e-2) * beta * beta, 
+			(-4.638467) + (4.418904e-1) * beta - (1.220292e-2) * beta * beta,
+			(3.841835) + (3.277658e-1) * beta - (2.660275e-2) * beta * beta,
 			(2.317342) + (3.912768e-1) * beta - (3.136223e-2) * beta * beta} ;
 
       double exp_1 = exp((x - a[2]) / a[3]);
@@ -1369,47 +1369,47 @@ kappa::Approximation::Approximation() {}
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 1 && r == 2) {
-      double a[7] = { (8.361751e-1) - (3.201292e-2) * beta, 
-		      -(4.707355e-1) - (1.783284e-3) * beta, 
-		      (1.771157e-1) + (1.172773e-2) * beta, 
+      double a[7] = { (8.361751e-1) - (3.201292e-2) * beta,
+		      -(4.707355e-1) - (1.783284e-3) * beta,
+		      (1.771157e-1) + (1.172773e-2) * beta,
 		      (-1.094937) - (3.115598e-2) * beta,
-	              (-4.976384) + (4.708074e-1) * beta - (1.283818e-2) * beta * beta, 
- 		      (3.645873) + (3.699452e-1) * beta - (2.988684e-2) * beta * beta, 
+	              (-4.976384) + (4.708074e-1) * beta - (1.283818e-2) * beta * beta,
+ 		      (3.645873) + (3.699452e-1) * beta - (2.988684e-2) * beta * beta,
  		      (2.428864) + (4.267351e-1) * beta - (3.278874e-2) * beta * beta };
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) /
       // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 1 && r == 3) {
       double a[7] = { (7.440562e-1) - (3.453851e-2) * beta,
-                     -(4.656306e-1) - (2.097901e-3) * beta, 
-		      (-1.465752e-1) + (1.446209e-2) * beta, 
+                     -(4.656306e-1) - (2.097901e-3) * beta,
+		      (-1.465752e-1) + (1.446209e-2) * beta,
 		      (-1.080410) - (2.712029e-2) * beta,
-		      (-5.233907) + (4.846691e-1) * beta - (1.280346e-2) * beta * beta, 
-		      (3.489814) + (4.140270e-1) * beta - (3.250138e-2) * beta * beta, 
+		      (-5.233907) + (4.846691e-1) * beta - (1.280346e-2) * beta * beta,
+		      (3.489814) + (4.140270e-1) * beta - (3.250138e-2) * beta * beta,
 		      (2.529678) + (4.515088e-1) * beta - (3.339293e-2) * beta * beta };
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) /
       // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
     } else if (l == 1 && r == 4) {
       double a[7] = { (6.684360e-1) - (3.515695e-2) * beta,
-                     -(4.622014e-1) - (2.135808e-3) * beta, 
-		      (-3.464990e-1) + (1.336362e-2) * beta, 
+                     -(4.622014e-1) - (2.135808e-3) * beta,
+		      (-3.464990e-1) + (1.336362e-2) * beta,
 		      (-1.054374) - (3.149321e-2) * beta,
-		      (-5.465789) + (4.888443e-1) * beta - (1.228090e-2) * beta * beta, 
-		      (3.374614) + (4.602468e-1) * beta - (3.463073e-2) * beta * beta, 
+		      (-5.465789) + (4.888443e-1) * beta - (1.228090e-2) * beta * beta,
+		      (3.374614) + (4.602468e-1) * beta - (3.463073e-2) * beta * beta,
 		      (2.648622) + (4.677409e-1) * beta - (3.339297e-2) * beta * beta };
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) /
       // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
@@ -1439,7 +1439,7 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) /
       // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
@@ -1454,7 +1454,7 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) /
       // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
@@ -1469,7 +1469,7 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) /
       // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
@@ -1484,7 +1484,7 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) /
       // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
@@ -1499,7 +1499,7 @@ kappa::Approximation::Approximation() {}
 
       double exp_1 = exp((x - a[2]) / a[3]);
       double exp_2 =  exp((x - a[5]) / a[6]);
-      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) / 
+      // return exp((a[0] + a[1] * x) * exp((x - a[2]) / a[3]) / (exp((x - a[2]) / a[3]) + exp((a[2] - x) /
       // a[3])) + a[4] * exp((x - a[5]) / a[6]) / (exp((x - a[5]) / a[6]) + exp((a[5] - x) / a[6]))) * sigma_sqr;
       return exp((a[0] + a[1] * x) * exp_1 / (exp_1 + 1 / exp_1) + a[4] * exp_2 / (exp_2 + 1 / exp_2));
 
@@ -1514,7 +1514,7 @@ kappa::Approximation::Approximation() {}
 
     double x = log(T);
     double x0 = 0.7564 * pow(beta, 0.064605); //  ESA STR 256 (5.6); Table 4; x0 = xi_1 * beta^xi_2
-    double sigma_sqr = x0 * x0 * r_e * r_e / 1e20; // value to obtain dimensional \Omega^{(l,r)}-integral [m]; 
+    double sigma_sqr = x0 * x0 * r_e * r_e / 1e20; // value to obtain dimensional \Omega^{(l,r)}-integral [m];
 
     return (d1 + d2*x + d3*x*x) / (sigma_sqr);
   }
@@ -1541,98 +1541,98 @@ kappa::Approximation::Approximation() {}
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
+
   // compute the backward and forward reaction rate coefficients for VT exchange (private)
-  double kappa::Approximation::p_k_bf_VT(double T, 
-  				         double vibr_energy_before, 
-					 double vibr_energy_after, 
-					 const arma::vec &rot_energy_before, 
-					 int num_rot_levels_before, 
-                                     	 const arma::vec &rot_energy_after, 
-					 int num_rot_levels_after, 
-					 int rot_symmetry, 
+  double kappa::Approximation::p_k_bf_VT(double T,
+  				         double vibr_energy_before,
+					 double vibr_energy_after,
+					 const arma::vec &rot_energy_before,
+					 int num_rot_levels_before,
+                                     	 const arma::vec &rot_energy_after,
+					 int num_rot_levels_after,
+					 int rot_symmetry,
 					 bool is_rigid_rotator) {
 
     if (is_rigid_rotator) {
       return exp((vibr_energy_after - vibr_energy_before) / (K_CONST_K * T));
     } else {
       // simplified for VT eq. 2.74 in book Kustova & Nagnibeda, 2003/2009.
-      return exp((vibr_energy_after - vibr_energy_before) / (K_CONST_K * T)) * 
-             p_Z_rot(T, rot_energy_before, num_rot_levels_before, rot_symmetry) /  
+      return exp((vibr_energy_after - vibr_energy_before) / (K_CONST_K * T)) *
+             p_Z_rot(T, rot_energy_before, num_rot_levels_before, rot_symmetry) /
              p_Z_rot(T, rot_energy_after, num_rot_levels_after, rot_symmetry);
     }
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
+
   // compute the backward and forward reaction rate coefficients for VV exchange (private)
-  double kappa::Approximation::p_k_bf_VV(double T, 
-  					 double vibr_energy1_before, 
-					 double vibr_energy1_after, 
-					 double vibr_energy2_before, 
+  double kappa::Approximation::p_k_bf_VV(double T,
+  					 double vibr_energy1_before,
+					 double vibr_energy1_after,
+					 double vibr_energy2_before,
 					 double vibr_energy2_after,
-                                     	 const arma::vec &rot_energy1_before, 
-					 int num_rot_levels1_before, 
-					 const arma::vec &rot_energy1_after, 
-					 int num_rot_levels1_after, 
-					 int rot_symmetry1, 
-                                     	 const arma::vec &rot_energy2_before, 
-					 int num_rot_levels2_before, 
-					 const arma::vec &rot_energy2_after, 
-					 int num_rot_levels2_after, 
-					 int rot_symmetry2) { 
+                                     	 const arma::vec &rot_energy1_before,
+					 int num_rot_levels1_before,
+					 const arma::vec &rot_energy1_after,
+					 int num_rot_levels1_after,
+					 int rot_symmetry1,
+                                     	 const arma::vec &rot_energy2_before,
+					 int num_rot_levels2_before,
+					 const arma::vec &rot_energy2_after,
+					 int num_rot_levels2_after,
+					 int rot_symmetry2) {
 
     // eq. 2.74 in book Kustova & Nagnibeda, 2003/2009.
     return exp((vibr_energy1_after - vibr_energy1_before + vibr_energy2_after - vibr_energy2_before) / (K_CONST_K * T)) *
-           (p_Z_rot(T, rot_energy1_before, num_rot_levels1_before, rot_symmetry1) * 
+           (p_Z_rot(T, rot_energy1_before, num_rot_levels1_before, rot_symmetry1) *
  	   p_Z_rot(T, rot_energy2_before, num_rot_levels2_before, rot_symmetry2)) /
-           (p_Z_rot(T, rot_energy1_after,  num_rot_levels1_after,  rot_symmetry1) * 
+           (p_Z_rot(T, rot_energy1_after,  num_rot_levels1_after,  rot_symmetry1) *
 	   p_Z_rot(T, rot_energy2_after,  num_rot_levels2_after,  rot_symmetry2));
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // compute the backward and forward reaction rate coefficients for chemical exchange (private)
-  double kappa::Approximation::p_k_bf_exch(	double T, 
-						double molecule_before_mass, 
-						double atom_before_mass, 
-						double molecule_after_mass, 
+  double kappa::Approximation::p_k_bf_exch(	double T,
+						double molecule_before_mass,
+						double atom_before_mass,
+						double molecule_after_mass,
 						double atom_after_mass,
-                                       		double diss_energy_before, 
-						double diss_energy_after, 
-						double vibr_energy_before, 
+                                       		double diss_energy_before,
+						double diss_energy_after,
+						double vibr_energy_before,
 						double vibr_energy_after,
-                                       		const arma::vec &rot_energy_before, 
-						int num_rot_levels_before, 
+                                       		const arma::vec &rot_energy_before,
+						int num_rot_levels_before,
 						int rot_symmetry_before,
-                                      		const arma::vec &rot_energy_after, 
-						int num_rot_levels_after, 
-						int rot_symmetry_after) { 
+                                      		const arma::vec &rot_energy_after,
+						int num_rot_levels_after,
+						int rot_symmetry_after) {
 
     // look at eq. 36 in system.pdf by Olga Kunova or eq. 2.78 in book Kustova & Nagnibeda, 2003/2009.
-    return pow(molecule_before_mass * atom_before_mass / (molecule_after_mass * atom_after_mass), 1.5) * 
-           (p_Z_rot(T, rot_energy_before, num_rot_levels_before, rot_symmetry_before) / 
-     	   p_Z_rot(T, rot_energy_after, num_rot_levels_after, rot_symmetry_after)) * 
-           exp((vibr_energy_after - vibr_energy_before) / (K_CONST_K * T)) * 
+    return pow(molecule_before_mass * atom_before_mass / (molecule_after_mass * atom_after_mass), 1.5) *
+           (p_Z_rot(T, rot_energy_before, num_rot_levels_before, rot_symmetry_before) /
+     	   p_Z_rot(T, rot_energy_after, num_rot_levels_after, rot_symmetry_after)) *
+           exp((vibr_energy_after - vibr_energy_before) / (K_CONST_K * T)) *
            exp((diss_energy_before - diss_energy_after) / (K_CONST_K * T));
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
+
   // compute the backward and forward reaction rate coefficients for dissociation-recombination (private)
-  double kappa::Approximation::p_k_bf_diss(	double T, 
-						double molecule_mass, 
-						double atom1_mass, 
-						double atom2_mass, 
-						double diss_energy, 
+  double kappa::Approximation::p_k_bf_diss(	double T,
+						double molecule_mass,
+						double atom1_mass,
+						double atom2_mass,
+						double diss_energy,
 						double vibr_energy,
-                                       		const arma::vec &rot_energy, 
-						int num_rot_levels, 
-						int rot_symmetry) { 
+                                       		const arma::vec &rot_energy,
+						int num_rot_levels,
+						int rot_symmetry) {
 
     // look at eq. 37 in system.pdf by Olga Kunova or eq. 2.79 in book Kustova & Nagnibeda, 2003/2009.
-    return pow(molecule_mass / (atom1_mass * atom2_mass), 1.5) * 
- 	   K_CONST_H * K_CONST_H * K_CONST_H * pow(2 * K_CONST_PI * K_CONST_K * T, -1.5) * 
+    return pow(molecule_mass / (atom1_mass * atom2_mass), 1.5) *
+ 	   K_CONST_H * K_CONST_H * K_CONST_H * pow(2 * K_CONST_PI * K_CONST_K * T, -1.5) *
 	   p_Z_rot(T, rot_energy, num_rot_levels, rot_symmetry) *
 	   exp((diss_energy - vibr_energy) / (K_CONST_K * T));
   }
@@ -1647,7 +1647,7 @@ kappa::Approximation::Approximation() {}
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     #endif
-  
+
     return sqrt(K_CONST_E0 * K_CONST_K * T / (arma::dot(concentrations, charges % charges)));
   }
 
@@ -1685,13 +1685,13 @@ kappa::Approximation::Approximation() {}
     if (e > molecule.num_electron_levels-1) {
       std::string error_string = "Electron level larger than max. level: e=" + std::to_string(e) + ", max. level=" + std::to_string(molecule.num_electron_levels-1);
       throw kappa::IncorrectValueException(error_string.c_str());
-    }	
+    }
     if (i > molecule.num_vibr_levels[e]-1) {
       std::string error_string = "Vibrational level larger than max. level: i=" + std::to_string(i) + ", max. level=" + std::to_string(molecule.num_vibr_levels[e]-1);
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     #endif
-  
+
     return p_Z_rot(T, molecule.rot_energy[e][i], molecule.num_rot_levels[e][i], molecule.rot_symmetry);
   }
 
@@ -1854,15 +1854,15 @@ kappa::Approximation::Approximation() {}
 
     double char_vibr_temp = molecule.characteristic_vibr_temperatures[0];
     return K_CONST_K/molecule.mass * (char_vibr_temp/T)*(char_vibr_temp/T)*exp(char_vibr_temp/T)/( (exp(char_vibr_temp/T) -1.) * (exp(char_vibr_temp/T) -1.) );
-  } 
+  }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::probability_VV(	double rel_vel, 	
- 						kappa::Molecule const &molecule1, 	
-						kappa::Molecule const &molecule2, 
+  double kappa::Approximation::probability_VV(	double rel_vel,
+ 						kappa::Molecule const &molecule1,
+						kappa::Molecule const &molecule2,
 						kappa::Interaction const &interaction,
-						int i, int k, int delta_i, int e1, int e2, 
+						int i, int k, int delta_i, int e1, int e2,
 						kappa::models_prob_vv model) {
 
     #ifdef KAPPA_STRICT_CHECKS
@@ -1887,10 +1887,10 @@ kappa::Approximation::Approximation() {}
       error_string += std::to_string(i) + ", " + std::to_string(k) + ", " + std::to_string(i + delta_i) + ", " + std::to_string(k - delta_i);
       throw kappa::IncorrectValueException(error_string.c_str());
     }
-    if (((interaction.particle1_name != molecule1.name) || (interaction.particle2_name != molecule2.name)) && 
+    if (((interaction.particle1_name != molecule1.name) || (interaction.particle2_name != molecule2.name)) &&
         ((interaction.particle1_name != molecule2.name) || (interaction.particle2_name != molecule1.name))) {
 
-      std::string error_string = "Interaction is for a different set of particles, the interaction is for: " + interaction.particle1_name + " + " 
+      std::string error_string = "Interaction is for a different set of particles, the interaction is for: " + interaction.particle1_name + " + "
                                                                                                              + interaction.particle2_name;
       error_string += "; the particles passed to the function are " + molecule1.name + ", " + molecule2.name;
       throw kappa::IncorrectValueException(error_string.c_str());
@@ -1902,10 +1902,10 @@ kappa::Approximation::Approximation() {}
       int abs_delta = abs(delta_i);
       double omega1 = abs(molecule1.vibr_energy[e1][i] - molecule1.vibr_energy[e1][i + delta_i]) / abs_delta;
       double omega2 = abs(molecule2.vibr_energy[e2][k] - molecule2.vibr_energy[e2][k - delta_i]) / abs_delta;
- 
-      return probability_VV_FHO(rel_vel, interaction.collision_mass, molecule1.vibr_energy[e1][i] 		- 
-                                                                     molecule1.vibr_energy[e1][i + delta_i] 	+ 
-                                                                     molecule2.vibr_energy[e2][k]               - 
+
+      return probability_VV_FHO(rel_vel, interaction.collision_mass, molecule1.vibr_energy[e1][i] 		-
+                                                                     molecule1.vibr_energy[e1][i + delta_i] 	+
+                                                                     molecule2.vibr_energy[e2][k]               -
                                                                      molecule2.vibr_energy[e2][k - delta_i],
                                                                      i, k, delta_i, omega1, omega2, abs(omega1 - omega2), interaction["alpha_FHO"]);
     } else {
@@ -1913,13 +1913,13 @@ kappa::Approximation::Approximation() {}
       throw kappa::ModelParameterException(error_string.c_str());
     }
   }
- 
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::probability_VT(	double rel_vel, 
-		 				kappa::Molecule const &molecule, 
+  double kappa::Approximation::probability_VT(	double rel_vel,
+		 				kappa::Molecule const &molecule,
 						kappa::Interaction const &interaction,
-                                             	int i, int delta_i, int e, 
+                                             	int i, int delta_i, int e,
 						kappa::models_prob_vt model) {
 
     #ifdef KAPPA_STRICT_CHECKS
@@ -1941,7 +1941,7 @@ kappa::Approximation::Approximation() {}
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     if ((interaction.particle1_name != molecule.name) && (interaction.particle2_name != molecule.name)) {
-      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " + interaction.particle1_name + " + " 
+      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " + interaction.particle1_name + " + "
                                                                                                                          + interaction.particle2_name;
       error_string += "; the molecule passed to the function is " + molecule.name;
       throw kappa::IncorrectValueException(error_string.c_str());
@@ -1959,28 +1959,28 @@ kappa::Approximation::Approximation() {}
         omega = - (molecule.vibr_energy[e][i] - molecule.vibr_energy[e][i + delta_i]) / (K_CONST_HBAR * abs(delta_i));
       }
 
-      double res = probability_VT_FHO(	rel_vel, 
-					interaction.collision_mass, 
+      double res = probability_VT_FHO(	rel_vel,
+					interaction.collision_mass,
 					molecule.reduced_osc_mass,
 		                        molecule.vibr_energy[e][i] - molecule.vibr_energy[e][i + delta_i],
- 	                          	i, delta_i, 	
-					omega, 
-					molecule.mA_mAB, 
-					interaction["alpha_FHO"], 
-					interaction["E_FHO"], 
+ 	                          	i, delta_i,
+					omega,
+					molecule.mA_mAB,
+					interaction["alpha_FHO"],
+					interaction["E_FHO"],
 					interaction["SVT_FHO"]);
 
       if (molecule.rot_symmetry == 1) {
 
-        res = 0.5 * (res + probability_VT_FHO(	rel_vel, 
-  						interaction.collision_mass, 
+        res = 0.5 * (res + probability_VT_FHO(	rel_vel,
+  						interaction.collision_mass,
 						molecule.reduced_osc_mass,
                         			molecule.vibr_energy[e][i] - molecule.vibr_energy[e][i + delta_i],
-                       				i, delta_i, 
-						omega, 	
-						molecule.mB_mAB, 
-						interaction["alpha_FHO"], 
-						interaction["E_FHO"], 
+                       				i, delta_i,
+						omega,
+						molecule.mB_mAB,
+						interaction["alpha_FHO"],
+						interaction["E_FHO"],
 						interaction["SVT_FHO"]));
       }
       return res;
@@ -1992,11 +1992,11 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::probability_diss(double rel_vel, 
-						kappa::Molecule const &molecule, 
-						kappa::Interaction const &interaction, 
-						int i, 
-						int e, 
+  double kappa::Approximation::probability_diss(double rel_vel,
+						kappa::Molecule const &molecule,
+						kappa::Interaction const &interaction,
+						int i,
+						int e,
 						kappa::models_prob_diss model) {
     #ifdef KAPPA_STRICT_CHECKS
     if (rel_vel < 0.0) {
@@ -2013,7 +2013,7 @@ kappa::Approximation::Approximation() {}
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     if ((interaction.particle1_name != molecule.name) && (interaction.particle2_name != molecule.name)) {
-      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " + interaction.particle1_name + " + " 
+      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " + interaction.particle1_name + " + "
                                 											 + interaction.particle2_name;
       error_string += "; the molecule passed to the function is " + molecule.name;
       throw kappa::IncorrectValueException(error_string.c_str());
@@ -2041,10 +2041,10 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::probability_diss(double rel_vel, 
-						kappa::Molecule const &molecule, 
-						kappa::Interaction const &interaction, 
-						int i, 
+  double kappa::Approximation::probability_diss(double rel_vel,
+						kappa::Molecule const &molecule,
+						kappa::Interaction const &interaction,
+						int i,
 						kappa::models_prob_diss model) {
 
     return probability_diss(rel_vel, molecule, interaction, i, 0, model);
@@ -2060,7 +2060,7 @@ kappa::Approximation::Approximation() {}
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     #endif
-  
+
     switch (model) {
       case models_cs_elastic::model_cs_el_vss:
         if (interaction.vss_data) {
@@ -2145,7 +2145,7 @@ kappa::Approximation::Approximation() {}
           std::string error_string = "No VSS data found for " + interaction.particle1_name + " + " + interaction.particle2_name + " interaction";
           throw kappa::DataNotFoundException(error_string.c_str());
         }
-      
+
         break;
       }
       default:
@@ -2164,11 +2164,11 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::crosssection_diss(	double rel_vel, 
-							kappa::Molecule const &molecule, 
-							kappa::Interaction const &interaction, 
-							int i, 
-							int e, 
+  double kappa::Approximation::crosssection_diss(	double rel_vel,
+							kappa::Molecule const &molecule,
+							kappa::Interaction const &interaction,
+							int i,
+							int e,
 							kappa::models_cs_diss model) {
 
     #ifdef KAPPA_STRICT_CHECKS
@@ -2255,15 +2255,15 @@ kappa::Approximation::Approximation() {}
       default:
         std::string error_string = "Unknown choice of dissociation probability model";
         throw kappa::ModelParameterException(error_string.c_str());
-     }  
-  }  
+     }
+  }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::crosssection_diss(	double rel_vel, 	
-							kappa::Molecule const &molecule, 
-							kappa::Interaction const &interaction, 
-							int i, 
+  double kappa::Approximation::crosssection_diss(	double rel_vel,
+							kappa::Molecule const &molecule,
+							kappa::Interaction const &interaction,
+							int i,
 							kappa::models_cs_diss model) {
 
     return crosssection_diss(rel_vel, molecule, interaction, i, 0, model);
@@ -2297,7 +2297,7 @@ kappa::Approximation::Approximation() {}
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     if ((interaction.particle1_name != molecule.name) && (interaction.particle2_name != molecule.name)) {
-      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " + interaction.particle1_name + 
+      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " + interaction.particle1_name +
  														   " + " + interaction.particle2_name;
       error_string += "; the molecule passed to the function is " + molecule.name;
       throw kappa::IncorrectValueException(error_string.c_str());
@@ -2310,10 +2310,10 @@ kappa::Approximation::Approximation() {}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Rotational relaxation time by Parker
-   double kappa::Approximation::rot_relaxation_time_parker(	double T, 
-								double n, 
-								kappa::Molecule const &molecule, 
-								kappa::Interaction const &interaction, 
+   double kappa::Approximation::rot_relaxation_time_parker(	double T,
+								double n,
+								kappa::Molecule const &molecule,
+								kappa::Interaction const &interaction,
 								kappa::models_omega model) {
 
      #ifdef KAPPA_STRICT_CHECKS
@@ -2326,17 +2326,17 @@ kappa::Approximation::Approximation() {}
        throw kappa::IncorrectValueException(error_string.c_str());
      }
      if ((interaction.particle1_name != molecule.name) && (interaction.particle2_name != molecule.name)) {
-       std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " + interaction.particle1_name 
-  														  + " + " + interaction.particle2_name;
+       std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: "
+                                  + interaction.particle1_name + " + " + interaction.particle2_name;
        error_string += "; the molecule passed to the function is " + molecule.name;
        throw kappa::IncorrectValueException(error_string.c_str());
      }
      #endif
 
-     //std::cout << "p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon)" << std::endl;
-     //std::cout << p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon) << std::endl;
-     //std::cout << omega_integral(T, interaction, 2, 2, model, true) << " " << n << std::endl;
-     return p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon) * K_CONST_PI * 0.15625 / 
+     //std::cout << p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon) * K_CONST_PI * 0.15625 /
+     //             (n * omega_integral(T, interaction, 2, 2, model, true)) << std::endl;
+
+     return p_rot_collision_number_parker(T, molecule.parker_const, interaction.epsilon) * K_CONST_PI * 0.15625 /
 	                                 (n * omega_integral(T, interaction, 2, 2, model, true));
   }
 
@@ -2355,7 +2355,7 @@ kappa::Approximation::Approximation() {}
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     if ((interaction.particle1_name != molecule.name) && (interaction.particle2_name != molecule.name)) {
-      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " + interaction.particle1_name + 
+      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " + interaction.particle1_name +
 														   " + " + interaction.particle2_name;
       error_string += "; the molecule passed to the function is " + molecule.name;
       throw kappa::IncorrectValueException(error_string.c_str());
@@ -2390,7 +2390,7 @@ kappa::Approximation::Approximation() {}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   double kappa::Approximation::omega_integral(double T, kappa::Interaction const &interaction, int l, int r, kappa::models_omega model, bool dimensional) {
-   
+
     #ifdef KAPPA_STRICT_CHECKS
     if (T <= 0) {
       std::string error_string = "Non-positive temperature: T=" + std::to_string(T);
@@ -2399,7 +2399,7 @@ kappa::Approximation::Approximation() {}
     if ((l <= 0) || (r <= 0)) {
       std::string error_string = "Non-positive number density l or degree: (l,r)=(" + std::to_string(l) + "," + std::to_string(r) + ")";
       throw kappa::IncorrectValueException(error_string.c_str());
-    } 
+    }
     #endif
 
     switch (model) {
@@ -2423,7 +2423,7 @@ kappa::Approximation::Approximation() {}
             if (dimensional) {
               return omega_integral_VSS(T, l, r, interaction.collision_mass, interaction.vss_c_cs, interaction.vss_omega, interaction.vss_alpha);
             } else {
-              return omega_integral_VSS(T, l, r, interaction.collision_mass, interaction.vss_c_cs, interaction.vss_omega, interaction.vss_alpha) / 
+              return omega_integral_VSS(T, l, r, interaction.collision_mass, interaction.vss_c_cs, interaction.vss_omega, interaction.vss_alpha) /
               omega_integral_RS(T, l, r, interaction.collision_diameter, interaction.collision_mass);
             }
           }
@@ -2447,7 +2447,7 @@ kappa::Approximation::Approximation() {}
 	                 omega_integral_RS(T+K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction.collision_diameter, interaction.collision_mass) -
 	                 omega_integral_LennardJones(T-K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction.epsilon) *
 	                 omega_integral_RS(T-K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction.collision_diameter, interaction.collision_mass)) * T / (2 * K_CONST_OMEGA_D_STEP_SIZE) +
-	                 (l + 1.5) * omega_integral_LennardJones(T, l, l, interaction.epsilon) * 
+	                 (l + 1.5) * omega_integral_LennardJones(T, l, l, interaction.epsilon) *
 	                 omega_integral_RS(T, l, l, interaction.collision_diameter, interaction.collision_mass);
 
           if (dimensional == true) {
@@ -2492,7 +2492,7 @@ kappa::Approximation::Approximation() {}
           r0 = T * T * T * (rp2 - 2 * rp1 + 2 * rm1 - rm2) / (2 * K_CONST_OMEGA_D_STEP_SIZE * K_CONST_OMEGA_D_STEP_SIZE * K_CONST_OMEGA_D_STEP_SIZE)
              + T * T * (3 * l + 14.5) * (rp1 - 2 * r0 + rm1) / (K_CONST_OMEGA_D_STEP_SIZE * K_CONST_OMEGA_D_STEP_SIZE)
              + T * ((2 * l + 9) * (l + 4.5) + (l + 2.5) * (l + 1.5)) * (rp1 - rm1) / (2 * K_CONST_OMEGA_D_STEP_SIZE)
-             + (l + 3.5) * (l + 2.5) * (l + 1.5) * r0;               
+             + (l + 3.5) * (l + 2.5) * (l + 1.5) * r0;
 
           if (dimensional == true) {
             return r0;
@@ -2504,7 +2504,7 @@ kappa::Approximation::Approximation() {}
           double r0 = omega_integral(T, interaction, 1, 4, model, true);
 
           double res = (omega_integral(T+K_CONST_OMEGA_D_STEP_SIZE, interaction, 1, 4, model, true) -
-                        omega_integral(T-K_CONST_OMEGA_D_STEP_SIZE, interaction, 1, 4, model, true)) * T / (2 * K_CONST_OMEGA_D_STEP_SIZE) + 5.5 * r0;             
+                        omega_integral(T-K_CONST_OMEGA_D_STEP_SIZE, interaction, 1, 4, model, true)) * T / (2 * K_CONST_OMEGA_D_STEP_SIZE) + 5.5 * r0;
 
           if (dimensional == true) {
             return r0;
@@ -2530,18 +2530,18 @@ kappa::Approximation::Approximation() {}
 	 } else if ((l == 1 && r == 2) || (l == 2 && r == 3)) {
 
 	   double res =  (omega_integral_Born_Mayer(T+K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction["beta Born-Mayer"],
-	                  							       interaction["phi_zero Born-Mayer"], 
-										       interaction.collision_diameter, 
+	                  							       interaction["phi_zero Born-Mayer"],
+										       interaction.collision_diameter,
 										       interaction["Lennard-Jones epsilon"])
 	                * omega_integral_RS(T+K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction.collision_diameter, interaction.collision_mass) -
 	                  omega_integral_Born_Mayer(T-K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction["beta Born-Mayer"],
-	                  							       interaction["phi_zero Born-Mayer"], 
-										       interaction.collision_diameter, 
+	                  							       interaction["phi_zero Born-Mayer"],
+										       interaction.collision_diameter,
 									               interaction["Lennard-Jones epsilon"])
-	                * omega_integral_RS(T-K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction.collision_diameter, interaction.collision_mass)) * T / 
+	                * omega_integral_RS(T-K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction.collision_diameter, interaction.collision_mass)) * T /
 			(2 * K_CONST_OMEGA_D_STEP_SIZE) + (l + 1.5) * omega_integral_Born_Mayer(T, l, l, interaction["beta Born-Mayer"],
-	             	  										 interaction["phi_zero Born-Mayer"], 
-													 interaction.collision_diameter, 
+	             	  										 interaction["phi_zero Born-Mayer"],
+													 interaction.collision_diameter,
 													 interaction["Lennard-Jones epsilon"])
 	                * omega_integral_RS(T, l, l, interaction.collision_diameter, interaction.collision_mass);
 
@@ -2552,25 +2552,25 @@ kappa::Approximation::Approximation() {}
            }
          } else if ((l == 1 && r == 3) || (l == 2 && r == 4)) {
 
-           double r0 = omega_integral_Born_Mayer(T, l, l, interaction["beta Born-Mayer"], 
- 						          interaction["phi_zero Born-Mayer"], 
-							  interaction.collision_diameter, 
+           double r0 = omega_integral_Born_Mayer(T, l, l, interaction["beta Born-Mayer"],
+ 						          interaction["phi_zero Born-Mayer"],
+							  interaction.collision_diameter,
 							  interaction["Lennard-Jones epsilon"])
 	              * omega_integral_RS(T, l, l, interaction.collision_diameter, interaction.collision_mass);
 
            double rp1 = omega_integral_Born_Mayer(T+K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction["beta Born-Mayer"],
-	                                                   			     interaction["phi_zero Born-Mayer"], 
-										     interaction.collision_diameter, 
+	                                                   			     interaction["phi_zero Born-Mayer"],
+										     interaction.collision_diameter,
 										     interaction["Lennard-Jones epsilon"])
 	              * omega_integral_RS(T+K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction.collision_diameter, interaction.collision_mass);
 
            double rm1 = omega_integral_Born_Mayer(T-K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction["beta Born-Mayer"],
-	                                                   			     interaction["phi_zero Born-Mayer"], 
-										     interaction.collision_diameter, 
+	                                                   			     interaction["phi_zero Born-Mayer"],
+										     interaction.collision_diameter,
 										     interaction["Lennard-Jones epsilon"])
 	              * omega_integral_RS(T-K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction.collision_diameter, interaction.collision_mass);
 
-	   r0 = T * T * (rp1 - 2 * r0 + rm1) / (K_CONST_OMEGA_D_STEP_SIZE * K_CONST_OMEGA_D_STEP_SIZE) + T * (2 * l + 5) * (rp1 - rm1) / (2 * K_CONST_OMEGA_D_STEP_SIZE) + (l + 2.5) * (l + 1.5) * r0;             	
+	   r0 = T * T * (rp1 - 2 * r0 + rm1) / (K_CONST_OMEGA_D_STEP_SIZE * K_CONST_OMEGA_D_STEP_SIZE) + T * (2 * l + 5) * (rp1 - rm1) / (2 * K_CONST_OMEGA_D_STEP_SIZE) + (l + 2.5) * (l + 1.5) * r0;
 
            if (dimensional == true) {
              return r0;
@@ -2580,23 +2580,23 @@ kappa::Approximation::Approximation() {}
          } else if (l == 1 && r == 4) {
 
            double r0 = omega_integral_Born_Mayer(T, l, l, interaction["beta Born-Mayer"],
- 	                                                  interaction["phi_zero Born-Mayer"], 
-	 					          interaction.collision_diameter, 
+ 	                                                  interaction["phi_zero Born-Mayer"],
+	 					          interaction.collision_diameter,
 					                  interaction["Lennard-Jones epsilon"])
 	                       			          * omega_integral_RS(T, l, l, interaction.collision_diameter, interaction.collision_mass);
 
            double rp1 = omega_integral_Born_Mayer(T+K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction["beta Born-Mayer"],
-                                                      			             interaction["phi_zero Born-Mayer"], 
-										     interaction.collision_diameter, 
+                                                      			             interaction["phi_zero Born-Mayer"],
+										     interaction.collision_diameter,
 										     interaction["Lennard-Jones epsilon"])
-	                         						     * omega_integral_RS(T + K_CONST_OMEGA_D_STEP_SIZE, 
-									             l, l, 
-										     interaction.collision_diameter, 
+	                         						     * omega_integral_RS(T + K_CONST_OMEGA_D_STEP_SIZE,
+									             l, l,
+										     interaction.collision_diameter,
 										     interaction.collision_mass);
 
            double rm1 = omega_integral_Born_Mayer(T-K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction["beta Born-Mayer"],
-	                                                   			      interaction["phi_zero Born-Mayer"], 
-										      interaction.collision_diameter, 
+	                                                   			      interaction["phi_zero Born-Mayer"],
+										      interaction.collision_diameter,
 										      interaction["Lennard-Jones epsilon"])
 						                                      * omega_integral_RS(T-K_CONST_OMEGA_D_STEP_SIZE, l, l, interaction.collision_diameter, interaction.collision_mass);
 
@@ -2611,7 +2611,7 @@ kappa::Approximation::Approximation() {}
            r0 = T * T * T * (rp2 - 2 * rp1 + 2 * rm1 - rm2) / (2 * K_CONST_OMEGA_D_STEP_SIZE * K_CONST_OMEGA_D_STEP_SIZE * K_CONST_OMEGA_D_STEP_SIZE)
 	      + T * T * (3 * l + 14.5) * (rp1 - 2 * r0 + rm1) / (K_CONST_OMEGA_D_STEP_SIZE * K_CONST_OMEGA_D_STEP_SIZE)
 	      + T * ((2 * l + 9) * (l + 4.5) + (l + 2.5) * (l + 1.5)) * (rp1 - rm1) / (2 * K_CONST_OMEGA_D_STEP_SIZE)
-	      + (l + 3.5) * (l + 2.5) * (l + 1.5) * r0;               
+	      + (l + 3.5) * (l + 2.5) * (l + 1.5) * r0;
 
            if (dimensional == true) {
              return r0;
@@ -2622,7 +2622,7 @@ kappa::Approximation::Approximation() {}
 	   double r0 = omega_integral(T, interaction, 1, 4, model, true);
 	   double res = (omega_integral(T+K_CONST_OMEGA_D_STEP_SIZE, interaction, 1, 4, model, true) -
 	                 omega_integral(T-K_CONST_OMEGA_D_STEP_SIZE, interaction, 1, 4, model, true)) * T / (2 * K_CONST_OMEGA_D_STEP_SIZE)
-	                       + 5.5 * r0;           
+	                       + 5.5 * r0;
 
            if (dimensional == true) {
              return r0;
@@ -2635,7 +2635,7 @@ kappa::Approximation::Approximation() {}
 	   throw kappa::ModelParameterException(error_string.c_str());
 	 }
 	 break;
- 	
+
       // Bracket integrals -- ESA model
       case models_omega::model_omega_esa:
         if (interaction.interaction_type == interaction_types::interaction_neutral_neutral) {
@@ -2676,12 +2676,12 @@ kappa::Approximation::Approximation() {}
               throw kappa::ModelParameterException(error_string.c_str());
             }
           } else if ((l == 1 && r == 1) || (l == 1 && r == 2) || (l == 1 && r == 3) || (l == 1 && r == 4) || (l == 1 && r == 5) || (l == 2 && r == 2) || (l == 2 && r == 3) || (l == 2 && r == 4) || (l == 3 && r == 3) || (l == 4 && r == 4)) {
-  	    if (dimensional == true) 
+  	    if (dimensional == true)
         {
-  	      return omega_integral_ESA_nn(T, l, r, interaction["beta Bruno"], interaction["epsilon0 Bruno"], interaction["re Bruno"]) * 
+  	      return omega_integral_ESA_nn(T, l, r, interaction["beta Bruno"], interaction["epsilon0 Bruno"], interaction["re Bruno"]) *
                  omega_integral_RS(T, l, r, interaction.collision_diameter, interaction.collision_mass);
-  	    } 
-        else 
+  	    }
+        else
         {
   	      return omega_integral_ESA_nn(T, l, r, interaction["beta Bruno"], interaction["epsilon0 Bruno"], interaction["re Bruno"]);
   	    }
@@ -2730,7 +2730,7 @@ kappa::Approximation::Approximation() {}
     		      if (l == 1 && r == 5) {
     		        ch_exch = kappa::Approximation::omega_integral_ESA_cn_corr( T, 64.5529, -4.2062, 6.8523e-2, interaction["beta Bruno"], interaction["re Bruno"]);
     		      }
-    		      tmp = sqrt(tmp*tmp + ch_exch*ch_exch);           
+    		      tmp = sqrt(tmp*tmp + ch_exch*ch_exch);
 
             } else if (((interaction.particle1_name == "O") && (interaction.particle2_name == "O+")) || ((interaction.particle1_name == "O+") && (interaction.particle2_name == "O"))) {
     	      if (l == 1 && r == 1) {
@@ -2748,7 +2748,7 @@ kappa::Approximation::Approximation() {}
     		      if (l == 1 && r == 5) {
     		        ch_exch = kappa::Approximation::omega_integral_ESA_cn_corr( T, 60.7663, -4.0646, 6.7987e-2, interaction["beta Bruno"], interaction["re Bruno"]);
     		      }
-    		      tmp = sqrt(tmp*tmp + ch_exch*ch_exch);           
+    		      tmp = sqrt(tmp*tmp + ch_exch*ch_exch);
 
             } else if (((interaction.particle1_name == "C") && (interaction.particle2_name == "C+")) || ((interaction.particle1_name == "C+") && (interaction.particle2_name == "C"))) {
     	      if (l == 1 && r == 1) {
@@ -2766,7 +2766,7 @@ kappa::Approximation::Approximation() {}
     		      if (l == 1 && r == 5) {
     		        ch_exch = kappa::Approximation::omega_integral_ESA_cn_corr( T, 61.3500, -4.6395, 8.7730e-2, interaction["beta Bruno"], interaction["re Bruno"]);
     		      }
-    		      tmp = sqrt(tmp * tmp + ch_exch * ch_exch);           
+    		      tmp = sqrt(tmp * tmp + ch_exch * ch_exch);
 
     	    } else if (((interaction.particle1_name == "CO") && (interaction.particle2_name == "CO+")) || ((interaction.particle1_name == "CO+") && (interaction.particle2_name == "CO"))) {
     	      if (l == 1 && r == 1) {
@@ -2784,7 +2784,7 @@ kappa::Approximation::Approximation() {}
     		      if (l == 1 && r == 5) {
     		        ch_exch = kappa::Approximation::omega_integral_ESA_cn_corr( T, 79.8298, -5.4225, 9.2091e-2, interaction["beta Bruno"], interaction["re Bruno"]);
     		      }
-    		      tmp = sqrt(tmp*tmp + ch_exch*ch_exch);           
+    		      tmp = sqrt(tmp*tmp + ch_exch*ch_exch);
     	    }
             if (dimensional == true) {
       	      return tmp * omega_integral_RS(T, l, r, interaction.collision_diameter, interaction.collision_mass);
@@ -2798,36 +2798,36 @@ kappa::Approximation::Approximation() {}
   	  }
   	} else if  (interaction.interaction_type == interaction_types::interaction_neutral_electron) {
 
-          if ((l == 1 && r == 1) || (l == 1 && r == 2) || (l == 1 && r == 3) || (l == 1 && r == 4) || (l == 1 && r == 5) || 
+          if ((l == 1 && r == 1) || (l == 1 && r == 2) || (l == 1 && r == 3) || (l == 1 && r == 4) || (l == 1 && r == 5) ||
               (l == 2 && r == 2) || (l == 2 && r == 3) || (l == 2 && r == 4) || (l == 3 && r == 3)) {
 
             std::string lrc = "_Om" + std::to_string(l) + std::to_string(r) + "_";
 
             if (dimensional == true) {
 
-              return omega_integral_ESA_ne(	T, 	interaction[lrc+"0"], 
-							interaction[lrc+"1"], 
-							interaction[lrc+"2"], 
-							interaction[lrc+"3"], 
-							interaction[lrc+"4"], 
+              return omega_integral_ESA_ne(	T, 	interaction[lrc+"0"],
+							interaction[lrc+"1"],
+							interaction[lrc+"2"],
+							interaction[lrc+"3"],
+							interaction[lrc+"4"],
 							interaction[lrc+"5"],
-                                           		interaction[lrc+"6"], 
-							interaction[lrc+"7"], 
-							interaction[lrc+"8"], 
+                                           		interaction[lrc+"6"],
+							interaction[lrc+"7"],
+							interaction[lrc+"8"],
 							interaction[lrc+"9"],
-                                           		interaction.collision_diameter) * 
+                                           		interaction.collision_diameter) *
 							omega_integral_RS(T, l, r, interaction.collision_diameter, interaction.collision_mass);
             } else {
-              return omega_integral_ESA_ne(	T, 
-						interaction[lrc+"0"], 
-						interaction[lrc+"1"], 
-						interaction[lrc+"2"], 
-						interaction[lrc+"3"], 
-						interaction[lrc+"4"], 	
+              return omega_integral_ESA_ne(	T,
+						interaction[lrc+"0"],
+						interaction[lrc+"1"],
+						interaction[lrc+"2"],
+						interaction[lrc+"3"],
+						interaction[lrc+"4"],
 						interaction[lrc+"5"],
-                                           	interaction[lrc+"6"], 
-						interaction[lrc+"7"], 
-						interaction[lrc+"8"], 
+                                           	interaction[lrc+"6"],
+						interaction[lrc+"7"],
+						interaction[lrc+"8"],
 						interaction[lrc+"9"],
                                            	interaction.collision_diameter);
             }
@@ -2846,11 +2846,11 @@ kappa::Approximation::Approximation() {}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::omega_integral(	double T, 
-						kappa::Interaction const &interaction, 
-						int l, int r, 
-						double debye_length, 
-						kappa::models_omega model, 
+  double kappa::Approximation::omega_integral(	double T,
+						kappa::Interaction const &interaction,
+						int l, int r,
+						double debye_length,
+						kappa::models_omega model,
 						bool dimensional) {
 
     if (interaction.interaction_type != interaction_types::interaction_charged_charged) {
@@ -2870,19 +2870,19 @@ kappa::Approximation::Approximation() {}
         throw kappa::IncorrectValueException(error_string.c_str());
       }
       #endif
-      
-      if ((l == 1 && r == 1) || 
-          (l == 1 && r == 2) || 
-          (l == 1 && r == 3) || 
-          (l == 1 && r == 4) || 
-          (l == 1 && r == 5) || 
-          (l == 2 && r == 2) || 
-          (l == 2 && r == 3) || 
-          (l == 2 && r == 4) || 
+
+      if ((l == 1 && r == 1) ||
+          (l == 1 && r == 2) ||
+          (l == 1 && r == 3) ||
+          (l == 1 && r == 4) ||
+          (l == 1 && r == 5) ||
+          (l == 2 && r == 2) ||
+          (l == 2 && r == 3) ||
+          (l == 2 && r == 4) ||
           (l == 3 && r == 3)) {
 
         if (dimensional) {
-          return omega_integral_ESA_cc(T, l, r, interaction.charge1, interaction.charge2, debye_length) * 
+          return omega_integral_ESA_cc(T, l, r, interaction.charge1, interaction.charge2, debye_length) *
                  omega_integral_RS(T, l, r, interaction.collision_diameter, interaction.collision_mass);
         } else {
           return omega_integral_ESA_cc(T, l, r, interaction.charge1, interaction.charge2, debye_length);
@@ -2984,12 +2984,12 @@ kappa::Approximation::Approximation() {}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // main function for VT
-   double kappa::Approximation::k_VT(	double T, 
-					kappa::Molecule const &molecule, 
-					kappa::Interaction const &interaction, 
-					int i, 
-					int delta_i, 
-					int e, 
+   double kappa::Approximation::k_VT(	double T,
+					kappa::Molecule const &molecule,
+					kappa::Interaction const &interaction,
+					int i,
+					int delta_i,
+					int e,
 					kappa::models_k_vt model) {
 
     #ifdef KAPPA_STRICT_CHECKS
@@ -3011,7 +3011,7 @@ kappa::Approximation::Approximation() {}
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     if ((interaction.particle1_name != molecule.name) && (interaction.particle2_name != molecule.name)) {
-      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " 
+      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: "
                                  :+ interaction.particle1_name + " + " + interaction.particle2_name;
       error_string += "; the molecule passed to the function is " + molecule.name;
       throw kappa::IncorrectValueException(error_string.c_str());
@@ -3098,47 +3098,47 @@ kappa::Approximation::Approximation() {}
         if (delta_i == -1) {
           if (molecule.anharmonic_spectrum) {
 
-            return k_VT_SSH(	T, 
-      				i, 
-      				interaction.collision_mass, 
-      				interaction.collision_diameter, 
-      				molecule.vibr_frequency[0], 
-      				interaction.epsilon, 	
+            return k_VT_SSH(	T,
+      				i,
+      				interaction.collision_mass,
+      				interaction.collision_diameter,
+      				molecule.vibr_frequency[0],
+      				interaction.epsilon,
       				molecule.internuclear_distance,
-                       		molecule.vibr_energy[0][i] - molecule.vibr_energy[0][i + delta_i], 
+                       		molecule.vibr_energy[0][i] - molecule.vibr_energy[0][i + delta_i],
       				molecule.vibr_energy[0][1] - molecule.vibr_energy[0][0]);
           } else {
 
-            return k_VT_SSH(	T, 
-      				i, 
-      				interaction.collision_mass, 
-      				interaction.collision_diameter, 
-      				molecule.vibr_frequency[0], 
-      				interaction.epsilon, 
+            return k_VT_SSH(	T,
+      				i,
+      				interaction.collision_mass,
+      				interaction.collision_diameter,
+      				molecule.vibr_frequency[0],
+      				interaction.epsilon,
       				molecule.internuclear_distance);
           }
         } else if (delta_i == 1) {
           if (molecule.anharmonic_spectrum) {
 
-            return k_VT_SSH(	T, 
-      				i + delta_i, 
-      				interaction.collision_mass, 
-      				interaction.collision_diameter, 	
-      				molecule.vibr_frequency[0], 
-      				interaction.epsilon, 
+            return k_VT_SSH(	T,
+      				i + delta_i,
+      				interaction.collision_mass,
+      				interaction.collision_diameter,
+      				molecule.vibr_frequency[0],
+      				interaction.epsilon,
       				molecule.internuclear_distance,
-               	        	molecule.vibr_energy[0][i + delta_i] - molecule.vibr_energy[0][i], 
+               	        	molecule.vibr_energy[0][i + delta_i] - molecule.vibr_energy[0][i],
       				molecule.vibr_energy[0][1] - molecule.vibr_energy[0][0]) * k_bf_VT(T, molecule, i + delta_i, -delta_i, 0);
           } else {
 
-            return k_VT_SSH(	T, 	
-      				i + delta_i, 
-      				interaction.collision_mass, 
-      				interaction.collision_diameter, 
-      				molecule.vibr_frequency[0], 
-      				interaction.epsilon, 
+            return k_VT_SSH(	T,
+      				i + delta_i,
+      				interaction.collision_mass,
+      				interaction.collision_diameter,
+      				molecule.vibr_frequency[0],
+      				interaction.epsilon,
       				molecule.internuclear_distance) * k_bf_VT(T, molecule, i + delta_i, -delta_i, 0);
-          } 
+          }
         } else {
           std::string error_string = "Only one-quantum transitions allowed for the SSH model";
           throw kappa::IncorrectValueException(error_string.c_str());
@@ -3162,7 +3162,7 @@ kappa::Approximation::Approximation() {}
             std::string error_string = "No Billing approximation for N2+N2 non-monoquantum VT transition";  // TODO: add reverse rate
             throw kappa::ModelParameterException(error_string.c_str());
           }
-        } else if (((interaction.particle1_name == "N2") && (interaction.particle2_name == "N")) || 
+        } else if (((interaction.particle1_name == "N2") && (interaction.particle2_name == "N")) ||
                    ((interaction.particle1_name == "N") && (interaction.particle2_name == "N2"))) {
           if (delta_i < 0) {
             return k_VT_Billing_N2N(T, i, delta_i);
@@ -3170,19 +3170,19 @@ kappa::Approximation::Approximation() {}
             return k_VT_Billing_N2N(T, i + delta_i, -delta_i) * k_bf_VT(T, molecule, i + delta_i, -delta_i, 0);
           }
         } else  {
-          std::string error_string = "No Billing approximation for VT rate for the following species: " + interaction.particle1_name + ", " 
+          std::string error_string = "No Billing approximation for VT rate for the following species: " + interaction.particle1_name + ", "
           											      + interaction.particle2_name;
           throw kappa::ModelParameterException(error_string.c_str());
         }
-      } 
+      }
 
-      // ESA phys4entry 
+      // ESA phys4entry
       case models_k_vt::model_k_vt_phys4entry: {
         if (e != 0) {
           std::string error_string = "No Phys4Entry approximation for electronically excited molecules";
           throw kappa::ModelParameterException(error_string.c_str());
         }
-        if (((interaction.particle1_name == "N2") && (interaction.particle2_name == "N")) || 
+        if (((interaction.particle1_name == "N2") && (interaction.particle2_name == "N")) ||
             ((interaction.particle1_name == "N") && (interaction.particle2_name == "N2"))) {
           if (delta_i < 0 ) {
             return k_VT_N2N_p4e(T, (int)convert_vibr_ladder_N2(molecule.vibr_energy[e][i]), delta_i);
@@ -3193,7 +3193,7 @@ kappa::Approximation::Approximation() {}
           //   std::string error_string = "No Billing approximation for N2+N2 non-monoquantum VT transition";  // TODO: add reverse rate
           //   throw kappa::ModelParameterException(error_string.c_str());
           // }
-        } else if (((interaction.particle1_name == "O2") && (interaction.particle2_name == "O")) || 
+        } else if (((interaction.particle1_name == "O2") && (interaction.particle2_name == "O")) ||
                    ((interaction.particle1_name == "O") && (interaction.particle2_name == "O2"))) {
           if (delta_i < 0) {
             return k_VT_O2O_p4e(T, (int)convert_vibr_ladder_O2(molecule.vibr_energy[e][i]), delta_i);
@@ -3201,7 +3201,7 @@ kappa::Approximation::Approximation() {}
             return k_VT_O2O_p4e(T, (int)convert_vibr_ladder_O2(molecule.vibr_energy[e][i]), -delta_i) * k_bf_VT(T, molecule, i + delta_i, -delta_i, 0);
           }
         } else  {
-          std::string error_string = "No Phys4Entry approximation for VT rate for the following species: " + interaction.particle1_name + ", " 
+          std::string error_string = "No Phys4Entry approximation for VT rate for the following species: " + interaction.particle1_name + ", "
            											         + interaction.particle2_name;
           throw kappa::ModelParameterException(error_string.c_str());
         }
@@ -3215,11 +3215,11 @@ kappa::Approximation::Approximation() {}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Simplified inteface (e=0) version for VT
-  double kappa::Approximation::k_VT(	double T, 
-					kappa::Molecule const &molecule, 
-					kappa::Interaction const &interaction, 
-					int i, 
-					int delta_i, 
+  double kappa::Approximation::k_VT(	double T,
+					kappa::Molecule const &molecule,
+					kappa::Interaction const &interaction,
+					int i,
+					int delta_i,
 					kappa::models_k_vt model) {
 
     return k_VT(T, molecule, interaction, i, delta_i, 0, model);
@@ -3227,13 +3227,13 @@ kappa::Approximation::Approximation() {}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::k_exch(	double T, 
-					kappa::Molecule const &molecule, 
-					kappa::Atom const &atom, 
+  double kappa::Approximation::k_exch(	double T,
+					kappa::Molecule const &molecule,
+					kappa::Atom const &atom,
 					kappa::Interaction const &interaction,
-                                    	int i, 
-					int e, 
-					int num_electron_levels, 
+                                    	int i,
+					int e,
+					int num_electron_levels,
 					kappa::models_k_exch model) {
 
     #ifdef KAPPA_STRICT_CHECKS
@@ -3246,7 +3246,7 @@ kappa::Approximation::Approximation() {}
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     if ((num_electron_levels < -1) || (num_electron_levels == 0)) {
-      std::string error_string = "Negative or zero value of number of electronic levels (can only be -1 or positive): num_electron_levels=" 
+      std::string error_string = "Negative or zero value of number of electronic levels (can only be -1 or positive): num_electron_levels="
                                + std::to_string(num_electron_levels);
       throw kappa::IncorrectValueException(error_string.c_str());
     }
@@ -3259,9 +3259,9 @@ kappa::Approximation::Approximation() {}
       std::string error_string = "Negative electronic level: e=" + std::to_string(e);
       throw kappa::IncorrectValueException(error_string.c_str());
     }
-    if (((interaction.particle1_name != molecule.name) || (interaction.particle2_name != atom.name)) && 
+    if (((interaction.particle1_name != molecule.name) || (interaction.particle2_name != atom.name)) &&
        ((interaction.particle1_name != atom.name) || (interaction.particle2_name != molecule.name))) {
-      std::string error_string = "Interaction is for a different set of particles, the interaction is for: " 
+      std::string error_string = "Interaction is for a different set of particles, the interaction is for: "
       			       + interaction.particle1_name + " + " + interaction.particle2_name;
       error_string += "; the particles passed to the function are " + molecule.name + ", " + atom.name;
       throw kappa::IncorrectValueException(error_string.c_str());
@@ -3273,7 +3273,7 @@ kappa::Approximation::Approximation() {}
       // model_k_exch_arrh_scanlon
       case models_k_exch::model_k_exch_arrh_scanlon:
 
-        if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="O2") && (atom.name=="N")) || 
+        if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="O2") && (atom.name=="N")) ||
 	   ((molecule.name=="NO") && (atom.name=="O")) || ((molecule.name=="NO") && (atom.name=="N"))) {
           return k_Arrhenius(T, interaction["exch,Arrh_A,Scanlon"], interaction["exch,Arrh_n,Scanlon"], interaction["exch,Ea,Scanlon"]);
         } else {
@@ -3319,12 +3319,12 @@ kappa::Approximation::Approximation() {}
       case models_k_exch::model_k_exch_polak:
 
         if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="O2") && (atom.name=="N"))) {
-          return k_exch_WRFP(T, 
-			     molecule.vibr_energy[e][i], 
-			     interaction["exch,Ea,WRFP"], 
-			     interaction["exch,alpha,Polak"], 
+          return k_exch_WRFP(T,
+			     molecule.vibr_energy[e][i],
+			     interaction["exch,Ea,WRFP"],
+			     interaction["exch,alpha,Polak"],
 			     interaction["exch,beta,Polak"],
-		   	     interaction["exch,A,RFP"], 
+		   	     interaction["exch,A,RFP"],
 			     interaction["exch,n,Polak"]);
         } else {
           std::string error_string = "No Polak data for exchange reaction for the following species: " + molecule.name + ", " + atom.name;
@@ -3340,11 +3340,11 @@ kappa::Approximation::Approximation() {}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // simplest interface (e=0 and only 1 electronic state) for the relaxation of chemical reactions
-  double kappa::Approximation::k_exch(	double T, 	
-					kappa::Molecule const &molecule, 
-					kappa::Atom const &atom, 
-					kappa::Interaction const &interaction, 
-					int i, 
+  double kappa::Approximation::k_exch(	double T,
+					kappa::Molecule const &molecule,
+					kappa::Atom const &atom,
+					kappa::Interaction const &interaction,
+					int i,
 					kappa::models_k_exch model) {
 
     return k_exch(T, molecule, atom, interaction, i, 0, 1, model);
@@ -3352,15 +3352,15 @@ kappa::Approximation::Approximation() {}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::k_exch(	double T, 
-					kappa::Molecule const &molecule, 
-					kappa::Atom const &atom, 
-					kappa::Molecule const &molecule_prod, 
+  double kappa::Approximation::k_exch(	double T,
+					kappa::Molecule const &molecule,
+					kappa::Atom const &atom,
+					kappa::Molecule const &molecule_prod,
 					kappa::Interaction const &interaction,
-                                    	int i, 
-					int k, 
-					int e, 
-					int num_electron_levels, 
+                                    	int i,
+					int k,
+					int e,
+					int num_electron_levels,
 					kappa::models_k_exch model) {
 
     #ifdef KAPPA_STRICT_CHECKS
@@ -3389,9 +3389,9 @@ kappa::Approximation::Approximation() {}
       std::string error_string = "Negative electronic level: e=" + std::to_string(e);
       throw kappa::IncorrectValueException(error_string.c_str());
     }
-    if (((interaction.particle1_name != molecule.name) || (interaction.particle2_name != atom.name)) && 
+    if (((interaction.particle1_name != molecule.name) || (interaction.particle2_name != atom.name)) &&
        ((interaction.particle1_name != atom.name) || (interaction.particle2_name != molecule.name))) {
-      std::string error_string = "Interaction is for a different set of particles, the interaction is for: " 
+      std::string error_string = "Interaction is for a different set of particles, the interaction is for: "
 			      + interaction.particle1_name + " + " + interaction.particle2_name;
       error_string += "; the particles passed to the function are " + molecule.name + ", " + atom.name;
       throw kappa::IncorrectValueException(error_string.c_str());
@@ -3407,22 +3407,22 @@ kappa::Approximation::Approximation() {}
       // model_k_exch_maliat_D6k_arrh_scanlon
       case models_k_exch::model_k_exch_maliat_D6k_arrh_scanlon:
 
-        if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="O2") && (atom.name=="N")) || 
+        if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="O2") && (atom.name=="N")) ||
 	    ((molecule.name=="NO") && (atom.name=="O")) ||((molecule.name=="NO") && (atom.name=="N"))) {
-          return k_Arrhenius(	T, 
-				interaction["exch,Arrh_A,Scanlon"], 
-				interaction["exch,Arrh_n,Scanlon"], 
+          return k_Arrhenius(	T,
+				interaction["exch,Arrh_A,Scanlon"],
+				interaction["exch,Arrh_n,Scanlon"],
 				interaction["exch,Ea,Scanlon"]) *
-              	 C_aliat(	T, 
-				molecule.electron_energy, 
-				molecule.statistical_weight, 
-				num_electron_levels, 
-				molecule.vibr_energy, 
-               			molecule.num_vibr_levels, 
-				molecule_prod.vibr_energy[0][k], 
-				interaction["exch,Ea,Scanlon"], 
-				i, 
-				e, 
+              	 C_aliat(	T,
+				molecule.electron_energy,
+				molecule.statistical_weight,
+				num_electron_levels,
+				molecule.vibr_energy,
+               			molecule.num_vibr_levels,
+				molecule_prod.vibr_energy[0][k],
+				interaction["exch,Ea,Scanlon"],
+				i,
+				e,
 				molecule.diss_energy[e] / (6 * K_CONST_K));
         } else {
           std::string error_string = "No Scanlon data for exchange reaction for the following species: " + molecule.name + ", " + atom.name;
@@ -3433,22 +3433,22 @@ kappa::Approximation::Approximation() {}
       // model_k_exch_maliat_3T_arrh_scanlon
       case models_k_exch::model_k_exch_maliat_3T_arrh_scanlon:
 
-        if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="O2") && (atom.name=="N")) || 
+        if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="O2") && (atom.name=="N")) ||
 	    ((molecule.name=="NO") && (atom.name=="O")) ||((molecule.name=="NO") && (atom.name=="N"))) {
-          return k_Arrhenius(	T, 		
-				interaction["exch,Arrh_A,Scanlon"], 
-				interaction["exch,Arrh_n,Scanlon"], 
-				interaction["exch,Ea,Scanlon"]) * 
-               	 C_aliat(	T, 
-				molecule.electron_energy, 
-				molecule.statistical_weight, 
+          return k_Arrhenius(	T,
+				interaction["exch,Arrh_A,Scanlon"],
+				interaction["exch,Arrh_n,Scanlon"],
+				interaction["exch,Ea,Scanlon"]) *
+               	 C_aliat(	T,
+				molecule.electron_energy,
+				molecule.statistical_weight,
 				num_electron_levels,
-                         	molecule.vibr_energy, 
-				molecule.num_vibr_levels, 
-				molecule_prod.vibr_energy[0][k], 
-				interaction["exch,Ea,Scanlon"], 
-				i, 
-				e, 
+                         	molecule.vibr_energy,
+				molecule.num_vibr_levels,
+				molecule_prod.vibr_energy[0][k],
+				interaction["exch,Ea,Scanlon"],
+				i,
+				e,
 				3 * T);
         } else {
           std::string error_string = "No Scanlon data for exchange reaction for the following species: " + molecule.name + ", " + atom.name;
@@ -3459,21 +3459,21 @@ kappa::Approximation::Approximation() {}
       // model_k_exch_maliat_infty_arrh_scanlon
       case models_k_exch::model_k_exch_maliat_infty_arrh_scanlon:
 
-        if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="O2") && (atom.name=="N")) || 
+        if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="O2") && (atom.name=="N")) ||
 	    ((molecule.name=="NO") && (atom.name=="O")) ||((molecule.name=="NO") && (atom.name=="N"))) {
-          return k_Arrhenius(	T, 
-				interaction["exch,Arrh_A,Scanlon"], 
-				interaction["exch,Arrh_n,Scanlon"], 
-				interaction["exch,Ea,Scanlon"]) * 
-             	 C_aliat(	T, 
-				molecule.electron_energy, 
-				molecule.statistical_weight, 
+          return k_Arrhenius(	T,
+				interaction["exch,Arrh_A,Scanlon"],
+				interaction["exch,Arrh_n,Scanlon"],
+				interaction["exch,Ea,Scanlon"]) *
+             	 C_aliat(	T,
+				molecule.electron_energy,
+				molecule.statistical_weight,
 				num_electron_levels,
-                         	molecule.vibr_energy, 
-				molecule.num_vibr_levels, 
-				molecule_prod.vibr_energy[0][k], 
-				interaction["exch,Ea,Scanlon"], 
-				i, 
+                         	molecule.vibr_energy,
+				molecule.num_vibr_levels,
+				molecule_prod.vibr_energy[0][k],
+				interaction["exch,Ea,Scanlon"],
+				i,
 				e);
         } else {
           std::string error_string = "No Scanlon data for exchange reaction for the following species: " + molecule.name + ", " + atom.name;
@@ -3481,24 +3481,24 @@ kappa::Approximation::Approximation() {}
         }
         break;
 
-      // model_k_exch_maliat_D6k_arrh_park   
+      // model_k_exch_maliat_D6k_arrh_park
       case models_k_exch::model_k_exch_maliat_D6k_arrh_park:
 
         if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="NO") && (atom.name=="O"))) {
-          return k_Arrhenius(	T, 
-				interaction["exch,Arrh_A,Park"], 	
-				interaction["exch,Arrh_n,Park"], 
-				interaction["exch,Ed,Park"]) * 
-          	 C_aliat(	T, 
-				molecule.electron_energy, 
-				molecule.statistical_weight, 
+          return k_Arrhenius(	T,
+				interaction["exch,Arrh_A,Park"],
+				interaction["exch,Arrh_n,Park"],
+				interaction["exch,Ed,Park"]) *
+          	 C_aliat(	T,
+				molecule.electron_energy,
+				molecule.statistical_weight,
 				num_electron_levels,
-                         	molecule.vibr_energy, 
-				molecule.num_vibr_levels, 
-				molecule_prod.vibr_energy[0][k], 
-				interaction["exch,Ea,Scanlon"], 
-				i, 
-				e, 
+                         	molecule.vibr_energy,
+				molecule.num_vibr_levels,
+				molecule_prod.vibr_energy[0][k],
+				interaction["exch,Ea,Scanlon"],
+				i,
+				e,
 				molecule.diss_energy[e] / (6 * K_CONST_K));
         } else {
           std::string error_string = "No Park data for exchange reaction for the following species: " + molecule.name + ", " + atom.name;
@@ -3510,20 +3510,20 @@ kappa::Approximation::Approximation() {}
       case models_k_exch::model_k_exch_maliat_3T_arrh_park:
 
         if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="NO") && (atom.name=="O"))) {
-          return k_Arrhenius(	T, 
-				interaction["exch,Arrh_A,Park"], 
-				interaction["exch,Arrh_n,Park"], 	
-				interaction["exch,Ed,Park"]) * 
-           	 C_aliat(	T, 
-				molecule.electron_energy, 
-				molecule.statistical_weight, 
+          return k_Arrhenius(	T,
+				interaction["exch,Arrh_A,Park"],
+				interaction["exch,Arrh_n,Park"],
+				interaction["exch,Ed,Park"]) *
+           	 C_aliat(	T,
+				molecule.electron_energy,
+				molecule.statistical_weight,
 				num_electron_levels,
-                         	molecule.vibr_energy, 
-				molecule.num_vibr_levels, 
-				molecule_prod.vibr_energy[0][k], 
-				interaction["exch,Ea,Scanlon"], 
-				i, 
-				e, 
+                         	molecule.vibr_energy,
+				molecule.num_vibr_levels,
+				molecule_prod.vibr_energy[0][k],
+				interaction["exch,Ea,Scanlon"],
+				i,
+				e,
 				3 * T);
         } else {
           std::string error_string = "No Park data for exchange reaction for the following species: " + molecule.name + ", " + atom.name;
@@ -3535,19 +3535,19 @@ kappa::Approximation::Approximation() {}
       case models_k_exch::model_k_exch_maliat_infty_arrh_park:
 
         if (((molecule.name=="N2") && (atom.name=="O")) || ((molecule.name=="NO") && (atom.name=="O"))) {
-          return k_Arrhenius(	T, 
-				interaction["exch,Arrh_A,Park"], 
-				interaction["exch,Arrh_n,Park"], 
-				interaction["exch,Ed,Park"]) * 
-              	 C_aliat(	T, 
-				molecule.electron_energy, 
-				molecule.statistical_weight, 
+          return k_Arrhenius(	T,
+				interaction["exch,Arrh_A,Park"],
+				interaction["exch,Arrh_n,Park"],
+				interaction["exch,Ed,Park"]) *
+              	 C_aliat(	T,
+				molecule.electron_energy,
+				molecule.statistical_weight,
 				num_electron_levels,
-                         	molecule.vibr_energy, 
-				molecule.num_vibr_levels, 
-				molecule_prod.vibr_energy[0][k], 
-				interaction["exch,Ea,Scanlon"], 
-				i, 
+                         	molecule.vibr_energy,
+				molecule.num_vibr_levels,
+				molecule_prod.vibr_energy[0][k],
+				interaction["exch,Ea,Scanlon"],
+				i,
 				e);
         } else {
           std::string error_string = "No Park data for exchange reaction for the following species: " + molecule.name + ", " + atom.name;
@@ -3563,13 +3563,13 @@ kappa::Approximation::Approximation() {}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Релаксационные члены, описывающие (бимолекулярные) обменные реакции
-  double kappa::Approximation::k_exch(	double T, 
-					kappa::Molecule const &molecule, 
-					kappa::Atom const &atom, 
-					kappa::Molecule const &molecule_prod, 
+  double kappa::Approximation::k_exch(	double T,
+					kappa::Molecule const &molecule,
+					kappa::Atom const &atom,
+					kappa::Molecule const &molecule_prod,
 					kappa::Interaction const &interaction,
-                                    	int i, 
-					int k, 
+                                    	int i,
+					int k,
 					kappa::models_k_exch model) {
 
     return k_exch(T, molecule, atom, molecule_prod, interaction, i, k, 0, 1, model);
@@ -3669,14 +3669,14 @@ kappa::Approximation::Approximation() {}
         throw kappa::ModelParameterException(error_string.c_str());
     }
   }
- 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::integral_diss(	double T, 
-	     					int degree, 
-     						kappa::Molecule const &molecule, 
-     						kappa::Interaction const &interaction, 
-     						int i, 
+  double kappa::Approximation::integral_diss(	double T,
+	     					int degree,
+     						kappa::Molecule const &molecule,
+     						kappa::Interaction const &interaction,
+     						int i,
      						kappa::models_cs_diss model) {
 
     return integral_diss(T, degree, molecule, interaction, i, 0, model);
@@ -3685,12 +3685,12 @@ kappa::Approximation::Approximation() {}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Computation of the dissociation rate for a selected "particle" interaction and dissociation model
-  double kappa::Approximation::k_diss(	double T, 
-					kappa::Molecule const &molecule, 
-					kappa::Interaction const &interaction, 
-					int i, 
-					int e, 
-					int num_electron_levels, 
+  double kappa::Approximation::k_diss(	double T,
+					kappa::Molecule const &molecule,
+					kappa::Interaction const &interaction,
+					int i,
+					int e,
+					int num_electron_levels,
 					kappa::models_k_diss model) {
 
     #ifdef KAPPA_STRICT_CHECKS
@@ -3708,7 +3708,7 @@ kappa::Approximation::Approximation() {}
       throw kappa::IncorrectValueException(error_string.c_str());
     }
     if ((interaction.particle1_name != molecule.name) && (interaction.particle2_name != molecule.name)) {
-      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " + interaction.particle1_name + 
+      std::string error_string = "Interaction is not for the molecule passed for the function, the interaction is for: " + interaction.particle1_name +
 														   " + " + interaction.particle2_name;
       error_string += "; the molecule passed to the function is " + molecule.name;
       throw kappa::IncorrectValueException(error_string.c_str());
@@ -3763,12 +3763,12 @@ kappa::Approximation::Approximation() {}
         break;
       case models_k_diss::model_k_diss_ilt:
         if (e==0) {
-          if (((interaction.particle1_name == "N2") && (interaction.particle2_name == "N")) || 
+          if (((interaction.particle1_name == "N2") && (interaction.particle2_name == "N")) ||
               ((interaction.particle1_name == "N" ) && (interaction.particle2_name == "N2"))) {
 
             return k_diss_ILT_N2N(T, interaction.collision_mass, molecule.vibr_energy[e][i], convert_vibr_ladder_N2(molecule.vibr_energy[e][i]));
 
-          } else if (((interaction.particle1_name == "O2") && (interaction.particle2_name == "O")) || 
+          } else if (((interaction.particle1_name == "O2") && (interaction.particle2_name == "O")) ||
                      ((interaction.particle1_name == "O" ) && (interaction.particle2_name == "O2"))) {
 
             return k_diss_ILT_O2O(T, interaction.collision_mass, molecule.vibr_energy[e][i], convert_vibr_ladder_O2(molecule.vibr_energy[e][i]));
@@ -3782,198 +3782,198 @@ kappa::Approximation::Approximation() {}
         }
         break;
       case models_k_diss::model_k_diss_arrh_scanlon:
-        return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"], 
+        return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"],
+				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"],
 				interaction["diss," + molecule.name + ",Ea,Scanlon"]);
         break;
       case models_k_diss::model_k_diss_arrh_park:
-        return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Park"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Park"], 
+        return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Park"],
+				interaction["diss," + molecule.name + ",Arrh_n,Park"],
 				interaction["diss," + molecule.name + ",Ed,Park"]);
         break;
       case models_k_diss::model_k_diss_tm_D6k_arrh_scanlon:
         if (num_electron_levels == 1) {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"], 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"],
 				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"],
-				interaction["diss," + molecule.name + ",Ea,Scanlon"]) * 
+				interaction["diss," + molecule.name + ",Ea,Scanlon"]) *
             		 	Z_diss(T, molecule.diss_energy[e] / (6 * K_CONST_K), molecule.vibr_energy[e], i);
         } else if (num_electron_levels == -1) {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"], 
-				interaction["diss," + molecule.name + ",Ea,Scanlon"]) * 
-            			Z_diss(	T, 
-					molecule.diss_energy[e] / (6 * K_CONST_K), 
-					molecule.electron_energy, 
-					molecule.statistical_weight, 
-					molecule.num_electron_levels, 
-					molecule.vibr_energy, 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"],
+				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"],
+				interaction["diss," + molecule.name + ",Ea,Scanlon"]) *
+            			Z_diss(	T,
+					molecule.diss_energy[e] / (6 * K_CONST_K),
+					molecule.electron_energy,
+					molecule.statistical_weight,
+					molecule.num_electron_levels,
+					molecule.vibr_energy,
 					i, e);
         } else {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"], 
-				interaction["diss," + molecule.name + ",Ea,Scanlon"]) * 
- 	    			Z_diss(	T, 
-					molecule.diss_energy[e] / (6 * K_CONST_K), 
-					molecule.electron_energy, 
-					molecule.statistical_weight, 
-					num_electron_levels, 
-					molecule.vibr_energy, 	
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"],
+				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"],
+				interaction["diss," + molecule.name + ",Ea,Scanlon"]) *
+ 	    			Z_diss(	T,
+					molecule.diss_energy[e] / (6 * K_CONST_K),
+					molecule.electron_energy,
+					molecule.statistical_weight,
+					num_electron_levels,
+					molecule.vibr_energy,
 					i, e);
         }
         break;
       case models_k_diss::model_k_diss_tm_3T_arrh_scanlon:
         if (num_electron_levels == 1) {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"], 
-				interaction["diss," + molecule.name + ",Ea,Scanlon"]) * 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"],
+				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"],
+				interaction["diss," + molecule.name + ",Ea,Scanlon"]) *
       				Z_diss(T, 3 * T, molecule.vibr_energy[e], i);
 
         } else if (num_electron_levels == -1) {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"], 
-				interaction["diss," + molecule.name + ",Ea,Scanlon"]) * 
-            			Z_diss(	T, 
-					3 * T, 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"],
+				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"],
+				interaction["diss," + molecule.name + ",Ea,Scanlon"]) *
+            			Z_diss(	T,
+					3 * T,
 					molecule.electron_energy,
-					molecule.statistical_weight, 
-					molecule.num_electron_levels, 
-					molecule.vibr_energy, 
+					molecule.statistical_weight,
+					molecule.num_electron_levels,
+					molecule.vibr_energy,
 					i, e);
         } else {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"], 
-				interaction["diss," + molecule.name + ",Ea,Scanlon"]) * 
-	    			Z_diss(	T, 
-					3 * T, 
-					molecule.electron_energy, 
-					molecule.statistical_weight, 
-					num_electron_levels, molecule.vibr_energy, 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"],
+				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"],
+				interaction["diss," + molecule.name + ",Ea,Scanlon"]) *
+	    			Z_diss(	T,
+					3 * T,
+					molecule.electron_energy,
+					molecule.statistical_weight,
+					num_electron_levels, molecule.vibr_energy,
 					i, e);
         }
         break;
       case models_k_diss::model_k_diss_tm_infty_arrh_scanlon:
         if (num_electron_levels == 1) {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"], 
-				interaction["diss," + molecule.name + ",Ea,Scanlon"]) * 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"],
+				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"],
+				interaction["diss," + molecule.name + ",Ea,Scanlon"]) *
             			Z_diss(T, molecule.vibr_energy[e], molecule.num_vibr_levels[e], i);
 
         } else if (num_electron_levels == -1) {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"], 
-				interaction["diss," + molecule.name + ",Ea,Scanlon"]) * 
-            			Z_diss(	T, 
-					molecule.electron_energy, 
-					molecule.statistical_weight, 
-					molecule.num_electron_levels, 
-					molecule.vibr_energy, 
-					molecule.num_vibr_levels, 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"],
+				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"],
+				interaction["diss," + molecule.name + ",Ea,Scanlon"]) *
+            			Z_diss(	T,
+					molecule.electron_energy,
+					molecule.statistical_weight,
+					molecule.num_electron_levels,
+					molecule.vibr_energy,
+					molecule.num_vibr_levels,
 					i, e);
         } else {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"], 
-				interaction["diss," + molecule.name + ",Ea,Scanlon"]) * 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Scanlon"],
+				interaction["diss," + molecule.name + ",Arrh_n,Scanlon"],
+				interaction["diss," + molecule.name + ",Ea,Scanlon"]) *
             			Z_diss(T, molecule.electron_energy, molecule.statistical_weight, num_electron_levels, molecule.vibr_energy, molecule.num_vibr_levels, i, e);
-        } 
+        }
         break;
       case models_k_diss::model_k_diss_tm_D6k_arrh_park:
         if (num_electron_levels == 1) {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Park"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Park"], 
-				interaction["diss," + molecule.name + ",Ed,Park"]) * 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Park"],
+				interaction["diss," + molecule.name + ",Arrh_n,Park"],
+				interaction["diss," + molecule.name + ",Ed,Park"]) *
             			Z_diss(T, molecule.diss_energy[e] / (6 * K_CONST_K), molecule.vibr_energy[e], i);
 
         } else if (num_electron_levels == -1) {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Park"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Park"], 
-				interaction["diss," + molecule.name + ",Ed,Park"]) * 
-            			Z_diss(	T, 
-					molecule.diss_energy[e] / (6 * K_CONST_K), 
-					molecule.electron_energy, 
-					molecule.statistical_weight, 
-					molecule.num_electron_levels, 
-					molecule.vibr_energy, 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Park"],
+				interaction["diss," + molecule.name + ",Arrh_n,Park"],
+				interaction["diss," + molecule.name + ",Ed,Park"]) *
+            			Z_diss(	T,
+					molecule.diss_energy[e] / (6 * K_CONST_K),
+					molecule.electron_energy,
+					molecule.statistical_weight,
+					molecule.num_electron_levels,
+					molecule.vibr_energy,
 					i, e);
         } else {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Park"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Park"], 
-				interaction["diss," + molecule.name + ",Ed,Park"]) * 
-            			Z_diss(	T, 
-					molecule.diss_energy[e] / (6 * K_CONST_K), 
-					molecule.electron_energy, 
-					molecule.statistical_weight, 
-					num_electron_levels, 
-					molecule.vibr_energy, 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Park"],
+				interaction["diss," + molecule.name + ",Arrh_n,Park"],
+				interaction["diss," + molecule.name + ",Ed,Park"]) *
+            			Z_diss(	T,
+					molecule.diss_energy[e] / (6 * K_CONST_K),
+					molecule.electron_energy,
+					molecule.statistical_weight,
+					num_electron_levels,
+					molecule.vibr_energy,
 					i, e);
         }
         break;
       case models_k_diss::model_k_diss_tm_3T_arrh_park:
         if (num_electron_levels == 1) {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Park"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Park"], 
-				interaction["diss," + molecule.name + ",Ed,Park"]) * 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Park"],
+				interaction["diss," + molecule.name + ",Arrh_n,Park"],
+				interaction["diss," + molecule.name + ",Ed,Park"]) *
             			Z_diss(T, 3 * T, molecule.vibr_energy[e], i);
 
          } else if (num_electron_levels == -1) {
-           return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Park"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Park"], 
-				interaction["diss," + molecule.name + ",Ed,Park"]) * 
+           return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Park"],
+				interaction["diss," + molecule.name + ",Arrh_n,Park"],
+				interaction["diss," + molecule.name + ",Ed,Park"]) *
             			Z_diss(T, 3 * T, molecule.electron_energy, molecule.statistical_weight, molecule.num_electron_levels, molecule.vibr_energy, i, e);
         } else {
-          return k_Arrhenius( 	T, 
-			    	interaction["diss," + molecule.name + ",Arrh_A,Park"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Park"], 
-				interaction["diss," + molecule.name + ",Ed,Park"]) * 
+          return k_Arrhenius( 	T,
+			    	interaction["diss," + molecule.name + ",Arrh_A,Park"],
+				interaction["diss," + molecule.name + ",Arrh_n,Park"],
+				interaction["diss," + molecule.name + ",Ed,Park"]) *
      	    			Z_diss(T, 3 * T, molecule.electron_energy, molecule.statistical_weight, num_electron_levels, molecule.vibr_energy, i, e);
         }
         break;
       case models_k_diss::model_k_diss_tm_infty_arrh_park:
         if (num_electron_levels == 1) {
-          return k_Arrhenius(	T, 	
-				interaction["diss," + molecule.name + ",Arrh_A,Park"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Park"], 
-				interaction["diss," + molecule.name + ",Ed,Park"]) * 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Park"],
+				interaction["diss," + molecule.name + ",Arrh_n,Park"],
+				interaction["diss," + molecule.name + ",Ed,Park"]) *
             			Z_diss(T, molecule.vibr_energy[e], molecule.num_vibr_levels[e], i);
 
         } else if (num_electron_levels == -1) {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Park"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Park"], 
-				interaction["diss," + molecule.name + ",Ed,Park"]) * 
-            			Z_diss(	T, 
-					molecule.electron_energy, 
-					molecule.statistical_weight, 
-					molecule.num_electron_levels, 
-					molecule.vibr_energy, 
-					molecule.num_vibr_levels, 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Park"],
+				interaction["diss," + molecule.name + ",Arrh_n,Park"],
+				interaction["diss," + molecule.name + ",Ed,Park"]) *
+            			Z_diss(	T,
+					molecule.electron_energy,
+					molecule.statistical_weight,
+					molecule.num_electron_levels,
+					molecule.vibr_energy,
+					molecule.num_vibr_levels,
 					i, e);
         } else {
-          return k_Arrhenius(	T, 
-				interaction["diss," + molecule.name + ",Arrh_A,Park"], 
-				interaction["diss," + molecule.name + ",Arrh_n,Park"], 
-				interaction["diss," + molecule.name + ",Ed,Park"]) * 
-  	    			Z_diss(	T, 
-					molecule.electron_energy, 
-					molecule.statistical_weight, 
-					num_electron_levels, 
-					molecule.vibr_energy, 
-					molecule.num_vibr_levels, 
+          return k_Arrhenius(	T,
+				interaction["diss," + molecule.name + ",Arrh_A,Park"],
+				interaction["diss," + molecule.name + ",Arrh_n,Park"],
+				interaction["diss," + molecule.name + ",Ed,Park"]) *
+  	    			Z_diss(	T,
+					molecule.electron_energy,
+					molecule.statistical_weight,
+					num_electron_levels,
+					molecule.vibr_energy,
+					molecule.num_vibr_levels,
 					i, e);
         }
         break;
@@ -3984,7 +3984,7 @@ kappa::Approximation::Approximation() {}
           } else if (molecule.name == "O2" && (interaction.particle1_name == "O" || interaction.particle2_name == "O")) {
             return diss_rate_O2O_p4e(T, convert_vibr_ladder_O2(molecule.vibr_energy[e][i]));
           } else {
-            std::string error_string = "No Phys4Entry data for dissociation of " + molecule.name + " in reaction: " + interaction.particle1_name + "+" 
+            std::string error_string = "No Phys4Entry data for dissociation of " + molecule.name + " in reaction: " + interaction.particle1_name + "+"
 														    + interaction.particle2_name;
             throw kappa::ModelParameterException(error_string.c_str());
           }
@@ -4002,10 +4002,10 @@ kappa::Approximation::Approximation() {}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Simplified version of k_diss to be called
-  double kappa::Approximation::k_diss(	double T, 
-					kappa::Molecule const &molecule, 
-					kappa::Interaction const &interaction, 
-					int i, 
+  double kappa::Approximation::k_diss(	double T,
+					kappa::Molecule const &molecule,
+					kappa::Interaction const &interaction,
+					int i,
  					kappa::models_k_diss model) {
 
     return k_diss(T, molecule, interaction, i, 0, 1, model);
@@ -4016,74 +4016,74 @@ kappa::Approximation::Approximation() {}
   // compute the backward and forward reaction rate coefficients for VT exchange (interface)
   double kappa::Approximation::k_bf_VT(double T, kappa::Molecule const &molecule, int i, int delta_i, int e) {
 
-    return p_k_bf_VT(	T, 
- 			molecule.vibr_energy[e][i], 
-			molecule.vibr_energy[e][i + delta_i], 
-			molecule.rot_energy[e][i], 
+    return p_k_bf_VT(	T,
+ 			molecule.vibr_energy[e][i],
+			molecule.vibr_energy[e][i + delta_i],
+			molecule.rot_energy[e][i],
 			molecule.num_rot_levels[e][i],
-                 	molecule.rot_energy[e][i + delta_i], 
-			molecule.num_rot_levels[e][i + delta_i], 
-			molecule.rot_symmetry, 
+                 	molecule.rot_energy[e][i + delta_i],
+			molecule.num_rot_levels[e][i + delta_i],
+			molecule.rot_symmetry,
 			molecule.rigid_rotator);
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // compute the backward and forward reaction rate coefficients for VV exchange (interface)
-  double kappa::Approximation::k_bf_VV(	double T, 
-					kappa::Molecule const &molecule1, 
-					kappa::Molecule const &molecule2, 
-					int i, 
-					int k, 
-					int delta_i, 
-					int e1, 
+  double kappa::Approximation::k_bf_VV(	double T,
+					kappa::Molecule const &molecule1,
+					kappa::Molecule const &molecule2,
+					int i,
+					int k,
+					int delta_i,
+					int e1,
 					int e2) {
 
-    return p_k_bf_VV(	T, 
-			molecule1.vibr_energy[e1][i], 
-			molecule1.vibr_energy[e1][i + delta_i], 
-			molecule2.vibr_energy[e2][k], 
+    return p_k_bf_VV(	T,
+			molecule1.vibr_energy[e1][i],
+			molecule1.vibr_energy[e1][i + delta_i],
+			molecule2.vibr_energy[e2][k],
 			molecule2.vibr_energy[e2][k - delta_i],
-                   	molecule1.rot_energy[e1][i], 
-			molecule1.num_rot_levels[e1][i], 
-			molecule1.rot_energy[e1][i + delta_i], 
-			molecule1.num_rot_levels[e1][i + delta_i], 
-			molecule1.rot_symmetry, 
-                   	molecule2.rot_energy[e2][k], 
-			molecule2.num_rot_levels[e2][k], 
-			molecule1.rot_energy[e2][k - delta_i], 
-			molecule2.num_rot_levels[e2][k - delta_i], 
+                   	molecule1.rot_energy[e1][i],
+			molecule1.num_rot_levels[e1][i],
+			molecule1.rot_energy[e1][i + delta_i],
+			molecule1.num_rot_levels[e1][i + delta_i],
+			molecule1.rot_symmetry,
+                   	molecule2.rot_energy[e2][k],
+			molecule2.num_rot_levels[e2][k],
+			molecule1.rot_energy[e2][k - delta_i],
+			molecule2.num_rot_levels[e2][k - delta_i],
 			molecule2.rot_symmetry);
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
+
   // compute the backward and forward reaction rate coefficients for chemical exchange (interface)
-  double kappa::Approximation::k_bf_exch(double T, 
- 					 kappa::Molecule const &molecule_before, 
+  double kappa::Approximation::k_bf_exch(double T,
+ 					 kappa::Molecule const &molecule_before,
 					 kappa::Atom const &atom_before,
-                             		 kappa::Molecule const &molecule_after, 
+                             		 kappa::Molecule const &molecule_after,
 					 kappa::Atom const &atom_after,
-                               		 kappa::Interaction const &interaction, 
-					 int i_before, 
-					 int i_after, 
-					 int e_before, 
+                               		 kappa::Interaction const &interaction,
+					 int i_before,
+					 int i_after,
+					 int e_before,
 					 int e_after) {
 
-    return p_k_bf_exch(	T, 
-			molecule_before.mass, 
-			atom_before.mass, 
-			molecule_after.mass, 
+    return p_k_bf_exch(	T,
+			molecule_before.mass,
+			atom_before.mass,
+			molecule_after.mass,
 			atom_after.mass,
-                   	molecule_before.diss_energy[e_before], 
-			molecule_after.diss_energy[e_after], 
-			molecule_before.vibr_energy[e_before][i_before], 
+                   	molecule_before.diss_energy[e_before],
+			molecule_after.diss_energy[e_after],
+			molecule_before.vibr_energy[e_before][i_before],
 			molecule_after.vibr_energy[e_after][i_after],
-                   	molecule_before.rot_energy[e_before][i_before], 
-			molecule_before.num_rot_levels[e_before][i_before], 
+                   	molecule_before.rot_energy[e_before][i_before],
+			molecule_before.num_rot_levels[e_before][i_before],
 			molecule_before.rot_symmetry,
-                   	molecule_after.rot_energy[e_after][i_after], 
-			molecule_after.num_rot_levels[e_after][i_after], 
+                   	molecule_after.rot_energy[e_after][i_after],
+			molecule_after.num_rot_levels[e_after][i_after],
 			molecule_after.rot_symmetry);
   }
 
@@ -4093,32 +4093,32 @@ kappa::Approximation::Approximation() {}
   // factor to convert k_diss -> k_rec for different atomic species
   double kappa::Approximation::k_bf_diss(double T, kappa::Molecule const &molecule, kappa::Atom const &atom1, kappa::Atom const &atom2, int i, int e) {
 
-    return p_k_bf_diss(	T, 
-			molecule.mass, 
-			atom1.mass, 
-			atom2.mass, 
-			molecule.diss_energy[e], 
-			molecule.vibr_energy[e][i], 
-			molecule.rot_energy[e][i], 
-			molecule.num_rot_levels[e][i], 
+    return p_k_bf_diss(	T,
+			molecule.mass,
+			atom1.mass,
+			atom2.mass,
+			molecule.diss_energy[e],
+			molecule.vibr_energy[e][i],
+			molecule.rot_energy[e][i],
+			molecule.num_rot_levels[e][i],
 			molecule.rot_symmetry);
-  } 
+  }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // factor to convert k_diss -> k_rec for the same atomic species
   double kappa::Approximation::k_bf_diss(double T, kappa::Molecule const &molecule, kappa::Atom const &atom, int i, int e) {
 
-    return p_k_bf_diss(	T, 
-			molecule.mass, 
-			atom.mass, 
-			atom.mass, 
+    return p_k_bf_diss(	T,
+			molecule.mass,
+			atom.mass,
+			atom.mass,
 			molecule.diss_energy[e],
-			molecule.vibr_energy[e][i], 
+			molecule.vibr_energy[e][i],
 			molecule.rot_energy[e][i],
-			molecule.num_rot_levels[e][i], 
+			molecule.num_rot_levels[e][i],
 			molecule.rot_symmetry);
- } 
+ }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4145,7 +4145,7 @@ kappa::Approximation::Approximation() {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // LC -- FIXME: probably wrong 
+  // LC -- FIXME: probably wrong
   int kappa::Approximation::p_max_i(double T, double vibr_energy1, double vibr_frequency, double alpha) {
 
     int p_i = -1;
@@ -4184,7 +4184,7 @@ kappa::Approximation::Approximation() {}
            						    { 2.211900e+05,2.316200e+04,-3.953300e+02,2.627600e+00,-1.849700e+05},
            						    {-4.030600e+06,-4.639000e+05, 8.147400e+03,-5.540000e+01, 3.549500e+06},
               						    {-4.193900e+00,-3.546000e-01,5.729100e-03,-3.640900e-05,3.126500e+00}};
- 
+
   const double kappa::Approximation::p4e_n2n_vt_bij4[5][5]={{-5.144800e+02,-1.811900e+01, 2.071900e-01,-9.692600e-04, 2.553900e+02},
            						    {3.950300e+04,2.329000e+03,2.329000e+03,2.329000e+03,-2.567600e+04},
            						    {-5.504500e+06,-2.607000e+05,3.365900e+03,-1.814000e+01,3.174700e+06},
