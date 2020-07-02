@@ -43,8 +43,8 @@ int main(int argc, char** argv) {
 
   std::cout << "Loading particles data" << std::endl;
 
-  //kappa::Molecule mol("N2", true, false, particle_source);
-  kappa::Molecule mol("N2", true, true, particle_source);
+  kappa::Molecule mol("N2", true, false, particle_source);
+  //kappa::Molecule mol("N2", true, true, particle_source);
   kappa::Atom at("N", particle_source);
 
   // kappa::Molecule mol("NO", false, true, particle_source);
