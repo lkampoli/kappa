@@ -42,8 +42,8 @@ int main(int argc, char** argv) {
   std::cout << "Loading particles data" << std::endl;
 
   // N2 molecule
-   kappa::Molecule mol("N2", true, true, particle_source); // rigid rotator
-  //kappa::Molecule mol("N2", true, false, particle_source); // anharmonic, non-rigid rotator
+  // kappa::Molecule mol("N2", true, true, particle_source); // rigid rotator
+  kappa::Molecule mol("N2", true, false, particle_source); // anharmonic, non-rigid rotator
   // kappa::Molecule mol("O2", true, false, particle_source); // anharmonic, non-rigid rotator
 
   // N atom

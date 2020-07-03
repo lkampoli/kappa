@@ -2211,8 +2211,8 @@ using namespace std;
       }
     }
 
-    std::cout << "T = " << T << std::endl;
-    std::cout << "bulk_viscosity = " << -res * K_CONST_K * T / this_total_n << std::endl;
+    //std::cout << "T = " << T << std::endl;
+    //std::cout << "bulk_viscosity = " << -res * K_CONST_K * T / this_total_n << std::endl;
     return -res * K_CONST_K * T / this_total_n;
   }
 
@@ -2237,18 +2237,6 @@ using namespace std;
         D_cd = (3./16) *      kT/(n * coll_mass * omega_11.at(i, j)); // eq. 5.61
         rm   = ( 32  ) *  n * omega_22.at(i, j) / (5 * K_CONST_PI);
 
-        std::cout << rm << std::endl;
-        std::cout << "coll_mass = " << coll_mass << std::endl;
-        std::cout << "Omega11 = " << omega_11.at(i, j) << std::endl;
-        std::cout << "Omega12 = " << omega_12.at(i, j) << std::endl;
-        std::cout << "Omega13 = " << omega_13.at(i, j) << std::endl;
-        std::cout << "Omega22 = " << omega_22.at(i, j) << std::endl;
-        std::cout << "Acd = " << A_cd << std::endl;
-        std::cout << "Bcd = " << B_cd << std::endl;
-        std::cout << "Ccd = " << C_cd << std::endl;
-        std::cout << "Dcd = " << D_cd << std::endl;
-        std::cout << "n = " << n << std::endl;
-
         // loop over vibrational levels of each molecule i
         for (k=0; k<molecules[i].num_vibr_levels[0]; k++) {
 
@@ -2258,32 +2246,40 @@ using namespace std;
           // loop over vibrational levels of each molecule j
           for (l=0; l<molecules[j].num_vibr_levels[0]; l++) {
 
-            // std::cout << this_n_vl_mol[i][k] << std::endl;
-            // std::cout << this_n_vl_mol[j][l] << std::endl;
             n_ij = this_n_vl_mol[i][k] * this_n_vl_mol[j][l];
-
-            //std::cout << this_n_vl_mol[i][k] << " " << this_n_vl_mol[j][l] << std::endl;
-            //std::cout << " bo, where am i" << std::endl;
 
             p2 = 3 * (vl_offset[j] + l);
             o2 =      vl_offset[j] + l ;
 
             if ((j!=i) || (l>k)) { // d,k ∈ S_ci, i.e. δ_ik * δ_cd = 0
 
-              //std::cout << "rot_rel_times.at(i, j) << " " << rot_rel_times.at(j, i)" << std::endl;
-              //std::cout << rot_rel_times.at(i, j) << " " << rot_rel_times.at(j, i) << std::endl;
+              thermal_conductivity_LHS.at(p1, p2) = -1.5 * kT * n_ij / (n * D_cd); // 0000
 
-              thermal_conductivity_LHS.at(p1    , p2    ) = -1.5 * kT * n_ij / (n * D_cd); // 0000
-              thermal_conductivity_LHS.at(p1 + 1, p2    ) = 0.75 * kT * n_ij * (6 * C_cd - 5) * molecules[j].mass / ((molecules[i].mass + molecules[j].mass) * n * D_cd); // 1000
-              thermal_conductivity_LHS.at(p1 + 2, p2    ) = 0; // 0010
-              thermal_conductivity_LHS.at(p1    , p2 + 1) = 0.75 * kT * n_ij * (6 * C_cd - 5) * molecules[i].mass / ((molecules[i].mass + molecules[j].mass) * n * D_cd); // 0100 = 1000
-              thermal_conductivity_LHS.at(p1 + 1, p2 + 1) = -1.5 * kT * n_ij * coll_mass / ((molecules[i].mass + molecules[j].mass) * n * D_cd) * (13.75 - 3 * B_cd - 4 * A_cd - (20./3.) * A_cd / (K_CONST_K * K_CONST_PI)
-                                                                             * (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j))
-                                                                             +  molecules[j].mass * c_rot_arr[o2] / (rm * rot_rel_times.at(j, i)))); // 1100 // 13.75 = 55/4
-              thermal_conductivity_LHS.at(p1 + 2, p2 + 1) = -6 * T / (n * D_cd * K_CONST_PI) * A_cd * n_ij * molecules[i].mass * molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j) * (molecules[i].mass + molecules[j].mass)); // 0110 = 1001
-              thermal_conductivity_LHS.at(p1    , p2 + 2) = 0; // 0001 = 0010
-              thermal_conductivity_LHS.at(p1 + 1, p2 + 2) = -6 * T / (n * D_cd * K_CONST_PI) * A_cd * n_ij * molecules[j].mass * molecules[j].mass * c_rot_arr[o2] / (rm * rot_rel_times.at(j, i) * (molecules[i].mass + molecules[j].mass)); // 1001 = 0110
-              thermal_conductivity_LHS.at(p1 + 2, p2 + 2) = 0; // 0011
+              thermal_conductivity_LHS.at(p1+1, p2) = 0.75 * kT * n_ij * (6 * C_cd - 5) * molecules[j].mass /
+                                                      ((molecules[i].mass + molecules[j].mass) * n * D_cd); // 1000
+
+              thermal_conductivity_LHS.at(p1+2, p2) = 0; // 0010
+
+              thermal_conductivity_LHS.at(p1, p2+1) = 0.75 * kT * n_ij * (6 * C_cd - 5) * molecules[i].mass /
+                                                      ((molecules[i].mass + molecules[j].mass) * n * D_cd); // 0100 = 1000
+
+              thermal_conductivity_LHS.at(p1+1, p2+1) = -1.5 * kT * n_ij * coll_mass /
+                                                        ((molecules[i].mass + molecules[j].mass) * n * D_cd) *
+                                                        (13.75 - 3 * B_cd - 4 * A_cd - (20./3.) * A_cd / (K_CONST_K * K_CONST_PI)
+                                                        * (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j))
+                                                        +  molecules[j].mass * c_rot_arr[o2] / (rm * rot_rel_times.at(j, i)))); // 1100 // 13.75 = 55/4
+
+              thermal_conductivity_LHS.at(p1+2, p2+1) = -6 * T / (n * D_cd * K_CONST_PI) * A_cd * n_ij *
+                                                        molecules[i].mass * molecules[i].mass * c_rot_arr[o1] /
+                                                        (rm * rot_rel_times.at(i, j) * (molecules[i].mass + molecules[j].mass)); // 0110 = 1001
+
+              thermal_conductivity_LHS.at(p1, p2+2) = 0; // 0001 = 0010
+
+              thermal_conductivity_LHS.at(p1+1, p2+2) = -6 * T / (n * D_cd * K_CONST_PI) * A_cd * n_ij * molecules[j].mass *
+                                                        molecules[j].mass * c_rot_arr[o2] / (rm * rot_rel_times.at(j, i) *
+                                                        (molecules[i].mass + molecules[j].mass)); // 1001 = 0110
+
+              thermal_conductivity_LHS.at(p1+2, p2+2) = 0; // 0011
 
               // symmetrization
               thermal_conductivity_LHS.at(p2    , p1    ) = thermal_conductivity_LHS.at(p1    , p2    );
@@ -2325,15 +2321,19 @@ using namespace std;
         thermal_conductivity_LHS.at(p1 + 2, p1    ) = 0; 	// 0010
         thermal_conductivity_LHS.at(p1    , p1 + 1) = 0; 	// 0100
 
-        thermal_conductivity_LHS.at(p1 + 1, p1 + 1) = 1.5 * kT * n_ij * A_cd * (2 + (20./3) * molecules[i].mass * c_rot_arr[o1] / (K_CONST_K * K_CONST_PI * rm * rot_rel_times.at(i, i))) / (n * D_cd); // 1100
+        thermal_conductivity_LHS.at(p1+1, p1+1) = 1.5 * kT * n_ij * A_cd * (2 + (20./3) * molecules[i].mass * c_rot_arr[o1] /
+                                                  (K_CONST_K * K_CONST_PI * rm * rot_rel_times.at(i, i))) / (n * D_cd); // 1100
 
-        thermal_conductivity_LHS.at(p1 + 2, p1 + 1) = -6 * T * A_cd * n_ij * molecules[i].mass * c_rot_arr[o1] / (K_CONST_PI * rm * rot_rel_times.at(i, i) * n * D_cd); // 0110
+        thermal_conductivity_LHS.at(p1+2, p1+1) = -6 * T * A_cd * n_ij * molecules[i].mass * c_rot_arr[o1] /
+                                                  (K_CONST_PI * rm * rot_rel_times.at(i, i) * n * D_cd); // 0110
 
-        thermal_conductivity_LHS.at(p1    , p1 + 2) = 0; // 0001
+        thermal_conductivity_LHS.at(p1, p1+2) = 0; // 0001
 
-        thermal_conductivity_LHS.at(p1 + 1, p1 + 2) = -6 * T * A_cd * n_ij * molecules[i].mass * c_rot_arr[o1] / (K_CONST_PI * rm * rot_rel_times.at(i, i) * n * D_cd); // 1001
+        thermal_conductivity_LHS.at(p1+1, p1+2) = -6 * T * A_cd * n_ij * molecules[i].mass * c_rot_arr[o1] /
+                                                  (K_CONST_PI * rm * rot_rel_times.at(i, i) * n * D_cd); // 1001
 
-        thermal_conductivity_LHS.at(p1 + 2, p1 + 2) = T * n_ij * (molecules[i].mass * c_rot_arr[o1] / n) * (1.5 / D_cd_rot + 3.6 * A_cd / (K_CONST_PI * D_cd * rm * rot_rel_times.at(i, i))); // 0011 // 3.6=18/5
+        thermal_conductivity_LHS.at(p1+2, p1+2) = T * n_ij * (molecules[i].mass * c_rot_arr[o1] / n) *
+                                                 (1.5 / D_cd_rot + 3.6 * A_cd / (K_CONST_PI * D_cd * rm * rot_rel_times.at(i, i))); // 0011 // 3.6=18/5
      }
 
      for (j=0; j<num_molecules; j++) {
@@ -2359,26 +2359,33 @@ using namespace std;
              o2 = vl_offset[j] + l;
 
              // eq. 5.65
-             thermal_conductivity_LHS.at(p1    , p1) += 1.5 * kT * n_ij / (D_cd * n); // 0000
+             thermal_conductivity_LHS.at(p1, p1) += 1.5 * kT * n_ij / (D_cd * n); // 0000
 
-             thermal_conductivity_LHS.at(p1 + 1, p1) -= 0.75 * kT * n_ij * molecules[j].mass * (6 * C_cd - 5) / ((molecules[i].mass + molecules[j].mass) * n * D_cd); // 1000
+             thermal_conductivity_LHS.at(p1+1, p1) -= 0.75 * kT * n_ij * molecules[j].mass * (6 * C_cd - 5) /
+                                                      ((molecules[i].mass + molecules[j].mass) * n * D_cd); // 1000
 
-             thermal_conductivity_LHS.at(p1    , p1 + 1) -= 0.75 * kT * n_ij * molecules[j].mass * (6 * C_cd - 5) / ((molecules[i].mass + molecules[j].mass) * n * D_cd); // 0100
+             thermal_conductivity_LHS.at(p1, p1+1) -= 0.75 * kT * n_ij * molecules[j].mass * (6 * C_cd - 5) /
+                                                      ((molecules[i].mass + molecules[j].mass) * n * D_cd); // 0100
 
-             thermal_conductivity_LHS.at(p1 + 1, p1 + 1) += 1.5 * kT * coll_mass * n_ij * (7.5 * molecules[i].mass / molecules[j].mass
-                                                         + 6.25 * molecules[j].mass / molecules[i].mass - 3 * molecules[j].mass * B_cd / molecules[i].mass
-                                                         + 4 * A_cd + (20./3) * A_cd * (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j))
-                                                         + molecules[j].mass * c_rot_arr[o2] / (rm * rot_rel_times.at(j, i)))
-                                                         / (K_CONST_PI * K_CONST_K)) / (n * D_cd * (molecules[i].mass + molecules[j].mass)); // 1100
+             thermal_conductivity_LHS.at(p1+1, p1+1) += 1.5 * kT * coll_mass * n_ij * (7.5 * molecules[i].mass / molecules[j].mass
+                                                        + 6.25 * molecules[j].mass / molecules[i].mass - 3 * molecules[j].mass *
+                                                        B_cd / molecules[i].mass + 4 * A_cd + (20./3) * A_cd *
+                                                        (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j)) +
+                                                         molecules[j].mass * c_rot_arr[o2] / (rm * rot_rel_times.at(j, i)))
+                                                        / (K_CONST_PI * K_CONST_K)) / (n * D_cd *
+                                                        (molecules[i].mass + molecules[j].mass)); // 1100
 
-             thermal_conductivity_LHS.at(p1 + 2, p1 + 1) -= 6. * T * A_cd * n_ij * molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j)) * molecules[i].mass
-                                                          / (n * D_cd * K_CONST_PI * (molecules[i].mass + molecules[j].mass)); // 0110
+             thermal_conductivity_LHS.at(p1+2, p1+1) -= 6. * T * A_cd * n_ij * molecules[i].mass * c_rot_arr[o1] /
+                                                        (rm * rot_rel_times.at(i, j)) * molecules[i].mass
+                                                        / (n * D_cd * K_CONST_PI * (molecules[i].mass + molecules[j].mass)); // 0110
 
-             thermal_conductivity_LHS.at(p1 + 1, p1 + 2) -= 6. * T * A_cd * n_ij * molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, j)) * molecules[i].mass
-                                                          / (n * D_cd * K_CONST_PI * (molecules[i].mass + molecules[j].mass)); // 1001
+             thermal_conductivity_LHS.at(p1+1, p1+2) -= 6. * T * A_cd * n_ij * molecules[i].mass * c_rot_arr[o1] /
+                                                        (rm * rot_rel_times.at(i, j)) * molecules[i].mass
+                                                        / (n * D_cd * K_CONST_PI * (molecules[i].mass + molecules[j].mass)); // 1001
 
-             thermal_conductivity_LHS.at(p1 + 2, p1 + 2) += T * n_ij * molecules[i].mass * c_rot_arr[o1] * (1.5 / D_cd_rot + 3.6 * A_cd * molecules[i].mass
-                                                          / (K_CONST_PI * D_cd * molecules[j].mass * rm * rot_rel_times.at(i, j))) / n; // 0011
+             thermal_conductivity_LHS.at(p1+2, p1+2) += T * n_ij * molecules[i].mass * c_rot_arr[o1] *
+                                                        (1.5 / D_cd_rot + 3.6 * A_cd * molecules[i].mass
+                                                        / (K_CONST_PI * D_cd * molecules[j].mass * rm * rot_rel_times.at(i, j)))/n; // 0011
            }
          }
        }
@@ -2400,20 +2407,21 @@ using namespace std;
          o1 = vl_offset[i] + k;
          n_ij = this_n_vl_mol[i][k] * this_n_atom[j];
 
-         //std::cout << "rot_rel_times.at(MOL, AT)" << std::endl;
-         //std::cout << rot_rel_times.at(i, num_molecules + j)  << std::endl;
+         thermal_conductivity_LHS.at(p1, p1) += 1.5 * kT * n_ij / (D_cd * n); // 0000
 
-         thermal_conductivity_LHS.at(p1    , p1)     += 1.5 * kT * n_ij / (D_cd * n); // 0000
+         thermal_conductivity_LHS.at(p1+1, p1) -= 0.75 * kT * n_ij * atoms[j].mass * (6 * C_cd - 5) /
+                                                  ((molecules[i].mass + atoms[j].mass) * n * D_cd); 	// 1000
 
-         thermal_conductivity_LHS.at(p1 + 1, p1)     -= 0.75 * kT * n_ij * atoms[j].mass * (6 * C_cd - 5) / ((molecules[i].mass + atoms[j].mass) * n * D_cd); 	// 1000
+         thermal_conductivity_LHS.at(p1, p1+1) -= 0.75 * kT * n_ij * atoms[j].mass * (6 * C_cd - 5) /
+                                                  ((molecules[i].mass + atoms[j].mass) * n * D_cd); 	// 0100
 
-         thermal_conductivity_LHS.at(p1    , p1 + 1) -= 0.75 * kT * n_ij * atoms[j].mass * (6 * C_cd - 5) / ((molecules[i].mass + atoms[j].mass) * n * D_cd); 	// 0100
-
-         thermal_conductivity_LHS.at(p1 + 1, p1 + 1) += 1.5 * kT * coll_mass * n_ij *
-   						                                          (7.5 * molecules[i].mass / atoms[j].mass +
- 							                                          6.25 * atoms[j].mass / molecules[i].mass - 3 * atoms[j].mass * B_cd / molecules[i].mass
-                                                        + 4 * A_cd + (20./3) * A_cd * (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, num_molecules + j))) /
-							                                          (K_CONST_PI * K_CONST_K)) / (n * D_cd * (molecules[i].mass + atoms[j].mass)); // 1100
+         thermal_conductivity_LHS.at(p1+1, p1+1) += 1.5 * kT * coll_mass * n_ij *
+   						                                      (7.5 * molecules[i].mass / atoms[j].mass +
+ 							                                       6.25 * atoms[j].mass / molecules[i].mass - 3 * atoms[j].mass * B_cd /
+                                                     molecules[i].mass + 4 * A_cd + (20./3) * A_cd *
+                                                     (molecules[i].mass * c_rot_arr[o1] /
+                                                     (rm * rot_rel_times.at(i, num_molecules + j))) /
+							                                       (K_CONST_PI * K_CONST_K)) / (n * D_cd * (molecules[i].mass + atoms[j].mass)); // 1100
 
          thermal_conductivity_LHS.at(p1 + 2, p1 + 1) -= 6. * T * A_cd * n_ij * molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, num_molecules + j))
                                                       * molecules[i].mass / (n * D_cd * K_CONST_PI * (molecules[i].mass + atoms[j].mass)); // 0110
@@ -2445,27 +2453,43 @@ using namespace std;
           p1 = 3 * (vl_offset[i] + k);
           o1 =  vl_offset[i] + k;
 
-          thermal_conductivity_LHS.at(p1, n_vibr_levels_total * 3 + 2 * j) = -1.5 * kT * n_ij / (n * D_cd); // 0000
-          thermal_conductivity_LHS.at(p1 + 1, n_vibr_levels_total * 3 + 2 * j) =  0.75 * kT * n_ij * (6 * C_cd - 5) * atoms[j].mass / ((molecules[i].mass + atoms[j].mass) * n * D_cd); // 1000
-          thermal_conductivity_LHS.at(p1 + 2, n_vibr_levels_total * 3 + 2 * j) = 0; // 0010
-          thermal_conductivity_LHS.at(p1, n_vibr_levels_total*3 + 2*j + 1) = 0.75 * kT * n_ij * (6 * C_cd - 5) * molecules[i].mass / ((molecules[i].mass + atoms[j].mass) * n * D_cd); // 0100
-          thermal_conductivity_LHS.at(p1 + 1, n_vibr_levels_total*3 + 2*j + 1) = -1.5 * kT * n_ij * coll_mass / (n * D_cd * (molecules[i].mass + atoms[j].mass))
-                                                                                  * (13.75 - 3 * B_cd - 4 * A_cd - (20./3.) * A_cd / (K_CONST_K * K_CONST_PI)
-                                                                                  * (molecules[i].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(i, num_molecules + j)))); // 1100, 13.75 = 55/4
+          thermal_conductivity_LHS.at(p1,   n_vibr_levels_total*3+2*j) = -1.5 * kT * n_ij / (n * D_cd); // 0000
+
+          thermal_conductivity_LHS.at(p1+1, n_vibr_levels_total*3+2*j) = 0.75 * kT * n_ij * (6 * C_cd - 5) * atoms[j].mass /
+                                                                         ((molecules[i].mass + atoms[j].mass) * n * D_cd); // 1000
+
+          thermal_conductivity_LHS.at(p1+2, n_vibr_levels_total*3+2*j) = 0; // 0010
+
+          thermal_conductivity_LHS.at(p1,   n_vibr_levels_total*3+2*j+1) = 0.75 * kT * n_ij * (6 * C_cd - 5) * molecules[i].mass /
+                                                                           ((molecules[i].mass + atoms[j].mass) * n * D_cd); // 0100
+
+          thermal_conductivity_LHS.at(p1+1, n_vibr_levels_total*3+2*j+1) = -1.5 * kT * n_ij * coll_mass /
+                                                                           (n * D_cd * (molecules[i].mass + atoms[j].mass))
+                                                                           * (13.75 - 3 * B_cd - 4 * A_cd - (20./3.) * A_cd /
+                                                                           (K_CONST_K * K_CONST_PI) *
+                                                                           (molecules[i].mass * c_rot_arr[o1] /
+                                                                           (rm * rot_rel_times.at(i, num_molecules + j)))); // 1100, 13.75 = 55/4
         /*
-          thermal_conductivity_LHS.at(p1 + 2, n_vibr_levels_total*3 + 2*j + 1) = -6 * T / (n * D_cd * K_CONST_PI) * A_cd * n_ij * molecules[i].mass * molecules[i].mass
-                                                                                  * c_rot_arr(o1) / (rm * rot_rel_times.at(i, num_molecules + j) * (molecules[i].mass + molecules[j].mass)); // 0110
+          thermal_conductivity_LHS.at(p1+2, n_vibr_levels_total*3+2*j+1) = -6 * T / (n * D_cd * K_CONST_PI) * A_cd * n_ij *
+                                                                           molecules[i].mass * molecules[i].mass
+                                                                           * c_rot_arr(o1) /
+                                                                           (rm * rot_rel_times.at(i, num_molecules + j) *
+                                                                           (molecules[i].mass + molecules[j].mass)); // 0110
          */
+
           // BugFix by Qizhen Hong
-          thermal_conductivity_LHS.at(p1 + 2, n_vibr_levels_total*3 + 2*j + 1) = -6 * T / (n * D_cd * K_CONST_PI) * A_cd * n_ij * molecules[i].mass * molecules[i].mass
-                                                                                  * c_rot_arr(o1) / (rm * rot_rel_times.at(i, num_molecules + j) * (molecules[i].mass + atoms[j].mass)); // 0110
+          thermal_conductivity_LHS.at(p1+2, n_vibr_levels_total*3+2*j+1) = -6 * T / (n * D_cd * K_CONST_PI) * A_cd * n_ij *
+                                                                            molecules[i].mass * molecules[i].mass
+                                                                            * c_rot_arr(o1) /
+                                                                            (rm * rot_rel_times.at(i, num_molecules + j) *
+                                                                            (molecules[i].mass + atoms[j].mass)); // 0110
           // symmetrization
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * j, p1    ) = thermal_conductivity_LHS.at(p1    , n_vibr_levels_total * 3 + 2 * j);
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * j, p1 + 1) = thermal_conductivity_LHS.at(p1 + 1, n_vibr_levels_total * 3 + 2 * j);
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * j, p1 + 2) = thermal_conductivity_LHS.at(p1 + 2, n_vibr_levels_total * 3 + 2 * j);
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * j + 1, p1    ) = thermal_conductivity_LHS.at(p1    , n_vibr_levels_total * 3 + 2 * j + 1);
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * j + 1, p1 + 1) = thermal_conductivity_LHS.at(p1 + 1, n_vibr_levels_total * 3 + 2 * j + 1);
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * j + 1, p1 + 2) = thermal_conductivity_LHS.at(p1 + 2, n_vibr_levels_total * 3 + 2 * j + 1);
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*j,   p1  ) = thermal_conductivity_LHS.at(p1    , n_vibr_levels_total * 3 + 2 * j);
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*j,   p1+1) = thermal_conductivity_LHS.at(p1 + 1, n_vibr_levels_total * 3 + 2 * j);
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*j,   p1+2) = thermal_conductivity_LHS.at(p1 + 2, n_vibr_levels_total * 3 + 2 * j);
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*j+1, p1  ) = thermal_conductivity_LHS.at(p1    , n_vibr_levels_total * 3 + 2 * j + 1);
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*j+1, p1+1) = thermal_conductivity_LHS.at(p1 + 1, n_vibr_levels_total * 3 + 2 * j + 1);
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*j+1, p1+2) = thermal_conductivity_LHS.at(p1 + 2, n_vibr_levels_total * 3 + 2 * j + 1);
         }
       }
     }
@@ -2479,18 +2503,26 @@ using namespace std;
         n_ij = this_n_atom[i] * this_n_atom[j];
 
         A_cd = 0.5 * omega_22.at(num_molecules + i, num_molecules + j) / omega_11.at(num_molecules + i, num_molecules + j);
-        B_cd = (1./3.) * (5 * omega_12.at(num_molecules + i, num_molecules + j) - omega_13.at(num_molecules + i, num_molecules + j)) / omega_11.at(num_molecules + i, num_molecules + j);
+        B_cd = (1./3.) * (5 * omega_12.at(num_molecules + i, num_molecules + j) -
+                              omega_13.at(num_molecules + i, num_molecules + j))/omega_11.at(num_molecules + i, num_molecules + j);
         C_cd = (1./3.) * omega_12.at(num_molecules + i, num_molecules + j) / omega_11.at(num_molecules + i, num_molecules + j);
         D_cd = (3./16) * kT / (n * coll_mass * omega_11.at(num_molecules + i, num_molecules + j));
 
-        thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i, n_vibr_levels_total * 3 + 2 * j) = -1.5 * kT * n_ij / (n * D_cd); // 0000
-        thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i + 1, n_vibr_levels_total * 3 + 2 * j) = 0.75 * kT * n_ij * (6 * C_cd - 5) * atoms[j].mass /
-														((atoms[i].mass + atoms[j].mass) * n * D_cd); // 1000
+        thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i, n_vibr_levels_total*3+2*j) = -1.5 * kT * n_ij / (n * D_cd); // 0000
+        thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i+1, n_vibr_levels_total*3+2*j) = 0.75 * kT * n_ij * (6 * C_cd - 5) *
+                                                                                              atoms[j].mass /
+                                                                                              ((atoms[i].mass + atoms[j].mass) *
+                                                                                               n * D_cd); // 1000
 
-        thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i, n_vibr_levels_total * 3 + 2 * j + 1) =  0.75 * kT * n_ij * (6 * C_cd - 5) * atoms[i].mass / 																		((atoms[i].mass + atoms[j].mass) * n * D_cd);
+        thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i, n_vibr_levels_total*3+2*j+1) = 0.75 * kT * n_ij * (6 * C_cd - 5) *
+                                                                                              atoms[i].mass /
+                                                                                              ((atoms[i].mass + atoms[j].mass) *
+                                                                                               n * D_cd);
 
-        thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i + 1, n_vibr_levels_total * 3 + 2 * j + 1) = -1.5 * kT * n_ij * coll_mass / (n * D_cd * (atoms[i].mass + atoms[j].mass))
-                                                                                                                   * (13.75 - 3 * B_cd - 4 * A_cd); // 1100, 13.75 = 55/4
+        thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i+1, n_vibr_levels_total*3+2*j+1) = -1.5 * kT * n_ij * coll_mass /
+                                                                                                (n * D_cd * (atoms[i].mass +
+                                                                                                             atoms[j].mass))
+                                                                                                 * (13.75 - 3 * B_cd - 4 * A_cd); // 1100, 13.75 = 55/4
 
         // symmetrization
         thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*j, n_vibr_levels_total*3+2*i) = thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i, n_vibr_levels_total*3+2*j);
@@ -2534,41 +2566,54 @@ using namespace std;
           //o1 =  vl_offset[i] + k;
           o1 =  vl_offset[j] + k;
 
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i    , n_vibr_levels_total * 3 + 2 * i) +=  1.5 * kT * n_ij / (D_cd * n); // 0000
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i + 1, n_vibr_levels_total * 3 + 2 * i) -= 	0.75 * kT * n_ij * molecules[j].mass * (6 * C_cd - 5) / ((atoms[i].mass + molecules[j].mass) * n * D_cd); // 1000
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i    , n_vibr_levels_total * 3 + 2 * i + 1) -=  0.75 * kT * n_ij * molecules[j].mass * (6 * C_cd - 5) / ((atoms[i].mass + molecules[j].mass) * n * D_cd); // 0100
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i  , n_vibr_levels_total*3+2*i) += 1.5 * kT * n_ij / (D_cd * n); // 0000
+
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i+1, n_vibr_levels_total*3+2*i) -= 0.75 * kT * n_ij *
+                                                                                                 molecules[j].mass * (6*C_cd-5) /
+                                                                                                 ((atoms[i].mass+molecules[j].mass)
+                                                                                                  * n * D_cd); // 1000
+
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i, n_vibr_levels_total*3+2*i+1) -= 0.75 * kT * n_ij * molecules[j].mass
+                                                                                                 * (6 * C_cd - 5) /
+                                                                                                 ((atoms[i].mass+molecules[j].mass)
+                                                                                                 * n * D_cd); // 0100
+          // BugFix by Qizhen Hong
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i+1, n_vibr_levels_total*3+2*i+1) += 1.5 * kT * coll_mass * n_ij *
+            (7.5 * atoms[i].mass / molecules[j].mass + 6.25 * molecules[j].mass / atoms[i].mass -
+                               3 * molecules[j].mass * B_cd / atoms[i].mass + 4 * A_cd + (20./3) * A_cd *
+                                  (molecules[j].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(j,num_molecules + i))) /
+                                  (K_CONST_PI * K_CONST_K)) / (n * D_cd * (atoms[i].mass + molecules[j].mass)); // 1100
 /*
           thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i + 1, n_vibr_levels_total * 3 + 2 * i + 1) +=
 		1.5 * kT * coll_mass * n_ij * (7.5 * atoms[i].mass / molecules[j].mass + 6.25 * molecules[j].mass / atoms[i].mass - 3 * molecules[j].mass * B_cd / atoms[i].mass
  		+ 4 * A_cd + (20./3) * A_cd * (molecules[j].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(num_molecules + j, i))) / (K_CONST_PI * K_CONST_K)) /
                												(n * D_cd * (atoms[i].mass + molecules[j].mass)); // 1100
 */
-          // BugFix by Qizhen Hong
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i + 1, n_vibr_levels_total * 3 + 2 * i + 1) +=
-		1.5 * kT * coll_mass * n_ij * (7.5 * atoms[i].mass / molecules[j].mass + 6.25 * molecules[j].mass / atoms[i].mass - 3 * molecules[j].mass * B_cd / atoms[i].mass
- 		+ 4 * A_cd + (20./3) * A_cd * (molecules[j].mass * c_rot_arr[o1] / (rm * rot_rel_times.at(j,num_molecules + i))) / (K_CONST_PI * K_CONST_K)) /
-               												(n * D_cd * (atoms[i].mass + molecules[j].mass)); // 1100
         }
       }
 
       for (j=0; j<num_atoms; j++) {
         if (j!=i) {
 
-          coll_mass = interactions[inter_index(num_molecules + i, num_molecules + j)].collision_mass;
+          coll_mass = interactions[inter_index(num_molecules+i, num_molecules+j)].collision_mass;
           n_ij = this_n_atom[i] * this_n_atom[j];
-          A_cd = ( 0.5 ) *      omega_22.at(num_molecules + i, num_molecules + j) / omega_11.at(num_molecules + i, num_molecules + j);
-          B_cd = (1./3.) * (5 * omega_12.at(num_molecules + i, num_molecules + j) - omega_13.at(num_molecules + i, num_molecules + j)) / omega_11.at(num_molecules + i, num_molecules + j);
-          C_cd = (1./3.) *      omega_12.at(num_molecules + i, num_molecules + j) / omega_11.at(num_molecules + i, num_molecules + j);
-          D_cd = (3./16) *      	 		             kT / (n * coll_mass * omega_11.at(num_molecules + i, num_molecules + j));
+          A_cd = ( 0.5 ) *      omega_22.at(num_molecules+i, num_molecules+j) / omega_11.at(num_molecules+i, num_molecules+j);
+          B_cd = (1./3.) * (5 * omega_12.at(num_molecules+i, num_molecules+j) - omega_13.at(num_molecules+i, num_molecules+j))
+                              / omega_11.at(num_molecules+i, num_molecules+j);
+          C_cd = (1./3.) *      omega_12.at(num_molecules+i, num_molecules+j) / omega_11.at(num_molecules+i, num_molecules+j);
+          D_cd = (3./16) *      	 		                    kT / (n * coll_mass * omega_11.at(num_molecules+i, num_molecules+j));
 
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i    , n_vibr_levels_total * 3 + 2 * i) +=  1.5 * kT * n_ij / (D_cd * n); // 0000
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i, n_vibr_levels_total*3+2*i) += 1.5 * kT * n_ij / (D_cd * n); // 0000
 
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i + 1, n_vibr_levels_total * 3 + 2 * i) -=  0.75 * kT * n_ij * atoms[j].mass * (6 * C_cd - 5) / ((atoms[i].mass + atoms[j].mass) * n * D_cd); // 1000
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i+1, n_vibr_levels_total*3+2*i) -= 0.75 * kT * n_ij * atoms[j].mass *
+            (6 * C_cd - 5) / ((atoms[i].mass + atoms[j].mass) * n * D_cd); // 1000
 
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i    , n_vibr_levels_total * 3 + 2 * i + 1) -=  0.75 * kT * n_ij * atoms[j].mass * (6 * C_cd - 5) / ((atoms[i].mass + atoms[j].mass) * n * D_cd); // 0100
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i, n_vibr_levels_total*3+2*i+1) -= 0.75 * kT * n_ij * atoms[j].mass *
+            (6 * C_cd - 5) / ((atoms[i].mass + atoms[j].mass) * n * D_cd); // 0100
 
-          thermal_conductivity_LHS.at(n_vibr_levels_total * 3 + 2 * i + 1, n_vibr_levels_total * 3 + 2 * i + 1) += 1.5 * kT * coll_mass * n_ij *
-				(7.5 * atoms[i].mass / atoms[j].mass + 6.25 * atoms[j].mass / atoms[i].mass - 3 * atoms[j].mass * B_cd / atoms[i].mass + 4 * A_cd) / ((atoms[i].mass + atoms[j].mass) * n * D_cd); // 1100
+          thermal_conductivity_LHS.at(n_vibr_levels_total*3+2*i+1, n_vibr_levels_total*3+2*i+1) += 1.5 * kT * coll_mass * n_ij *
+            (7.5 * atoms[i].mass / atoms[j].mass + 6.25 * atoms[j].mass / atoms[i].mass -
+             3 * atoms[j].mass * B_cd / atoms[i].mass + 4 * A_cd) / ((atoms[i].mass + atoms[j].mass) * n * D_cd); // 1100
         }
       }
     }
@@ -2627,8 +2672,8 @@ using namespace std;
 
     thermal_conductivity_RHS *= T / this_total_n;
 
-    //std::cout << "T = " << T << std::endl;
-    //std::cout << "thermal_conductivity_RHS" << thermal_conductivity_RHS << std::endl;
+    std::cout << "T = " << T << std::endl;
+    std::cout << "thermal_conductivity_RHS" << thermal_conductivity_RHS << std::endl;
     return thermal_conductivity_RHS;
   }
 
