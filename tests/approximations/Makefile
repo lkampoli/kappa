@@ -3,20 +3,18 @@
  KAPPA_INSTALL=../../install
 
  CXX       = g++ -O3 -pg -lm -std=c++11 -fopenmp
- 
- CXX_FLAGS = 	-I $(KAPPA_INSTALL)/include/kappa++ 				\
-#		-I $(KAPPA_DIR)/kappa_deps/x86_64/include			\
-#		-I $(KAPPA_DIR)/kappa_deps/x86_64/include/armadillo_bits	\
-#		-I $(KAPPA_DIR)/kappa_deps/x86_64/include/yaml-cpp	
 
- CXX_LIBS  = 	-L $(KAPPA_INSTALL)/lib -lkappa++				\
-#		-L $(KAPPA_DIR)/kappa_deps/x86_64/lib -lyaml-cpp -larmadillo	
+ CXX_FLAGS = -I $(KAPPA_INSTALL)/include/kappa++ \
+	     -I /usr/include
 
-EXAMPLES  = \
-	cvibr_multit 		\
-	cvibr_sts		\
-	cvtr_sts		\
-	cvrot_sts
+ CXX_LIBS  = -L $(KAPPA_INSTALL)/lib -lkappa++ \
+	     -L /usr/lib -larmadillo           \
+	     -L /usr/lib -lyaml-cpp
+
+ EXAMPLES  = cvibr_multit \
+	     cvibr_sts    \
+     	     cvtr_sts     \
+     	     cvrot_sts
 	
 all : $(EXAMPLES)
 

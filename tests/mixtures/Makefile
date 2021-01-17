@@ -4,30 +4,27 @@
 
  CXX = g++ -g -pg -lm -std=c++11 -fopenmp
  
- CXX_FLAGS = -I $(KAPPA_INSTALL)/include/kappa++             \
-#		-I $(KAPPA_DIR)/kappa_deps/x86_64/include                \
-#		-I $(KAPPA_DIR)/kappa_deps/x86_64/include/armadillo_bits \
-#		-I $(KAPPA_DIR)/kappa_deps/x86_64/include/yaml-cpp
+ CXX_FLAGS = -I $(KAPPA_INSTALL)/include/kappa++ \
+             -I /usr/include
 
- CXX_LIBS  = 	$(KAPPA_INSTALL)/lib/libkappa++.so \
-#		-L $(KAPPA_DIR)/kappa_deps/x86_64/lib -lyaml-cpp -larmadillo -lopenblas -llapack
+ CXX_LIBS  = -L $(KAPPA_INSTALL)/lib -lkappa++ \
+             -L /usr/lib -larmadillo           \
+             -L /usr/lib -lyaml-cpp
 
-EXAMPLES  = 											 \
-	mixture_string_creation          \
-	mixture-sts-basic                \
-	mixture-sts-bulk_air5            \
-	mixture-sts-shear                \
-	mixture-sts-bulk                 \
-	mixture-sts-shear-bulk-thermal   \
-	thermodiffusion                  \
-	mixture-sts-thermo-diffusion     \
-	transport_coefficients_air5      \
-	mixture-sts-basic_boltzman       \
-	TestDiffusion                    \
-	thermal_conductivity             \
-	mixture-sts-thermal_conductivity 
-#	ionized_mixture_creation         \
-
+ EXAMPLES  = mixture_string_creation          \
+	     mixture-sts-basic                \
+	     mixture-sts-bulk_air5            \
+	     mixture-sts-shear                \
+	     mixture-sts-bulk                 \
+	     mixture-sts-shear-bulk-thermal   \
+	     thermodiffusion                  \
+	     mixture-sts-thermo-diffusion     \
+	     transport_coefficients_air5      \
+	     mixture-sts-basic_boltzman       \
+	     TestDiffusion                    \
+	     thermal_conductivity             \
+	     mixture-sts-thermal_conductivity \
+#	     ionized_mixture_creation         \
 
 all : $(EXAMPLES)
 

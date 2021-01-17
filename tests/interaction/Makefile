@@ -4,24 +4,22 @@
 
  CXX       = g++ -O3 -pg -lm -std=c++11 -fopenmp
  
- CXX_FLAGS = 	-I $(KAPPA_INSTALL)/include/kappa++ 				\
-#		-I $(KAPPA_DIR)/kappa_deps/x86_64/include		 	\
-#		-I $(KAPPA_DIR)/kappa_deps/x86_64/include/armadillo_bits	\
-#		-I $(KAPPA_DIR)/kappa_deps/x86_64/include/yaml-cpp	
+ CXX_FLAGS = -I $(KAPPA_INSTALL)/include/kappa++ \
+	     -I /usr/include
 
- CXX_LIBS  = 	-L $(KAPPA_INSTALL)/lib -lkappa++				\
-#		-L $(KAPPA_DIR)/kappa_deps/x86_64/lib -lyaml-cpp -larmadillo	
+ CXX_LIBS  = -L $(KAPPA_INSTALL)/lib -lkappa++ \
+	     -L /usr/lib -larmadillo           \
+             -L /usr/lib -lyaml-cpp
 
-EXAMPLES  = \
-	k_exchArrhTest			\
-	omegaBCEtest			\
-	omegaTest			\
-	vssTest				\
-	k_diss_ILTtest			\
-	k_dissTest			\
-        vss_and_neutral_e		\
-	test_FHO			\
-	cs_dissTest
+ EXAMPLES  = k_exchArrhTest    \
+     	     omegaBCEtest      \
+     	     omegaTest	       \
+     	     vssTest	       \
+     	     k_diss_ILTtest    \
+     	     k_dissTest	       \
+     	     vss_and_neutral_e \
+     	     test_FHO	       \
+     	     cs_dissTest
 
 all : $(EXAMPLES)
 

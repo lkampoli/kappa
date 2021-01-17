@@ -4,15 +4,14 @@
 
  CXX       = g++ -O3 -pg -lm -std=c++11 -fopenmp
  
- CXX_FLAGS = 	-I $(KAPPA_INSTALL)/include/kappa++ 				\
-		-I $(KAPPA_DIR)/kappa_deps/x86_64/include		 	\
-		-I $(KAPPA_DIR)/kappa_deps/x86_64/include/armadillo_bits	\
-		-I $(KAPPA_DIR)/kappa_deps/x86_64/include/yaml-cpp	
+ CXX_FLAGS = -I $(KAPPA_INSTALL)/include/kappa++ \
+	     -I /usr/include
 
- CXX_LIBS  = 	$(KAPPA_INSTALL)/lib/libkappa++.so				\
-		-L $(KAPPA_DIR)/kappa_deps/x86_64/lib -lyaml-cpp -larmadillo	
+ CXX_LIBS  = -L $(KAPPA_INSTALL)/lib -lkappa++ \
+	     -L /usr/lib -larmadillo           \
+             -L /usr/lib -lyaml-cpp
 
-EXAMPLES  = basicTest
+ EXAMPLES  = basicTest
 
 all : $(EXAMPLES)
 
