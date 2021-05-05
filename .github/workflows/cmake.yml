@@ -21,7 +21,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Install dependencies
-      run: sudo apt-get install libopenblas-dev libarmadillo-dev libyaml-cpp-dev
+      run: sudo apt-get install libopenblas-dev libarmadillo-dev libyaml-cpp-dev lcov
             
     - name: Make build dir
       run: mkdir build 
@@ -31,22 +31,35 @@ jobs:
     
     - name: Configure
       run: > 
-          export CC=$(echo  "${{ matrix.compiler }}" | cut -d' ' -f1) && 
-          export CXX=$(echo "${{ matrix.compiler }}" | cut -d' ' -f2) && 
-          cd build && cmake -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DENABLE_TESTING:BOOL=FALSE -DCMAKE_INSTALL_PREFIX=../install ..
+          export CC=$(echo  "${{ matrix.compiler }}" | cut -d' ' -f1) &&
+          export CXX=$(echo "${{ matrix.compiler }}" | cut -d' ' -f2) &&
+          cd build && 
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DENABLE_TESTING:BOOL=FALSE -DENABLE_COVERAGE:BOOL=FALSE -DCMAKE_INSTALL_PREFIX=../install ..
 
     - name: Build
-      run: cd build && cmake .. && make install
+      run: cd build && 
+           cmake .. && 
+           make install
    
     - name: Cleanall examples
       working-directory: ./tests
       run: ./cleanall.sh
 
-    - name: Test
+    - name: Run Test
       working-directory: ./tests
       run: ./runall.sh
     # run: >
     #     export KAPPA_DIRECTORY=$(pwd) &&
     #     export KAPPA_DATA_DIRECTORY=$KAPPA_DIRECTORY/data &&
     #     export LD_LIBRARY_PATH=$KAPPA_DIRECTORY/install/lib:$LD_LIBRARY_PATH &&
-    #     cd build && ctest
+    #     cd build && 
+    #     ctest
+    
+    #- name: Make Coverage
+    #  run: cd build && 
+    #       make coverage
+          
+    #- name: Run Codecov
+    #  run: > 
+    #      cd build && 
+    #      bash <(curl -s https://codecov.io/bash) -f kappa++.info || echo "Codecov did not collect coverage reports"
