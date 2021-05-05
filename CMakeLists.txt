@@ -84,16 +84,16 @@ project(kappa++
     #set (CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wold-style-cast")
     #set (CMAKE_CXX_FLAGS "-g")
 
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -lm -g -pg -fopenmp 						" )
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/kappa_deps/x86_64/include/				" )
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/kappa_deps/x86_64/include/yaml-cpp/			" )
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/kappa_deps/x86_64/include/armadillo_bits/		" )
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/kappa_deps/x86_64/include/boost/			" )
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/src/approximations/					" )
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/src/interactions/					" )
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/src/numerics/					" )
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/src/mixtures/					" )
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/src/particles					" )
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -lm -g -pg -fopenmp 						             " )
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/kappa_deps/x86_64/include/				 " )
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/kappa_deps/x86_64/include/yaml-cpp/		 " )
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/kappa_deps/x86_64/include/armadillo_bits/" )
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/kappa_deps/x86_64/include/boost/		 " )
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/src/approximations/					     " )
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/src/interactions/					     " )
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/src/numerics/					         " )
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/src/mixtures/					         " )
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/src/particles					         " )
 
  endif ()
 
@@ -127,6 +127,7 @@ project(kappa++
  list(APPEND LCOV_REMOVE_PATTERNS
      "'*/tests/*'"
      "'*/install/*'"
+     #"'*/examples/*'"
  )
  include(CodeCoverage)
 
@@ -142,7 +143,6 @@ project(kappa++
 #################################################################################
 # Find the required packages: OpenBLAS(Blas, Lapack), Armadillo, Yaml-cpp, Boost
 #################################################################################
-
 
  find_package(Yaml REQUIRED)
   add_library(Yaml INTERFACE IMPORTED)
@@ -171,6 +171,8 @@ project(kappa++
  option (ENABLE_TESTING "Enable regression testing with CTest" OFF)
 
  if (ENABLE_TESTING OR ENABLE_COVERAGE)
+    find_package(Catch2)
     enable_testing()
     add_subdirectory(tests)
+    #add_subdirectory(examples)
  endif()

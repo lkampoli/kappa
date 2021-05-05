@@ -32,3 +32,8 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
  target_link_libraries(kappa++ ${YAML_LIBRARY})
  target_link_libraries(kappa++ ${ARMADILLO_LIBRARY})
  install(TARGETS kappa++ DESTINATION lib)
+
+ # Evaluate coverage
+ if(ENABLE_COVERAGE)
+     add_coverage(kappa++)
+ endif()

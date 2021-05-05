@@ -35,6 +35,10 @@ The main features of _KAPPA_ code are the following:
 Detailed information about installation can be found at:
 https://github.com/lkampoli/kappa/wiki/HOWTO.
 
+or briefly, 
+
+`sudo apt-get install libopenblas-dev libarmadillo-dev libyaml-cpp-dev catch`
+
 ## Copyrights
 
 KAPPA is an open source project, it is distributed under the 

@@ -42,11 +42,11 @@ jobs:
            make install
    
     - name: Cleanall examples
-      working-directory: ./tests
+      working-directory: ./examples
       run: ./cleanall.sh
 
-    - name: Run Test
-      working-directory: ./tests
+    - name: Run Examples
+      working-directory: ./examples
       run: ./runall.sh
     # run: >
     #     export KAPPA_DIRECTORY=$(pwd) &&
