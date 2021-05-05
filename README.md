@@ -6,7 +6,7 @@ conventional CFD codes to provide thermodynamic, transport, chemistry, and
 energy transfer properties associated with non-equilibrium reacting flows.
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/lkampoli/kappa/CMake?style=plastic)](https://github.com/lkampoli/kappa/actions)
-[![license: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+[![license: LGPL v3](https://img.shields.io/github/license/lkampoli/kappa?color=orange&style=plastic)](https://www.gnu.org/licenses/lgpl-3.0)
 [![GitHub forks](https://img.shields.io/github/forks/lkampoli/kappa?style=plastic)](https://github.com/lkampoli/kappa/network/members)
 [![GitHub Repo stars](https://img.shields.io/github/stars/lkampoli/kappa?color=yellow&style=plastic)](https://github.com/lkampoli/kappa/stargazers)
 [![GitHub watchers](https://img.shields.io/github/watchers/lkampoli/kappa?color=green&style=plastic)](https://github.com/lkampoli/kappa/watchers)
