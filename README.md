@@ -5,6 +5,8 @@ Saint Petersburg State University (SPBSU), designed to be coupled with
 conventional CFD codes to provide thermodynamic, transport, chemistry, and 
 energy transfer properties associated with non-equilibrium reacting flows.
 
+[![Build Status](https://github.com/lkampoli/kappa/workflows/Build/badge.svg)](https://github.com/lkampoli/kappa/actions)
+
 The main features of _KAPPA_ code are the following:
 * Kinetic theory approximations implemented:
     - Vibrational state-to-state (STS);

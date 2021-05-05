@@ -8,5 +8,3 @@ do
    cd ..
    pwd
 done
-
-
