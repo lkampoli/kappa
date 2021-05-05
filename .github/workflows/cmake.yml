@@ -37,7 +37,7 @@ jobs:
       run: cd build && cmake .. && make install
    
     - name: Cleanall examples
-      working_directory: ./tests
+      working-directory: ./tests
       run: ./cleanall.sh
 
     - name: Test
