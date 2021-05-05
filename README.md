@@ -14,6 +14,7 @@ energy transfer properties associated with non-equilibrium reacting flows.
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/lkampoli/kappa?color=red&style=plastic)](https://github.com/lkampoli/kappa/graphs/commit-activity)
 [![GitHub size](https://img.shields.io/github/languages/code-size/lkampoli/kappa?color=violet&style=plastic)]()
 [![GitHub lines](https://img.shields.io/tokei/lines/github/lkampoli/kappa?color=pink&style=plastic)]()
+[![GitHub language count](https://img.shields.io/github/languages/count/lkampoli/kappa?color=cyan&style=plastic)]()
 
 The main features of _KAPPA_ code are the following:
 * Kinetic theory approximations implemented:
