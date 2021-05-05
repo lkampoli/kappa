@@ -41,7 +41,7 @@ jobs:
       run: ./cleanall.sh
 
     - name: Test
-      working_directory: ./tests
+      working-directory: ./tests
       run: ./runall.sh
     # run: >
     #     export KAPPA_DIRECTORY=$(pwd) &&
