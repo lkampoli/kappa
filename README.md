@@ -11,6 +11,7 @@ energy transfer properties associated with non-equilibrium reacting flows.
 [![GitHub Repo stars](https://img.shields.io/github/stars/lkampoli/kappa?color=yellow&style=plastic)](https://github.com/lkampoli/kappa/stargazers)
 [![GitHub watchers](https://img.shields.io/github/watchers/lkampoli/kappa?color=green&style=plastic)](https://github.com/lkampoli/kappa/watchers)
 [![GitHub contributors](https://img.shields.io/github/contributors/lkampoli/kappa?color=magenta)](https://github.com/lkampoli/kappa/graphs/contributors)
+[![GitHub contributors](https://img.shields.io/github/contributors/lkampoli/kappa?color=magenta)](https://github.com/lkampoli/ML_4_STS/CONTRIBUTORS.md)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/lkampoli/kappa?color=red&style=plastic)](https://github.com/lkampoli/kappa/graphs/commit-activity)
 [![GitHub size](https://img.shields.io/github/languages/code-size/lkampoli/kappa?color=violet&style=plastic)]()
 [![GitHub lines](https://img.shields.io/tokei/lines/github/lkampoli/kappa?color=pink&style=plastic)]()
