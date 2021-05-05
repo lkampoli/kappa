@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     strategy:
+      fail-fast: false
+      max-parallel: 12
       matrix:
         os: [ubuntu-16.04, ubuntu-18.04, ubuntu-latest]
         build_type: [Debug, Release]
