@@ -29,16 +29,22 @@ jobs:
     
     - name: Configure
       run: > 
-          export CC=$(echo "${{ matrix.compiler }}"| cut -d' ' -f1)  && 
+          export CC=$(echo  "${{ matrix.compiler }}" | cut -d' ' -f1) && 
           export CXX=$(echo "${{ matrix.compiler }}" | cut -d' ' -f2) && 
           cd build && cmake -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DENABLE_TESTING:BOOL=FALSE -DCMAKE_INSTALL_PREFIX=../install ..
-                
+
     - name: Build
       run: cd build && cmake .. && make install
-            
-    #- name: Test
-    #  run: >
-    #      export KAPPA_DIRECTORY=$(pwd) &&
-    #      export KAPPA_DATA_DIRECTORY=$KAPPA_DIRECTORY/data &&
-    #      export LD_LIBRARY_PATH=$KAPPA_DIRECTORY/install/lib:$LD_LIBRARY_PATH &&
-    #      cd build && ctest
+   
+    - name: Cleanall examples
+      working_directory: ./tests
+      run: ./cleanall.sh
+
+    - name: Test
+      working_directory: ./tests
+      run: ./runall.sh
+    # run: >
+    #     export KAPPA_DIRECTORY=$(pwd) &&
+    #     export KAPPA_DATA_DIRECTORY=$KAPPA_DIRECTORY/data &&
+    #     export LD_LIBRARY_PATH=$KAPPA_DIRECTORY/install/lib:$LD_LIBRARY_PATH &&
+    #     cd build && ctest
