@@ -187,7 +187,7 @@ using namespace std;
       all_rigid_rotators = rigid_rotators;
 
       for (auto name : split_names) {
-        std::cout << " Particles' name: " << name << std::endl;
+        //std::cout << " Particles' name: " << name << std::endl;
         if (name != "e-") { // if there is an e-, there should be charged particles and the e- data will be loaded anyway
           try {
             kappa::Molecule mol(name, anharmonic, rigid_rotators, particles_filename);
@@ -1876,8 +1876,8 @@ using namespace std;
     bulk_viscosity_RHS[0] = 0; // normalization condition as to make the system linearly independent
     bulk_viscosity_RHS /= (this_ctr + this_crot);
 
-    std::cout << "T = " << T << std::endl;
-    std::cout << "bulk_viscosity_RHS" << bulk_viscosity_RHS << std::endl;
+    //std::cout << "T = " << T << std::endl;
+    //std::cout << "bulk_viscosity_RHS" << bulk_viscosity_RHS << std::endl;
     //std::cout << "size bulk_viscosity_RHS" << bulk_viscosity_RHS.size() << std::endl;
     return bulk_viscosity_RHS;
   }
@@ -1890,11 +1890,11 @@ using namespace std;
     compute_bulk_viscosity_LHS(T, model);
     compute_bulk_viscosity_RHS(T);
 
-    std::cout << "compute_bulk_viscosity_coeffs" << std::endl;
-    std::cout << "bulk_viscosity_RHS" << std::endl;
-    std::cout << bulk_viscosity_RHS << std::endl;
-    std::cout << "bulk_viscosity_LHS" << std::endl;
-    std::cout << bulk_viscosity_LHS << std::endl;
+    //std::cout << "compute_bulk_viscosity_coeffs" << std::endl;
+    //std::cout << "bulk_viscosity_RHS" << std::endl;
+    //std::cout << bulk_viscosity_RHS << std::endl;
+    //std::cout << "bulk_viscosity_LHS" << std::endl;
+    //std::cout << bulk_viscosity_LHS << std::endl;
     bulk_viscosity_coeffs = arma::solve(bulk_viscosity_LHS * 1e20, bulk_viscosity_RHS) * 1e20;
 
     return bulk_viscosity_coeffs;
@@ -2153,7 +2153,7 @@ using namespace std;
     bulk_viscosity_rigid_rot_RHS[0] = 0; // normalization condition
     bulk_viscosity_rigid_rot_RHS /= (this_ctr + this_crot);
 
-    std::cout << this_ctr << " " << this_crot << " " <<  " " << c_rot_rigid_rot_arr[0] << std::endl;
+    //std::cout << this_ctr << " " << this_crot << " " <<  " " << c_rot_rigid_rot_arr[0] << std::endl;
     //std::cout << bulk_viscosity_rigid_rot_RHS << std::endl;
     return bulk_viscosity_rigid_rot_RHS;
   }
@@ -2166,11 +2166,11 @@ using namespace std;
     compute_bulk_viscosity_rigid_rot_LHS(T, model);
     compute_bulk_viscosity_rigid_rot_RHS(T);
 
-    std::cout << "compute_bulk_viscosity_coeffs_RR" << std::endl;
-    std::cout << "bulk_viscosity_RHS_RR" << std::endl;
-    std::cout << bulk_viscosity_rigid_rot_RHS << std::endl;
-    std::cout << "bulk_viscosity_LHS_RR" << std::endl;
-    std::cout << bulk_viscosity_rigid_rot_LHS << std::endl;
+    //std::cout << "compute_bulk_viscosity_coeffs_RR" << std::endl;
+    //std::cout << "bulk_viscosity_RHS_RR" << std::endl;
+    //std::cout << bulk_viscosity_rigid_rot_RHS << std::endl;
+    //std::cout << "bulk_viscosity_LHS_RR" << std::endl;
+    //std::cout << bulk_viscosity_rigid_rot_LHS << std::endl;
 
     bulk_viscosity_rigid_rot_coeffs = arma::solve(bulk_viscosity_rigid_rot_LHS * 1e17, bulk_viscosity_rigid_rot_RHS) * 1e17;
 
@@ -2672,8 +2672,8 @@ using namespace std;
 
     thermal_conductivity_RHS *= T / this_total_n;
 
-    std::cout << "T = " << T << std::endl;
-    std::cout << "thermal_conductivity_RHS" << thermal_conductivity_RHS << std::endl;
+    //std::cout << "T = " << T << std::endl;
+    //std::cout << "thermal_conductivity_RHS" << thermal_conductivity_RHS << std::endl;
     return thermal_conductivity_RHS;
   }
 

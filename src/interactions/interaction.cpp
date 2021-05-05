@@ -10,7 +10,7 @@
 
 #include "exceptions.hpp"
 #include "interaction.hpp"
-#include "yaml.h"
+//#include "yaml.h"
 #include "yaml-cpp/yaml.h"
 
 using namespace std;

@@ -79,6 +79,8 @@ int main(int argc, char** argv) {
   mol_ndens.push_back(mixture.Boltzmann_distribution(T_vals[0], 101325.0 / (K_CONST_K * T_vals[0]), O2));
   mol_ndens.push_back(mixture.Boltzmann_distribution(T_vals[0], 101325.0 / (K_CONST_K * T_vals[0]), NO));
 
+  std::cout << std::setw(20) << mol_ndens[0];
+
   std::cout << std::setw(20) << " Temp. [K] ";
   std::cout << std::setw(20) << " N2 ";
   std::cout << std::setw(20) << " O2 ";

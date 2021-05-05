@@ -6,7 +6,7 @@
 #include <fstream>
 #include "molecule.hpp"
 #include "exceptions.hpp"
-#include "yaml.h"
+//#include "yaml.h"
 #include "yaml-cpp/yaml.h"
 
 using namespace std;

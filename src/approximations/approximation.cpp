@@ -426,10 +426,10 @@ kappa::Approximation::Approximation() {}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   double kappa::Approximation::crosssection_VT_FHO_RS(	double rel_vel,
-							double coll_mass,
+                            double coll_mass,
 							double diameter,
 							double osc_mass,
-                                                    	double Delta_E_vibr,
+                                                        double Delta_E_vibr,
 							int i,
 							int delta_i,
  							double omega,
@@ -467,13 +467,19 @@ kappa::Approximation::Approximation() {}
     }
   }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  double kappa::Approximation::crosssection_diss_RS(double rel_vel, double coll_mass, double diameter, double diss_energy, double vibr_energy, bool center_of_mass) {
+  double kappa::Approximation::crosssection_diss_RS(double rel_vel, 
+                                                    double coll_mass, 
+                                                    double diameter, 
+                                                    double diss_energy, 
+                                                    double vibr_energy, 
+                                                    bool center_of_mass) {
+
    return crosssection_elastic_RS(diameter) * p_probability_diss(rel_vel, coll_mass, diss_energy, vibr_energy, center_of_mass);
   }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   double kappa::Approximation::crosssection_diss_VSS(double rel_vel, double coll_mass, double vss_c_cs, double vss_omega, double diss_energy, double vibr_energy, bool center_of_mass) {
     return crosssection_elastic_VSS(rel_vel, vss_c_cs, vss_omega) * p_probability_diss(rel_vel, coll_mass, diss_energy, vibr_energy, center_of_mass);

@@ -2,7 +2,9 @@
  KAPPA_DIR = ../..
  KAPPA_INSTALL = ../../install
 
- CXX = g++ -g -pg -lm -std=c++11 -fopenmp
+ CXX = g++ -lm -std=c++11
+ #CXX = g++ -g -pg -lm -std=c++11 -fopenmp
+ #CXX = icpc -std=c++11 -fopenmp
  
  CXX_FLAGS = -I $(KAPPA_INSTALL)/include/kappa++ \
              -I /usr/include
@@ -12,19 +14,20 @@
              -L /usr/lib -lyaml-cpp
 
  EXAMPLES  = mixture_string_creation          \
-	     mixture-sts-basic                \
-	     mixture-sts-bulk_air5            \
-	     mixture-sts-shear                \
-	     mixture-sts-bulk                 \
-	     mixture-sts-shear-bulk-thermal   \
-	     thermodiffusion                  \
-	     mixture-sts-thermo-diffusion     \
-	     transport_coefficients_air5      \
-	     mixture-sts-basic_boltzman       \
-	     TestDiffusion                    \
-	     thermal_conductivity             \
-	     mixture-sts-thermal_conductivity \
-#	     ionized_mixture_creation         \
+    mixture-sts-basic                \
+    mixture-sts-bulk_air5            \
+    mixture-sts-shear                \
+    mixture-sts-bulk                 \
+    mixture-sts-shear-bulk-thermal   \
+    thermodiffusion                  \
+    mixture-sts-thermo-diffusion     \
+    transport_coefficients_air5      \
+    mixture-sts-basic_boltzman       \
+    TestDiffusion                    \
+    thermal_conductivity             \
+    mixture-sts-thermal_conductivity \
+    mk_TC_air5_database
+#	ionized_mixture_creation         
 
 all : $(EXAMPLES)
 
@@ -68,6 +71,9 @@ thermal_conductivity : thermal_conductivity.o
 	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
 
 mixture-sts-thermal_conductivity : mixture-sts-thermal_conductivity.o
+	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
+
+mk_TC_air5_database : mk_TC_air5_database.o
 	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
 
 %.o : %.cpp

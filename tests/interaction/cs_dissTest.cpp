@@ -51,18 +51,18 @@ void calculate(Molecule m, Atom a, Approximation appr) {
   }
 
   std::vector<std::string> cs_model_names = {	"RS",
-						"RS, center-of-mass line energy", 
-						"RS, center-of-mass line energy + vibr energy",
+	                        					"RS, center-of-mass line energy", 
+						                        "RS, center-of-mass line energy + vibr energy",
                                                	"VSS", 
-						"VSS, center-of-mass line energy + vibr energy",
+						                        "VSS, center-of-mass line energy + vibr energy",
                                                	"ILT"};
 
-  std::vector<kappa::models_cs_diss> cs_model_vals = {models_cs_diss::model_cs_diss_rs_thresh, 
-                                                      models_cs_diss::model_cs_diss_rs_thresh_cmass, 
-						      models_cs_diss::model_cs_diss_rs_thresh_cmass_vibr, 
-						      models_cs_diss::model_cs_diss_vss_thresh, 
-						      models_cs_diss::model_cs_diss_vss_thresh_cmass_vibr, 
-						      models_cs_diss::model_cs_diss_ilt};
+  std::vector<kappa::models_cs_diss> cs_model_vals = {  models_cs_diss::model_cs_diss_rs_thresh, 
+                                                        models_cs_diss::model_cs_diss_rs_thresh_cmass, 
+						                                models_cs_diss::model_cs_diss_rs_thresh_cmass_vibr, 
+						                                models_cs_diss::model_cs_diss_vss_thresh, 
+						                                models_cs_diss::model_cs_diss_vss_thresh_cmass_vibr, 
+						                                models_cs_diss::model_cs_diss_ilt};
   double res, tmp;
   outf.open(m.name + "_" + a.name + ".txt");
 
