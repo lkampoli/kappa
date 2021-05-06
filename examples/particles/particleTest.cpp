@@ -31,8 +31,11 @@ int main(int argc, char** argv) {
   std::string m_source = std::getenv("KAPPA_DATA_DIRECTORY");
   std::cout << "KAPPA_DATA_DIRECTORY is: " << m_source << '\n';
   std::string particle_source    = m_source + "particles.yaml";
+  std::cout << "particle_source: " << particle_source << '\n';
   std::string interaction_source = m_source + "interaction.yaml";
+  std::cout << "interaction_source: " << interaction_source << '\n';
 
+   
   try {
     Particle Ar_badfilename("Ar","articles.yaml");  
     // trying to read a non-existent database file throws the correct error

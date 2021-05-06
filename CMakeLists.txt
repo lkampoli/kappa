@@ -174,5 +174,4 @@ project(kappa++
     find_package(Catch2)
     enable_testing()
     add_subdirectory(tests)
-    #add_subdirectory(examples)
  endif()
