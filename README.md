@@ -29,7 +29,7 @@ The main features of KAPPA code are the following:
 * Database files for particle and interaction are in /data:
     - particles.yaml;
     - interaction.yaml.
-* Example testcases are located in /tests.
+* Example testcases are located in /examples.
 
 ## Installation
 Detailed information about installation can be found at:
