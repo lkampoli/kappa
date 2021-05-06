@@ -74,5 +74,19 @@ A list of contributors can found in [CONTRIBUTORS.md](CONTRIBUTORS.md).
     - particle.hpp, atom.hpp and molecule.hpp are the header files for the Particle, Atom and Molecule classes
     - particle.cpp, atom.cpp and molecule.cpp are the implementation files for the Particle, Atom and Molecule classes
     
-## Reference 
-https://www.researchgate.net/publication/328706345_KAPPA_Kinetic_approach_to_physical_processes_in_atmospheres_library_in_C
+## Citing KAPPA
+Please cite the following article when mentioning KAPPA in your own papers.
+
+* Campoli, L., Oblapenko, G. P., & Kustova, E. V. (2019). [Kappa: Kinetic approach to physical processes in atmospheres library in C++.]. Computer Physics Communications, 236, 244-267, (https://doi.org/10.1016/j.cpc.2018.10.016).
+
+**Bibtex**
+```bibtex
+@article{campoli2019kappa,
+  title={Kappa: Kinetic approach to physical processes in atmospheres library in C++},
+  author={Campoli, Lorenzo and Oblapenko, GP and Kustova, Elena V},
+  journal={Computer Physics Communications},
+  volume={236},
+  pages={244--267},
+  year={2019},
+  publisher={Elsevier}
+}
