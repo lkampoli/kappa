@@ -15,7 +15,7 @@ energy transfer properties associated with non-equilibrium reacting flows.
 [![GitHub lines](https://img.shields.io/tokei/lines/github/lkampoli/kappa?color=pink&style=plastic)]()
 <!-- [![GitHub language count](https://img.shields.io/github/languages/count/lkampoli/kappa?color=cyan&style=plastic)]() -->
 
-The main features of _KAPPA_ code are the following:
+The main features of KAPPA code are the following:
 * Kinetic theory approximations implemented:
     - Vibrational state-to-state (STS);
     - 1-temperature;
