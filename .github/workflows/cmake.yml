@@ -13,6 +13,7 @@ jobs:
       max-parallel: 12
       matrix:
         os: [ubuntu-16.04, ubuntu-18.04, ubuntu-latest]
+        platform: [x86, x64]
         build_type: [Debug, Release]
         compiler: [gcc g++, clang clang++]
     runs-on: ${{ matrix.os }}
