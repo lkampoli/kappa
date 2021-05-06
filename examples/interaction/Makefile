@@ -5,10 +5,10 @@
  CXX       = g++ -O3 -pg -lm -std=c++11 -fopenmp
  
  CXX_FLAGS = -I $(KAPPA_INSTALL)/include/kappa++ \
-	     -I /usr/include
+		     -I /usr/include
 
  CXX_LIBS  = -L $(KAPPA_INSTALL)/lib -lkappa++ \
-	     -L /usr/lib -larmadillo           \
+	    	 -L /usr/lib -larmadillo           \
              -L /usr/lib -lyaml-cpp
 
  EXAMPLES  = k_exchArrhTest    \
@@ -54,4 +54,4 @@ cs_dissTest : cs_dissTest.o
 	$(CXX) -c $(CXX_FLAGS)  $<
 
 clean :
-	$(RM) *.o $(EXAMPLES) *.txt *.ps *.pdf *.xlsx gmon.out *.log
+	$(RM) *.o $(EXAMPLES) *.ps *.pdf *.xlsx gmon.out *.log

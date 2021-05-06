@@ -1,9 +1,0 @@
-Start Test for Particle classes
-KAPPA_DATA_DIRECTORY is: /home/lk/CFD/kappa/data/
-particle_source: /home/lk/CFD/kappa/data/particles.yaml
-interaction_source: /home/lk/CFD/kappa/data/interaction.yaml
-Could not load database file articles.yaml
-No data found for B in the database
-Number of electron levels in CO: 28
-Vibrational spectrum of CO: 211
-Rigid rotator model used for CO molecule: 93

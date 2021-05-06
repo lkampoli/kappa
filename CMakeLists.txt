@@ -28,7 +28,10 @@
 #
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 cmake_policy(SET CMP0048 NEW)
+# Enable IPO for CMake versions that support it
+cmake_policy(SET CMP0069 NEW)
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(kappa++
     VERSION 1.0.0
@@ -71,6 +74,9 @@ project(kappa++
         RelWithDebInfo MinSizeRel Profile." FORCE)
  endif ()
 
+ #set_property(TARGET tgt PROPERTY CXX_STANDARD 11)
+ #add_compile_options(-Wall -Wextra -pedantic -Werror -std=c++11)
+
 ################################################################################
 # Install prefix settings
 ################################################################################
@@ -79,10 +85,12 @@ project(kappa++
     "Install path prefix, prepended onto install directories." FORCE)
  mark_as_advanced(CMAKE_INSTALL_PREFIX)
 
+ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -lm -pg" )
+
  if (CMAKE_COMPILER_IS_GNUCXX)
 
-    #set (CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wold-style-cast")
-    #set (CMAKE_CXX_FLAGS "-g")
+    set (CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wold-style-cast")
+    set (CMAKE_CXX_FLAGS "-g")
 
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -lm -g -pg -fopenmp 						             " )
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I ${CMAKE_CURRENT_SOURCE_DIR}/kappa_deps/x86_64/include/				 " )
@@ -127,7 +135,6 @@ project(kappa++
  list(APPEND LCOV_REMOVE_PATTERNS
      "'*/tests/*'"
      "'*/install/*'"
-     #"'*/examples/*'"
  )
  include(CodeCoverage)
 
@@ -174,4 +181,5 @@ project(kappa++
     find_package(Catch2)
     enable_testing()
     add_subdirectory(tests)
+    add_subdirectory(examples)
  endif()

@@ -80,7 +80,7 @@ mk_TC_air5_database : mk_TC_air5_database.o
 	$(CXX) -c $(CXX_FLAGS)  $<
 
 clean :
-	$(RM) *.o $(EXAMPLES) *.out *.txt gmon.out *.log
+	$(RM) *.o $(EXAMPLES) *.out gmon.out *.log
 
 runall:
 	./$(EXAMPLES)

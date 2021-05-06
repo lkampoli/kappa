@@ -2,7 +2,8 @@
  KAPPA_DIR=../..
  KAPPA_INSTALL=../../install
 
- CXX       = g++ -O3 -pg -lm -std=c++11 -fopenmp
+ #CXX      = g++ -O3 -pg -lm -std=c++11 -fopenmp
+ CXX       = icpc -O3 -lm -std=c++11
  
  CXX_FLAGS = -I $(KAPPA_INSTALL)/include/kappa++ \
              -I /usr/include
@@ -26,4 +27,4 @@ particleTest : particleTest.o
 	$(CXX) -c $(CXX_FLAGS)  $<
 
 clean :
-	$(RM) *.o $(EXAMPLES) *.csv *.out gmon.out *.txt *.log
+	$(RM) *.o $(EXAMPLES) *.csv *.out gmon.out *.log

@@ -5,14 +5,14 @@
  CXX       = g++ -O3 -pg -lm -std=c++11 -fopenmp
 
  CXX_FLAGS = -I $(KAPPA_INSTALL)/include/kappa++ \
-	     -I /usr/include
+		     -I /usr/include
 
  CXX_LIBS  = -L $(KAPPA_INSTALL)/lib -lkappa++ \
-	     -L /usr/lib -larmadillo           \
-	     -L /usr/lib -lyaml-cpp
+	     	 -L /usr/lib -larmadillo           \
+	     	 -L /usr/lib -lyaml-cpp
 
  EXAMPLES  = cvibr_multit \
-	     cvibr_sts    \
+	     	 cvibr_sts    \
      	     cvtr_sts     \
      	     cvrot_sts
 	
@@ -34,4 +34,4 @@ cvrot_sts : cvrot_sts.o
 	$(CXX) -c $(CXX_FLAGS)  $<
 
 clean :
-	$(RM) *.o $(EXAMPLES) *.txt gmon.out *.log
+	$(RM) *.o $(EXAMPLES)  gmon.out *.log

@@ -5,10 +5,10 @@
  CXX       = g++ -O3 -pg -lm -std=c++11 -fopenmp
  
  CXX_FLAGS = -I $(KAPPA_INSTALL)/include/kappa++ \
-	     -I /usr/include
+	     	 -I /usr/include
 
  CXX_LIBS  = -L $(KAPPA_INSTALL)/lib -lkappa++ \
-	     -L /usr/lib -larmadillo           \
+	 	     -L /usr/lib -larmadillo           \
              -L /usr/lib -lyaml-cpp
 
  EXAMPLES  = basicTest
