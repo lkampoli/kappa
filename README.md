@@ -77,7 +77,7 @@ A list of contributors can found in [CONTRIBUTORS.md](CONTRIBUTORS.md).
 ## Citing KAPPA
 Please cite the following article when mentioning KAPPA in your own papers.
 
-* Campoli, L., Oblapenko, G. P., & Kustova, E. V. (2019). [Kappa: Kinetic approach to physical processes in atmospheres library in C++.]. Computer Physics Communications, 236, 244-267, (https://doi.org/10.1016/j.cpc.2018.10.016).
+* Campoli, L., Oblapenko, G. P., & Kustova, E. V. (2019). [Kappa: Kinetic approach to physical processes in atmospheres library in C++.](https://doi.org/10.1016/j.cpc.2018.10.016), Computer Physics Communications, 236, 244-267.
 
 **Bibtex**
 ```bibtex
