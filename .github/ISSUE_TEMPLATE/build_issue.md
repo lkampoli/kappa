@@ -2,7 +2,7 @@
 name: Build issue
 about: Use this template to open an issue about compiling KAPPA
 title: "[BUI]"
-labels: ? - Needs Triage, build"
+labels: "? - Needs Triage, build"
 assignees: ''
 
 ---
