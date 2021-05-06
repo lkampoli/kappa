@@ -39,18 +39,6 @@ or briefly,
 
 `sudo apt-get install libopenblas-dev libarmadillo-dev libyaml-cpp-dev catch`
 
-## Copyrights
-
-KAPPA is an open source project, it is distributed under the 
-[LGPL v3](https://www.gnu.org/licenses/lgpl-3.0.en.html). Anyone interested in 
-using, developing or contributing to KAPPA is welcome. Take a look at the 
-[contributing guidelines](CONTRIBUTING.md) to start to contribute to the 
-project.
-
-## Contributors
-
-A list of contributors can found in [CONTRIBUTORS.md](CONTRIBUTORS.md).
-
 ## Source code structure
 
 * Files in /src/approximations implement the various (state-to-state, multi- and one-temperature) kinetic theory approximations:
@@ -73,6 +61,18 @@ A list of contributors can found in [CONTRIBUTORS.md](CONTRIBUTORS.md).
 * Files in /src/particles implement the Particle class and its derivative classes (Atom, Molecule):
     - particle.hpp, atom.hpp and molecule.hpp are the header files for the Particle, Atom and Molecule classes
     - particle.cpp, atom.cpp and molecule.cpp are the implementation files for the Particle, Atom and Molecule classes
+
+## Copyrights
+
+KAPPA is an open source project, it is distributed under the 
+[LGPL v3](https://www.gnu.org/licenses/lgpl-3.0.en.html). Anyone interested in 
+using, developing or contributing to KAPPA is welcome. Take a look at the 
+[contributing guidelines](CONTRIBUTING.md) to start to contribute to the 
+project.
+
+## Contributors
+
+A list of contributors can found in [CONTRIBUTORS.md](CONTRIBUTORS.md).
     
 ## Citing KAPPA
 Please cite the following article when mentioning KAPPA in your own papers.
