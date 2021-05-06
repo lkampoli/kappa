@@ -49,12 +49,14 @@ jobs:
     - name: Run Examples
       working-directory: ./examples
       run: ./runall.sh
-    # run: >
-    #     export KAPPA_DIRECTORY=$(pwd) &&
-    #     export KAPPA_DATA_DIRECTORY=$KAPPA_DIRECTORY/data &&
-    #     export LD_LIBRARY_PATH=$KAPPA_DIRECTORY/install/lib:$LD_LIBRARY_PATH &&
-    #     cd build && 
-    #     ctest
+
+    - name: Run Tests
+      run: >
+          export KAPPA_DIRECTORY=$(pwd) &&
+          export KAPPA_DATA_DIRECTORY=$KAPPA_DIRECTORY/data &&
+          export LD_LIBRARY_PATH=$KAPPA_DIRECTORY/install/lib:$LD_LIBRARY_PATH &&
+          cd build && 
+          ctest
     
     #- name: Make Coverage
     #  run: cd build && 
