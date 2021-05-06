@@ -29,7 +29,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 cmake_policy(SET CMP0048 NEW)
 # Enable IPO for CMake versions that support it
-cmake_policy(SET CMP0069 NEW)
+#cmake_policy(SET CMP0069 NEW)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -134,7 +134,6 @@ project(kappa++
  option(ENABLE_COVERAGE "Generate coverage for codecov.io" OFF)
  list(APPEND LCOV_REMOVE_PATTERNS
      "'*/tests/*'"
-     "'*/install/*'"
  )
  include(CodeCoverage)
 

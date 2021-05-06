@@ -35,7 +35,7 @@ jobs:
           export CC=$(echo  "${{ matrix.compiler }}" | cut -d' ' -f1) &&
           export CXX=$(echo "${{ matrix.compiler }}" | cut -d' ' -f2) &&
           cd build && 
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DENABLE_TESTING:BOOL=FALSE -DENABLE_COVERAGE:BOOL=FALSE -DCMAKE_INSTALL_PREFIX=../install ..
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DENABLE_TESTING:BOOL=TRUE -DENABLE_COVERAGE:BOOL=FALSE -DCMAKE_INSTALL_PREFIX=../install ..
 
     - name: Build
       run: cd build && 
@@ -45,6 +45,14 @@ jobs:
     - name: Cleanall examples
       working-directory: ./examples
       run: ./cleanall.sh
+
+      #- name: Compile Examples
+      #run: >
+      #    export KAPPA_DIRECTORY=$(pwd) &&
+      #    export KAPPA_DATA_DIRECTORY=$KAPPA_DIRECTORY/data &&
+      #    export LD_LIBRARY_PATH=$KAPPA_DIRECTORY/install/lib:$LD_LIBRARY_PATH &&
+      #    cd build && 
+      #    make all
 
     - name: Run Examples
       working-directory: ./examples

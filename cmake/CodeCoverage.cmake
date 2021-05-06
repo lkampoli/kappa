@@ -6,8 +6,7 @@ function (add_coverage TNAME)
 endfunction (add_coverage)
 
 
-# Add coverage support for target ${TNAME} and register target for coverage
-# evaluation.
+# Add coverage support for target ${TNAME} and register target for coverage evaluation.
 function(add_coverage_target TNAME)
     target_compile_options(${TNAME} 
         PUBLIC
@@ -59,4 +58,3 @@ if(ENABLE_COVERAGE)
         message(FATAL_ERROR "Coverage needs GCC or Clang")
     endif()
 endif(ENABLE_COVERAGE)
-
