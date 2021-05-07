@@ -11,6 +11,8 @@
 #include <vector>
 #include "constants.h"
 #include "particle.hpp"
+
+#define ARMA_ALLOW_FAKE_GCC
 #include <armadillo>
 
 namespace kappa {

@@ -13,7 +13,6 @@
 #include <numeric>
 #include "constants.h"
 #include "exceptions.hpp"
-//#include "yaml.h"
 #include "yaml-cpp/yaml.h"
 
 using namespace std;
@@ -48,13 +47,13 @@ using namespace kappa;
    this->name = name;
    YAML::Node particle = file[name];
 
-  if (particle	["Mass, kg"		]) mass 		= particle["Mass, kg"		].as<double>()	; //!< particle mass
-  if (particle	["Diameter, m"		]) diameter 		= particle["Diameter, m"	].as<double>()	; //!< particle diameter
-  if (particle	["Formation energy, J"	]) formation_energy 	= particle["Formation energy, J"].as<double>()	; //!< particle formation energy
-  if (particle	["Charge"		]) charge 		= particle["Charge"		].as<int>()	; //!< particle charge
-  if (particle	["Type"			]) particleType 	= particle["Type"		].as<string>()	; //!< particle type
+  if (particle	["Mass, kg"]) mass                        = particle["Mass, kg"].as<double>();              //!< particle mass
+  if (particle	["Diameter, m"]) diameter                 = particle["Diameter, m"].as<double>();           //!< particle diameter
+  if (particle	["Formation energy, J"]) formation_energy = particle["Formation energy, J"].as<double>();   //!< particle formation energy
+  if (particle	["Charge"]) charge                        = particle["Charge"].as<int>();                   //!< particle charge
+  if (particle	["Type"]) particleType                    = particle["Type"].as<string>();                  //!< particle type
 
-  // needed to compute molecular weights &Co.
+  // needed to compute molecular weights & Co.
   if (particle["Stoichiometry"]) {
     YAML::Node stoi = particle["Stoichiometry"];  
     for (YAML::const_iterator it=stoi.begin();it!=stoi.end();++it) {
@@ -64,10 +63,10 @@ using namespace kappa;
 	
   // not an electron
   if (name != "e-") {
-  if (particle	["Parameter ε (Lennard-Jones), J"]) LennardJones_epsilon = particle["Parameter ε (Lennard-Jones), J"].as<double>();                //!< depth of the LJ potential well (if particle = electron, is equal to 0)
-  if (particle	["Ionization potential, J"	 ]) ionization_potential = particle["Ionization potential, J"	    ].as<double>();                //!< particle ionization potential (if particle = electron, is equal to 0)
-  if (particle	["Electronic energy, J"		 ]) electron_energy 	 = particle["Electronic energy, J"	    ].as<vector<double>>();        //!< number of electronic levels of a particle (if particle = electron, is equal to 0)
-  if (particle	["Statistical weight"		 ]) statistical_weight 	 = particle["Statistical weight"	    ].as<vector<unsigned long>>(); //!< stat. weights of electron lev. of the particle (if particle = electron, is not initialized)
+  if (particle	["Parameter ε (Lennard-Jones), J"]) LennardJones_epsilon = particle["Parameter ε (Lennard-Jones), J"].as<double>();//!< depth of the LJ potential well (if particle = electron, is equal to 0)
+  if (particle	["Ionization potential, J"]) ionization_potential = particle["Ionization potential, J"].as<double>(); //!< particle ionization potential (if particle = electron, is equal to 0)
+  if (particle	["Electronic energy, J"]) electron_energy = particle["Electronic energy, J"].as<vector<double>>();//!< number of electronic levels of a particle (if particle = electron, is equal to 0)
+  if (particle	["Statistical weight"]) statistical_weight = particle["Statistical weight"].as<vector<unsigned long>>(); //!< stat. weights of electron lev. of the particle (if particle = electron, is not initialized)
    num_electron_levels = statistical_weight.size();
   }   
 } 

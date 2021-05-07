@@ -12,6 +12,7 @@
 
 #define ARMA_DONT_PRINT_ERRORS // to avoid warning message during solve() linear systems
 
+#define ARMA_ALLOW_FAKE_GCC
 #include <armadillo> 
 
 #include "approximation.hpp"
@@ -28,13 +29,37 @@ class Mixture : public Approximation {
 
  public:
     
-  Mixture(const std::vector<kappa::Molecule> &i_molecules, const std::vector<kappa::Atom> &i_atoms, const std::string &interactions_filename="interaction.yaml", const std::string &particles_filename="particles.yaml");
-  Mixture(const std::vector<kappa::Molecule> &i_molecules, const std::string &interactions_filename="interaction.yaml", const std::string &particles_filename="particles.yaml");
-  Mixture(const std::vector<kappa::Atom> &i_atoms, const std::string &interactions_filename="interaction.yaml", const std::string &particles_filename="particles.yaml");
-  Mixture(const kappa::Molecule &molecule, const kappa::Atom &atom, const std::string &interactions_filename="interaction.yaml", const std::string &particles_filename="particles.yaml");
-  Mixture(const kappa::Atom &atom, const std::string &interactions_filename="interaction.yaml", const std::string &particles_filename="particles.yaml");
-  Mixture(const kappa::Molecule &molecule, const std::string &interactions_filename="interaction.yaml", const std::string &particles_filename="particles.yaml");
-  Mixture(const std::string particle_names, const std::string &interactions_filename="interaction.yaml", const std::string &particles_filename="particles.yaml", bool anharmonic=true, bool rigid_rotators=true);
+  Mixture(const std::vector<kappa::Molecule> &i_molecules, 
+          const std::vector<kappa::Atom> &i_atoms, 
+          const std::string &interactions_filename="interaction.yaml", 
+          const std::string &particles_filename="particles.yaml");
+
+  Mixture(const std::vector<kappa::Molecule> &i_molecules, 
+          const std::string &interactions_filename="interaction.yaml", 
+          const std::string &particles_filename="particles.yaml");
+
+  Mixture(const std::vector<kappa::Atom> &i_atoms, 
+          const std::string &interactions_filename="interaction.yaml", 
+          const std::string &particles_filename="particles.yaml");
+
+  Mixture(const kappa::Molecule &molecule, 
+          const kappa::Atom &atom, 
+          const std::string &interactions_filename="interaction.yaml", 
+          const std::string &particles_filename="particles.yaml");
+
+  Mixture(const kappa::Atom &atom, 
+          const std::string &interactions_filename="interaction.yaml", 
+          const std::string &particles_filename="particles.yaml");
+
+  Mixture(const kappa::Molecule &molecule, 
+          const std::string &interactions_filename="interaction.yaml", 
+          const std::string &particles_filename="particles.yaml");
+
+  Mixture(const std::string particle_names, 
+          const std::string &interactions_filename="interaction.yaml", 
+          const std::string &particles_filename="particles.yaml", 
+          bool anharmonic=true, 
+          bool rigid_rotators=true);
 
   // Returns a string with the names of particles in the mixture
   std::string get_names();
@@ -76,10 +101,10 @@ class Mixture : public Approximation {
 
   // Calculation of the number density of the mixture
   // @param const std::vector<arma::vec> &n_vl_molecule - the population of the vibrational levels of molecules
-  // @param const arma::vec &n_molecule - Vector of number densities of molecules
-  // @param const arma::vec &n_atom - Vector of number densities of atoms
-  // @param double n_electrons - the number density of electrons (the default value is 0)
-  // @param const arma::vec &n - Vector of number densities
+  // @param const arma::vec &n_molecule                 - Vector of number densities of molecules
+  // @param const arma::vec &n_atom                     - Vector of number densities of atoms
+  // @param double n_electrons                          - the number density of electrons (the default value is 0)
+  // @param const arma::vec &n                          - Vector of number densities
   double compute_n(const std::vector<arma::vec> &n_vl_molecule, const arma::vec &n_atom, double n_electrons=0.0);
   double compute_n(const arma::vec &n_molecule, const arma::vec &n_atom, double n_electrons=0.0);
   double compute_n(const std::vector<arma::vec> &n_vl_molecule, double n_electrons=0.0);
@@ -111,25 +136,50 @@ class Mixture : public Approximation {
   double c_rot(double T, const arma::vec &n_molecule, const arma::vec &n_atom, double n_electrons=0.0);
   double c_rot(double T, const arma::vec &n);
 
-  void compute_transport_coefficients(double T, const std::vector<arma::vec> &n_vl_molecule, const arma::vec &n_atom, double n_electrons, kappa::models_omega model=kappa::models_omega::model_omega_esa, double perturbation=1e-9);
-  void compute_transport_coefficients(double T, const std::vector<arma::vec> &n_vl_molecule, const arma::vec &n_atom, kappa::models_omega model=kappa::models_omega::model_omega_esa, double perturbation=1e-9);
+  void compute_transport_coefficients(double T, 
+          const std::vector<arma::vec> &n_vl_molecule, 
+          const arma::vec &n_atom, 
+          double n_electrons, 
+          kappa::models_omega model=kappa::models_omega::model_omega_esa, 
+          double perturbation=1e-9);
+
+  void compute_transport_coefficients(double T, 
+          const std::vector<arma::vec> &n_vl_molecule, 
+          const arma::vec &n_atom, 
+          kappa::models_omega model=kappa::models_omega::model_omega_esa, 
+          double perturbation=1e-9);
+
   // void compute_transport_coefficients(double T, const arma::vec &n_molecule, const arma::vec &n_atom, double n_electrons, kappa::models_omega model=kappa::models_omega::model_omega_esa, double perturbation=1e-9);	
+  
   // void compute_transport_coefficients(double T, const arma::vec &n_molecule, const arma::vec &n_atom, kappa::models_omega model=kappa::models_omega::model_omega_esa, double perturbation=1e-9);
-  void compute_transport_coefficients(double T, const std::vector<arma::vec> &n_vl_molecule, double n_electrons, kappa::models_omega model=kappa::models_omega::model_omega_esa, double perturbation=1e-9);	
-  void compute_transport_coefficients(double T, const std::vector<arma::vec> &n_vl_molecule, kappa::models_omega model=kappa::models_omega::model_omega_esa, double perturbation=1e-9);
-  void compute_transport_coefficients(double T,	const arma::vec &n, kappa::models_omega model=kappa::models_omega::model_omega_esa, double perturbation=1e-9);
+
+  void compute_transport_coefficients(double T, 
+          const std::vector<arma::vec> &n_vl_molecule, 
+          double n_electrons, 
+          kappa::models_omega model=kappa::models_omega::model_omega_esa, 
+          double perturbation=1e-9);	
+
+  void compute_transport_coefficients(double T,
+          const std::vector<arma::vec> &n_vl_molecule, 
+          kappa::models_omega model=kappa::models_omega::model_omega_esa, 
+          double perturbation=1e-9);
+
+  void compute_transport_coefficients(double T,	
+          const arma::vec &n, 
+          kappa::models_omega model=kappa::models_omega::model_omega_esa, 
+          double perturbation=1e-9);
 
   double get_thermal_conductivity();
   double get_shear_viscosity();
   double get_bulk_viscosity();
   arma::vec get_thermodiffusion();
 
-  // Returns the matrix of diffusion coefficients (for calculation it is necessary to call the function compute_transport_coefficients)
+  // Returns the matrix of diffusion coefficients 
+  // (for calculation it is necessary to call the function compute_transport_coefficients)
   arma::mat get_diffusion();
   arma::mat get_lite_diffusion();
   arma::vec get_binary_diffusion();
   // arma::mat binary_diffusion(double T, kappa::models_omega model=kappa::models_omega::model_omega_esa);
-
 
  protected:
         
@@ -178,7 +228,9 @@ class Mixture : public Approximation {
   arma::vec bulk_viscosity_coeffs;
   arma::vec bulk_viscosity_rigid_rot_coeffs;
 
-  arma::vec empty_n_atom; // if our mixture has no atoms, we pass this as a dummy parameter to functions which expect numeric density of atomic species
+  // if our mixture has no atoms, we pass this as a dummy parameter to functions which expect numeric density of atomic species
+  arma::vec empty_n_atom; 
+
   std::vector<arma::vec> empty_n_vl_molecule;
 
   arma::vec this_n_atom;
@@ -217,7 +269,7 @@ class Mixture : public Approximation {
   void add_interactions(const std::string &filename);
 
   void check_n_vl_molecule(const std::vector<arma::vec> &n_vl_molecule); // check sizes of arrays and test values for non-negativity
-  void check_n_molecule(const arma::vec &n_molecule); // check sizes of arrays and test values for non-negativity
+  void check_n_molecule(const arma::vec &n_molecule);                    // check sizes of arrays and test values for non-negativity
   void check_n_atom(const arma::vec &n_atom);
   void check_n(const arma::vec &n);
 

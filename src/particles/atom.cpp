@@ -6,7 +6,6 @@
 #include <fstream>
 #include "atom.hpp"
 #include "exceptions.hpp"
-//#include "yaml.h"
 #include "yaml-cpp/yaml.h"
 
 using namespace std;

@@ -13,7 +13,7 @@ namespace kappa {
 
 // 0 - no logging; 
 // 1 - temperatures, transport coefficients, summed densities;
-// 2 - matrices (summed),  RHS (summed), 
+// 2 - matrices (summed), RHS (summed), 
 // 3 - matrices, RHS, non-summed densities
 enum logging_sts {no_logging, logging_basic, logging_detailed_1, logging_detailed_2, logging_detailed_sts}; 
 

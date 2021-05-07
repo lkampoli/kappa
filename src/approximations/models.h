@@ -16,7 +16,7 @@ enum class models_prob_diss {	model_prob_diss_thresh_cmass_vibr,
 				model_prob_diss_thresh_cmass, 
 				model_prob_diss_thresh};
 
-enum class models_cs_elastic {	model_cs_el_rs, 	  	    // The model of hard spheres (RS) in combination with the FHO model
+enum class models_cs_elastic {	model_cs_el_rs,	    // The model of hard spheres (RS) in combination with the FHO model
 				model_cs_el_vss};                   // The model of spheres of variable diameter (VSS) in combination with model FHO
 
 enum class models_cs_vv {	model_cs_vv_rs_fho, 
@@ -49,7 +49,7 @@ enum class models_k_vt {	model_k_vt_rs_fho,
 enum class models_k_exch {	model_k_exch_arrh_scanlon, 
 				model_k_exch_arrh_park, 
 				model_k_exch_warnatz, 
-				model_k_exch_rf, 			// Rusanov-Friedman model (doesn't take into account the electr. excitation of the reagent molecule and the vibr. excitation of the product molecule)
+				model_k_exch_rf, // Rusanov-Friedman model (doesn't take into account the electr. excitation of the reagent molecule and the vibr. excitation of the product molecule)
 				model_k_exch_polak,
 			  	model_k_exch_maliat_D6k_arrh_scanlon,   // Modified Aliat model with data from Scanlon et al. with \f$ U=\frac{D}{6k} \f$
 				model_k_exch_maliat_3T_arrh_scanlon, 
@@ -70,7 +70,7 @@ enum class models_k_diss {	model_k_diss_rs_thresh_cmass_vibr,
 				model_k_diss_arrh_park,
 				model_k_diss_tm_D6k_arrh_scanlon,  	// The Treanor-Marrone model with the data from Scanlon et al. with \f$ U=\frac{D}{6k} \f$
 				model_k_diss_tm_3T_arrh_scanlon,	// The Treanor-Marrone model with the data from Scanlon et al. with \f$ U=3T \f$
-				model_k_diss_tm_infty_arrh_scanlon,    	// The Treanor-Marrone model with the data from Scanlon et al. with \f$ U=\infty \f$
+				model_k_diss_tm_infty_arrh_scanlon,	// The Treanor-Marrone model with the data from Scanlon et al. with \f$ U=\infty \f$
 				model_k_diss_tm_D6k_arrh_park,  
 				model_k_diss_tm_3T_arrh_park, 
 				model_k_diss_tm_infty_arrh_park,

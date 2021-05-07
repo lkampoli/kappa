@@ -8,6 +8,8 @@
 
 #include <functional>
 #include <cmath>
+
+#define ARMA_ALLOW_FAKE_GCC
 #include <armadillo>
 
 namespace kappa {

@@ -11,6 +11,8 @@
 #include <vector>
 #include "particle.hpp"
 #include "constants.h"
+
+#define ARMA_ALLOW_FAKE_GCC
 #include <armadillo>
 
 namespace kappa {
@@ -85,7 +87,8 @@ class Molecule : public Particle {
       Array of energy vectors of rotational levels:
       1st index - number of electronic levels 
       2nd index - number of vibrational levels; 
-      if the molecule is a rigid rotator, for any fixed 1st index all values are the same (the rotational spectrum does not depend on the vibrational state of the molecule)
+      if the molecule is a rigid rotator, for any fixed 1st index all values are the same 
+      (the rotational spectrum does not depend on the vibrational state of the molecule)
    */
   std::vector<std::vector<int> > num_rot_levels; 
 
@@ -99,7 +102,8 @@ class Molecule : public Particle {
       Array of energy vectors of rotational levels:
       1st index - number of electronic levels 
       2nd index - number of vibrational levels; 
-      if the molecule is a rigid rotator, for any fixed 1st index all values are the same (the rotational spectrum does not depend on the vibrational state of the molecule)
+      if the molecule is a rigid rotator, for any fixed 1st index all values are the same 
+      (the rotational spectrum does not depend on the vibrational state of the molecule)
    */
   std::vector<std::vector<arma::vec> > rot_energy;
 

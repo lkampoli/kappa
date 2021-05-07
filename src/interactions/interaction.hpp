@@ -26,8 +26,8 @@ class Interaction {
 
   // Builts an object of type Interaction 
   // loading data on the interaction of two particles from the database
-  // @param const Particle &Particle1 - first particle participating in the interaction
-  // @param const Particle &Particle2 - second particle participating in the interaction
+  // @param const Particle &Particle1   - first particle participating in the interaction
+  // @param const Particle &Particle2   - second particle participating in the interaction
   // @param const std::string &filename - path to the interaction.yaml database file
   Interaction(const Particle &Particle1, const Particle &Particle2, const std::string &filename = "interaction.yaml");
 
@@ -82,10 +82,10 @@ class Interaction {
   double vss_c_cs; 
 
    // Type of interaction, which can be:
-   // @param kappa::interaction_types::interaction_neutral_neutral - interaction of uncharged particles
-   // @param kappa::interaction_types::interaction_neutral_ion - interaction of neutral particles and ions
+   // @param kappa::interaction_types::interaction_neutral_neutral  - interaction of uncharged particles
+   // @param kappa::interaction_types::interaction_neutral_ion      - interaction of neutral particles and ions
    // @param kappa::interaction_types::interaction_neutral_electron - interaction of neutral particles and electrons
-   // @param kappa::interaction_types::interaction_charged_charged - interaction of two charged particles
+   // @param kappa::interaction_types::interaction_charged_charged  - interaction of two charged particles
    interaction_types interaction_type;
 
    // arma::mat neutral_electron_elastic_coeffs;

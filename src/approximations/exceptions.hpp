@@ -1,5 +1,5 @@
 /*!
-    \file approximations.hpp
+    \file execptions.hpp
  */
 
 #ifndef kappa_exceptions_hpp

@@ -10,4 +10,3 @@
 #include "approximation_onet.hpp"
 
 #endif /* APPROXIMATIONS_HPP */
-

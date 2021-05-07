@@ -6,7 +6,6 @@
 #include <fstream>
 #include "molecule.hpp"
 #include "exceptions.hpp"
-//#include "yaml.h"
 #include "yaml-cpp/yaml.h"
 
 using namespace std;
@@ -40,7 +39,7 @@ Molecule::Molecule(const std::string &name, bool anharmonic_spectrum, bool rigid
 
       while (tmp < diss_energy[e] - electron_energy[e]) {
 
-        // Morse potential (the anharmonic oscillator model), eq. 1.3.
+        // Morse potential (anharmonic oscillator model), eq. 1.3, Kustova & Nagnibeda, 2009.
         tmp = K_CONST_H * K_CONST_C * (vibr_frequency[e] * (i + 0.5) - level_we_xe * (i + 0.5) * (i + 0.5) 
                                                                      + level_we_ye * (i + 0.5) * (i + 0.5) * (i + 0.5) 
                                                                      + level_we_ze * (i + 0.5) * (i + 0.5) * (i + 0.5) * (i + 0.5));
@@ -157,7 +156,7 @@ Molecule::Molecule(const std::string &name, bool anharmonic_spectrum, bool rigid
     this->name = name;
     YAML::Node particle = file[name];
     
-    // TODO something if does not exist in file
+    // TODO if does not exist in file
     if (!particle["Dissociation energy, J"]) {
       std::string error_string = "No data found for " + name + " in the database";
       throw DataNotFoundException(error_string);

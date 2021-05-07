@@ -12,4 +12,3 @@
 #include "atom.hpp"
 
 #endif /* PARTICLES_HPP */
-
