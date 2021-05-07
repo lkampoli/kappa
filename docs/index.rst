@@ -8,20 +8,52 @@
 Welcome to KAPPA's documentation!
 =================================
 
+KAPPA (Kinetic Approach to modeling of re-entry Processes in Planetary Atmospheres) – библиотека на C++ для расчета свойств неравновесных течений газов с внутренними степенями свободы. Она позволяет использовать различные уровни описания (поуровневое, многотемпературное и однотемпературное приближение) смеси.
+
+Библиотека содержит функции расчета скорости физико-химической релаксации (учитываются процессы релаксации колебательных и электронных степеней свободы, химические реакции и ионизация), теплоемкостей, транспортных коэффициентов (теплопроводность, диффузия, сдвиговая и объемная вязкости), времен релаксации, а также различных вспомогательных величин.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Introduction
+
+   introduction
+
 .. toctree::
    :maxdepth: 1
    :caption: Installation
 
-   install/dependencies
+   installation
 
 .. toctree::
-    :maxdepth: 1
-    :caption: Tutorials
+   :maxdepth: 1
+   :caption: Particles
 
-    tutorials/particles
-    tutorials/mixtures
-    tutorials/approximations
-    tutorials/interactions
+   particles
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Mixture
+
+   mixture
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Approximations
+
+   approximations
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Interactions
+
+   interactions
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Exceptions
+
+   exceptions
+
 
 Indices and tables
 ==================

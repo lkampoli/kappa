@@ -1,13 +1,19 @@
-Dependencies 
+Installation 
 ************
 
 ### **KAPPA depends on the following packages:**
 
-[YAML](https://github.com/jbeder/yaml-cpp)
+YAML_
 
-[OpenBLAS](https://github.com/xianyi/OpenBLAS)
+.. _YAML: https://github.com/jbeder/yaml-cpp
 
-[Armadillo](https://gitlab.com/conradsnicta/armadillo-code.git)
+OpenBLAS_
+
+.. _OpenBLAS: https://github.com/xianyi/OpenBLAS
+
+Armadillo_
+
+.. _Armadillo: https://gitlab.com/conradsnicta/armadillo-code.git
 
 ---
 
