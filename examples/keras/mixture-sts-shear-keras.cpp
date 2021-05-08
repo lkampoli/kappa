@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
   std::cout << "Mixture created" << std::endl;
 
   //std::vector<double> T_vals = { 500., 1000., 5000., 10000., 20000., 40000. };
-  std::vector<float> T_vals = { 5000. };
+  std::vector<float> T_vals = { 500. };
   float x_N2 = 0.9;
   float x_O2 = 0.0;
   float x_NO = 0.0;
@@ -76,9 +76,12 @@ int main(int argc, char** argv) {
 
   /////////////////   
   const auto model = fdeep::load_model("shear_fdeep_model.json");
+  //const auto result = model.predict(
+  //        {fdeep::tensor(fdeep::tensor_shape(static_cast<std::size_t>(7)),
+  //                std::vector<float>{T_vals[0], pressure, x_N2, x_O2, x_NO, x_N, x_O})});
   const auto result = model.predict(
-          {fdeep::tensor(fdeep::tensor_shape(static_cast<std::size_t>(7)),
-                  std::vector<float>{T_vals[0], pressure, x_N2, x_O2, x_NO, x_N, x_O})});
+          {fdeep::tensor(fdeep::tensor_shape(static_cast<std::size_t>(1)),
+                  std::vector<float>{T_vals[0]})});
   std::cout << std::setw(20) << " shear viscosity KERAS = " << fdeep::show_tensors(result) << std::endl;
   /////////////////   
   
@@ -102,8 +105,8 @@ int main(int argc, char** argv) {
 //                                                     models_omega::model_omega_esa};
 
   for (auto T : T_vals) {
-    tot_ndens =  pressure / (K_CONST_K * T);
-    mol_ndens[0] = mixture.Boltzmann_distribution(T, x_N2 * pressure / (K_CONST_K * T), mol);
+    //tot_ndens   = pressure / (K_CONST_K * T);
+    mol_ndens[0]  = mixture.Boltzmann_distribution(T, x_N2 * pressure / (K_CONST_K * T), mol);
     atom_ndens[0] = x_N * pressure / (K_CONST_K * T);
 
     mixture.compute_transport_coefficients(T, mol_ndens, atom_ndens, 0, models_omega::model_omega_rs, 0.);
@@ -111,9 +114,11 @@ int main(int argc, char** argv) {
     outf << std::setw(20) << T;
     outf << std::setw(20) << mixture.get_shear_viscosity();
     outf << std::endl;
+
+    std::cout << std::setw(20) << " shear viscosity KAPPA = " << mixture.get_shear_viscosity() << std::endl;
   }
 
-  std::cout << std::setw(20) << " shear viscosity = " << mixture.get_shear_viscosity() << std::endl;
+  //std::cout << std::setw(20) << " shear viscosity KAPPA = " << mixture.get_shear_viscosity() << std::endl;
   //std::cout << std::setw(20) << " bulk viscosity = " << mixture.get_bulk_viscosity() << std::endl;
   //std::cout << std::setw(20) << " thermal conductivity = " << mixture.get_thermal_conductivity() << std::endl;
 

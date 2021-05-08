@@ -26,10 +26,14 @@
     TestDiffusion                    \
     thermal_conductivity             \
     mixture-sts-thermal_conductivity \
-    mk_TC_air5_database
+    mk_TC_air5_database				 \
+ 	mixture-sts-shear_compare_K_code
 #	ionized_mixture_creation         
 
 all : $(EXAMPLES)
+
+mixture-sts-shear_compare_K_code : mixture-sts-shear_compare_K_code.o
+	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)
 
 ionized_mixture_creation : ionized_mixture_creation.o
 	$(CXX) -o $@ $(CXX_FLAGS) $^ $(CXX_LIBS)

@@ -3,13 +3,15 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+from numpy import savez_compressed
+from numpy import load
 import pandas as pd
 import seaborn as sns
 import tensorflow as tf
 
 import sklearn
 print(sklearn.__version__)
-
+from sklearn import metrics
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold, StratifiedKFold
@@ -26,8 +28,7 @@ from sklearn.preprocessing import PowerTransformer
 
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dense, Dropout
-from tensorflow.python.keras.wrappers.scikit_learn import KerasRegressor
-from sklearn import metrics
+#from tensorflow.python.keras.wrappers.scikit_learn import KerasRegressor
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.callbacks import EarlyStopping
@@ -43,10 +44,10 @@ import time
 #from IPython.display import clear_output
 #from livelossplot import PlotLossesKeras
 
-from keras.callbacks import TensorBoard
+#from keras.callbacks import TensorBoard
 
-from keras.utils.vis_utils import plot_model
-from keras.models import load_model
+#from keras.utils.vis_utils import plot_model
+#from keras.models import load_model
 
 #from ann_visualizer.visualize import ann_viz;
 #from keras.models import model_from_json
@@ -68,14 +69,20 @@ from plotting import newfig, savefig
 from matplotlib import rc
 rc("text", usetex=False)
 
-with open('./TCs_air5.txt') as f:
+#with open('./TCs_air5.txt') as f:
+with open('./shear_N2_xat_0.900000.txt') as f:
     lines = (line for line in f if not line.startswith('#'))
     dataset = np.loadtxt(lines, skiprows=1)
 
-#dataset = np.loadtxt("../../../Data/TCs_air5.txt")
-x = dataset[:,0:7] # T, P, x_N2, x_O2, x_NO, x_N, x_O
-y = dataset[:,7:8] # shear
-#y = dataset[:,7:10] # shear, bulk, conductivity
+# save to npy file
+#savez_compressed('data.npz', dataset)
+#dataset = load('data.npz')
+
+#x = dataset[:,0:7] # T, P, x_N2, x_O2, x_NO, x_N, x_O
+#y = dataset[:,7:8] # shear
+
+x = dataset[:,0:1] # T
+y = dataset[:,1:2] # shear
 
 # summarize the dataset
 in_dim  = x.shape[1]
@@ -108,14 +115,16 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.75, test_
 
 print("[INFO] Model build ...")
 model = Sequential()
-model.add(Dense(70, input_dim=in_dim, kernel_initializer='normal', activation='relu'))
-model.add(Dense(35, activation='relu'))
-model.add(Dense(15, activation='relu'))
-model.add(Dense(out_dim, activation='linear')) # TODO:: improve architecture!
+model.add(Dense(10, input_dim=in_dim, kernel_initializer='normal', activation='relu'))
+model.add(Dense(10, activation='relu'))
+model.add(Dense(10, activation='relu'))
+model.add(Dense(out_dim, activation='linear'))
 
 #opt = keras.optimizers.SGD(lr=0.01, momentum=0.9, decay=0.01)
 #opt = keras.optimizers.Adam(learning_rate=0.01)
-opt = keras.optimizers.Adam(learning_rate=0.01, decay=1e-3/100)
+opt = keras.optimizers.Adam(learning_rate=0.001, decay=1e-3/100)
+
+#callback = keras.callbacks.EarlyStopping(monitor='loss', patience=10)
 
 model.summary()
 
@@ -131,7 +140,7 @@ model.compile(loss='mse', metrics=['mse', 'mae', 'mape', 'msle'], optimizer=opt)
 
 print("[INFO] training model...")
 #history = model.fit(x_train, y_train, epochs=100, batch_size=15, verbose=2, validation_data=(x_test, y_test), callbacks=[PlotLossesKeras()])
-history = model.fit(x_train, y_train, epochs=10, batch_size=64, verbose=2, validation_data=(x_test, y_test))
+history = model.fit(x_train, y_train, epochs=500, batch_size=8, verbose=2, validation_data=(x_test, y_test))
 
 #loss_history = np.array(history)
 #np.savetxt("loss_history.txt", loss_history, delimiter=",")
