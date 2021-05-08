@@ -6,3 +6,5 @@
 /thirdparty/FunctionalPlus/*
 /thirdparty/json/*
 /thirdparty/doctest/*
+
+/home/lk/CFD/kappa/examples/keras/*.txt
