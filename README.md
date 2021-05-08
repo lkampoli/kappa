@@ -65,7 +65,7 @@ or briefly,
 ## Copyrights
 
 KAPPA is an open source project, it is distributed under the 
-[LGPL v3](https://www.gnu.org/licenses/lgpl-3.0.en.html). Anyone interested in 
+[LGPL v2](https://www.gnu.org/licenses/lgpl-2.0.en.html). Anyone interested in 
 using, developing or contributing to KAPPA is welcome. Take a look at the 
 [contributing guidelines](CONTRIBUTING.md) to start to contribute to the 
 project.
