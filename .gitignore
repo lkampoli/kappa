@@ -1,3 +1,8 @@
 /build/*
 /install/*
 *.o
+/thirdparty/eigen/*
+/thirdparty/frugally-deep/*
+/thirdparty/FunctionalPlus/*
+/thirdparty/json/*
+/thirdparty/doctest/*

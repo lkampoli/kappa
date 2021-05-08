@@ -33,6 +33,13 @@ cmake_policy(SET CMP0048 NEW)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+#include("cmake/HunterGate.cmake") # teach your project about Hunter (before project())
+#   HunterGate( # Latest release shown here: https://github.com/ruslo/hunter/releases
+#   URL "https://github.com/ruslo/hunter/archive/v0.20.17.tar.gz"
+#   SHA1 "d7d1d5446bbf20b78fa5ac1b52ecb67a01c3790e"
+#   LOCAL # <----- load cmake/Hunter/config.cmake
+#)
+
 project(kappa++
     VERSION 1.0.0
     LANGUAGES CXX
@@ -74,9 +81,6 @@ project(kappa++
         RelWithDebInfo MinSizeRel Profile." FORCE)
  endif ()
 
- #set_property(TARGET tgt PROPERTY CXX_STANDARD 11)
- #add_compile_options(-Wall -Wextra -pedantic -Werror -std=c++11)
-
 ################################################################################
 # Install prefix settings
 ################################################################################
@@ -84,8 +88,6 @@ project(kappa++
  set(CMAKE_INSTALL_PREFIX "../install" CACHE STRING
     "Install path prefix, prepended onto install directories." FORCE)
  mark_as_advanced(CMAKE_INSTALL_PREFIX)
-
- set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -lm -pg" )
 
  if (CMAKE_COMPILER_IS_GNUCXX)
 
@@ -164,6 +166,11 @@ project(kappa++
   set_property(TARGET Armadillo PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${ARMADILLO_INCLUDE_DIR})
   include_directories(${ARMADILLO_INCLUDE_DIRS})
   LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/kappa_deps/x86_64/lib64)
+
+  #hunter_add_package(frugally-deep)
+  #find_package(frugally-deep CONFIG REQUIRED)
+
+  #target_link_libraries(main PUBLIC frugally-deep::fdeep)
 
 ################################################################################
 # Install the data directory in the install folder

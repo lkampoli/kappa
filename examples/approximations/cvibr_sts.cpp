@@ -39,7 +39,6 @@ int main(){
   std::string output_dir = GetCurrentWorkingDir();
   std::cout << "Current directory is: " << output_dir << std::endl;
 
-   
   double T;
   // create molecules and atoms
   Molecule MoleculeN2("N2", false, true, particle_source);
