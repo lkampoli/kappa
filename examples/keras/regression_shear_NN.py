@@ -1,37 +1,39 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import datetime
+
 import matplotlib.pyplot as plt
 import numpy as np
-from numpy import savez_compressed
-from numpy import load
+#from numpy import savez_compressed
+#from numpy import load
 import pandas as pd
 import seaborn as sns
-import tensorflow as tf
 
-import sklearn
-print(sklearn.__version__)
-from sklearn import metrics
+#import sklearn
+#print(sklearn.__version__)
+#from sklearn import metrics
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import KFold, StratifiedKFold
-from sklearn.pipeline import Pipeline
+#from sklearn.model_selection import cross_val_score
+#from sklearn.model_selection import KFold, StratifiedKFold
+#from sklearn.pipeline import Pipeline
 
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import RobustScaler
-from sklearn.preprocessing import minmax_scale
-from sklearn.preprocessing import MaxAbsScaler
-from sklearn.preprocessing import Normalizer
-from sklearn.preprocessing import QuantileTransformer
-from sklearn.preprocessing import PowerTransformer
+#from sklearn.preprocessing import MinMaxScaler
+#from sklearn.preprocessing import StandardScaler
+#from sklearn.preprocessing import RobustScaler
+#from sklearn.preprocessing import minmax_scale
+#from sklearn.preprocessing import MaxAbsScaler
+#from sklearn.preprocessing import Normalizer
+#from sklearn.preprocessing import QuantileTransformer
+#from sklearn.preprocessing import PowerTransformer
 
-from tensorflow.python.keras.models import Sequential
-from tensorflow.python.keras.layers import Dense, Dropout
-#from tensorflow.python.keras.wrappers.scikit_learn import KerasRegressor
-from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.keras.callbacks import EarlyStopping
+#from tensorflow.python.keras.models import Sequential
+#from tensorflow.python.keras.layers import Dense, Dropout, BatchNormalization
+##from tensorflow.python.keras.wrappers.scikit_learn import KerasRegressor
+#from tensorflow import keras
+#from tensorflow.keras import layers
+#from tensorflow.keras.callbacks import EarlyStopping
+#from tensorflow.keras.layers.experimental import preprocessing
 
 import os;
 path="."
@@ -58,7 +60,7 @@ from keras_sequential_ascii import keras2ascii
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits import mplot3d
 
-from keras.optimizers import SGD, Adam, RMSprop, Adagrad
+#from keras.optimizers import SGD, Adam, RMSprop, Adagrad
 import pickle
 
 import sys
@@ -68,6 +70,14 @@ from plotting import newfig, savefig
 
 from matplotlib import rc
 rc("text", usetex=False)
+
+import tensorflow as tf
+
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.layers.experimental import preprocessing
+
+print(tf.__version__)
 
 #with open('./TCs_air5.txt') as f:
 with open('./shear_N2_xat_0.900000.txt') as f:
@@ -104,7 +114,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.75, test_
 #print("[INFO] StandardScaling data ...")
 #sc_x = StandardScaler()
 #sc_y = StandardScaler()
-#
+
 #sc_x.fit(x_train)
 #x_train = sc_x.transform(x_train)
 #x_test  = sc_x.transform(x_test)
@@ -113,22 +123,38 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.75, test_
 #y_train = sc_y.transform(y_train)
 #y_test  = sc_y.transform(y_test)
 
+#kernel_initializer='he_uniform', normal
+
+normalizer = preprocessing.Normalization()
+normalizer.adapt(np.array(x_train))
+
+
 print("[INFO] Model build ...")
 model = Sequential()
-model.add(Dense(10, input_dim=in_dim, kernel_initializer='normal', activation='relu'))
-model.add(Dense(10, activation='relu'))
-model.add(Dense(10, activation='relu'))
+model.add(Dense(20, input_dim=in_dim, kernel_initializer='he_uniform', activation='relu'))
+model.add(BatchNormalization())
+model.add(Dense(20, activation='relu'))
+#model.add(BatchNormalization())
+#model.add(BatchNormalization())
+model.add(Dense(20, activation='relu'))
+#model.add(BatchNormalization())
+model.add(Dense(20, activation='relu'))
+#model.add(BatchNormalization())
 model.add(Dense(out_dim, activation='linear'))
 
 #opt = keras.optimizers.SGD(lr=0.01, momentum=0.9, decay=0.01)
 #opt = keras.optimizers.Adam(learning_rate=0.01)
-opt = keras.optimizers.Adam(learning_rate=0.001, decay=1e-3/100)
+opt = keras.optimizers.Adam()
+#opt = keras.optimizers.Adam(learning_rate=0.001, decay=1e-3/100)
 
 #callback = keras.callbacks.EarlyStopping(monitor='loss', patience=10)
 
 model.summary()
 
 keras2ascii(model)
+
+log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
 
 # mse:  loss = square(y_true - y_pred)
 # mae:  loss = abs(y_true - y_pred)
@@ -140,7 +166,7 @@ model.compile(loss='mse', metrics=['mse', 'mae', 'mape', 'msle'], optimizer=opt)
 
 print("[INFO] training model...")
 #history = model.fit(x_train, y_train, epochs=100, batch_size=15, verbose=2, validation_data=(x_test, y_test), callbacks=[PlotLossesKeras()])
-history = model.fit(x_train, y_train, epochs=500, batch_size=8, verbose=2, validation_data=(x_test, y_test))
+history = model.fit(x_train, y_train, epochs=600, batch_size=32, verbose=2, validation_data=(x_test, y_test), callbacks=[tensorboard_callback])
 
 #loss_history = np.array(history)
 #np.savetxt("loss_history.txt", loss_history, delimiter=",")
