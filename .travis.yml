@@ -5,4 +5,3 @@ language: cpp
 
 script: |
     echo 'First Travis Test!'
-    
