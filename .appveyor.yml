@@ -7,11 +7,11 @@ install:
 test_script:
 - ps: Write-Host "Hello, world!"
   
-init:
-- ps: $my_variable = 'Test value'
+#init:
+#- ps: $my_variable = 'Test value'
 
-test_script:
-- ps: Write-Host "This is $my_variable"
+#test_script:
+#- ps: Write-Host "This is $my_variable"
 
   
 #version: 1.0.{build}-{branch}
