@@ -1,19 +1,22 @@
-# Notes:
-#   - Minimal appveyor.yml file is an empty file. All sections are optional.
-#   - Indent each level of configuration with 2 spaces. Do not use tabs!
-#   - All section names are case-sensitive.
-#   - Section names should be unique on each level.
+image: Ubuntu
 
-#---------------------------------#
-#      general configuration      #
-#---------------------------------#
+install:
+- ls -al
+- sh: sudo apt-get update
 
-version: 1.0.{build}-{branch}
+test_script:
+- ps: Write-Host "Hello, world!"
+  
+init:
+- ps: $my_variable = 'Test value'
 
-build:
-  - Ubuntu
+test_script:
+- ps: Write-Host "This is $my_variable"
+
+  
+#version: 1.0.{build}-{branch}
 
 # configuration common for all jobs
-init:
-  - appveyor version
-  - echo Some common logic here...  
+#init:
+#  - appveyor version
+#  - echo Some common logic here...  
